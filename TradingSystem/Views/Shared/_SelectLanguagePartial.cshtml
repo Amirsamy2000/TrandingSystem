@@ -1,0 +1,27 @@
+﻿@using Microsoft.AspNetCore.Localization
+@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor
+
+@{
+    // استرجاع الثقافة الحالية (اللغة الحالية)
+    var requestCulture = HttpContextAccessor.HttpContext.Features.Get<IRequestCultureFeature>();
+    var currentCulture = requestCulture?.RequestCulture.Culture.Name;
+
+    // قائمة باللغات المتاحة
+    var cultures = new Dictionary<string, string>
+    {
+        { "en", "English" },
+        { "ar", "العربية" }
+    };
+}
+
+<form id="lang-form" method="post" asp-controller="Home" asp-action="SetLanguage" class="form-inline">
+    <select name="culture" onchange="document.getElementById('lang-form').submit();" class="form-select">
+        @foreach (var culture in cultures)
+        {
+          // var isSelected = currentCulture.StartsWith(culture.Key) ? "selected" : "";
+            <option value="@culture.Key"  >@culture.Value</option>
+        }
+    </select>
+    <input type="hidden" name="returnUrl" value="@HttpContextAccessor.HttpContext.Request.Path" />
+</form>
