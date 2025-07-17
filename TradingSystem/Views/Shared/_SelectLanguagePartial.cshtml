@@ -15,12 +15,17 @@
     };
 }
 
-<form id="lang-form" method="post" asp-controller="Home" asp-action="SetLanguage" class="form-inline">
-    <select name="culture" onchange="document.getElementById('lang-form').submit();" class="form-select">
+<form id="lang-form" method="post" asp-controller="Home" asp-action="SetLanguage" class="form-inline ">
+    <select name="culture" onchange="document.getElementById('lang-form').submit();" class="form-select btn-getstarted text-center">
         @foreach (var culture in cultures)
         {
-          // var isSelected = currentCulture.StartsWith(culture.Key) ? "selected" : "";
-            <option value="@culture.Key"  >@culture.Value</option>
+            @* var isSelected = currentCulture.StartsWith(culture.Key) ? "" : "selected"; *@
+            @* <option value="@culture.Key" selected="@isSelected">@culture.Value</option> *@
+
+  var isSelected = currentCulture.StartsWith(culture.Key);
+    <option value="@culture.Key" selected="@(isSelected ? "selected" : null)">
+        @culture.Value
+    </option>
         }
     </select>
     <input type="hidden" name="returnUrl" value="@HttpContextAccessor.HttpContext.Request.Path" />
