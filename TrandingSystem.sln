@@ -5,6 +5,12 @@ VisualStudioVersion = 17.13.35931.197
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrandingSystem", "TradingSystem\TrandingSystem.csproj", "{665C6CF0-E2AF-4F35-89A4-5CA57B72D49E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrandingSystem.Domain", "TrandingSystem.Domain\TrandingSystem.Domain.csproj", "{499DF5FE-502E-44B6-8432-78D28DA6B4B2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrandingSystem.Application", "TrandingSystem.Application\TrandingSystem.Application.csproj", "{7F0E9D1E-6D54-4DAE-B6F1-5FE74A2E8468}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrandingSystem.Infrastructure", "TrandingSystem.Infrastructure\TrandingSystem.Infrastructure.csproj", "{43CF18C2-BD5D-4BCE-AF1D-69E1DE56A0DC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +21,18 @@ Global
 		{665C6CF0-E2AF-4F35-89A4-5CA57B72D49E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{665C6CF0-E2AF-4F35-89A4-5CA57B72D49E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{665C6CF0-E2AF-4F35-89A4-5CA57B72D49E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{499DF5FE-502E-44B6-8432-78D28DA6B4B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{499DF5FE-502E-44B6-8432-78D28DA6B4B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{499DF5FE-502E-44B6-8432-78D28DA6B4B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{499DF5FE-502E-44B6-8432-78D28DA6B4B2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F0E9D1E-6D54-4DAE-B6F1-5FE74A2E8468}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F0E9D1E-6D54-4DAE-B6F1-5FE74A2E8468}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F0E9D1E-6D54-4DAE-B6F1-5FE74A2E8468}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F0E9D1E-6D54-4DAE-B6F1-5FE74A2E8468}.Release|Any CPU.Build.0 = Release|Any CPU
+		{43CF18C2-BD5D-4BCE-AF1D-69E1DE56A0DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{43CF18C2-BD5D-4BCE-AF1D-69E1DE56A0DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{43CF18C2-BD5D-4BCE-AF1D-69E1DE56A0DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{43CF18C2-BD5D-4BCE-AF1D-69E1DE56A0DC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

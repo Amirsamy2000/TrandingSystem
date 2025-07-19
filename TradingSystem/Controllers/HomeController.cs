@@ -1,22 +1,31 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
-using WebApplication1.Models;
+using Microsoft.EntityFrameworkCore;
+using TrandingSystem.Infrastructure.Data;
 
 namespace WebApplication1.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private DbContextOptions<db23617Context> _options;
 
-        public HomeController(ILogger<HomeController> logger)
+
+        public HomeController(ILogger<HomeController> logger, DbContextOptions<db23617Context> options)
         {
             _logger = logger;
+            _options = options;
         }
 
         public IActionResult Index()
         {
+           
+            // Fetch categories from the database
             return View();
+
+           
         }
         public IActionResult About()
         {
