@@ -1,12 +1,14 @@
-﻿using System;
-using System.Diagnostics;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Diagnostics;
 using TrandingSystem.Infrastructure.Data;
 
 namespace WebApplication1.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;

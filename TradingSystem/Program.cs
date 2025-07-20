@@ -1,9 +1,17 @@
-﻿using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.Extensions.Options;
 using System.Globalization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using TrandingSystem.Infrastructure.Data;
 
 var builder = WebApplication.CreateBuilder(args);
+var connectionString = builder.Configuration.GetConnectionString("db23617ContextConnection") ?? throw new InvalidOperationException("Connection string 'db23617ContextConnection' not found.");;
+
+builder.Services.AddDbContext<db23617Context>(options => options.UseSqlServer(connectionString));
+
+builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<db23617Context>();
 
 
 // Add services to the container.
