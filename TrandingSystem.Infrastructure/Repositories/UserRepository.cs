@@ -16,7 +16,7 @@ namespace TrandingSystem.Infrastructure.Repositories
             return true;
         }
 
-        public List<Users> GetAllUsers()
+        public List<string> GetAllUsers()
         {
             throw new NotImplementedException();
         }

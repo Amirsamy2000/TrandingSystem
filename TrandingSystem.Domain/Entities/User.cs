@@ -2,26 +2,16 @@
 #nullable disable
 using System;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Identity;
 
 namespace TrandingSystem.Domain.Entities;
-public partial class User
+public partial class User : IdentityUser<int>
 {
-    public int UserId { get; set; }
-
     public string FullName { get; set; }
-
-    public string Email { get; set; }
-
     public string Mobile { get; set; }
-
-    public string PasswordHash { get; set; }
-
     public DateTime? RegisteredAt { get; set; }
-
     public bool IsBlocked { get; set; }
-
-    public byte RoleId { get; set; }
-
+    public int RoleId { get; set; } // Changed from byte to int
     public string Address { get; set; }
 
     public virtual ICollection<Category> Categories { get; set; } = new List<Category>();
