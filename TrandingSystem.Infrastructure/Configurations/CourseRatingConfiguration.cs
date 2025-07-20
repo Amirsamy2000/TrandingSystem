@@ -3,12 +3,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
 using System.Collections.Generic;
-using TrandingSystem.Infrastructure.D:\Private_Work\TradingSystem\BackEnd\TradingSystem\TrandingSystem.Domain\Entities;
+using TrandingSystem.Domain.Entities;
 using TrandingSystem.Infrastructure.Data;
 
 namespace TrandingSystem.Infrastructure.Data.Configurations
 {
-    public partial class CourseRatingConfiguration : IEntityTypeConfiguration<CourseRating>
+    public   class CourseRatingConfiguration : IEntityTypeConfiguration<CourseRating>
     {
         public void Configure(EntityTypeBuilder<CourseRating> entity)
         {
@@ -26,9 +26,8 @@ namespace TrandingSystem.Infrastructure.Data.Configurations
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__CourseRat__UserI__69FBBC1F");
 
-            OnConfigurePartial(entity);
+ 
         }
 
-        partial void OnConfigurePartial(EntityTypeBuilder<CourseRating> entity);
-    }
+     }
 }

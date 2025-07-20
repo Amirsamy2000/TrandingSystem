@@ -3,12 +3,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
 using System.Collections.Generic;
-using TrandingSystem.Infrastructure.D:\Private_Work\TradingSystem\BackEnd\TradingSystem\TrandingSystem.Domain\Entities;
+using TrandingSystem.Domain.Entities;
 using TrandingSystem.Infrastructure.Data;
 
 namespace TrandingSystem.Infrastructure.Data.Configurations
 {
-    public partial class LiveSessionConfiguration : IEntityTypeConfiguration<LiveSession>
+    public   class LiveSessionConfiguration : IEntityTypeConfiguration<LiveSession>
     {
         public void Configure(EntityTypeBuilder<LiveSession> entity)
         {
@@ -37,9 +37,8 @@ namespace TrandingSystem.Infrastructure.Data.Configurations
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__LiveSessi__Cread__6EC0713C");
 
-            OnConfigurePartial(entity);
+ 
         }
 
-        partial void OnConfigurePartial(EntityTypeBuilder<LiveSession> entity);
-    }
+     }
 }

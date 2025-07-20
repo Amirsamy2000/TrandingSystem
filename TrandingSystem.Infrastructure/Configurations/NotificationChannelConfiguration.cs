@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
 using System.Collections.Generic;
-using TrandingSystem.Infrastructure.D:\Private_Work\TradingSystem\BackEnd\TradingSystem\TrandingSystem.Domain\Entities;
+using TrandingSystem.Domain.Entities;
 using TrandingSystem.Infrastructure.Data;
 
 namespace TrandingSystem.Infrastructure.Data.Configurations
@@ -23,7 +23,7 @@ namespace TrandingSystem.Infrastructure.Data.Configurations
             entity.Property(e => e.SenderAddress).HasMaxLength(255);
             entity.Property(e => e.SenderName).HasMaxLength(100);
 
-            OnConfigurePartial(entity);
+ 
         }
 
         partial void OnConfigurePartial(EntityTypeBuilder<NotificationChannel> entity);

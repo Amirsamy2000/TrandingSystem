@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
 using System.Collections.Generic;
-using TrandingSystem.Infrastructure.D:\Private_Work\TradingSystem\BackEnd\TradingSystem\TrandingSystem.Domain\Entities;
+using TrandingSystem.Domain.Entities;
 using TrandingSystem.Infrastructure.Data;
 
 namespace TrandingSystem.Infrastructure.Data.Configurations
@@ -21,7 +21,7 @@ namespace TrandingSystem.Infrastructure.Data.Configurations
             entity.Property(e => e.SendEmail).HasDefaultValue(true);
             entity.Property(e => e.SendWhatsApp).HasDefaultValue(false);
 
-            OnConfigurePartial(entity);
+ 
         }
 
         partial void OnConfigurePartial(EntityTypeBuilder<NotificationSetting> entity);

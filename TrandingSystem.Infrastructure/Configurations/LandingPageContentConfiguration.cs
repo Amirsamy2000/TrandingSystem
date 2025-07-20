@@ -3,12 +3,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
 using System.Collections.Generic;
-using TrandingSystem.Infrastructure.D:\Private_Work\TradingSystem\BackEnd\TradingSystem\TrandingSystem.Domain\Entities;
+using TrandingSystem.Domain.Entities;
 using TrandingSystem.Infrastructure.Data;
 
 namespace TrandingSystem.Infrastructure.Data.Configurations
 {
-    public partial class LandingPageContentConfiguration : IEntityTypeConfiguration<LandingPageContent>
+    public   class LandingPageContentConfiguration : IEntityTypeConfiguration<LandingPageContent>
     {
         public void Configure(EntityTypeBuilder<LandingPageContent> entity)
         {
@@ -30,9 +30,9 @@ namespace TrandingSystem.Infrastructure.Data.Configurations
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__LandingPa__Cread__6CD828CA");
 
-            OnConfigurePartial(entity);
+ 
         }
 
-        partial void OnConfigurePartial(EntityTypeBuilder<LandingPageContent> entity);
+ 
     }
 }

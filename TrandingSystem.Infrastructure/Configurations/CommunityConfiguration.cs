@@ -3,12 +3,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
 using System.Collections.Generic;
-using TrandingSystem.Infrastructure.D:\Private_Work\TradingSystem\BackEnd\TradingSystem\TrandingSystem.Domain\Entities;
+using TrandingSystem.Domain.Entities;
 using TrandingSystem.Infrastructure.Data;
 
 namespace TrandingSystem.Infrastructure.Data.Configurations
 {
-    public partial class CommunityConfiguration : IEntityTypeConfiguration<Community>
+    public   class CommunityConfiguration : IEntityTypeConfiguration<Community>
     {
         public void Configure(EntityTypeBuilder<Community> entity)
         {
@@ -28,9 +28,8 @@ namespace TrandingSystem.Infrastructure.Data.Configurations
                 .HasForeignKey(d => d.CourseId)
                 .HasConstraintName("FK__Communiti__Cours__6166761E");
 
-            OnConfigurePartial(entity);
+ 
         }
 
-        partial void OnConfigurePartial(EntityTypeBuilder<Community> entity);
     }
 }

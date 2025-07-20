@@ -3,12 +3,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
 using System.Collections.Generic;
-using TrandingSystem.Infrastructure.D:\Private_Work\TradingSystem\BackEnd\TradingSystem\TrandingSystem.Domain\Entities;
+using TrandingSystem.Domain.Entities;
 using TrandingSystem.Infrastructure.Data;
 
 namespace TrandingSystem.Infrastructure.Data.Configurations
 {
-    public partial class CategoryConfiguration : IEntityTypeConfiguration<Category>
+    public   class CategoryConfiguration : IEntityTypeConfiguration<Category>
     {
         public void Configure(EntityTypeBuilder<Category> entity)
         {
@@ -22,9 +22,8 @@ namespace TrandingSystem.Infrastructure.Data.Configurations
                 .HasForeignKey(d => d.CreateBy)
                 .HasConstraintName("FK__Categorie__Creat__607251E5");
 
-            OnConfigurePartial(entity);
+ 
         }
 
-        partial void OnConfigurePartial(EntityTypeBuilder<Category> entity);
-    }
+     }
 }

@@ -3,12 +3,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
 using System.Collections.Generic;
-using TrandingSystem.Infrastructure.D:\Private_Work\TradingSystem\BackEnd\TradingSystem\TrandingSystem.Domain\Entities;
+using TrandingSystem.Domain.Entities;
 using TrandingSystem.Infrastructure.Data;
 
 namespace TrandingSystem.Infrastructure.Data.Configurations
 {
-    public partial class ContactInfoConfiguration : IEntityTypeConfiguration<ContactInfo>
+    public   class ContactInfoConfiguration : IEntityTypeConfiguration<ContactInfo>
     {
         public void Configure(EntityTypeBuilder<ContactInfo> entity)
         {
@@ -31,9 +31,8 @@ namespace TrandingSystem.Infrastructure.Data.Configurations
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__ContactIn__Cread__6442E2C9");
 
-            OnConfigurePartial(entity);
+ 
         }
 
-        partial void OnConfigurePartial(EntityTypeBuilder<ContactInfo> entity);
-    }
+     }
 }

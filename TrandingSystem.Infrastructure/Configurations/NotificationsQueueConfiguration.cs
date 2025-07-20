@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
 using System.Collections.Generic;
-using TrandingSystem.Infrastructure.D:\Private_Work\TradingSystem\BackEnd\TradingSystem\TrandingSystem.Domain\Entities;
+using TrandingSystem.Domain.Entities;
 using TrandingSystem.Infrastructure.Data;
 
 namespace TrandingSystem.Infrastructure.Data.Configurations
@@ -30,7 +30,7 @@ namespace TrandingSystem.Infrastructure.Data.Configurations
                 .HasForeignKey(d => d.UserId)
                 .HasConstraintName("FK__Notificat__UserI__719CDDE7");
 
-            OnConfigurePartial(entity);
+ 
         }
 
         partial void OnConfigurePartial(EntityTypeBuilder<NotificationsQueue> entity);
