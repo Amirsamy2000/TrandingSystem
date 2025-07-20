@@ -10,6 +10,7 @@ namespace TrandingSystem.Domain.Entities
         public byte RoleId { get; set; }
 
         public string RoleName { get; set; }
+        public string Test { set; get; }
 
         public virtual ICollection<User> Users { get; set; } = new List<User>();
     }
