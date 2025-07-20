@@ -8,7 +8,7 @@ using TrandingSystem.Infrastructure.Data;
 
 namespace TrandingSystem.Infrastructure.Data.Configurations
 {
-    public partial class MessageConfiguration : IEntityTypeConfiguration<Message>
+    public   class MessageConfiguration : IEntityTypeConfiguration<Message>
     {
         public void Configure(EntityTypeBuilder<Message> entity)
         {
@@ -31,6 +31,5 @@ namespace TrandingSystem.Infrastructure.Data.Configurations
  
         }
 
-        partial void OnConfigurePartial(EntityTypeBuilder<Message> entity);
-    }
+     }
 }

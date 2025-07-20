@@ -8,7 +8,7 @@ using TrandingSystem.Infrastructure.Data;
 
 namespace TrandingSystem.Infrastructure.Data.Configurations
 {
-    public partial class VideoConfiguration : IEntityTypeConfiguration<Video>
+    public   class VideoConfiguration : IEntityTypeConfiguration<Video>
     {
         public void Configure(EntityTypeBuilder<Video> entity)
         {
@@ -41,6 +41,5 @@ namespace TrandingSystem.Infrastructure.Data.Configurations
  
         }
 
-        partial void OnConfigurePartial(EntityTypeBuilder<Video> entity);
-    }
+     }
 }

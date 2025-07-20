@@ -3,54 +3,56 @@
 using System;
 using System.Collections.Generic;
 
-namespace TrandingSystem.Domain.Entities;
-public partial class User
+namespace TrandingSystem.Domain.Entities
 {
-    public int UserId { get; set; }
+    public partial class User
+    {
+        public int UserId { get; set; }
 
-    public string FullName { get; set; }
+        public string FullName { get; set; }
 
-    public string Email { get; set; }
+        public string Email { get; set; }
 
-    public string Mobile { get; set; }
+        public string Mobile { get; set; }
 
-    public string PasswordHash { get; set; }
+        public string PasswordHash { get; set; }
 
-    public DateTime? RegisteredAt { get; set; }
+        public DateTime? RegisteredAt { get; set; }
 
-    public bool IsBlocked { get; set; }
+        public bool IsBlocked { get; set; }
 
-    public byte RoleId { get; set; }
+        public byte RoleId { get; set; }
 
-    public string Address { get; set; }
+        public string Address { get; set; }
 
-    public virtual ICollection<Category> Categories { get; set; } = new List<Category>();
+        public virtual ICollection<Category> Categories { get; set; } = new List<Category>();
 
-    public virtual ICollection<CommunityMember> CommunityMembers { get; set; } = new List<CommunityMember>();
+        public virtual ICollection<CommunityMember> CommunityMembers { get; set; } = new List<CommunityMember>();
 
-    public virtual ICollection<ContactInfo> ContactInfos { get; set; } = new List<ContactInfo>();
+        public virtual ICollection<ContactInfo> ContactInfos { get; set; } = new List<ContactInfo>();
 
-    public virtual ICollection<CourseEnrollment> CourseEnrollments { get; set; } = new List<CourseEnrollment>();
+        public virtual ICollection<CourseEnrollment> CourseEnrollments { get; set; } = new List<CourseEnrollment>();
 
-    public virtual ICollection<CourseRating> CourseRatings { get; set; } = new List<CourseRating>();
+        public virtual ICollection<CourseRating> CourseRatings { get; set; } = new List<CourseRating>();
 
-    public virtual ICollection<Course> Courses { get; set; } = new List<Course>();
+        public virtual ICollection<Course> Courses { get; set; } = new List<Course>();
 
-    public virtual ICollection<LandingPageContent> LandingPageContents { get; set; } = new List<LandingPageContent>();
+        public virtual ICollection<LandingPageContent> LandingPageContents { get; set; } = new List<LandingPageContent>();
 
-    public virtual ICollection<LiveSession> LiveSessions { get; set; } = new List<LiveSession>();
+        public virtual ICollection<LiveSession> LiveSessions { get; set; } = new List<LiveSession>();
 
-    public virtual ICollection<Message> Messages { get; set; } = new List<Message>();
+        public virtual ICollection<Message> Messages { get; set; } = new List<Message>();
 
-    public virtual ICollection<NotificationsQueue> NotificationsQueues { get; set; } = new List<NotificationsQueue>();
+        public virtual ICollection<NotificationsQueue> NotificationsQueues { get; set; } = new List<NotificationsQueue>();
 
-    public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
+        public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
 
-    public virtual Role Role { get; set; }
+        public virtual Role Role { get; set; }
 
-    public virtual ICollection<UserSession> UserSessions { get; set; } = new List<UserSession>();
+        public virtual ICollection<UserSession> UserSessions { get; set; } = new List<UserSession>();
 
-    public virtual ICollection<UsersConnection> UsersConnections { get; set; } = new List<UsersConnection>();
+        public virtual ICollection<UsersConnection> UsersConnections { get; set; } = new List<UsersConnection>();
 
-    public virtual ICollection<Video> Videos { get; set; } = new List<Video>();
+        public virtual ICollection<Video> Videos { get; set; } = new List<Video>();
+    }
 }

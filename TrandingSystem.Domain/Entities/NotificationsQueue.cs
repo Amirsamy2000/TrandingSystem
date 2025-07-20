@@ -3,24 +3,26 @@
 using System;
 using System.Collections.Generic;
 
-namespace TrandingSystem.Domain.Entities;
-public partial class NotificationsQueue
+namespace TrandingSystem.Domain.Entities
 {
-    public int NotificationId { get; set; }
+    public partial class NotificationsQueue
+    {
+        public int NotificationId { get; set; }
 
-    public int? UserId { get; set; }
+        public int? UserId { get; set; }
 
-    public string Channel { get; set; }
+        public string Channel { get; set; }
 
-    public string Subject { get; set; }
+        public string Subject { get; set; }
 
-    public string Message { get; set; }
+        public string Message { get; set; }
 
-    public string Status { get; set; }
+        public string Status { get; set; }
 
-    public DateTime? CreatedAt { get; set; }
+        public DateTime? CreatedAt { get; set; }
 
-    public DateTime? SentAt { get; set; }
+        public DateTime? SentAt { get; set; }
 
-    public virtual User User { get; set; }
+        public virtual User User { get; set; }
+    }
 }

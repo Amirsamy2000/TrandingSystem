@@ -3,16 +3,18 @@
 using System;
 using System.Collections.Generic;
 
-namespace TrandingSystem.Domain.Entities;
-public partial class UsersConnection
+namespace TrandingSystem.Domain.Entities
 {
-    public int UserId { get; set; }
+    public partial class UsersConnection
+    {
+        public int UserId { get; set; }
 
-    public string ConnId { get; set; }
+        public string ConnId { get; set; }
 
-    public DateTime? ConnecdAt { get; set; }
+        public DateTime? ConnecdAt { get; set; }
 
-    public bool? IsOnline { get; set; }
+        public bool? IsOnline { get; set; }
 
-    public virtual User User { get; set; }
+        public virtual User User { get; set; }
+    }
 }

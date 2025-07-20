@@ -3,16 +3,18 @@
 using System;
 using System.Collections.Generic;
 
-namespace TrandingSystem.Domain.Entities;
-public partial class CourseLecturer
+namespace TrandingSystem.Domain.Entities
 {
-    public int CourseLecturerId { get; set; }
+    public partial class CourseLecturer
+    {
+        public int CourseLecturerId { get; set; }
 
-    public int CourseId { get; set; }
+        public int CourseId { get; set; }
 
-    public int LecturerId { get; set; }
+        public int LecturerId { get; set; }
 
-    public virtual Course Course { get; set; }
+        public virtual Course Course { get; set; }
 
-    public virtual User Lecturer { get; set; }
+        public virtual User Lecturer { get; set; }
+    }
 }

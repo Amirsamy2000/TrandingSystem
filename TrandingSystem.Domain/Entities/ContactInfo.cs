@@ -3,20 +3,22 @@
 using System;
 using System.Collections.Generic;
 
-namespace TrandingSystem.Domain.Entities;
-public partial class ContactInfo
+namespace TrandingSystem.Domain.Entities
 {
-    public int ContactId { get; set; }
+    public partial class ContactInfo
+    {
+        public int ContactId { get; set; }
 
-    public string Label { get; set; }
+        public string Label { get; set; }
 
-    public string Value { get; set; }
+        public string Value { get; set; }
 
-    public DateTime? LastUpdated { get; set; }
+        public DateTime? LastUpdated { get; set; }
 
-    public bool? IsVisible { get; set; }
+        public bool? IsVisible { get; set; }
 
-    public int CreadteBy { get; set; }
+        public int CreadteBy { get; set; }
 
-    public virtual User CreadteByNavigation { get; set; }
+        public virtual User CreadteByNavigation { get; set; }
+    }
 }

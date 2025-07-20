@@ -1,11 +1,14 @@
 ﻿using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc.Razor;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using System.Globalization;
+using TrandingSystem.Infrastructure.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
-
+builder.Services.AddDbContext<db23617Context>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 // four steps for add localization support

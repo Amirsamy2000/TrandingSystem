@@ -3,18 +3,20 @@
 using System;
 using System.Collections.Generic;
 
-namespace TrandingSystem.Domain.Entities;
-public partial class UserSession
+namespace TrandingSystem.Domain.Entities
 {
-    public int SessionId { get; set; }
+    public partial class UserSession
+    {
+        public int SessionId { get; set; }
 
-    public int UserId { get; set; }
+        public int UserId { get; set; }
 
-    public DateTime? CreatedAt { get; set; }
+        public DateTime? CreatedAt { get; set; }
 
-    public bool? IsActive { get; set; }
+        public bool? IsActive { get; set; }
 
-    public string SessionToken { get; set; }
+        public string SessionToken { get; set; }
 
-    public virtual User User { get; set; }
+        public virtual User User { get; set; }
+    }
 }

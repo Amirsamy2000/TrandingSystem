@@ -3,20 +3,22 @@
 using System;
 using System.Collections.Generic;
 
-namespace TrandingSystem.Domain.Entities;
-public partial class Category
+namespace TrandingSystem.Domain.Entities
 {
-    public int CategoryId { get; set; }
+    public partial class Category
+    {
+        public int CategoryId { get; set; }
 
-    public string CategoryName { get; set; }
+        public string CategoryName { get; set; }
 
-    public int? CreateBy { get; set; }
+        public int? CreateBy { get; set; }
 
-    public DateTime? CreateAt { get; set; }
+        public DateTime? CreateAt { get; set; }
 
-    public bool? IsActive { get; set; }
+        public bool? IsActive { get; set; }
 
-    public virtual ICollection<Course> Courses { get; set; } = new List<Course>();
+        public virtual ICollection<Course> Courses { get; set; } = new List<Course>();
 
-    public virtual User CreateByNavigation { get; set; }
+        public virtual User CreateByNavigation { get; set; }
+    }
 }

@@ -3,22 +3,24 @@
 using System;
 using System.Collections.Generic;
 
-namespace TrandingSystem.Domain.Entities;
-public partial class CourseRating
+namespace TrandingSystem.Domain.Entities
 {
-    public int RatingId { get; set; }
+    public partial class CourseRating
+    {
+        public int RatingId { get; set; }
 
-    public int UserId { get; set; }
+        public int UserId { get; set; }
 
-    public int CourseId { get; set; }
+        public int CourseId { get; set; }
 
-    public byte Rating { get; set; }
+        public byte Rating { get; set; }
 
-    public string Comment { get; set; }
+        public string Comment { get; set; }
 
-    public DateTime? CreatedAt { get; set; }
+        public DateTime? CreatedAt { get; set; }
 
-    public virtual Course Course { get; set; }
+        public virtual Course Course { get; set; }
 
-    public virtual User User { get; set; }
+        public virtual User User { get; set; }
+    }
 }

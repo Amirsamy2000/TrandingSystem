@@ -3,24 +3,26 @@
 using System;
 using System.Collections.Generic;
 
-namespace TrandingSystem.Domain.Entities;
-public partial class LandingPageContent
+namespace TrandingSystem.Domain.Entities
 {
-    public int ContactId { get; set; }
+    public partial class LandingPageContent
+    {
+        public int ContactId { get; set; }
 
-    public string SectionNameEN { get; set; }
+        public string SectionNameEN { get; set; }
 
-    public string SectionNameAR { get; set; }
+        public string SectionNameAR { get; set; }
 
-    public string ContentEN { get; set; }
+        public string ContentEN { get; set; }
 
-    public string ContentAR { get; set; }
+        public string ContentAR { get; set; }
 
-    public int CreadteBy { get; set; }
+        public int CreadteBy { get; set; }
 
-    public DateTime LastUpdated { get; set; }
+        public DateTime LastUpdated { get; set; }
 
-    public bool? IsActive { get; set; }
+        public bool? IsActive { get; set; }
 
-    public virtual User CreadteByNavigation { get; set; }
+        public virtual User CreadteByNavigation { get; set; }
+    }
 }
