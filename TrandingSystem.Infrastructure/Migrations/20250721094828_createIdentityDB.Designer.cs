@@ -12,8 +12,8 @@ using TrandingSystem.Infrastructure.Data;
 namespace TrandingSystem.Infrastructure.Migrations
 {
     [DbContext(typeof(db23617Context))]
-    [Migration("20250720193128_identityUpdate")]
-    partial class identityUpdate
+    [Migration("20250721094828_createIdentityDB")]
+    partial class createIdentityDB
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

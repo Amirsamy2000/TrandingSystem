@@ -2,17 +2,17 @@ using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.Extensions.Options;
 using System.Globalization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using TrandingSystem.Infrastructure.Data;
+using TrandingSystem.Domain.Entities;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("db23617ContextConnection") ?? throw new InvalidOperationException("Connection string 'db23617ContextConnection' not found.");;
 
 builder.Services.AddDbContext<db23617Context>(options => options.UseSqlServer(connectionString));
-
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<db23617Context>();
-
+builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddRoles<Role>()
+    .AddEntityFrameworkStores<db23617Context>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -68,10 +68,12 @@ app.UseRouting();
 var localizationOptions = app.Services.GetService<IOptions<RequestLocalizationOptions>>().Value;
 app.UseRequestLocalization(localizationOptions);
 // end step 4
+app.UseAuthentication(); // Added for Identity
 app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+app.MapRazorPages(); // Added for Identity
 
 app.Run();
