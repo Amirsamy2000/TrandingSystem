@@ -12,9 +12,9 @@ namespace TrandingSystem.Infrastructure.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<Role> entity)
         {
-            entity.HasKey(e => e.RoleId).HasName("PK__Roles__8AFACE1A02996A08");
+            entity.HasKey(e => e.Id).HasName("PK__Roles__8AFACE1A02996A08");
 
-            entity.Property(e => e.RoleId).ValueGeneratedOnAdd();
+            entity.Property(e => e.Id).ValueGeneratedOnAdd();
             entity.Property(e => e.RoleName).HasMaxLength(100);
 
  

@@ -2,16 +2,11 @@
 #nullable disable
 using System;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Identity;
 
-namespace TrandingSystem.Domain.Entities
+namespace TrandingSystem.Domain.Entities;
+public partial class Role : IdentityRole<int>
 {
-    public partial class Role
-    {
-        public byte RoleId { get; set; }
-
-        public string RoleName { get; set; }
-        public string Test { set; get; }
-
-        public virtual ICollection<User> Users { get; set; } = new List<User>();
-    }
+    public string RoleName { get; set; }
+    public virtual ICollection<User> Users { get; set; } = new List<User>();
 }

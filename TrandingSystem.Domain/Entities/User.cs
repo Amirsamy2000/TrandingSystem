@@ -2,57 +2,45 @@
 #nullable disable
 using System;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Identity;
 
-namespace TrandingSystem.Domain.Entities
+namespace TrandingSystem.Domain.Entities;
+public partial class User : IdentityUser<int>
 {
-    public partial class User
-    {
-        public int UserId { get; set; }
+    public string FullName { get; set; }
+    public string Mobile { get; set; }
+    public DateTime? RegisteredAt { get; set; }
+    public bool IsBlocked { get; set; }
+    public int RoleId { get; set; } // Changed from byte to int
+    public string Address { get; set; }
 
-        public string FullName { get; set; }
+    public virtual ICollection<Category> Categories { get; set; } = new List<Category>();
 
-        public string Email { get; set; }
+    public virtual ICollection<CommunityMember> CommunityMembers { get; set; } = new List<CommunityMember>();
 
-        public string Mobile { get; set; }
+    public virtual ICollection<ContactInfo> ContactInfos { get; set; } = new List<ContactInfo>();
 
-        public string PasswordHash { get; set; }
+    public virtual ICollection<CourseEnrollment> CourseEnrollments { get; set; } = new List<CourseEnrollment>();
 
-        public DateTime? RegisteredAt { get; set; }
+    public virtual ICollection<CourseRating> CourseRatings { get; set; } = new List<CourseRating>();
 
-        public bool IsBlocked { get; set; }
+    public virtual ICollection<Course> Courses { get; set; } = new List<Course>();
 
-        public byte RoleId { get; set; }
+    public virtual ICollection<LandingPageContent> LandingPageContents { get; set; } = new List<LandingPageContent>();
 
-        public string Address { get; set; }
+    public virtual ICollection<LiveSession> LiveSessions { get; set; } = new List<LiveSession>();
 
-        public virtual ICollection<Category> Categories { get; set; } = new List<Category>();
+    public virtual ICollection<Message> Messages { get; set; } = new List<Message>();
 
-        public virtual ICollection<CommunityMember> CommunityMembers { get; set; } = new List<CommunityMember>();
+    public virtual ICollection<NotificationsQueue> NotificationsQueues { get; set; } = new List<NotificationsQueue>();
 
-        public virtual ICollection<ContactInfo> ContactInfos { get; set; } = new List<ContactInfo>();
+    public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
 
-        public virtual ICollection<CourseEnrollment> CourseEnrollments { get; set; } = new List<CourseEnrollment>();
+    public virtual Role Role { get; set; }
 
-        public virtual ICollection<CourseRating> CourseRatings { get; set; } = new List<CourseRating>();
+    public virtual ICollection<UserSession> UserSessions { get; set; } = new List<UserSession>();
 
-        public virtual ICollection<Course> Courses { get; set; } = new List<Course>();
+    public virtual ICollection<UsersConnection> UsersConnections { get; set; } = new List<UsersConnection>();
 
-        public virtual ICollection<LandingPageContent> LandingPageContents { get; set; } = new List<LandingPageContent>();
-
-        public virtual ICollection<LiveSession> LiveSessions { get; set; } = new List<LiveSession>();
-
-        public virtual ICollection<Message> Messages { get; set; } = new List<Message>();
-
-        public virtual ICollection<NotificationsQueue> NotificationsQueues { get; set; } = new List<NotificationsQueue>();
-
-        public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
-
-        public virtual Role Role { get; set; }
-
-        public virtual ICollection<UserSession> UserSessions { get; set; } = new List<UserSession>();
-
-        public virtual ICollection<UsersConnection> UsersConnections { get; set; } = new List<UsersConnection>();
-
-        public virtual ICollection<Video> Videos { get; set; } = new List<Video>();
-    }
+    public virtual ICollection<Video> Videos { get; set; } = new List<Video>();
 }

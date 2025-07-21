@@ -12,16 +12,8 @@ namespace TrandingSystem.Infrastructure.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<User> entity)
         {
-            entity.HasKey(e => e.UserId).HasName("PK__Users__1788CC4C1041235A");
+            entity.HasKey(e => e.Id).HasName("PK__Users__1788CC4C1041235A");
 
-            entity.HasIndex(e => e.Mobile, "UQ__Users__6FAE0782F2311B3E").IsUnique();
-
-            entity.HasIndex(e => e.Email, "UQ__Users__A9D10534ECCDE00C").IsUnique();
-
-            entity.Property(e => e.Email)
-                .IsRequired()
-                .HasMaxLength(250)
-                .IsUnicode(false);
             entity.Property(e => e.FullName)
                 .IsRequired()
                 .HasMaxLength(250);
@@ -29,11 +21,8 @@ namespace TrandingSystem.Infrastructure.Data.Configurations
                 .IsRequired()
                 .HasMaxLength(20)
                 .IsUnicode(false);
-            entity.Property(e => e.PasswordHash)
-                .IsRequired()
-                .HasMaxLength(200)
-                .IsUnicode(false);
             entity.Property(e => e.RegisteredAt).HasColumnType("datetime");
+            entity.Property(e => e.Address).HasMaxLength(250);
 
             entity.HasOne(d => d.Role).WithMany(p => p.Users)
                 .HasForeignKey(d => d.RoleId)
