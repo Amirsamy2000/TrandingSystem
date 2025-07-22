@@ -78,6 +78,14 @@
                     <li><a asp-controller="Home" asp-action="Events">@Localizer["Events"]</a></li>
                     <li><a asp-controller="Home" asp-action="Pricing">@Localizer["Pricing"]</a></li>
                     <li><a asp-controller="Home" asp-action="Contact">@Localizer["Contact"]</a></li>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li>
+                            <form id="logoutForm" asp-area="Identity" asp-page="/Account/Logout" method="post" class="d-inline">
+                                <button type="submit" class="btn btn-link nav-link" style="display:inline; padding:0;">Logout</button>
+                            </form>
+                        </li>
+                    }
                 </ul>
                 <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
             </nav>

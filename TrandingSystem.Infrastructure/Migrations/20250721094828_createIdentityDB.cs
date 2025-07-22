@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace TrandingSystem.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class identityUpdate : Migration
+    public partial class createIdentityDB : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
