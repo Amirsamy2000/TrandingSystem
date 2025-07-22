@@ -12,8 +12,8 @@ using TrandingSystem.Infrastructure.Data;
 namespace TrandingSystem.Infrastructure.Migrations
 {
     [DbContext(typeof(db23617Context))]
-    [Migration("20250722174310_createnewaracol")]
-    partial class createnewaracol
+    [Migration("20250722195013_RenameColumnsNCategory")]
+    partial class RenameColumnsNCategory
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -76,10 +76,12 @@ namespace TrandingSystem.Infrastructure.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<int>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("ProviderKey")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("nvarchar(max)");
@@ -115,10 +117,12 @@ namespace TrandingSystem.Infrastructure.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("Value")
                         .HasColumnType("nvarchar(max)");
@@ -136,12 +140,12 @@ namespace TrandingSystem.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CategoryId"));
 
-                    b.Property<string>("CategoryNameAR")
+                    b.Property<string>("CategoryNameAr")
                         .HasMaxLength(250)
                         .IsUnicode(true)
                         .HasColumnType("nvarchar(250)");
 
-                    b.Property<string>("CategoryNameEN")
+                    b.Property<string>("CategoryNameEn")
                         .HasMaxLength(250)
                         .HasColumnType("nvarchar(250)");
 
@@ -497,6 +501,9 @@ namespace TrandingSystem.Infrastructure.Migrations
 
                     b.Property<string>("DescriptionEN")
                         .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImageSessionUrl")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool?>("IsActive")
@@ -936,6 +943,9 @@ namespace TrandingSystem.Infrastructure.Migrations
 
                     b.Property<string>("DescriptionEN")
                         .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImageVideoUrl")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool?>("IsActive")

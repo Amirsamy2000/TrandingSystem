@@ -137,12 +137,12 @@ namespace TrandingSystem.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CategoryId"));
 
-                    b.Property<string>("CategoryNameAR")
+                    b.Property<string>("CategoryNameAr")
                         .HasMaxLength(250)
                         .IsUnicode(true)
                         .HasColumnType("nvarchar(250)");
 
-                    b.Property<string>("CategoryNameEN")
+                    b.Property<string>("CategoryNameEn")
                         .HasMaxLength(250)
                         .HasColumnType("nvarchar(250)");
 
