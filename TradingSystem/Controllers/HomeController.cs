@@ -21,7 +21,7 @@ namespace WebApplication1.Controllers
         public IActionResult Index()
         {
 
-            var t = _db.Roles.ToList();
+         //   var t = _db.Roles.ToList();
 
             return View();
 
@@ -75,5 +75,7 @@ namespace WebApplication1.Controllers
             // إعادة توجيه المستخدم لنفس الصفحة
             return LocalRedirect(returnUrl);
         }
+
+        public IActionResult Dashboard() { return View(); }
     }
 }
