@@ -9,6 +9,7 @@ namespace TrandingSystem.Domain.Entities
     {
         public int RatingId { get; set; }
 
+        public string test { set;get; } // Example property to demonstrate the code structure
         public int UserId { get; set; }
 
         public int CourseId { get; set; }

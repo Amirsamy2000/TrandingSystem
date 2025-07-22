@@ -5,20 +5,14 @@
 namespace TrandingSystem.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class creatimageurl : Migration
+    public partial class fortest : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<string>(
-                name: "ImageVideoUrl",
-                table: "Videos",
-                type: "nvarchar(max)",
-                nullable: true);
-
-            migrationBuilder.AddColumn<string>(
-                name: "ImageSessionUrl",
-                table: "LiveSessions",
+                name: "test",
+                table: "CourseRatings",
                 type: "nvarchar(max)",
                 nullable: true);
         }
@@ -27,12 +21,8 @@ namespace TrandingSystem.Infrastructure.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "ImageVideoUrl",
-                table: "Videos");
-
-            migrationBuilder.DropColumn(
-                name: "ImageSessionUrl",
-                table: "LiveSessions");
+                name: "test",
+                table: "CourseRatings");
         }
     }
 }
