@@ -1,8 +1,20 @@
 ﻿@page
 @model LoginModel
 @{
+    Layout = null;
     ViewData["Title"] = "Log in";
 }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewData["Title"]</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="~/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet" />
+    <link href="~/assets/css/main.css" rel="stylesheet" />
+</head>
+<body>
 <main class="main d-flex align-items-center justify-content-center min-vh-100" style="background: var(--bs-body-bg);">
     <div class="container d-flex justify-content-center align-items-center" style="min-height: 80vh;">
         <div class="card shadow border-0 w-100" style="max-width:400px;">
@@ -59,8 +71,16 @@
 </main>
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
-        button#login-submit:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 6px 12px rgba(65, 84, 241, 0.25);
-    }
+    <script>
+        document.getElementById('login-submit')?.addEventListener('mouseover', function() {
+            this.style.transform = 'translateY(-2px)';
+            this.style.boxShadow = '0 6px 12px rgba(65, 84, 241, 0.25)';
+        });
+        document.getElementById('login-submit')?.addEventListener('mouseout', function() {
+            this.style.transform = '';
+            this.style.boxShadow = '';
+        });
+    </script>
 }
+</body>
+</html>
