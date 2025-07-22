@@ -1,0 +1,70 @@
+﻿@page
+@model RegisterModel
+@{
+    ViewData["Title"] = "Register";
+}
+<main class="main d-flex align-items-center justify-content-center min-vh-100" style="background: var(--bs-body-bg);">
+    <div class="container d-flex justify-content-center align-items-center" style="min-height: 80vh;">
+        <div class="card shadow border-0 w-100" style="max-width:400px;">
+            <div class="card-body p-4">
+                <div class="text-center mb-4">
+                    <i class="bi bi-person-plus display-3 text-primary"></i>
+                    <h2 class="fw-bold mb-2">@ViewData["Title"]</h2>
+                </div>
+                <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post" autocomplete="off">
+                    <div asp-validation-summary="ModelOnly" class="text-danger mb-2" role="alert"></div>
+                    <div class="form-floating mb-3">
+                        <input asp-for="Input.FullName" class="form-control" aria-required="true" placeholder="Full Name" />
+                        <label asp-for="Input.FullName">Full Name</label>
+                        <span asp-validation-for="Input.FullName" class="text-danger"></span>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input asp-for="Input.Mobile" class="form-control" aria-required="true" placeholder="Mobile" />
+                        <label asp-for="Input.Mobile">Mobile</label>
+                        <span asp-validation-for="Input.Mobile" class="text-danger"></span>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
+                        <label asp-for="Input.Email">Email</label>
+                        <span asp-validation-for="Input.Email" class="text-danger"></span>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
+                        <label asp-for="Input.Password">Password</label>
+                        <span asp-validation-for="Input.Password" class="text-danger"></span>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
+                        <label asp-for="Input.ConfirmPassword">Confirm Password</label>
+                        <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                    </div>
+                    <button id="registerSubmit" type="submit" class="w-100 btn btn-lg mb-3 text-white d-flex align-items-center justify-content-center gap-2" style="background: linear-gradient(135deg, #4154f1, #5969f3); border: none; transition: all 0.3s ease;">
+                        <i class="bi bi-person-plus fs-5"></i>
+                        <span class="fw-semibold">Register</span>
+                    </button>
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <a asp-page="./Login" asp-route-returnUrl="@Model.ReturnUrl" class="small">Already have an account?</a>
+                        <a asp-page="./ForgotPassword" class="small">Forgot password?</a>
+                    </div>
+                    <div class="text-center mb-2">
+                        <span class="text-muted small">Or register with</span>
+                    </div>
+                    <div class="d-flex justify-content-center gap-2 mb-2">
+                        <button type="button" class="btn btn-outline-secondary rounded-circle" title="Google"><i class="bi bi-google"></i></button>
+                        <button type="button" class="btn btn-outline-secondary rounded-circle" title="Facebook"><i class="bi bi-facebook"></i></button>
+                        <button type="button" class="btn btn-outline-secondary rounded-circle" title="Twitter"><i class="bi bi-twitter-x"></i></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <style>
+        button#registerSubmit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(65, 84, 241, 0.25);
+        }
+    </style>
+}
