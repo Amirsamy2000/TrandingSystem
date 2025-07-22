@@ -7,7 +7,7 @@ using TrandingSystem.Infrastructure.Data;
 using TrandingSystem.Domain.Entities;
 
 var builder = WebApplication.CreateBuilder(args);
-var connectionString = builder.Configuration.GetConnectionString("db23617ContextConnection") ?? throw new InvalidOperationException("Connection string 'db23617ContextConnection' not found.");;
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");;
 
 builder.Services.AddDbContext<db23617Context>(options => options.UseSqlServer(connectionString));
 builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true)
