@@ -20,7 +20,7 @@ namespace TrandingSystem.Domain.Entities
         public string DescriptionAR { get; set; }
 
         public string VideoUrl { get; set; }
-
+        public string ImageVideoUrl { get; set; }
         public bool? IsPaid { get; set; }
 
         public decimal? Cost { get; set; }

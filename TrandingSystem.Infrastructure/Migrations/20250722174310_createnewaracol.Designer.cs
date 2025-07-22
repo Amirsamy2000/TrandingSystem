@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TrandingSystem.Infrastructure.Data;
 
@@ -11,9 +12,11 @@ using TrandingSystem.Infrastructure.Data;
 namespace TrandingSystem.Infrastructure.Migrations
 {
     [DbContext(typeof(db23617Context))]
-    partial class db23617ContextModelSnapshot : ModelSnapshot
+    [Migration("20250722174310_createnewaracol")]
+    partial class createnewaracol
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -496,9 +499,6 @@ namespace TrandingSystem.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ImageSessionUrl")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<bool?>("IsActive")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bit")
@@ -936,9 +936,6 @@ namespace TrandingSystem.Infrastructure.Migrations
 
                     b.Property<string>("DescriptionEN")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ImageVideoUrl")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool?>("IsActive")

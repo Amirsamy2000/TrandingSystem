@@ -22,6 +22,7 @@ namespace TrandingSystem.Domain.Entities
         public string YoutubeLink { get; set; }
 
         public DateTime ScheduledAt { get; set; }
+        public string ImageSessionUrl { get; set; }
 
         public bool? IsLocked { get; set; }
 

@@ -9,8 +9,8 @@ namespace TrandingSystem.Domain.Entities
     {
         public int CategoryId { get; set; }
 
-        public string CategoryName { get; set; }
-
+        public string CategoryNameEN { get; set; }
+        public string CategoryNameAR { get; set; }
         public int? CreateBy { get; set; }
 
         public DateTime? CreateAt { get; set; }
