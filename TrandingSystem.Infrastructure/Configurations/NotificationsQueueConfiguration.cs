@@ -8,7 +8,7 @@ using TrandingSystem.Infrastructure.Data;
 
 namespace TrandingSystem.Infrastructure.Data.Configurations
 {
-    public partial class NotificationsQueueConfiguration : IEntityTypeConfiguration<NotificationsQueue>
+    public   class NotificationsQueueConfiguration : IEntityTypeConfiguration<NotificationsQueue>
     {
         public void Configure(EntityTypeBuilder<NotificationsQueue> entity)
         {
@@ -33,6 +33,5 @@ namespace TrandingSystem.Infrastructure.Data.Configurations
  
         }
 
-        partial void OnConfigurePartial(EntityTypeBuilder<NotificationsQueue> entity);
-    }
+     }
 }

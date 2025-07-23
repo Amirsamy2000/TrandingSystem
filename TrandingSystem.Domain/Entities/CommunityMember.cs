@@ -3,20 +3,22 @@
 using System;
 using System.Collections.Generic;
 
-namespace TrandingSystem.Domain.Entities;
-public partial class CommunityMember
+namespace TrandingSystem.Domain.Entities
 {
-    public int Id { get; set; }
+    public partial class CommunityMember
+    {
+        public int Id { get; set; }
 
-    public int CommunityId { get; set; }
+        public int CommunityId { get; set; }
 
-    public int UserId { get; set; }
+        public int UserId { get; set; }
 
-    public bool? IsBlocked { get; set; }
+        public bool? IsBlocked { get; set; }
 
-    public DateTime? JoinedAt { get; set; }
+        public DateTime? JoinedAt { get; set; }
 
-    public virtual Community Community { get; set; }
+        public virtual Community Community { get; set; }
 
-    public virtual User User { get; set; }
+        public virtual User User { get; set; }
+    }
 }

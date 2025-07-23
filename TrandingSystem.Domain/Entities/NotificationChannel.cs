@@ -3,22 +3,24 @@
 using System;
 using System.Collections.Generic;
 
-namespace TrandingSystem.Domain.Entities;
-public partial class NotificationChannel
+namespace TrandingSystem.Domain.Entities
 {
-    public int ChannelId { get; set; }
+    public partial class NotificationChannel
+    {
+        public int ChannelId { get; set; }
 
-    public string ChannelType { get; set; }
+        public string ChannelType { get; set; }
 
-    public string Name { get; set; }
+        public string Name { get; set; }
 
-    public string SenderName { get; set; }
+        public string SenderName { get; set; }
 
-    public string SenderAddress { get; set; }
+        public string SenderAddress { get; set; }
 
-    public string Config { get; set; }
+        public string Config { get; set; }
 
-    public bool? IsActive { get; set; }
+        public bool? IsActive { get; set; }
 
-    public DateTime? LastUpdated { get; set; }
+        public DateTime? LastUpdated { get; set; }
+    }
 }

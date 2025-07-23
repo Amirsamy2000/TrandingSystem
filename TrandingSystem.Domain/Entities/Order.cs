@@ -3,24 +3,26 @@
 using System;
 using System.Collections.Generic;
 
-namespace TrandingSystem.Domain.Entities;
-public partial class Order
+namespace TrandingSystem.Domain.Entities
 {
-    public int OrderId { get; set; }
+    public partial class Order
+    {
+        public int OrderId { get; set; }
 
-    public int UserId { get; set; }
+        public int UserId { get; set; }
 
-    public int CourseId { get; set; }
+        public int CourseId { get; set; }
 
-    public string ReceiptImagePath { get; set; }
+        public string ReceiptImagePath { get; set; }
 
-    public byte OrderStatus { get; set; }
+        public byte OrderStatus { get; set; }
 
-    public int ConfirmedBy { get; set; }
+        public int ConfirmedBy { get; set; }
 
-    public DateTime CreatedAt { get; set; }
+        public DateTime CreatedAt { get; set; }
 
-    public virtual Course Course { get; set; }
+        public virtual Course Course { get; set; }
 
-    public virtual User User { get; set; }
+        public virtual User User { get; set; }
+    }
 }

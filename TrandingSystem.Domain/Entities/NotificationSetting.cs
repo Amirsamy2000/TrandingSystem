@@ -3,16 +3,18 @@
 using System;
 using System.Collections.Generic;
 
-namespace TrandingSystem.Domain.Entities;
-public partial class NotificationSetting
+namespace TrandingSystem.Domain.Entities
 {
-    public int SettingId { get; set; }
+    public partial class NotificationSetting
+    {
+        public int SettingId { get; set; }
 
-    public string EventKey { get; set; }
+        public string EventKey { get; set; }
 
-    public bool? SendEmail { get; set; }
+        public bool? SendEmail { get; set; }
 
-    public bool? SendWhatsApp { get; set; }
+        public bool? SendWhatsApp { get; set; }
 
-    public DateTime? LastUpdated { get; set; }
+        public DateTime? LastUpdated { get; set; }
+    }
 }

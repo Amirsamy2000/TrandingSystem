@@ -5,26 +5,26 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Diagnostics;
 using TrandingSystem.Infrastructure.Data;
+using TrandingSystem.Domain.Entities;
 
 namespace WebApplication1.Controllers
 {
-    [Authorize]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private DbContextOptions<db23617Context> _options;
+        private readonly db23617Context _db;
 
-
-        public HomeController(ILogger<HomeController> logger, DbContextOptions<db23617Context> options)
+        public HomeController(ILogger<HomeController> logger,     db23617Context options)
         {
             _logger = logger;
-            _options = options;
+            _db = options;
         }
 
         public IActionResult Index()
         {
-           
-            // Fetch categories from the database
+
+         //   var t = _db.Roles.ToList();
+
             return View();
 
            
@@ -77,5 +77,7 @@ namespace WebApplication1.Controllers
             // إعادة توجيه المستخدم لنفس الصفحة
             return LocalRedirect(returnUrl);
         }
+
+        public IActionResult Dashboard() { return View(); }
     }
 }

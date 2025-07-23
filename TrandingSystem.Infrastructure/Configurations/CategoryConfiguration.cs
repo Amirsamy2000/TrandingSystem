@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
 using System.Collections.Generic;
+using System.Reflection.Emit;
 using TrandingSystem.Domain.Entities;
 using TrandingSystem.Infrastructure.Data;
 
@@ -14,7 +15,9 @@ namespace TrandingSystem.Infrastructure.Data.Configurations
         {
             entity.HasKey(e => e.CategoryId).HasName("PK__Categori__19093A0B01AB99A3");
 
-            entity.Property(e => e.CategoryName).HasMaxLength(250);
+            entity.Property(e => e.CategoryNameEn).HasMaxLength(250);
+            entity.Property(x => x.CategoryNameAr).HasMaxLength(250).IsUnicode();
+          ;
             entity.Property(e => e.CreateAt).HasColumnType("datetime");
             entity.Property(e => e.IsActive).HasDefaultValue(true);
 

@@ -3,34 +3,36 @@
 using System;
 using System.Collections.Generic;
 
-namespace TrandingSystem.Domain.Entities;
-public partial class Video
+namespace TrandingSystem.Domain.Entities
 {
-    public int VideoId { get; set; }
+    public partial class Video
+    {
+        public int VideoId { get; set; }
 
-    public int CourseId { get; set; }
+        public int CourseId { get; set; }
 
-    public string TitleEN { get; set; }
+        public string TitleEN { get; set; }
 
-    public string TitleAR { get; set; }
+        public string TitleAR { get; set; }
 
-    public string DescriptionEN { get; set; }
+        public string DescriptionEN { get; set; }
 
-    public string DescriptionAR { get; set; }
+        public string DescriptionAR { get; set; }
 
-    public string VideoUrl { get; set; }
+        public string VideoUrl { get; set; }
+        public string ImageVideoUrl { get; set; }
+        public bool? IsPaid { get; set; }
 
-    public bool? IsPaid { get; set; }
+        public decimal? Cost { get; set; }
 
-    public decimal? Cost { get; set; }
+        public DateTime? CreatedAt { get; set; }
 
-    public DateTime? CreatedAt { get; set; }
+        public int CreadteBy { get; set; }
 
-    public int CreadteBy { get; set; }
+        public bool? IsActive { get; set; }
 
-    public bool? IsActive { get; set; }
+        public virtual Course Course { get; set; }
 
-    public virtual Course Course { get; set; }
-
-    public virtual User CreadteByNavigation { get; set; }
+        public virtual User CreadteByNavigation { get; set; }
+    }
 }

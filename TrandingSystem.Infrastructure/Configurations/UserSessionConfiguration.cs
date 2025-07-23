@@ -8,7 +8,7 @@ using TrandingSystem.Infrastructure.Data;
 
 namespace TrandingSystem.Infrastructure.Data.Configurations
 {
-    public partial class UserSessionConfiguration : IEntityTypeConfiguration<UserSession>
+    public   class UserSessionConfiguration : IEntityTypeConfiguration<UserSession>
     {
         public void Configure(EntityTypeBuilder<UserSession> entity)
         {
@@ -30,6 +30,5 @@ namespace TrandingSystem.Infrastructure.Data.Configurations
  
         }
 
-        partial void OnConfigurePartial(EntityTypeBuilder<UserSession> entity);
-    }
+     }
 }

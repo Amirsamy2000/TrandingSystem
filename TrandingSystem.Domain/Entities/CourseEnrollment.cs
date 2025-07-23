@@ -3,20 +3,22 @@
 using System;
 using System.Collections.Generic;
 
-namespace TrandingSystem.Domain.Entities;
-public partial class CourseEnrollment
+namespace TrandingSystem.Domain.Entities
 {
-    public int EnrollmentId { get; set; }
+    public partial class CourseEnrollment
+    {
+        public int EnrollmentId { get; set; }
 
-    public int UserId { get; set; }
+        public int UserId { get; set; }
 
-    public int CourseId { get; set; }
+        public int CourseId { get; set; }
 
-    public DateTime EnrollmentDate { get; set; }
+        public DateTime EnrollmentDate { get; set; }
 
-    public bool IsConfirmed { get; set; }
+        public bool IsConfirmed { get; set; }
 
-    public virtual Course Course { get; set; }
+        public virtual Course Course { get; set; }
 
-    public virtual User User { get; set; }
+        public virtual User User { get; set; }
+    }
 }

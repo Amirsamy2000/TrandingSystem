@@ -3,20 +3,22 @@
 using System;
 using System.Collections.Generic;
 
-namespace TrandingSystem.Domain.Entities;
-public partial class Message
+namespace TrandingSystem.Domain.Entities
 {
-    public int MessageId { get; set; }
+    public partial class Message
+    {
+        public int MessageId { get; set; }
 
-    public int CommunityId { get; set; }
+        public int CommunityId { get; set; }
 
-    public int UserId { get; set; }
+        public int UserId { get; set; }
 
-    public string MessageText { get; set; }
+        public string MessageText { get; set; }
 
-    public DateTime? SentAt { get; set; }
+        public DateTime? SentAt { get; set; }
 
-    public virtual Community Community { get; set; }
+        public virtual Community Community { get; set; }
 
-    public virtual User User { get; set; }
+        public virtual User User { get; set; }
+    }
 }
