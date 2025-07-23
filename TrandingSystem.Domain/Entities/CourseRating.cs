@@ -18,8 +18,6 @@ public partial class CourseRating
 
     public DateTime? CreatedAt { get; set; }
 
-    public string Notes { get; set; }
-
     public virtual Course Course { get; set; }
 
     public virtual User User { get; set; }
