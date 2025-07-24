@@ -14,4 +14,8 @@
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="9.0.7" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\TradingSystem.Shared\TradingSystem.Shared.csproj" />
+  </ItemGroup>
+
 </Project>

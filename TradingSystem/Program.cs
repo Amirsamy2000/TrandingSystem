@@ -9,7 +9,10 @@ using TrandingSystem.Domain.Entities;
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");;
 
-builder.Services.AddDbContext<db23617Context>(options => options.UseSqlServer(connectionString));
+builder.Services.AddDbContext<db23617Context>(options =>
+    options.UseSqlServer(connectionString)
+           .UseLazyLoadingProxies()
+);
 builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddRoles<Role>()
     .AddEntityFrameworkStores<db23617Context>();

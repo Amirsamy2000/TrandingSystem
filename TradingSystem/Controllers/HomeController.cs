@@ -78,6 +78,7 @@ namespace WebApplication1.Controllers
             return LocalRedirect(returnUrl);
         }
 
+        [Authorize]
         public IActionResult Dashboard() { return View(); }
     }
 }
