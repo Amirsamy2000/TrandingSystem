@@ -7,19 +7,19 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Common\" />
     <Folder Include="Features\Users\Queries\" />
     <Folder Include="Validators\" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="13.0.1" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
     <PackageReference Include="MediatR" Version="13.0.0" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="9.0.7" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\TradingSystem.Shared\TradingSystem.Shared.csproj" />
     <ProjectReference Include="..\TrandingSystem.Domain\TrandingSystem.Domain.csproj" />
     <ProjectReference Include="..\TrandingSystem.Infrastructure\TrandingSystem.Infrastructure.csproj" />
   </ItemGroup>

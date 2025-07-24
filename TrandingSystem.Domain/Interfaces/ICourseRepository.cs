@@ -7,7 +7,7 @@ using TrandingSystem.Domain.Abstractions;
 using TrandingSystem.Domain.Entities;
 namespace TrandingSystem.Domain.Interfaces
 {
-    public interface ICourseRepository 
+    public interface ICourseRepository : IDomainInterface<Course>
     {
 
     }
