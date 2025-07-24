@@ -9,9 +9,14 @@ using TrandingSystem.Infrastructure.Data;
 
 namespace TrandingSystem.Infrastructure.Repositories
 {
-    internal class CourseRepository : ICourseRepository
+    public class CourseRepository : ICourseRepository
     {
         private readonly db23617Context _context;
+
+        public CourseRepository(db23617Context context)
+        {
+            _context = context;
+        }
         public Course Create(Course Object)
         {
             
@@ -24,7 +29,7 @@ namespace TrandingSystem.Infrastructure.Repositories
 
         public List<Course> Read()
         {
-            throw new NotImplementedException();
+            return _context.Courses.ToList();
         }
 
         public Course ReadById(int Id)

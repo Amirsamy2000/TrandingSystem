@@ -1,6 +1,7 @@
 using AutoMapper;
-using TrandingSystem.Domain.Entities;
 using TrandingSystem.Application.Dtos;
+using TrandingSystem.Application.Features.Courses.Commands;
+using TrandingSystem.Domain.Entities;
 
 namespace TrandingSystem.Application.Common
 {
@@ -8,7 +9,8 @@ namespace TrandingSystem.Application.Common
     {
         public MappingProfile()
         {
-            CreateMap<Course, CourseDto>().ReverseMap();
+            
+
             // Add other mappings here as needed
         }
     }

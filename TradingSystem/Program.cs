@@ -1,10 +1,16 @@
+using MediatR;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc.Razor;
-using Microsoft.Extensions.Options;
-using System.Globalization;
 using Microsoft.EntityFrameworkCore;
-using TrandingSystem.Infrastructure.Data;
+using Microsoft.Extensions.Options;
+using NuGet.Protocol.Core.Types;
+using System.Globalization;
+using TrandingSystem.Application.Common;
+using TrandingSystem.Application.Features.Courses.Commands;
 using TrandingSystem.Domain.Entities;
+using TrandingSystem.Domain.Interfaces;
+using TrandingSystem.Infrastructure.Data;
+using TrandingSystem.Infrastructure.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");;
@@ -13,6 +19,20 @@ builder.Services.AddDbContext<db23617Context>(options =>
     options.UseSqlServer(connectionString)
            .UseLazyLoadingProxies()
 );
+
+
+//builder.Services.AddAutoMapper(typeof(MappingProfile));
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+builder.Services.AddMediatR(cfg => 
+    cfg.RegisterServicesFromAssembly(typeof(AddCourseCommand).Assembly));
+
+builder.Services.AddScoped<ICourseRepository, CourseRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+
+
+//builder.Services.AddScoped<ICourseRepository, CourseRepository>();
+
 builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddRoles<Role>()
     .AddEntityFrameworkStores<db23617Context>();

@@ -33,6 +33,9 @@ namespace TrandingSystem.Domain.Entities
 
         public bool? IsActive { get; set; }
 
+        public string? ImageCourseUrl { get; set; }
+
+
         public virtual Category Category { get; set; }
 
         public virtual ICollection<Community> Communities { get; set; } = new List<Community>();

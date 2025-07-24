@@ -18,6 +18,9 @@ namespace TrandingSystem.Infrastructure.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "9.0.7")
+                .HasAnnotation("Proxies:ChangeTracking", false)
+                .HasAnnotation("Proxies:CheckEquality", false)
+                .HasAnnotation("Proxies:LazyLoading", true)
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -313,6 +316,9 @@ namespace TrandingSystem.Infrastructure.Migrations
 
                     b.Property<string>("DescriptionEN")
                         .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImageCourseUrl")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool?>("IsActive")
