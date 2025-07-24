@@ -288,12 +288,26 @@
                                     <li>
                                         <div class="dropdown-divider"></div>
                                     </li>
-                                    <li>
-                                        <a class="dropdown-item" href="auth-login-basic.html">
-                                            <i class="bx bx-power-off me-2"></i>
-                                            <span class="align-middle">Log Out</span>
-                                        </a>
-                                    </li>
+                                    @if (User.Identity.IsAuthenticated)
+                                    {
+                                        @* <li>
+                                            <a class="dropdown-item" href="auth-login-basic.html">
+                                                <span class="align-middle">Log Out</span>
+                                            </a>
+                                        </li> *@
+                                        <li>
+                                            <a class="dropdown-item" href="#" onclick="document.getElementById('logoutForm').submit(); return false;">
+                                                <span class="d-flex align-items-center align-middle">
+                                                    <i class="flex-shrink-0 bx bx-power-off me-2"></i>
+                                                    <span class="flex-grow-1 align-middle">Logout</span>
+                                                </span>
+                                            </a>
+                                            <form id="logoutForm" asp-area="Identity" asp-page="/Account/Logout" method="post" class="d-none"></form>
+                                        </li>
+
+
+                                    }
+                                    
                                 </ul>
                             </li>
                             <!--/ User -->
