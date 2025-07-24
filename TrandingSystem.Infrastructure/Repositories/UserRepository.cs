@@ -8,7 +8,7 @@ using TrandingSystem.Domain.Interfaces;
 
 namespace TrandingSystem.Infrastructure.Repositories
 {
-    internal class UserRepository : IUserRepository
+    public class UserRepository : IUserRepository
     {
        // private readonly AppDbContext _context;
         public bool AddUser(string name, string email)

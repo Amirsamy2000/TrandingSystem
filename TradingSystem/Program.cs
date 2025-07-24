@@ -5,7 +5,12 @@ using System.Globalization;
 using Microsoft.EntityFrameworkCore;
 using TrandingSystem.Infrastructure.Data;
 using TrandingSystem.Domain.Entities;
-
+using TrandingSystem.Domain.Interfaces;
+using TrandingSystem.Infrastructure.Repositories;
+using TrandingSystem.Application.Features.Video.Handlers;
+using TrandingSystem.Application.Common;
+using AutoMapper;
+using NuGet.Protocol.Core.Types;
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");;
 
@@ -17,9 +22,29 @@ builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfi
     .AddRoles<Role>()
     .AddEntityFrameworkStores<db23617Context>();
 
+// Add UnitOfWork
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+//Add Auto Maper
+// With the following:
+builder.Services.AddAutoMapper(cfg =>
+{
+    cfg.AddMaps(typeof(MappingProfile).Assembly);
+});
+// Add MediatR
+builder.Services.AddMediatR(cfg =>
+{
+    cfg.RegisterServicesFromAssembly(typeof(GetVideosByCourseIdHandler).Assembly);
+});
+
+
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<ICourseRepository, CourseRepository>();
+
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 // four steps for add localization support
+// dd DI for UnitOfWork and Repositories
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 // 1-- add service Localization
 builder.Services.AddLocalization(options =>
@@ -76,7 +101,7 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Videos}/{action=Videos}/{id?}");
 app.MapRazorPages(); // Added for Identity
 
 app.Run();
