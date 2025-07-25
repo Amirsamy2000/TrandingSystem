@@ -1,19 +1,11 @@
 ﻿using AutoMapper;
-using AutoMapper.QueryableExtensions;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 using TradingSystem.Application.Common.Response;
 using TrandingSystem.Application.Dtos;
 using TrandingSystem.Application.Features.Video.Queries;
-using TrandingSystem.Domain.Entities;
 using TrandingSystem.Domain.Interfaces;
-using TrandingSystem.Domain.Entities;
+ 
 
 namespace TrandingSystem.Application.Features.Video.Handlers
 {

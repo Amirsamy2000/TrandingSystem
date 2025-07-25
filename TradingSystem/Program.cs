@@ -11,6 +11,7 @@ using TrandingSystem.Application.Features.Video.Handlers;
 using TrandingSystem.Application.Common;
 using AutoMapper;
 using NuGet.Protocol.Core.Types;
+using MediatR;
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");;
 
