@@ -29,6 +29,7 @@ builder.Services.AddMediatR(cfg =>
 
 builder.Services.AddScoped<ICourseRepository, CourseRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 
 
 //builder.Services.AddScoped<ICourseRepository, CourseRepository>();

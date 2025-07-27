@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TrandingSystem.Domain.Abstractions;
 using TrandingSystem.Domain.Entities;
 using TrandingSystem.Domain.Interfaces;
 using TrandingSystem.Infrastructure.Data;
 
 namespace TrandingSystem.Infrastructure.Repositories
 {
-    public class CategoryRepository : ICategoryRepository<Category> 
+    public class CategoryRepository : ICategoryRepository
     {
         private readonly db23617Context _context;
 
@@ -17,6 +18,7 @@ namespace TrandingSystem.Infrastructure.Repositories
         {
             _context = context;
         }
+
         public Category Create(Category Object)
         {
             _context.Categories.Add(Object);
@@ -29,16 +31,18 @@ namespace TrandingSystem.Infrastructure.Repositories
             return _context.Categories.ToList();
         }
 
-        public Course ReadById(int Id)
+        public Category Delete(int Id)
         {
             throw new NotImplementedException();
         }
 
-        public Course Update(Course Element)
+
+        public Category ReadById(int Id)
         {
             throw new NotImplementedException();
         }
-        public Course Delete(int Id)
+
+        public Category Update(Category Element)
         {
             throw new NotImplementedException();
         }

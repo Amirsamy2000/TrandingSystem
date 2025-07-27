@@ -15,6 +15,7 @@ namespace TrandingSystem.Mapping
             CreateMap<Course, AddCourseCommand>().ReverseMap();
             CreateMap<Course, CourseVM>().ReverseMap();
             CreateMap<Course, CourseDto>().ReverseMap();
+            CreateMap<Category, CategoryDto>().ReverseMap();
 
 
         }

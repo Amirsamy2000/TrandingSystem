@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TradingSystem.Application.Common.Response;
 using TrandingSystem.Application.Dtos;
-using TrandingSystem.Application.Features.Courses.Commands;
+using TrandingSystem.Application.Features.Courses.Queries;
 using TrandingSystem.Domain.Entities;
 using TrandingSystem.Domain.Interfaces;
 

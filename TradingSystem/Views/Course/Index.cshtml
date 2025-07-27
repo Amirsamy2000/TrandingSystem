@@ -207,7 +207,8 @@
                 dataType: 'json',
                 success: function(data) {
                     debugger
-                    categories = data.filter(cat => cat.IsActive === true);
+                    categories =  data.data.filter(cat => cat.isActive === true);
+                    // categories =ValidCat.map(cat => cat.categoryNameEn);
                     populateCategoryFilter();
                 },
                 error: function(xhr, status, error) {
@@ -226,7 +227,7 @@
             categoryFilter.find('option:not(:first)').remove();
 
             categories.forEach(function(category) {
-                categoryFilter.append(`<option value="${category.CategoryId}">${category.NameEN || category.Name}</option>`);
+                categoryFilter.append(`<option value="${category.categoryId}">${category.categoryNameEn || category.categoryNameAr}</option>`);
             });
         }
 

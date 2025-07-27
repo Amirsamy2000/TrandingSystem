@@ -2,6 +2,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using TradingSystem.Application.Common.Response;
+using TrandingSystem.Application.Features.Courses.Queries;
 using TrandingSystem.Application.Features.Courses.Commands;
 using TrandingSystem.Domain.Entities;
 using TrandingSystem.ViewModels;
