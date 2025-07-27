@@ -117,40 +117,40 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Add" xml:space="preserve">
+  <data name="TitleEN" xml:space="preserve">
+    <value>العنوان  (عربي)</value>
+  </data>
+  <data name="Send" xml:space="preserve">
+    <value>حفظ</value>
+  </data>
+  <data name="TitleAR" xml:space="preserve">
+    <value>العنوان (انجليزي)</value>
+  </data>
+  <data name="DescriptionEN" xml:space="preserve">
+    <value>الوصف (انجليزي)</value>
+  </data>
+  <data name="DescriptionAR" xml:space="preserve">
+    <value>الوصف (عربي)</value>
+  </data>
+  <data name="VideoUrl" xml:space="preserve">
+    <value>الفديو</value>
+  </data>
+  <data name="AddNewVideo" xml:space="preserve">
     <value>اضافة فديو جديد</value>
   </data>
-  <data name="Delete" xml:space="preserve">
-    <value>حذف</value>
-  </data>
-  <data name="Display" xml:space="preserve">
-    <value>عرض</value>
-  </data>
-  <data name="Date" xml:space="preserve">
-    <value>التاريخ</value>
-  </data>
-  <data name="Update" xml:space="preserve">
-    <value>تعديل</value>
-  </data>
-  <data name="Status" xml:space="preserve">
-    <value>الحالة</value>
+  <data name="IsPaid" xml:space="preserve">
+    <value>مدفوع</value>
   </data>
   <data name="Cost" xml:space="preserve">
     <value>التكلفة</value>
   </data>
-  <data name="Block" xml:space="preserve">
-    <value>حظر</value>
+  <data name="IsActive" xml:space="preserve">
+    <value>نشط</value>
   </data>
-  <data name="Unblock " xml:space="preserve">
-    <value>إلغاء الحظر</value>
+  <data name="ImageVideoUrl" xml:space="preserve">
+    <value>صورة الفديو</value>
   </data>
-  <data name="Paid" xml:space="preserve">
-    <value>مدفوع</value>
-  </data>
-  <data name="Unpaid" xml:space="preserve">
-    <value>مجاني</value>
-  </data>
-  <data name="Title" xml:space="preserve">
-    <value>فديوهات</value>
+  <data name="Course" xml:space="preserve">
+    <value>كورس</value>
   </data>
 </root>

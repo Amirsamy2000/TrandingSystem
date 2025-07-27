@@ -1,7 +1,6 @@
-﻿@using Microsoft.AspNetCore.Mvc.Localization
+﻿@using Microsoft.AspNetCore.Localization
+@using Microsoft.AspNetCore.Mvc.Localization
 @inject IViewLocalizer Localizer
-@using Microsoft.AspNetCore.Localization
-@using Microsoft.AspNetCore.Http
 @inject IHttpContextAccessor HttpContextAccessor
 @{
     //var currentCulture = System.Threading.Thread.CurrentThread.CurrentCulture;
@@ -62,6 +61,10 @@
     <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="~/LayoutDasbord/assets/js/config.js"></script>
+
+    @* for Icons *@
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
 </head>
 
 <body>
@@ -132,7 +135,7 @@
                         <a href="#" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-home-circle"></i>
                             <div data-i18n="Analytics">
-                                <partial name="_SelectLanguagePartial" class="btn-info " style="background-color:#696cff " />
+                                @await Html.PartialAsync("_SelectLanguagePartial")
 
                             </div>
                         </a>
@@ -205,7 +208,28 @@
                         </ul>
                     </li>
                      
-                  
+                    <!-- Videos -->
+                    <li class="menu-item">
+                        <a href="" class="menu-link menu-toggle">
+                            <i class=' menu-icon tf-icons bx bx-video'></i>   
+                            <div data-i18n="Layouts">@Localizer["Videos"]</div>
+                        </a>
+
+                        <ul class="menu-sub">
+                            <li class="menu-item">
+                                <a asp-Action="AddNewVideo" asp-controller="Videos" class="menu-link">
+                                    <div data-i18n="Without menu">@Localizer["AddVideo"]</div>
+                                </a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="layouts-without-navbar.html" class="menu-link">
+                                    <div data-i18n="Without navbar">@Localizer["DisplatVideo"]</div>
+                                </a>
+                            </li>
+
+                        </ul>
+                    </li>
+
                 </ul>
             </aside>
             <!-- / Menu -->

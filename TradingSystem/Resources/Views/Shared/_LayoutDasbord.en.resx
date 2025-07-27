@@ -147,4 +147,13 @@
   <data name="communty" xml:space="preserve">
     <value>Communities</value>
   </data>
+  <data name="Videos" xml:space="preserve">
+    <value>Videos</value>
+  </data>
+  <data name="AddVideo" xml:space="preserve">
+    <value>Add Video</value>
+  </data>
+  <data name="DisplatVideo" xml:space="preserve">
+    <value>Dispaly Videos</value>
+  </data>
 </root>

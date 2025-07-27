@@ -27,6 +27,8 @@ namespace TrandingSystem.Application.Features.Video.Handlers
 
                 // 1) اجلب الـ IQueryable من الريبو
                 var query = _unitOfWork.Videos.GetAllVideosForCouse(request.CourseId);
+                var course = query.FirstOrDefault().Course;
+                string courseName = request.Culture == "ar" ? course.TitleAR : course.TitleEN;
 
                 _unitOfWork.Videos.GetAllVideosForCouse(request.CourseId);
                 // هنا تستخدم AutoMapper بشكل عادي بعد ما تجيب البيانات من قاعدة البيانات
@@ -36,8 +38,12 @@ namespace TrandingSystem.Application.Features.Video.Handlers
                 });
 
 
-                
 
+                result=result.Select(x =>
+                {
+                    x.CourseName = courseName;
+                    return x;
+                }).ToList();
                 // 4) رجع Response موحد
                 return Response<IEnumerable<VideoDto>>
                     .SuccessResponse(result, "Videos fetched successfully");

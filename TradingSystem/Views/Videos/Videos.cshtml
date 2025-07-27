@@ -1,28 +1,85 @@
 ﻿@using TrandingSystem.Application.Dtos
 @model IEnumerable<VideoDto>
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
 @{
     ViewData["Title"] = "Videos";
     Layout = "~/Views/Shared/_LayoutDasbord.cshtml";
+ 
 }
-<h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">@ViewData["Master"] /</span> @ViewData["Title"] </h4>
+<style>
+    .description-clamp {
+    max-height: 3.6em; /* تقريبا سطرين */
+    overflow: hidden;
+    position: relative;
+    transition: max-height 0.3s ease-in-out;
+    cursor: pointer;
+    }
 
+    .description-clamp:hover {
+    max-height: 500px; /* ارتفاع كبير يسمح بظهور كل المحتوى */
+    }
+    .Add-infoCard{
+    background-color: #eee;
+    border-radius: 6px;
+    padding-top:10px
+    }
+</style>
+<h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">@Localizer["Title"] /</span>   @Model.FirstOrDefault().CourseName </h4>
+
+<div class="row mb-3">
+    <div class="col">
+       
+        <button class="btn btn-primary" onclick="AddNewVideo()">  <i class='menu-icon tf-icons bx bx-plus'></i> @Localizer["Add"]</button>
+    </div>
+</div>
 <div class="row mb-5">
-
-@foreach(var video in Model){
+    @foreach(var video in Model){
         @* card one *@
         <div class="col-md-6 col-lg-4 mb-3">
             <div class="card h-100">
                 <img class="card-img-top" src="@video.ImageVideoUrl" alt="Card image cap" />
-                <div class="card-body">
+                <div class="card-body p-2">
                     <h5 class="card-title">@video.Title</h5>
-                    <p class="card-text">
+                    <p class="card-text description-clamp">
                         @video.Description
                     </p>
-                    <a href="javascript:void(0)" class="btn btn-outline-info">عرض </a>
-                    <a href="javascript:void(0)" class="btn btn-outline-warning">حظر</a>
-                    <a href="javascript:void(0)" class="btn btn-outline-danger">حذف</a>
+                    <a href="javascript:void(0)" class="btn btn-outline-primary  m-1">@Localizer["Update"]</a>
+                    <a href="javascript:void(0)" class="btn btn-outline-info  m-1">@Localizer["Display"] </a>
+                    @if (video.IsActive==true)
+                    {
+                        <a href="javascript:void(0)" class="btn btn-outline-warning  m-1">@Localizer["Block"]</a>
+
+                    }
+                    else
+                    {
+                        <a href="javascript:void(0)" class="btn btn-outline-warning  m-1">@Localizer["UnBlock"]</a>
+
+                    }
+
+                    <a href="javascript:void(0)" class="btn btn-outline-danger  m-1">@Localizer["Delete"]</a>
                     <hr />
-                    
+                    <div class="row p-2">
+                        <div class="col-12 d-flex justify-content-between align-items-center Add-infoCard">
+                            <h5>@Localizer["Date"]</h5>
+                            <p>@video.CreatedAt</p>
+                        </div>
+                        <div class="col-12 d-flex justify-content-between align-items-center mt-2 Add-infoCard">
+                            <h5 class=" ">@Localizer["Status"]</h5>
+                            @if (video.IsPaid)
+                            {
+                                <p class="">@Localizer["Paid"]</p>
+                            }
+                            else
+                            {
+                                <p class="">@Localizer["Unpaid"]</p>
+                            }
+                        </div>
+                        <div class="col-12 d-flex justify-content-between align-items-center mt-2 Add-infoCard">
+                            <h5>@Localizer["Cost"]</h5>
+                            <p>@video.Cost $</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
