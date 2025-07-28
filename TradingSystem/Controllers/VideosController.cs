@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System.Threading;
+using TradingSystem.Application.Common.Response;
 using TrandingSystem.Application.Features.Video.Queries;
 using TrandingSystem.Domain.Entities;
 
@@ -17,7 +18,7 @@ namespace TrandingSystem.Controllers
             _mediator = mediator;
         }
         // this View For Display All Videos For Course Use CourseId
-        public IActionResult Videos(int CourseId,CancellationToken cancellationToken)
+        public IActionResult Videos(CancellationToken cancellationToken, int CourseId = 1)
         {
             var culture = Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName;
             //@ViewData["Master"] = @locaizer[""]
@@ -54,6 +55,34 @@ namespace TrandingSystem.Controllers
         {
             
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult BlockVideo(int VideoId,int Status)
+        {
+
+            return Json(Response<string>.SuccessResponse(
+                        message: "Failed to block the video.",
+                        data: "Video blocked successfully."
+                    ));
+        }
+
+        [HttpPost]
+        public IActionResult DeleteVideo(int VideoId)
+        {
+
+            return Json(Response<string>.SuccessResponse(
+                        message: "Failed to block the video.",
+                        data: "Video blocked successfully."
+                    ));
+        }
+        public IActionResult DeleteAllVideos(int VideoId, int Status)
+        {
+
+            return Json(Response<string>.SuccessResponse(
+                        message: "Failed to block the video.",
+                        data: "Video blocked successfully."
+                    ));
         }
 
 

@@ -135,6 +135,9 @@
   <data name="VideoUrl" xml:space="preserve">
     <value>Video</value>
   </data>
+  <data name="DeleteAll" xml:space="preserve">
+    <value>Delete All Videos</value>
+  </data>
   <data name="AddNewVideo" xml:space="preserve">
     <value>Add New Video</value>
   </data>

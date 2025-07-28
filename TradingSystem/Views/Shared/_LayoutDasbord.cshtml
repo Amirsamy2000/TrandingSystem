@@ -222,7 +222,7 @@
                                 </a>
                             </li>
                             <li class="menu-item">
-                                <a href="layouts-without-navbar.html" class="menu-link">
+                                <a asp-action="Videos" asp-controller="Videos" class="menu-link">
                                     <div data-i18n="Without navbar">@Localizer["DisplatVideo"]</div>
                                 </a>
                             </li>
@@ -374,9 +374,24 @@
                         </div>
                     </footer> *@
                     <!-- / Footer -->
-
-                    <div class="content-backdrop fade"></div>
-                </div>
+                   @* modal Large *@
+                    <div class="modal fade" id="largeModal" tabindex="-1" aria-hidden="true">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button"
+                                            class="btn-close"
+                                            data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body" id="modalbody">
+                                  
+                                </div>
+                              
+                            </div>
+                        </div>
+                    </div>
+                    @* end *@
                 <!-- Content wrapper -->
             </div>
             <!-- / Layout page -->
@@ -387,7 +402,8 @@
     </div>
     <!-- / Layout wrapper -->
 
-     
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
 
     <!-- Core JS -->
     <!-- build:js assets/vendor/js/core.js -->
@@ -409,6 +425,7 @@
 
     <!-- Place this tag in your head or just before your close body tag. -->
     @* <script async defer src="https://buttons.github.io/buttons.js"></script> *@
-    @RenderSectionAsync("Scripts", required: false);
+
+    @RenderSection("Scripts", required: false)
 </body>
 </html>

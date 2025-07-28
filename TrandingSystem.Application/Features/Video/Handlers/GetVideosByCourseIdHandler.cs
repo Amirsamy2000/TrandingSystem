@@ -4,6 +4,7 @@ using System.Net;
 using TradingSystem.Application.Common.Response;
 using TrandingSystem.Application.Dtos;
 using TrandingSystem.Application.Features.Video.Queries;
+using TrandingSystem.Domain.Entities;
 using TrandingSystem.Domain.Interfaces;
  
 
@@ -42,6 +43,7 @@ namespace TrandingSystem.Application.Features.Video.Handlers
                 result=result.Select(x =>
                 {
                     x.CourseName = courseName;
+                    x.CourseId = request.CourseId;
                     return x;
                 }).ToList();
                 // 4) رجع Response موحد

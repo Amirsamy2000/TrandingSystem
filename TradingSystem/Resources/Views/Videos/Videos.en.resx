@@ -132,6 +132,9 @@
   <data name="Update" xml:space="preserve">
     <value>Update</value>
   </data>
+  <data name="titleBlock" xml:space="preserve">
+    <value>Are you sure you want to Block Video?</value>
+  </data>
   <data name="Status" xml:space="preserve">
     <value>Status</value>
   </data>
@@ -152,5 +155,32 @@
   </data>
   <data name="Title" xml:space="preserve">
     <value>Videos</value>
+  </data>
+  <data name="DeleteAll" xml:space="preserve">
+    <value>Delete All Videos</value>
+  </data>
+  <data name="confirmButtonTextBlock" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="cancelButtonTextBlock" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="responseSuccessBlock" xml:space="preserve">
+    <value>Block completed successfully</value>
+  </data>
+  <data name="responseDangerBlock" xml:space="preserve">
+    <value>An error occurred during the operation</value>
+  </data>
+  <data name="responseDangerBlock1" xml:space="preserve">
+    <value>An error occurred during the operation</value>
+  </data>
+  <data name="responseSuccessBlock1" xml:space="preserve">
+    <value>Block completed successfully</value>
+  </data>
+  <data name="titleDelete" xml:space="preserve">
+    <value>Are you sure you want to Delete Video?</value>
+  </data>
+  <data name="titleDeleteall" xml:space="preserve">
+    <value>Are you sure you want to Delete All Videos?</value>
   </data>
 </root>

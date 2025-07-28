@@ -135,6 +135,9 @@
   <data name="VideoUrl" xml:space="preserve">
     <value>الفديو</value>
   </data>
+  <data name="DeleteAll" xml:space="preserve">
+    <value>حذف جميع الفديوهات</value>
+  </data>
   <data name="AddNewVideo" xml:space="preserve">
     <value>اضافة فديو جديد</value>
   </data>

@@ -132,6 +132,9 @@
   <data name="Update" xml:space="preserve">
     <value>تعديل</value>
   </data>
+  <data name="titleBlock" xml:space="preserve">
+    <value>هل أنت متأكد من حظر الفديو؟ </value>
+  </data>
   <data name="Status" xml:space="preserve">
     <value>الحالة</value>
   </data>
@@ -152,5 +155,32 @@
   </data>
   <data name="Title" xml:space="preserve">
     <value>فديوهات</value>
+  </data>
+  <data name="DeleteAll" xml:space="preserve">
+    <value>حذف جميع الفديوهات</value>
+  </data>
+  <data name="confirmButtonTextBlock" xml:space="preserve">
+    <value>نعم</value>
+  </data>
+  <data name="cancelButtonTextBlock" xml:space="preserve">
+    <value>الغاء</value>
+  </data>
+  <data name="responseSuccessBlock" xml:space="preserve">
+    <value>تم تنفيذ الحظر بنجاح </value>
+  </data>
+  <data name="responseDangerBlock" xml:space="preserve">
+    <value>حدث خطأ أثناء تنفيذ العملية </value>
+  </data>
+  <data name="responseDangerBlock1" xml:space="preserve">
+    <value>حدث خطأ أثناء تنفيذ العملية </value>
+  </data>
+  <data name="responseSuccessBlock1" xml:space="preserve">
+    <value>تم تنفيذ الحظر بنجاح </value>
+  </data>
+  <data name="titleDelete" xml:space="preserve">
+    <value>هل أنت متأكد من حذف الفديو؟ </value>
+  </data>
+  <data name="titleDeleteall" xml:space="preserve">
+    <value>هل أنت متأكد من حذف جميع الفديوهات؟ </value>
   </data>
 </root>
