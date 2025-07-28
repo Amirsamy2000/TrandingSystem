@@ -1,14 +1,19 @@
+using MediatR;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc.Razor;
-using Microsoft.Extensions.Options;
-using System.Globalization;
 using Microsoft.EntityFrameworkCore;
-using TrandingSystem.Infrastructure.Data;
+using Microsoft.Extensions.Options;
+using NuGet.Protocol.Core.Types;
+using System.Globalization;
+using TrandingSystem.Application.Features.Courses.Commands;
 using TrandingSystem.Domain.Entities;
+using TrandingSystem.Domain.Interfaces;
+using TrandingSystem.Infrastructure.Data;
+using TrandingSystem.Infrastructure.Repositories;
+
 using TrandingSystem.Domain.Interfaces;
 using TrandingSystem.Infrastructure.Repositories;
 using TrandingSystem.Application.Features.Video.Handlers;
-using TrandingSystem.Application.Common;
 using AutoMapper;
 using NuGet.Protocol.Core.Types;
 using MediatR;
@@ -19,18 +24,28 @@ builder.Services.AddDbContext<db23617Context>(options =>
     options.UseSqlServer(connectionString)
            .UseLazyLoadingProxies()
 );
+
+
+//builder.Services.AddAutoMapper(typeof(MappingProfile));
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+builder.Services.AddMediatR(cfg => 
+    cfg.RegisterServicesFromAssembly(typeof(AddCourseCommand).Assembly));
+
+builder.Services.AddScoped<ICourseRepository, CourseRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+
+
+//builder.Services.AddScoped<ICourseRepository, CourseRepository>();
+
 builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddRoles<Role>()
     .AddEntityFrameworkStores<db23617Context>();
 
 // Add UnitOfWork
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-//Add Auto Maper
-// With the following:
-builder.Services.AddAutoMapper(cfg =>
-{
-    cfg.AddMaps(typeof(MappingProfile).Assembly);
-});
+
+
 // Add MediatR
 builder.Services.AddMediatR(cfg =>
 {
@@ -102,7 +117,7 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Videos}/{action=Videos}/{id?}");
+    pattern: "{controller=Home}/{action=Index}/{id?}");
 app.MapRazorPages(); // Added for Identity
 
 app.Run();

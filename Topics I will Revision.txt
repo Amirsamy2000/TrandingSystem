@@ -1,0 +1,5 @@
+Lazy loading
+eager loading 
+
+unit of work
+

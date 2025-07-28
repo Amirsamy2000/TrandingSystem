@@ -26,6 +26,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\TrandingSystem.Application\TrandingSystem.Application.csproj" />
+    <ProjectReference Include="..\TrandingSystem.Domain\TrandingSystem.Domain.csproj" />
     <ProjectReference Include="..\TrandingSystem.Infrastructure\TrandingSystem.Infrastructure.csproj" />
   </ItemGroup>
 

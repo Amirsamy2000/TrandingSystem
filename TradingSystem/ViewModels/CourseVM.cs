@@ -25,5 +25,7 @@
         public bool? IsFullyFree { get; set; }
 
         public bool? IsActive { get; set; }
+        public string? ImageCourseUrl { get; set; }
+
     }
 }

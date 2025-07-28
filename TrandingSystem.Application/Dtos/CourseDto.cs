@@ -9,8 +9,6 @@ namespace TrandingSystem.Application.Dtos
 {
     public class CourseDto
     {
-        public int CourseId { get; set; }
-
         public string TitleEN { get; set; }
 
         public string TitleAR { get; set; }
@@ -35,20 +33,6 @@ namespace TrandingSystem.Application.Dtos
 
         public bool? IsActive { get; set; }
 
-        public virtual Category Category { get; set; }
-
-        public virtual ICollection<Community> Communities { get; set; } = new List<Community>();
-
-        public virtual ICollection<CourseEnrollment> CourseEnrollments { get; set; } = new List<CourseEnrollment>();
-
-        public virtual ICollection<CourseRating> CourseRatings { get; set; } = new List<CourseRating>();
-
-        public virtual User CreateByNavigation { get; set; }
-
-        public virtual ICollection<LiveSession> LiveSessions { get; set; } = new List<LiveSession>();
-
-        public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
-
-        public virtual ICollection<Video> Videos { get; set; } = new List<Video>();
+        public string? ImageCourseUrl { get; set; }
     }
 }
