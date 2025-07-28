@@ -1,0 +1,206 @@
+﻿@using TrandingSystem.Application.Dtos
+@model IEnumerable<VideoDto>
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@{
+    ViewData["Title"] = "Videos";
+    Layout = "~/Views/Shared/_LayoutDasbord.cshtml";
+    var Coure = Model.FirstOrDefault();
+}
+<style>
+    .description-clamp {
+    max-height: 3.6em; /* تقريبا سطرين */
+    overflow: hidden;
+    position: relative;
+    transition: max-height 0.3s ease-in-out;
+    cursor: pointer;
+    }
+
+    .description-clamp:hover {
+    max-height: 500px; /* ارتفاع كبير يسمح بظهور كل المحتوى */
+    }
+    .Add-infoCard{
+    background-color: #eee;
+    border-radius: 6px;
+    padding-top:10px
+    }
+
+    .modal-body{
+        padding: 0px !important;
+    }
+</style>
+<h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">@Localizer["Title"] /</span>   @Coure.CourseName </h4>
+
+<div class="row mb-3">
+    <div class="col">
+       
+        <button class="btn btn-primary" onclick="DispalPatialAddNewVideo()">  <i class='menu-icon tf-icons bx bx-plus'></i> @Localizer["Add"]</button>
+        <button class="btn btn-danger" onclick="DeleteAllVideos(@Coure.CourseId)">  <i class='menu-icon bx bx-trash tf-icons bx bx-plus'></i> @Localizer["DeleteAll"]</button>
+    </div>
+</div>
+<div class="row mb-5">
+    @foreach(var video in Model){
+        @* card one *@
+        <div class="col-md-6 col-lg-4 mb-3">
+            <div class="card h-100">
+                <img class="card-img-top" src="@video.ImageVideoUrl" alt="Card image cap" />
+                <div class="card-body p-2">
+                    <h5 class="card-title">@video.Title</h5>
+                    <p class="card-text description-clamp">
+                        @video.Description
+                    </p>
+                    <a data-id="@video.VideoId" class="btn btn-outline-primary  m-1">@Localizer["Update"]</a>
+                    <a data-id="@video.VideoId" class="btn btn-outline-info  m-1">@Localizer["Display"] </a>
+                    @if (video.IsActive==true)
+                    {
+                        <a onclick="BlockVideo(@video.VideoId,0)" class="btn btn-outline-warning  m-1">@Localizer["Block"]</a>
+
+                    }
+                    else
+                    {
+                        <a onclick="BlockVideo(@video.VideoId,1)" class="btn btn-outline-warning  m-1">@Localizer["UnBlock"]</a>
+
+                    }
+
+                    <a data-id="" onclick="DeleteVideo(@video.VideoId)" class="btn btn-outline-danger  m-1">@Localizer["Delete"]</a>
+                    <hr />
+                    <div class="row p-2">
+                        <div class="col-12 d-flex justify-content-between align-items-center Add-infoCard">
+                            <h5>@Localizer["Date"]</h5>
+                            <p>@video.CreatedAt</p>
+                        </div>
+                        <div class="col-12 d-flex justify-content-between align-items-center mt-2 Add-infoCard">
+                            <h5 class=" ">@Localizer["Status"]</h5>
+                            @if (video.IsPaid)
+                            {
+                                <p class="">@Localizer["Paid"]</p>
+                            }
+                            else
+                            {
+                                <p class="">@Localizer["Unpaid"]</p>
+                            }
+                        </div>
+                        <div class="col-12 d-flex justify-content-between align-items-center mt-2 Add-infoCard">
+                            <h5>@Localizer["Cost"]</h5>
+                            <p>@video.Cost $</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+}
+   
+
+
+</div>
+
+@section Scripts {
+
+
+    <script>
+             function DrawAlter(ModelSetting) {
+            Swal.fire({
+                title: ModelSetting.title,
+                icon: ModelSetting.icon,
+                showCancelButton: true,
+                confirmButtonText: ModelSetting.confirmButtonText,
+                cancelButtonText: ModelSetting.cancelButtonText,
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    fetch(ModelSetting.url, { method: ModelSetting.method })
+                        .then(response => {
+                            if (!response.ok) throw new Error("HTTP error " + response.status);
+                            return response.json(); // توقعنا Response<T>
+                        })
+                        .then(res => {
+                            if (res.success) {
+                                Swal.fire(res.message, '', 'success').then(() => {
+                            location.reload(); // ✅ reload after user clicks "OK" in success alert
+                        });;
+                            } else {
+                                Swal.fire(res.message, '', 'error');
+                            }
+                        })
+                        .catch(error => {
+                            console.error("Error:", error);
+                            Swal.fire("Error while connecting to server", '', 'error');
+                        });
+                }
+            });
+        }
+
+
+        // For Block Video
+            function BlockVideo(id, status) {
+            debugger;
+            let model = {
+                title: "@Localizer["titleBlock"]",
+                icon: "warning",
+                confirmButtonText: "@Localizer["confirmButtonTextBlock"]",
+                cancelButtonText: "@Localizer["cancelButtonTextBlock"]",
+                url:  `/Videos/BlockVideo?VideoId=${id}&Status=${status}`,
+                method: "POST",
+
+                responseSuccess: "@Localizer["responseSuccessBlock"]",
+                responseDanger: "@Localizer["responseDangerBlock"]"
+            };
+            DrawAlter(model);
+        }
+
+        // For Delet Videos
+          function DeleteVideo(id) {
+            debugger;
+              let model = {
+                title: "@Localizer["titleDelete"]",
+                icon: "question",
+                confirmButtonText: "@Localizer["confirmButtonTextBlock"]",
+                cancelButtonText: "@Localizer["cancelButtonTextBlock"]",
+                url:  `/Videos/DeleteVideo?VideoId=${id}`,
+                method: "POST",
+
+                responseSuccess: "@Localizer["responseSuccessBlock"]",
+                responseDanger: "@Localizer["responseDangerBlock"]"
+            };
+            DrawAlter(model);
+        }
+
+         // For Delet Videos
+          function DeleteAllVideos(id) {
+            debugger;
+              let model = {
+                title: "@Localizer["titleDeleteall"]",
+                icon: "error",
+                confirmButtonText: "@Localizer["confirmButtonTextBlock"]",
+                cancelButtonText: "@Localizer["cancelButtonTextBlock"]",
+                url:  `/Videos/DeleteAllVideos?CourseId=${id}`,
+                method: "POST",
+
+                responseSuccess: "@Localizer["responseSuccessBlock"]",
+                responseDanger: "@Localizer["responseDangerBlock"]"
+            };
+            DrawAlter(model);
+        }
+
+        // For Dipaly Video As Youtube
+
+        // Dispal Patial Add New Video
+        function DispalPatialAddNewVideo(){
+            $.ajax({
+                url:"/Videos/PartialViewAddNewVideo",
+                type:"GET",
+                success:function(data){
+                    $("#modalbody").html(data)
+                    $("#mainPartial").removeClass('col-10')
+                     $("#mainPartial").addClass('col-12')
+                   // استخدم كود Bootstrap 5 لعرض المودال
+                    var myModal = new bootstrap.Modal(document.getElementById('largeModal'), {
+            backdrop: true, // أو static لو عايز تمنع إغلاقه بالضغط على الخلفية
+            keyboard: true   // يسمح بإغلاقه بزر Esc
+        });
+            myModal.show();
+                }
+
+            })
+        }
+    </script>
+}

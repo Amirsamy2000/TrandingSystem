@@ -91,7 +91,8 @@
             </nav>
 
             <a class="btn-getstarted " asp-controller="Home" asp-action="Courses">@Localizer["GetStarted"]</a>
-            <partial name="_SelectLanguagePartial" class="btn-getstarted" />
+            @* <partial name="_SelectLanguagePartial" class="btn-getstarted" /> *@
+            @await Html.PartialAsync("_SelectLanguagePartial")
 
         </div>
     </header>

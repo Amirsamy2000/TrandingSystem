@@ -1,0 +1,165 @@
+﻿@using Microsoft.Extensions.Localization
+@using TrandingSystem.Controllers
+
+@inject IStringLocalizer<VideosController> Localizer
+
+
+<div class="row d-flex justify-content-center">
+
+
+    <div class="col-10" id="mainPartial">
+        <div class="card mb-4">
+            <div class="card-header d-flex align-items-center justify-content-between">
+                <h5 class="mb-0 text-primary">@Localizer["AddNewVideo"]</h5>
+
+            </div>
+            <div class="card-body">
+                <form asp-action="AddVideo" asp-controller="Videos" method="post" enctype="multipart/form-data">
+
+
+                    @* Title *@
+                    <div class="row mb-3">
+                        <label class="col-sm-4 col-form-label" for="basic-icon-default-fullname">@Localizer["TitleAR"]</label>
+                        <div class="col-sm-8">
+                            <div class="input-group input-group-merge speech-to-text">
+                                <input type="text" class="form-control" placeholder="Say it" aria-describedby="text-to-speech-addon">
+                                <span class="input-group-text" id="text-to-speech-addon">
+                                    <i class="bx bx-microphone cursor-pointer text-to-speech-toggle"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label class="col-sm-4 col-form-label" for="basic-icon-default-fullname">@Localizer["TitleEN"]</label>
+                        <div class="col-sm-8">
+                            <div class="input-group input-group-merge speech-to-text">
+                                <input type="text" class="form-control" placeholder="Say it" aria-describedby="text-to-speech-addon">
+                                <span class="input-group-text" id="text-to-speech-addon">
+                                    <i class="bx bx-microphone cursor-pointer text-to-speech-toggle"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    @* end *@
+
+                    @* Description *@
+                    <div class="row mb-3">
+                        <label class="col-sm-4 form-label" for="basic-icon-default-message">@Localizer["DescriptionAR"]</label>
+                        <div class="col-sm-8">
+                            <div class="input-group input-group-merge speech-to-text">
+                                <textarea class="form-control" placeholder="Say it" rows="3"></textarea>
+                                <span class="input-group-text" id="text-to-speech-addon">
+                                    <i class="bx bx-microphone cursor-pointer text-to-speech-toggle"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label class="col-sm-4 form-label" for="basic-icon-default-message">@Localizer["DescriptionEN"]</label>
+                        <div class="col-sm-8">
+                            <div class="input-group input-group-merge speech-to-text">
+                                <textarea class="form-control" placeholder="Say it" rows="3"></textarea>
+                                <span class="input-group-text" id="text-to-speech-addon">
+                                    <i class="bx bx-microphone cursor-pointer text-to-speech-toggle"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    @* end *@
+
+                    @* Course *@
+                    <div class="row mb-3">
+                        <label class="col-sm-4 form-label" for="basic-icon-default-message">@Localizer["Course"]</label>
+                        <div class="col-sm-8">
+                            <div class="input-group input-group-merge speech-to-text">
+                                <select class="form-control"></select>
+
+                            </div>
+                        </div>
+                    </div>
+                    @* end *@
+
+                    @* Image *@
+                    <div class="row mb-3">
+                        <label class="col-sm-4 col-form-label" for="basic-icon-default-company">@Localizer["ImageVideoUrl"]</label>
+                        <div class="col-sm-8">
+                            <div class="input-group input-group-merge">
+                                <span id="basic-icon-default-company2" class="input-group-text">
+                                    <i class="bx bx-buildings"></i>
+                                </span>
+                                <input type="file" class="form-control" id="inputGroupFile02" accept="image/*">
+                            </div>
+                        </div>
+                    </div>
+                    @* end *@
+
+                    @* Video *@
+                    <div class="row mb-3">
+                        <label class="col-sm-4 col-form-label" for="basic-icon-default-company">@Localizer["VideoUrl"]</label>
+                        <div class="col-sm-8">
+                            <div class="input-group input-group-merge">
+                                <span id="basic-icon-default-company2" class="input-group-text">
+                                    <i class="bx bx-buildings"></i>
+                                </span>
+                                <input type="file" class="form-control" id="inputGroupFile02" placeholder="don">
+                            </div>
+                        </div>
+                    </div>
+                    @* end *@
+
+                    @* Paid And Active *@
+                    <div class="row mb-3 d-flex justify-content-center ">
+                        @* Active *@
+                        <div class="col-4">
+                            <div class="row  d-flex justify-content-center">
+                                <label class="col-sm-4 col-form-label " for="basic-icon-default-company">@Localizer["IsActive"]</label>
+                                <div class="col-sm-8">
+                                    <div class="input-group input-group-merge mt-1">
+
+                                        <input class="form-check-input mt-1" type="checkbox" value="" id="checkIndeterminate" checked>
+                                    </div>
+                                </div>
+                          </div>
+                        </div>
+                        @* end *@
+                        <div class="col-4">
+                            <div class="row d-flex justify-content-center">
+                                <label class="col-sm-4 col-form-label" for="basic-icon-default-company">@Localizer["IsPaid"]</label>
+                                <div class="col-sm-8">
+                                    <div class="input-group input-group-merge">
+
+                                        <input class="form-check-input mt-1" type="checkbox" value="" id="checkIndeterminate" >
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    @* end *@
+
+
+                    @* Cost *@
+                    <div class="row mb-3">
+                        <label class="col-sm-4 col-form-label" for="basic-icon-default-email">@Localizer["Cost"]</label>
+                        <div class="col-sm-8">
+                            <div class="input-group input-group-merge">
+                                <span class="input-group-text">$</span>
+                                <input type="text" class="form-control" placeholder="00" aria-label="Amount (to the nearest dollar)" >
+                                <span class="input-group-text">.00</span>
+                            </div>
+                        </div>
+                    </div>
+                    @* end *@
+
+                    <div class="row justify-content-end">
+                        <div class="col-sm-8">
+                            <button type="submit" class="btn btn-primary pl-3 pr-3">@Localizer["Send"]</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
