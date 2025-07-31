@@ -275,6 +275,7 @@
         }
 
         function createCourseCard(course) {
+            debugger
             const categoryName = getCategoryName(course.CategoryId);
             const badges = createStatusBadges(course);
             const imageHtml = createImageHtml(course);
@@ -287,24 +288,24 @@
                             <div class="mb-2">
                                 ${badges}
                             </div>
-                            <h6 class="card-title fw-bold mb-2 text-truncate" title="${course.TitleEN}">
-                                ${course.TitleEN || 'Untitled Course'}
+                            <h6 class="card-title fw-bold mb-2 text-truncate" title="${course.titleEN}">
+                                ${course.titleEN || 'Untitled Course'}
                             </h6>
                             <p class="card-text text-muted small mb-2 flex-grow-1" style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">
-                                ${course.DescriptionEN || 'No description available'}
+                                ${course.descriptionEN || 'No description available'}
                             </p>
                             <div class="mb-2">
                                 <small class="text-muted">Category: <span class="fw-semibold">${categoryName}</span></small>
                             </div>
                             <div class="d-flex justify-content-between align-items-center mt-auto">
                                 <div class="cost-text">
-                                    ${course.IsFullyFree ? 'FREE' : '$' + (course.Cost || 0).toFixed(2)}
+                                    ${course.isFullyFree ? 'FREE' : '$' + (course.cost || 0).toFixed(2)}
                                 </div>
                                 <div class="btn-group" role="group">
-                                    <button type="button" class="btn btn-sm btn-outline-primary btn-action" onclick="editCourse(${course.CourseId})">
+                                    <button type="button" class="btn btn-sm btn-outline-primary btn-action" onclick="editCourse(${course.courseId})">
                                         <i class="bx bx-edit-alt"></i> Edit
                                     </button>
-                                    <button type="button" class="btn btn-sm btn-outline-danger btn-action" onclick="deleteCourse(${course.CourseId}, '${course.TitleEN}')">
+                                    <button type="button" class="btn btn-sm btn-outline-danger btn-action" onclick="deleteCourse(${course.courseId}, '${course.titleEN}')">
                                         <i class="bx bx-trash"></i> Delete
                                     </button>
                                 </div>
@@ -316,8 +317,8 @@
         }
 
         function createImageHtml(course) {
-            if (course.ImageCourseUrl) {
-                return `<img src="${course.ImageCourseUrl}" class="card-img-top course-image" alt="${course.TitleEN}">`;
+            if (course.imageCourseUrl) {
+                return `<img src="${course.imageCourseUrl}" class="card-img-top course-image" alt="${course.titleEN}">`;
             } else {
                 return `<div class="placeholder-image rounded-top"><i class="bx bx-book-open"></i></div>`;
             }
@@ -326,15 +327,15 @@
         function createStatusBadges(course) {
             let badges = [];
 
-            if (course.IsLive) {
+            if (course.isLive) {
                 badges.push('<span class="badge badge-live me-1">Live</span>');
             }
 
-            if (course.IsFullyFree) {
+            if (course.isFullyFree) {
                 badges.push('<span class="badge badge-free me-1">Free</span>');
             }
 
-            if (course.IsActive === false) {
+            if (course.isActive === false) {
                 badges.push('<span class="badge badge-inactive me-1">Inactive</span>');
             }
 

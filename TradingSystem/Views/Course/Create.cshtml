@@ -274,20 +274,22 @@
         });
 
         function loadCategories() {
+            debugger
             $.ajax({
                 url: '/Categories/Read',
                 type: 'GET',
                 dataType: 'json',
                 success: function(data) {
+                    debugger
                     const categorySelect = $('#categoryId');
                     categorySelect.empty().append('<option value="">Select a category...</option>');
 
                     // Filter only active categories
-                    const activeCategories = data.filter(cat => cat.IsActive === true);
+                    const activeCategories = data.data.filter(cat => cat.isActive === true);
 
                     activeCategories.forEach(function(category) {
                         categorySelect.append(
-                            `<option value="${category.CategoryId}">${category.CategoryNameEn}</option>`
+                            `<option value="${category.categoryId}">${category.categoryNameEn}</option>`
                         );
                     });
                 },

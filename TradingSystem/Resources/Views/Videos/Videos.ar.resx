@@ -117,43 +117,70 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Adduser" xml:space="preserve">
-    <value>Add User</value>
-  </data>
   <data name="Add" xml:space="preserve">
-    <value>Add Course</value>
+    <value>اضافة فديو جديد</value>
   </data>
-  <data name="user" xml:space="preserve">
-    <value>Users</value>
+  <data name="Delete" xml:space="preserve">
+    <value>حذف</value>
   </data>
-  <data name="Addcommunty" xml:space="preserve">
-    <value>Add Community</value>
+  <data name="Display" xml:space="preserve">
+    <value>عرض</value>
   </data>
-  <data name="Dashboard" xml:space="preserve">
-    <value>Dashboard</value>
+  <data name="Date" xml:space="preserve">
+    <value>التاريخ</value>
   </data>
-  <data name="dispalycommunty" xml:space="preserve">
-    <value>Communities</value>
+  <data name="Update" xml:space="preserve">
+    <value>تعديل</value>
   </data>
-  <data name="dispalyuser" xml:space="preserve">
-    <value>Stie Name</value>
+  <data name="titleBlock" xml:space="preserve">
+    <value>هل أنت متأكد من حظر الفديو؟ </value>
   </data>
-  <data name="course" xml:space="preserve">
-    <value>Courses</value>
+  <data name="Status" xml:space="preserve">
+    <value>الحالة</value>
   </data>
-  <data name="dispaly" xml:space="preserve">
-    <value>Display Courses</value>
+  <data name="Cost" xml:space="preserve">
+    <value>التكلفة</value>
   </data>
-  <data name="communty" xml:space="preserve">
-    <value>Communities</value>
+  <data name="Block" xml:space="preserve">
+    <value>حظر</value>
   </data>
-  <data name="Videos" xml:space="preserve">
-    <value>Videos</value>
+  <data name="Unblock " xml:space="preserve">
+    <value>إلغاء الحظر</value>
   </data>
-  <data name="AddVideo" xml:space="preserve">
-    <value>Add Video</value>
+  <data name="Paid" xml:space="preserve">
+    <value>مدفوع</value>
   </data>
-  <data name="DisplatVideo" xml:space="preserve">
-    <value>Dispaly Videos</value>
+  <data name="Unpaid" xml:space="preserve">
+    <value>مجاني</value>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>فديوهات</value>
+  </data>
+  <data name="DeleteAll" xml:space="preserve">
+    <value>حذف جميع الفديوهات</value>
+  </data>
+  <data name="confirmButtonTextBlock" xml:space="preserve">
+    <value>نعم</value>
+  </data>
+  <data name="cancelButtonTextBlock" xml:space="preserve">
+    <value>الغاء</value>
+  </data>
+  <data name="responseSuccessBlock" xml:space="preserve">
+    <value>تم تنفيذ الحظر بنجاح </value>
+  </data>
+  <data name="responseDangerBlock" xml:space="preserve">
+    <value>حدث خطأ أثناء تنفيذ العملية </value>
+  </data>
+  <data name="responseDangerBlock1" xml:space="preserve">
+    <value>حدث خطأ أثناء تنفيذ العملية </value>
+  </data>
+  <data name="responseSuccessBlock1" xml:space="preserve">
+    <value>تم تنفيذ الحظر بنجاح </value>
+  </data>
+  <data name="titleDelete" xml:space="preserve">
+    <value>هل أنت متأكد من حذف الفديو؟ </value>
+  </data>
+  <data name="titleDeleteall" xml:space="preserve">
+    <value>هل أنت متأكد من حذف جميع الفديوهات؟ </value>
   </data>
 </root>
