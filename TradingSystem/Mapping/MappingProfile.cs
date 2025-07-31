@@ -14,7 +14,12 @@ namespace TrandingSystem.Mapping
             CreateMap<CourseVM, AddCourseCommand>().ReverseMap();
             CreateMap<Course, AddCourseCommand>().ReverseMap();
             CreateMap<Course, CourseVM>().ReverseMap();
-            CreateMap<Course, CourseDto>().ReverseMap();
+            // Course mapping with CategoryName
+            CreateMap<Course, CourseDto>()
+            .ForMember(dest => dest.categoryName, opt => opt.MapFrom(src => src.Category.CategoryNameEn))
+            .ReverseMap()
+            .ForMember(dest => dest.Category, opt => opt.Ignore()); // prevent reverse confusion
+
             CreateMap<Category, CategoryDto>().ReverseMap();
             // Add other mappings here as needed
             // Map Dto ==> VideoDto to Video;

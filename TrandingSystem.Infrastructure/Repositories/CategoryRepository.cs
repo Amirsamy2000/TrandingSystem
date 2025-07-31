@@ -39,7 +39,7 @@ namespace TrandingSystem.Infrastructure.Repositories
 
         public Category ReadById(int Id)
         {
-            throw new NotImplementedException();
+            return _context.Categories.Find(Id);
         }
 
         public Category Update(Category Element)
