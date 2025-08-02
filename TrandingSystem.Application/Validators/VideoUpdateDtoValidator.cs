@@ -1,12 +1,13 @@
 ﻿using FluentValidation;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.Extensions.Localization;
 using TrandingSystem.Application.Dtos;
 using TrandingSystem.Application.Resources;
 
 namespace TrandingSystem.Application.Validators
 {
-    public class VideoUpdateDtoValidator: AbstractValidator<ViedoUpdateDto>
+    public class VideoUpdateDtoValidator : AbstractValidator<ViedoUpdateDto>
     {
         private readonly IStringLocalizer<ValidationMessages> _localizer;
 
@@ -20,28 +21,37 @@ namespace TrandingSystem.Application.Validators
     };
         public VideoUpdateDtoValidator(IStringLocalizer<ValidationMessages> localizer)
         {
-            _localizer= localizer;
+            _localizer = localizer;
             RuleFor(x => x.TitleAR)
-               .NotEmpty().WithMessage("مطلةب");
+               .NotEmpty().WithMessage(_localizer["Required"]);
 
             RuleFor(x => x.TitleEN)
-                .NotEmpty().WithMessage(_localizer["Required_TitleEN"]);
+                .NotEmpty().WithMessage(_localizer["Required"]);
 
             RuleFor(x => x.DescriptionAR)
-                .NotEmpty().WithMessage(_localizer["Required_DescAR"]);
+                .NotEmpty().WithMessage(_localizer["Required"]);
 
             RuleFor(x => x.DescriptionEN)
-                .NotEmpty().WithMessage(_localizer["Required_DescEN"]);
+                .NotEmpty().WithMessage(_localizer["Required"]);
 
 
 
+            RuleFor(x => x.ImageVideoUrl)
+    .Must(file => file == null || IsValidImageType(file))
+    .WithMessage(localizer["OnlyImageTypesAllowed"])
 
-            //  RuleFor(x => x.ImageVideoUrlNew)
-            //.Must(file => file == null || IsValidImageType(file))
-            //.WithMessage(localizer["OnlyImageTypesAllowed"]) // ← ترجمها في ملف الترجمة
+    .Must(file => file == null || IsValidImageExtension(file))
+    .WithMessage(localizer["InvalidImageExtension"]);
 
-            //.Must(file => file == null || IsValidImageExtension(file))
-            //.WithMessage(localizer["InvalidImageExtension"]);
+            RuleFor(x => x.Cost)
+                // التكلفة يجب أن تكون غير سالبة دائمًا
+                .GreaterThanOrEqualTo(0).Empty()
+                .WithMessage(_localizer["CostMustBeGreaterThanOrEqualToZero"])
+
+                // شرط خاص: إذا مش مدفوع، يجب أن تكون التكلفة 0
+                .Must((model, cost) => model.IsPaid || cost == 0)
+                .WithMessage(_localizer["CostMustBeZeroIfNotPaid"]);
+
         }
 
 

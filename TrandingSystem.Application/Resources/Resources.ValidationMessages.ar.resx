@@ -118,21 +118,27 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Required" xml:space="preserve">
-    <value>Done2</value>
+    <value>This field is required</value>
   </data>
-  <data name="Required_DescAR" xml:space="preserve">
-    <value>Don4</value>
+  <data name="OnlyImageTypesAllowed" xml:space="preserve">
+    <value>يُسمح فقط بأنواع الصور (JPG، PNG، GIF، WebP).</value>
   </data>
-  <data name="Required_DescEN" xml:space="preserve">
-    <value>Done6</value>
+  <data name="CostMustBeGreaterThanOrEqualToZero" xml:space="preserve">
+    <value>غير مسموح بادخال ارقام سالبة</value>
   </data>
-  <data name="Required_TitleAR" xml:space="preserve">
-    <value>Done6</value>
+  <data name="CostMustBeZeroIfNotPaid" xml:space="preserve">
+    <value>يجب ان تكون التكلفة 0 لان الفيديو مجاني</value>
   </data>
-  <data name="Required_TitleEN" xml:space="preserve">
-    <value>Done5</value>
+  <data name="UpdateVideoMessage" xml:space="preserve">
+    <value>تم تعديل  الفيديو بنجاح</value>
   </data>
-  <data name="String1" xml:space="preserve">
-    <value>Done3</value>
+  <data name="FailureUpdate" xml:space="preserve">
+    <value>حدث خطأ أثناء تعديل  الفيديو</value>
+  </data>
+  <data name="InvalidImageExtension2" xml:space="preserve">
+    <value>امتداد الصورة غير صالح. الامتدادات المسموح بها: JPG، PNG، GIF، WebP.</value>
+  </data>
+  <data name="NotFoundVideo" xml:space="preserve">
+    <value>لم يتم العثور علي الفديو</value>
   </data>
 </root>

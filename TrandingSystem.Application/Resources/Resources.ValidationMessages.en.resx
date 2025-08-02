@@ -117,22 +117,28 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="String1" xml:space="preserve">
-    <value />
-  </data>
   <data name="Required" xml:space="preserve">
-    <value>6تمام</value>
+    <value>This field is required</value>
   </data>
-  <data name="Required_DescAR" xml:space="preserve">
-    <value>تمام5</value>
+  <data name="OnlyImageTypesAllowed" xml:space="preserve">
+    <value>Only image types are allowed (JPG, PNG, GIF, WebP).</value>
   </data>
-  <data name="Required_DescEN" xml:space="preserve">
-    <value>تمام3</value>
+  <data name="CostMustBeGreaterThanOrEqualToZero" xml:space="preserve">
+    <value>Negative  numbers or Empty Value are not allowed.</value>
   </data>
-  <data name="Required_TitleAR" xml:space="preserve">
-    <value>تمام2</value>
+  <data name="CostMustBeZeroIfNotPaid" xml:space="preserve">
+    <value>The cost should be 0 because the video is free.</value>
   </data>
-  <data name="Required_TitleEN" xml:space="preserve">
-    <value>يبسي</value>
+  <data name="UpdateVideoMessage" xml:space="preserve">
+    <value>Video updated successfully</value>
+  </data>
+  <data name="FailureUpdate" xml:space="preserve">
+    <value>An error occurred while Updating the video</value>
+  </data>
+  <data name="InvalidImageExtension2" xml:space="preserve">
+    <value>Invalid image file extension. Allowed: JPG, PNG, GIF, WebP.</value>
+  </data>
+  <data name="NotFoundVideo" xml:space="preserve">
+    <value>Video not found.</value>
   </data>
 </root>

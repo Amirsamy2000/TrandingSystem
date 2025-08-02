@@ -17,11 +17,13 @@ namespace TrandingSystem.Infrastructure.Repositories
             _db= context;
         }
 
+        // Add New Video
         public Video Create(Video Object)
         {
             throw new KeyNotFoundException();
         }
 
+        // delete video
         public Video Delete(int Id)
         {
             var video = _db.Videos.Find(Id);
