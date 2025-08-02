@@ -32,9 +32,9 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddMediatR(cfg => 
     cfg.RegisterServicesFromAssembly(typeof(AddCourseCommand).Assembly));
 
-builder.Services.AddScoped<ICourseRepository, CourseRepository>();
-builder.Services.AddScoped<IUserRepository, UserRepository>();
-builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+//builder.Services.AddScoped<ICourseRepository, CourseRepository>();
+//builder.Services.AddScoped<IUserRepository, UserRepository>();
+//builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 
 
 //builder.Services.AddScoped<ICourseRepository, CourseRepository>();
@@ -44,7 +44,7 @@ builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfi
     .AddEntityFrameworkStores<db23617Context>();
 
 // Add UnitOfWork
-builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+//builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 
 // Add MediatR

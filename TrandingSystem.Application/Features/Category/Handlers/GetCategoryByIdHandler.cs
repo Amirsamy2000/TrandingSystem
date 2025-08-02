@@ -16,12 +16,12 @@ namespace TrandingSystem.Application.Features.Category.Handlers
     public class GetCategoryByIdHandler : IRequestHandler<GetCategoryById, Response<CategoryDto>>
     {
 
-        private readonly ICategoryRepository _repository;
+        private readonly IUnitOfWork _UnitOfWork;
         private readonly IMapper _mapper;
 
-        public GetCategoryByIdHandler(ICategoryRepository repository, IMapper mapper)
+        public GetCategoryByIdHandler(IUnitOfWork UnitOfWork, IMapper mapper)
         {
-            _repository = repository;
+            _UnitOfWork = UnitOfWork;
             _mapper = mapper;
         }
 
@@ -29,7 +29,7 @@ namespace TrandingSystem.Application.Features.Category.Handlers
         {
             try
             {
-                var category = _repository.ReadById(request.catId);
+                var category = _UnitOfWork.Categories.ReadById(request.catId);
                 if (category == null)
                 {
                     return Response<CategoryDto>.ErrorResponse($"Category with ID {request.catId} not found.", null, HttpStatusCode.NotFound);
