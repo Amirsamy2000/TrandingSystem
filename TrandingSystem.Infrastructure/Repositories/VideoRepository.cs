@@ -19,12 +19,28 @@ namespace TrandingSystem.Infrastructure.Repositories
 
         public Video Create(Video Object)
         {
-            throw new NotImplementedException();
+            throw new KeyNotFoundException();
         }
 
         public Video Delete(int Id)
         {
-            throw new NotImplementedException();
+            var video = _db.Videos.Find(Id);
+            if(video is null)
+            {
+                throw new KeyNotFoundException("Not Found Video");
+
+            }
+            else
+            {
+                _db.Videos.Remove(video);
+                return video;
+
+            }
+        }
+
+        public void DeleteAllVideosByCourseId(List<Video> videos)
+        {
+            _db.Videos.RemoveRange(videos);
         }
 
         // For Get All Videos for a specific course
@@ -37,12 +53,13 @@ namespace TrandingSystem.Infrastructure.Repositories
 
         public Video ReadById(int Id)
         {
-            throw new NotImplementedException();
+            return  _db.Videos.Find(Id);
         }
 
-        public Video Update(Video Element)
+        public Video Update(Video video)
         {
-            throw new NotImplementedException();
+            var UpdatedVideo=_db.Videos.Update(video);
+            return UpdatedVideo.Entity;
         }
     }
 

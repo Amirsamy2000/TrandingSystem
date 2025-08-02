@@ -31,7 +31,7 @@
 </style>
 <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">@Localizer["Title"] /</span>   @Coure.CourseName </h4>
 
-<div class="row mb-3">
+<div class="row mb-3 ">
     <div class="col">
        
         <button class="btn btn-primary" onclick="DispalPatialAddNewVideo()">  <i class='menu-icon tf-icons bx bx-plus'></i> @Localizer["Add"]</button>
@@ -49,16 +49,16 @@
                     <p class="card-text description-clamp">
                         @video.Description
                     </p>
-                    <a data-id="@video.VideoId" class="btn btn-outline-primary  m-1">@Localizer["Update"]</a>
-                    <a data-id="@video.VideoId" class="btn btn-outline-info  m-1">@Localizer["Display"] </a>
+                    <a onclick="DispalPatialUppdateNewVideo(@video.VideoId)" class="btn btn-outline-primary  m-1">@Localizer["Update"]</a>
+                    <a   onclick="DisplayVideo(@video.VideoId)" class="btn btn-outline-info  m-1">@Localizer["Display"] </a>
                     @if (video.IsActive==true)
                     {
-                        <a onclick="BlockVideo(@video.VideoId,0)" class="btn btn-outline-warning  m-1">@Localizer["Block"]</a>
+                        <a onclick="BlockVideo(@video.VideoId,false)" class="btn btn-outline-warning  m-1">@Localizer["Block"]</a>
 
                     }
                     else
                     {
-                        <a onclick="BlockVideo(@video.VideoId,1)" class="btn btn-outline-warning  m-1">@Localizer["UnBlock"]</a>
+                        <a onclick="BlockVideo(@video.VideoId,true)" class="btn btn-outline-warning  m-1">@Localizer["UnBlock"]</a>
 
                     }
 
@@ -93,48 +93,27 @@
 
 
 </div>
-
+<div class="modal fade" id="youTubeModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <iframe height="350" src="https://www.youtube.com/embed/EngW7tLk6R8" id="UrlVideo"></iframe>
+        </div>
+    </div>
+</div>
 @section Scripts {
+    <partial name="_ValidationScriptsPartial" />
 
 
     <script>
-             function DrawAlter(ModelSetting) {
-            Swal.fire({
-                title: ModelSetting.title,
-                icon: ModelSetting.icon,
-                showCancelButton: true,
-                confirmButtonText: ModelSetting.confirmButtonText,
-                cancelButtonText: ModelSetting.cancelButtonText,
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    fetch(ModelSetting.url, { method: ModelSetting.method })
-                        .then(response => {
-                            if (!response.ok) throw new Error("HTTP error " + response.status);
-                            return response.json(); // توقعنا Response<T>
-                        })
-                        .then(res => {
-                            if (res.success) {
-                                Swal.fire(res.message, '', 'success').then(() => {
-                            location.reload(); // ✅ reload after user clicks "OK" in success alert
-                        });;
-                            } else {
-                                Swal.fire(res.message, '', 'error');
-                            }
-                        })
-                        .catch(error => {
-                            console.error("Error:", error);
-                            Swal.fire("Error while connecting to server", '', 'error');
-                        });
-                }
-            });
-        }
+      
 
 
         // For Block Video
             function BlockVideo(id, status) {
+               let response=status==true?"@Localizer["titleBlock1"]":"@Localizer["titleBlock"]"
             debugger;
             let model = {
-                title: "@Localizer["titleBlock"]",
+                title: response,
                 icon: "warning",
                 confirmButtonText: "@Localizer["confirmButtonTextBlock"]",
                 cancelButtonText: "@Localizer["cancelButtonTextBlock"]",
@@ -181,26 +160,161 @@
             DrawAlter(model);
         }
 
-        // For Dipaly Video As Youtube
+      
 
         // Dispal Patial Add New Video
         function DispalPatialAddNewVideo(){
+              let setting={
+
+                title:"@Localizer["loading"]"
+            }
+            SweatAlterProcessing(setting)
             $.ajax({
                 url:"/Videos/PartialViewAddNewVideo",
                 type:"GET",
                 success:function(data){
+                     Swal.close();
                     $("#modalbody").html(data)
                     $("#mainPartial").removeClass('col-10')
                      $("#mainPartial").addClass('col-12')
                    // استخدم كود Bootstrap 5 لعرض المودال
                     var myModal = new bootstrap.Modal(document.getElementById('largeModal'), {
-            backdrop: true, // أو static لو عايز تمنع إغلاقه بالضغط على الخلفية
-            keyboard: true   // يسمح بإغلاقه بزر Esc
+              backdrop: 'static',     // يمنع الإغلاق عند الضغط على الخلفية, // أو static لو عايز تمنع إغلاقه بالضغط على الخلفية
+                keyboard: false      // يسمح بإغلاقه بزر Esc
         });
             myModal.show();
                 }
 
             })
         }
+
+           // Dispal Patial Update New Video
+        function DispalPatialUppdateNewVideo(id){
+
+            let setting={
+                
+                title:"@Localizer["loading"]"
+            }
+            SweatAlterProcessing(setting)
+           
+            $.ajax({
+                url:"/Videos/PartialViewUpdateNewVideo",
+                type:"GET",
+                data:{
+                    CourseId:@Coure.CourseId,
+                    VideId:id
+
+                },
+                success:function(data){
+                                         Swal.close();
+
+                    $("#modalbody").html(data)
+                    $("#mainPartial").removeClass('col-10')
+                     $("#mainPartial").addClass('col-12')
+                   // استخدم كود Bootstrap 5 لعرض المودال
+                    var myModal = new bootstrap.Modal(document.getElementById('largeModal'), {
+              backdrop: 'static',     // يمنع الإغلاق عند الضغط على الخلفية, // أو static لو عايز تمنع إغلاقه بالضغط على الخلفية
+                keyboard: false      // يسمح بإغلاقه بزر Esc
+        });
+            myModal.show();
+                },
+           
+
+
+            })
+        }
+         // For Dipaly Video As Youtube
+            function DisplayVideo(id) {
+            $.ajax({
+                url: "/Videos/DisplayVideo",
+                type: "GET",
+                data: { VideoId: id }, // ✅ كانت ناقصة =
+                success: function (res) {
+                    console.log("====================================================")
+                    console.log(res)
+                    // تأكد أن res.Data يحتوي على رابط فيديو صالح
+                    $('#UrlVideo').attr('src', res.data);
+
+                    // عرض المودال
+                    var myModal = new bootstrap.Modal(document.getElementById('youTubeModal'));
+                    myModal.show();
+                },
+                error: function (res) {
+                    console.error("Error loading video", res);
+                }
+            });
+        }
+        // For Change Is Paid
+               function handleIsPaidChange(cost) {
+            if (!$("#Ispaid").is(":checked")) {
+                // لو مش مدفوع، خليه 0.00
+                $("#Cost").val("0.00");
+            } else {
+                // لو مدفوع، خليه القيمة الأصلية (مثلاً 30.00)
+                let normalizedCost = parseFloat(cost).toFixed(2).replace(",", ".");
+                $("#Cost").val(normalizedCost);
+            }
+        }
+                $(function () {
+            $("#updateVideoForm").validate();
+        });
+
+
+        function SubmitUpdateVideo() {
+            debugger;
+
+            let setting = {
+                title: "@Localizer["loading"]"
+            };
+            SweatAlterProcessing(setting);
+
+            var form = $('#updateVideoForm')[0];
+            var data = new FormData(form);
+
+            var token = $('input[name="__RequestVerificationToken"]').val();
+
+            $.ajax({
+                type: "POST",
+                url: "/Videos/SubmitUpdateVideo",
+                data: data,
+                processData: false,
+                contentType: false,
+                headers: {
+                    'RequestVerificationToken': token
+                },
+                success: function (res) {
+                    debugger;
+                    Swal.close();
+
+                    // لو الرد عبارة عن HTML (partial view فيه أخطاء تحقق)
+                    if (typeof res === "string" && res.includes("updateVideoForm")) {
+                        $("#mainPartial").html(res);
+                        return;
+                    }
+
+                    // لو الرد عبارة عن JSON وفيه success
+                    if (res.success) {
+                        let modalInstance = bootstrap.Modal.getInstance(document.getElementById('largeModal'));
+                        if (modalInstance) {
+                            modalInstance.hide();
+                        }
+
+                        SweatAlterSuccess(res.message);
+                    } else {
+                        SweatAlterDanger(res.message);
+                    }
+                },
+                error: function (err) {
+                    let modalInstance = bootstrap.Modal.getInstance(document.getElementById('largeModal'));
+                    if (modalInstance) {
+                        modalInstance.hide();
+                    }
+                    SweatAlterDanger("خطأ أثناء تحديث الفيديو.");
+                }
+            });
+        }
+
+
     </script>
 }
+

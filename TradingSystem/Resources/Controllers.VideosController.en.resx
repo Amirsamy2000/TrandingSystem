@@ -121,7 +121,7 @@
     <value>Title (Arabic)</value>
   </data>
   <data name="Send" xml:space="preserve">
-    <value>Save</value>
+    <value>Save Video</value>
   </data>
   <data name="TitleAR" xml:space="preserve">
     <value>Title (English)</value>
@@ -155,5 +155,11 @@
   </data>
   <data name="Course" xml:space="preserve">
     <value>Course</value>
+  </data>
+  <data name="UnBlock" xml:space="preserve">
+    <value>Un Block</value>
+  </data>
+  <data name="UpdateNewVideo" xml:space="preserve">
+    <value>Update Video Data</value>
   </data>
 </root>

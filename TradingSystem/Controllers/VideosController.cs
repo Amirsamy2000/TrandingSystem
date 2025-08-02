@@ -1,9 +1,15 @@
-﻿using MediatR;
+﻿using FluentValidation;
+using Humanizer;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System.Threading;
 using TradingSystem.Application.Common.Response;
+using TrandingSystem.Application.Dtos;
+using TrandingSystem.Application.Features.Courses.Commands;
+using TrandingSystem.Application.Features.Video.Commands;
 using TrandingSystem.Application.Features.Video.Queries;
+using TrandingSystem.Application.Validators;
 using TrandingSystem.Domain.Entities;
 
 
@@ -12,10 +18,13 @@ namespace TrandingSystem.Controllers
     public class VideosController : Controller
     {
         private readonly IMediator _mediator;
+        private readonly IValidator<ViedoUpdateDto> _validator;
 
-        public VideosController(IMediator mediator)
+      
+        public VideosController(IMediator mediator, IValidator<ViedoUpdateDto> validator)
         {
             _mediator = mediator;
+            _validator = validator;
         }
         // this View For Display All Videos For Course Use CourseId
         public IActionResult Videos(CancellationToken cancellationToken, int CourseId = 1)
@@ -37,7 +46,8 @@ namespace TrandingSystem.Controllers
         // this Partial View For Display Add New Video Form
         public IActionResult PartialViewAddNewVideo(int CourseId=0)
         {
-             IEnumerable<Course> Course = null;
+            var Rescourses =  _mediator.Send(new GetAllCoursesQuery()).Result;
+            IEnumerable<Course> Course = null;
             if (CourseId != 0)
             {
                 // Get All Courses Data
@@ -46,10 +56,40 @@ namespace TrandingSystem.Controllers
 
             ViewData["CourseId"] = CourseId;
 
-            return PartialView("_PartialAddVideo", Course);
+            return PartialView("_PartialAddVideo", Rescourses.Data);
         }
 
-       // this View For Dispaly Partial View Add NEW Video
+        public IActionResult PartialViewUpdateNewVideo(int VideId ,int CourseId=0)
+        {
+            // Get All Courses Data
+            var Rescourses = _mediator.Send(new GetAllCoursesQuery()).Result;
+  
+            ViewBag.Courses = Rescourses.Data;
+            ViewData["Courses"] = Rescourses.Data;
+            ViewData["CourseId"] = CourseId;
+            // Get  Video By VideoId for Update
+            var response = _mediator.Send(new GetVideoByVideoIdQuery(VideId, Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName)).Result;
+            return PartialView("_PartialUpdateVideo", response.Data);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public  async Task<IActionResult> SubmitUpdateVideo(ViedoUpdateDto UpdateedVideo)
+        {
+            var validationResult = await _validator.ValidateAsync(UpdateedVideo);
+            if (!validationResult.IsValid)
+            {
+                foreach (var error in validationResult.Errors)
+                    ModelState.AddModelError(error.PropertyName, error.ErrorMessage);
+
+                return PartialView("_PartialUpdateVideo", UpdateedVideo);
+            }
+            var response = _mediator.Send(new UpdateVideoCommand(UpdateedVideo, Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName)).Result;
+
+            return Json(response);
+        }
+
+        // this View For Dispaly Partial View Add NEW Video
 
         public IActionResult AddNewVideo(int CourseId = 0)
         {
@@ -58,23 +98,29 @@ namespace TrandingSystem.Controllers
         }
 
         [HttpPost]
-        public IActionResult BlockVideo(int VideoId,int Status)
+        public IActionResult BlockVideo(int VideoId,bool Status)
         {
 
-            return Json(Response<string>.SuccessResponse(
-                        message: "Failed to block the video.",
-                        data: "Video blocked successfully."
-                    ));
+            var response = _mediator.Send(new BlockVideoByIdCommand(VideoId, Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName, Status)).Result;
+
+            return Json(response);
         }
 
         [HttpPost]
-        public IActionResult DeleteVideo(int VideoId)
+        public IActionResult DeleteAllVideos(int CourseId)
         {
 
-            return Json(Response<string>.SuccessResponse(
-                        message: "Failed to block the video.",
-                        data: "Video blocked successfully."
-                    ));
+            var response = _mediator.Send(new DeleteAllVideosByCourseIdCommand(CourseId, Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName)).Result;
+
+            return Json(response);
+        }
+
+        [HttpPost]
+        public IActionResult DeleteVideo(int VideoId,CancellationToken cancellationToken)
+        {
+            var reponse = _mediator.Send(new DeleteVideoByIdCommand(VideoId, Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName), cancellationToken).Result;
+
+            return Json(reponse);
         }
         public IActionResult DeleteAllVideos(int VideoId, int Status)
         {
@@ -83,6 +129,17 @@ namespace TrandingSystem.Controllers
                         message: "Failed to block the video.",
                         data: "Video blocked successfully."
                     ));
+        }
+
+        [HttpGet]
+        public IActionResult DisplayVideo(int VideoId)
+        {
+           
+            return Json(Response<string>.SuccessResponse(
+                         message: "Failed to block the video.",
+                         data: "https://www.youtube.com/embed/lUVepezRfRw?list=PLc50qE8XmwQSRmaVLJxje3tEnU2ROGK_x"
+                     ));
+
         }
 
 

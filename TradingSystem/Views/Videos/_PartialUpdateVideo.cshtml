@@ -1,0 +1,132 @@
+﻿@using Microsoft.Extensions.Localization
+@using TrandingSystem.Application.Dtos
+@using TrandingSystem.Controllers
+@inject IStringLocalizer<VideosController> Localizer
+@model ViedoUpdateDto
+
+<div class="row d-flex justify-content-center">
+    <div class="col-10" id="mainPartial">
+        <div class="card mb-4">
+            <div class="card-header d-flex align-items-center justify-content-between">
+                <h5 class="mb-0 text-primary">@Localizer["UpdateNewVideo"]</h5>
+            </div>
+
+            <div class="card-body">
+                <form enctype="multipart/form-data" id="updateVideoForm">
+                    @Html.AntiForgeryToken()
+
+                    <!-- رسائل التحقق العامة -->
+                    <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+                    
+                    <!-- Title AR -->
+                    <div class="row mb-3">
+                        <label class="col-sm-4 col-form-label">@Localizer["TitleAR"]</label>
+                        <div class="col-sm-8">
+                            <input asp-for="TitleAR" class="form-control" />
+                            <span asp-validation-for="TitleAR" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <!-- Title EN -->
+                    <div class="row mb-3">
+                        <label class="col-sm-4 col-form-label">@Localizer["TitleEN"]</label>
+                        <div class="col-sm-8">
+                            <input asp-for="TitleEN" class="form-control" />
+                            <span asp-validation-for="TitleEN" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <!-- Description AR -->
+                    <div class="row mb-3">
+                        <label class="col-sm-4 col-form-label">@Localizer["DescriptionAR"]</label>
+                        <div class="col-sm-8">
+                            <textarea asp-for="DescriptionAR" class="form-control" rows="3"></textarea>
+                            <span asp-validation-for="DescriptionAR" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <!-- Description EN -->
+                    <div class="row mb-3">
+                        <label class="col-sm-4 col-form-label">@Localizer["DescriptionEN"]</label>
+                        <div class="col-sm-8">
+                            <textarea asp-for="DescriptionEN" class="form-control" rows="3"></textarea>
+                            <span asp-validation-for="DescriptionEN" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <!-- Course -->
+                    <div class="row mb-3">
+                        <label class="col-sm-4 col-form-label">@Localizer["Course"]</label>
+                        <div class="col-sm-8">
+                            <select asp-for="CourseId" class="form-control">
+                                @if (ViewBag.Courses != null)
+                                {
+                                    foreach (var course in ViewBag.Courses as List<CourseDto>)
+                                    {
+                                        <option value="1">@course.TitleEN</option>
+                                    }
+                                }
+                            </select>
+                            <span asp-validation-for="CourseId" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <!-- Image Upload -->
+                    <div class="row mb-3">
+                        <label class="col-sm-4 col-form-label">@Localizer["ImageVideoUrl"]</label>
+                        <div class="col-sm-8">
+                            <input asp-for="ImageVideoUrlNew" type="file" accept="image/*" class="form-control" />
+                            <span asp-validation-for="ImageVideoUrlNew" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                   
+
+                    <!-- IsActive / IsPaid -->
+                    <div class="row mb-3 d-flex justify-content-center">
+                        <!-- IsActive -->
+                        <div class="col-4">
+                            <div class="form-check">
+                                <input asp-for="IsActive" class="form-check-input" type="checkbox" />
+                                <label class="form-check-label" asp-for="IsActive">@Localizer["IsActive"]</label>
+                            </div>
+                        </div>
+
+                        <!-- IsPaid -->
+                        <div class="col-4">
+                            <div class="form-check">
+                                <input asp-for="IsPaid" class="form-check-input" type="checkbox" id="Ispaid" onchange="handleIsPaidChange(@Model.Cost)" />
+                                <label class="form-check-label" asp-for="IsPaid">@Localizer["IsPaid"]</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Cost -->
+                    <div class="row mb-3">
+                        <label class="col-sm-4 col-form-label">@Localizer["Cost"]</label>
+                        <div class="col-sm-8">
+                            <div class="input-group">
+                                <span class="input-group-text">$</span>
+                                <input asp-for="Cost" class="form-control" id="Cost" />
+                                <span class="input-group-text">.00</span>
+                            </div>
+                            <span asp-validation-for="Cost" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <!-- Hidden Fields -->
+                
+                    <input asp-for="VideoId" type="hidden" />
+                    
+                    <!-- Submit -->
+                    <div class="row justify-content-end">
+                        <div class="col-sm-8">
+                            <button type="button" onclick="SubmitUpdateVideo()" class="btn btn-primary px-4" > @Localizer["Send"]</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+

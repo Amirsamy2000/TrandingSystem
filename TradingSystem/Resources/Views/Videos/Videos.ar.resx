@@ -183,4 +183,16 @@
   <data name="titleDeleteall" xml:space="preserve">
     <value>هل أنت متأكد من حذف جميع الفديوهات؟ </value>
   </data>
+  <data name="UnBlock" xml:space="preserve">
+    <value>إلغاء الحظر</value>
+  </data>
+  <data name="UpdateNewVideo" xml:space="preserve">
+    <value>تعديل بيانات الفديو </value>
+  </data>
+  <data name="titleBlock1" xml:space="preserve">
+    <value>هل أنت متأكد من الغاء حظر الفديو؟ </value>
+  </data>
+  <data name="loading" xml:space="preserve">
+    <value>جارٍ التحميل.....</value>
+  </data>
 </root>

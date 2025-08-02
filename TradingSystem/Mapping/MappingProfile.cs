@@ -23,6 +23,7 @@ namespace TrandingSystem.Mapping
           .ForMember(dest => dest.Description, opt => opt.MapFrom((src, _, _, context) =>
               context.Items["culture"].ToString() == "ar" ? src.DescriptionAR : src.DescriptionEN));
 
+            CreateMap<Video, ViedoUpdateDto>().ReverseMap();
 
         }
     }

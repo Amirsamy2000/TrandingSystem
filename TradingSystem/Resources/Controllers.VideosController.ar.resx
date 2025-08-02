@@ -121,7 +121,7 @@
     <value>العنوان  (عربي)</value>
   </data>
   <data name="Send" xml:space="preserve">
-    <value>حفظ</value>
+    <value>حفظ الفديو</value>
   </data>
   <data name="TitleAR" xml:space="preserve">
     <value>العنوان (انجليزي)</value>
@@ -155,5 +155,11 @@
   </data>
   <data name="Course" xml:space="preserve">
     <value>كورس</value>
+  </data>
+  <data name="UnBlock" xml:space="preserve">
+    <value>الغاء الخظر</value>
+  </data>
+  <data name="UpdateNewVideo" xml:space="preserve">
+    <value>تعديل بيانات الفديو</value>
   </data>
 </root>

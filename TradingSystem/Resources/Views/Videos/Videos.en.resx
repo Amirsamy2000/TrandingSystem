@@ -145,7 +145,7 @@
     <value>Bolck</value>
   </data>
   <data name="Unblock " xml:space="preserve">
-    <value>Unblock </value>
+    <value>Un Block</value>
   </data>
   <data name="Paid" xml:space="preserve">
     <value>Paid</value>
@@ -182,5 +182,17 @@
   </data>
   <data name="titleDeleteall" xml:space="preserve">
     <value>Are you sure you want to Delete All Videos?</value>
+  </data>
+  <data name="UnBlock" xml:space="preserve">
+    <value>Un Block</value>
+  </data>
+  <data name="UpdateNewVideo" xml:space="preserve">
+    <value>Edit Video Data</value>
+  </data>
+  <data name="titleBlock1" xml:space="preserve">
+    <value>Are you sure you want to Un Block Video?</value>
+  </data>
+  <data name="loading" xml:space="preserve">
+    <value>Loading.....</value>
   </data>
 </root>

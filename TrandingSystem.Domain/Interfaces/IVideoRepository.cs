@@ -13,6 +13,7 @@ namespace TrandingSystem.Domain.Interfaces
     {
          IQueryable<Video> GetAllVideosForCouse(int CousreId);
        
+        void DeleteAllVideosByCourseId(List<Video> videos);
 
     }
 }
