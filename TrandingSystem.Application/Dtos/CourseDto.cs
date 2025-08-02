@@ -4,11 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TrandingSystem.Domain.Entities;
+using TrandingSystem.Domain.Interfaces;
 
 namespace TrandingSystem.Application.Dtos
 {
     public class CourseDto
     {
+        
         public string TitleEN { get; set; }
 
         public string TitleAR { get; set; }
@@ -18,6 +20,7 @@ namespace TrandingSystem.Application.Dtos
         public string DescriptionAR { get; set; }
 
         public int CategoryId { get; set; }
+        public string categoryName { get; set; }
 
         public decimal Cost { get; set; }
 

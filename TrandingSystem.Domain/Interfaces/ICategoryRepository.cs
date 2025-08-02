@@ -8,8 +8,7 @@ using TrandingSystem.Domain.Entities;
 
 namespace TrandingSystem.Domain.Interfaces
 {
-    public interface IUserRepository : IDomainInterface<User>
+    public interface ICategoryRepository : IDomainInterface<Category>
     {
-
     }
 }

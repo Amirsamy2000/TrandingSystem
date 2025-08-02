@@ -8,9 +8,10 @@ using TradingSystem.Application.Common.Response;
 using TrandingSystem.Application.Dtos;
 using TrandingSystem.Domain.Entities;
 
-namespace TrandingSystem.Application.Features.Courses.Commands
+namespace TrandingSystem.Application.Features.Courses.Queries
 {
     public class GetAllCoursesQuery : IRequest<Response<List<CourseDto>>>
     {
+        public int UserId { get; set; }
     }
 }

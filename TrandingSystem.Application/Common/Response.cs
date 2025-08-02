@@ -9,7 +9,7 @@ namespace TradingSystem.Application.Common.Response
         public T? Data2 { get; set; }
         public string Message { get; set; }
         public string MessageOfDeveloper { get; set; }
-        public HttpStatusCode Status { get; set; }
+        public HttpStatusCode? Status { get; set; }
         public bool Success { get; set; }
 
         public Response() { }

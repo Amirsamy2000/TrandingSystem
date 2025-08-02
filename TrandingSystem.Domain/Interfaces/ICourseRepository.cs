@@ -9,6 +9,8 @@ namespace TrandingSystem.Domain.Interfaces
 {
     public interface ICourseRepository : IDomainInterface<Course>
     {
+        List<Course> GetCoursesByLecturerId(int lecturerId);
+
 
     }
 }
