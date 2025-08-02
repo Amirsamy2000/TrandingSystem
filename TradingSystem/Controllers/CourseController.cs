@@ -95,5 +95,19 @@ namespace TrandingSystem.Controllers
             // Redirect to index or success page
             return RedirectToAction("Create");
         }
+
+
+        [HttpDelete]
+        public async Task<IActionResult> Delete(int CourseId)
+        {
+
+
+            var result = await _mediator.Send(new DeleteCourseCommand
+            {
+                courseId = CourseId
+            });
+
+            return Ok(result);
+        }
     }
 }

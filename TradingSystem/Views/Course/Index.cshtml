@@ -362,6 +362,7 @@
         }
 
         function filterCourses() {
+            debugger;
             const categoryFilter = $('#categoryFilter').val();
             const statusFilter = $('#statusFilter').val();
 
@@ -422,24 +423,38 @@
 
         function performDelete(courseId, courseName) {
             $.ajax({
-                url: `/Course/Delete/${courseId}`,
+                url: `/Course/Delete?CourseId=${courseId}`,
                 type: 'DELETE',
                 success: function(response) {
-                    // Remove course from array
-                    allCourses = allCourses.filter(course => course.CourseId !== courseId);
 
-                    // Re-render courses
-                    filterCourses();
+                    if(response.success)
+                    {
+                        // Remove course from array
+                        debugger;
+                        allCourses = allCourses.filter(course => course.courseId !== courseId);
 
-                    // Show success message
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Deleted!',
-                        text: `"${courseName}" has been deleted successfully.`,
-                        confirmButtonColor: '#696cff',
-                        timer: 3000,
-                        timerProgressBar: true
-                    });
+                        // Re-render courses
+                        filterCourses();
+
+                        // Show success message
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Deleted!',
+                            text: `"${courseName}" has been deleted successfully.`,
+                            confirmButtonColor: '#696cff',
+                            timer: 3000,
+                            timerProgressBar: true
+                        });
+                    }
+                    else{
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: response.message,
+                            confirmButtonColor: '#696cff'
+                        });
+                    }
+                    
                 },
                 error: function(xhr, status, error) {
                     console.error('Error deleting course:', error);
