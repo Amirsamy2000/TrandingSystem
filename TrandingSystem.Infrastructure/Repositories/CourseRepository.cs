@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -32,6 +33,17 @@ namespace TrandingSystem.Infrastructure.Repositories
             return _context.Courses.ToList();
         }
 
+        public List<Course> GetCoursesByLecturerId(int lecturerId)
+        {
+            return _context.CourseLecturers
+                .Include(cl => cl.Course)
+                    .ThenInclude(c => c.Category)
+                .Where(cl => cl.LecturerId == lecturerId)
+                .Select(cl => cl.Course)
+                .ToList();
+
+        }
+
         public Course ReadById(int Id)
         {
             throw new NotImplementedException();
@@ -46,5 +58,6 @@ namespace TrandingSystem.Infrastructure.Repositories
             throw new NotImplementedException();
         }
 
+        
     }
 }

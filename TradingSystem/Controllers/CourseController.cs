@@ -1,9 +1,10 @@
 ﻿using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 using TradingSystem.Application.Common.Response;
-using TrandingSystem.Application.Features.Courses.Queries;
 using TrandingSystem.Application.Features.Courses.Commands;
+using TrandingSystem.Application.Features.Courses.Queries;
 using TrandingSystem.Domain.Entities;
 using TrandingSystem.ViewModels;
 
@@ -23,20 +24,40 @@ namespace TrandingSystem.Controllers
         [HttpGet]
         public async Task<IActionResult> ReadAll()
         {
-            var Rescourses = await _mediator.Send(new GetAllCoursesQuery());
-            // Check if the response is successful
-            //if (!courses.Success)
-            //{
-            //    // Handle the error case, e.g., log the error or return an error view
-            //    ModelState.AddModelError(string.Empty, courses.Message);
-            //    return Json(new List<CourseVM>()); // Return an empty list or handle as needed
-            //}
-            //var courseViewModels = _mapper.Map<List<CourseVM>>(Rescourses);
-            // Return the view with the list of courses
+            // Get the current user ID from the claims
+            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
 
-            //// Map the course entities to view models if necessary
+            if (userIdClaim == null)
+            {
+                return Unauthorized("User ID not found in token.");
+            }
 
-            return Ok(Rescourses);
+            int userId = int.Parse(userIdClaim.Value);
+
+            var result = await _mediator.Send(new GetAllCoursesQuery
+            {
+                UserId = userId
+            });
+
+            //if (!result.Success)
+            //    return StatusCode((int)(result.Status ?? System.Net.HttpStatusCode.BadRequest), result);
+
+            return Ok(result);
+
+            //var Rescourses = await _mediator.Send(new GetAllCoursesQuery());
+            //// Check if the response is successful
+            ////if (!courses.Success)
+            ////{
+            ////    // Handle the error case, e.g., log the error or return an error view
+            ////    ModelState.AddModelError(string.Empty, courses.Message);
+            ////    return Json(new List<CourseVM>()); // Return an empty list or handle as needed
+            ////}
+            ////var courseViewModels = _mapper.Map<List<CourseVM>>(Rescourses);
+            //// Return the view with the list of courses
+
+            ////// Map the course entities to view models if necessary
+
+            //return Ok(Rescourses);
         }
 
         public async Task<IActionResult> Index()
