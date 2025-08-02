@@ -10,6 +10,7 @@ using TrandingSystem.Domain.Entities;
 using TrandingSystem.Domain.Interfaces;
 using TrandingSystem.Infrastructure.Data;
 using TrandingSystem.Infrastructure.Repositories;
+using TrandingSystem.Infrastructure.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,6 +27,7 @@ builder.Services.AddScoped<ICourseRepository, CourseRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddScoped<IImageService, ImageService>();
 
 // Identity مع Roles و EF Store
 builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true)

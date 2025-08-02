@@ -3,10 +3,12 @@ using Humanizer;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using System.Security.Claims;
 using System.Threading;
 using TradingSystem.Application.Common.Response;
 using TrandingSystem.Application.Dtos;
 using TrandingSystem.Application.Features.Courses.Commands;
+using TrandingSystem.Application.Features.Courses.Queries;
 using TrandingSystem.Application.Features.Video.Commands;
 using TrandingSystem.Application.Features.Video.Queries;
 using TrandingSystem.Application.Validators;
@@ -46,7 +48,16 @@ namespace TrandingSystem.Controllers
         // this Partial View For Display Add New Video Form
         public IActionResult PartialViewAddNewVideo(int CourseId=0)
         {
-            var Rescourses =  _mediator.Send(new GetAllCoursesQuery()).Result;
+            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
+
+            if (userIdClaim == null)
+            {
+                return Unauthorized("User ID not found in token.");
+            }
+
+            int userId = int.Parse(userIdClaim.Value);
+
+            var Rescourses =  _mediator.Send(new GetAllCoursesQuery { UserId=userId}).Result;
             IEnumerable<Course> Course = null;
             if (CourseId != 0)
             {
@@ -61,8 +72,16 @@ namespace TrandingSystem.Controllers
 
         public IActionResult PartialViewUpdateNewVideo(int VideId ,int CourseId=0)
         {
+            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
+
+            if (userIdClaim == null)
+            {
+                return Unauthorized("User ID not found in token.");
+            }
+
+            int userId = int.Parse(userIdClaim.Value);
             // Get All Courses Data
-            var Rescourses = _mediator.Send(new GetAllCoursesQuery()).Result;
+            var Rescourses = _mediator.Send(new GetAllCoursesQuery{ UserId=userId}).Result;
   
             ViewBag.Courses = Rescourses.Data;
             ViewData["Courses"] = Rescourses.Data;
