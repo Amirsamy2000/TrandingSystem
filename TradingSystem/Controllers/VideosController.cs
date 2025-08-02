@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System.Threading;
@@ -9,6 +10,8 @@ using TrandingSystem.Domain.Entities;
 
 namespace TrandingSystem.Controllers
 {
+    [Authorize]
+
     public class VideosController : Controller
     {
         private readonly IMediator _mediator;

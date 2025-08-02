@@ -1,22 +1,22 @@
+using AutoMapper;
 using MediatR;
+using MediatR;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using NuGet.Protocol.Core.Types;
+using NuGet.Protocol.Core.Types;
 using System.Globalization;
 using TrandingSystem.Application.Features.Courses.Commands;
+using TrandingSystem.Application.Features.Video.Handlers;
 using TrandingSystem.Domain.Entities;
+using TrandingSystem.Domain.Interfaces;
 using TrandingSystem.Domain.Interfaces;
 using TrandingSystem.Infrastructure.Data;
 using TrandingSystem.Infrastructure.Repositories;
-
-using TrandingSystem.Domain.Interfaces;
 using TrandingSystem.Infrastructure.Repositories;
-using TrandingSystem.Application.Features.Video.Handlers;
-using AutoMapper;
-using NuGet.Protocol.Core.Types;
-using MediatR;
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");;
 
@@ -94,6 +94,15 @@ builder.Services.Configure<RequestLocalizationOptions>(options =>
     //// هنا بنحدد الطريقة اللي المستخدم يقدر يحدد بيها اللغة (كوكي أو كويري أو هيدر)
     //options.RequestCultureProviders.Insert(0, new QueryStringRequestCultureProvider());
 });
+
+
+// ⛔ Force single session
+builder.Services.Configure<SecurityStampValidatorOptions>(options =>
+{
+    options.ValidationInterval = TimeSpan.Zero;
+});
+
+
 // end step 3
 var app = builder.Build();
 
