@@ -46,7 +46,7 @@ namespace TrandingSystem.Controllers
 
 
         // this Partial View For Display Add New Video Form
-        public IActionResult PartialViewAddNewVideo(int CourseId=0)
+        public IActionResult PartialViewAddNewVideo()
         {
             var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
 
@@ -58,14 +58,10 @@ namespace TrandingSystem.Controllers
             int userId = int.Parse(userIdClaim.Value);
 
             var Rescourses =  _mediator.Send(new GetAllCoursesQuery { UserId=userId}).Result;
-            IEnumerable<Course> Course = null;
-            if (CourseId != 0)
-            {
-                // Get All Courses Data
-                //there
-            }
 
-            ViewData["CourseId"] = CourseId;
+
+
+            ViewBag.Courses = Rescourses;
 
             return PartialView("_PartialAddVideo", Rescourses.Data);
         }
