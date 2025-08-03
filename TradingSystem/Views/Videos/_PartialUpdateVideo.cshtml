@@ -63,7 +63,7 @@
                                 {
                                     foreach (var course in ViewBag.Courses as List<CourseDto>)
                                     {
-                                        <option value="">@course.TitleEN</option>
+                                        <option value="@course.CourseId">@course.TitleEN</option>
                                     }
                                 }
                             </select>

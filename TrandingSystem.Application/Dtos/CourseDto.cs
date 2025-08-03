@@ -10,7 +10,8 @@ namespace TrandingSystem.Application.Dtos
 {
     public class CourseDto
     {
-        
+        public int CourseId { get; set; }
+
         public string TitleEN { get; set; }
 
         public string TitleAR { get; set; }

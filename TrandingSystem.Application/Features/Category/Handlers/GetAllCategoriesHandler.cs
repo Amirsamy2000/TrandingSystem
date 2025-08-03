@@ -15,19 +15,19 @@ namespace TrandingSystem.Application.Features.Category.Handlers
 {
     internal class GetAllCategoriesHandler : IRequestHandler<GetAllCategoriesQuery, Response<List<CategoryDto>>>
     {
-        private readonly ICategoryRepository _repository;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
-        public GetAllCategoriesHandler(ICategoryRepository repository, IMapper mapper)
+        public GetAllCategoriesHandler(IUnitOfWork unitOfWork, IMapper mapper)
         {
-            _repository = repository;
+            _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
         public Task<Response<List<CategoryDto>>> Handle(GetAllCategoriesQuery request, CancellationToken cancellationToken)
         {
             try
             {
-                var categories = _repository.Read(); // assuming this returns List<Course>
+                var categories = _unitOfWork.Categories.Read(); // assuming this returns List<Course>
                 if (categories == null || !categories.Any())
                 {
                     return Task.FromResult(Response<List<CategoryDto>>.ErrorResponse("there are no Categories available", null, HttpStatusCode.NotFound));

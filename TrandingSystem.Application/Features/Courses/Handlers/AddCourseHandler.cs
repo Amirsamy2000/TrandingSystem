@@ -14,12 +14,13 @@ namespace TrandingSystem.Application.Features.Courses.Handlers
 {
     internal class AddCourseHandler : IRequestHandler<AddCourseCommand, Response<Course>>
     {
-        private readonly ICourseRepository _CourseRepository;
+        private readonly IUnitOfWork _unitOfWork;
+
         private readonly IMapper _mapper;
 
-        public AddCourseHandler(ICourseRepository CourseRepository, IMapper mapper)
+        public AddCourseHandler(IUnitOfWork unitOfWork, IMapper mapper)
         {
-            _CourseRepository = CourseRepository;
+            _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
 
@@ -33,7 +34,7 @@ namespace TrandingSystem.Application.Features.Courses.Handlers
                     return Response<Course>.ErrorResponse("Invalid course data");
                 }
 
-                var result = _CourseRepository.Create(course);
+                var result = _unitOfWork.Courses.Create(course);
 
                 if (result == null)
                 {
