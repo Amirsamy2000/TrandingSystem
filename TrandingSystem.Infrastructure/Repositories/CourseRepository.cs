@@ -46,7 +46,7 @@ namespace TrandingSystem.Infrastructure.Repositories
 
         public Course ReadById(int Id)
         {
-            throw new NotImplementedException();
+            return _context.Courses.Find(Id);
         }
 
         public Course Update(Course Element)
