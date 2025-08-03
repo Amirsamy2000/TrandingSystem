@@ -63,6 +63,22 @@ namespace TrandingSystem.Controllers
             //return Ok(Rescourses);
         }
 
+
+        [HttpGet]
+        public async Task<IActionResult> _ReadByIdPartialView(int CourseId)
+        {
+            // Get the current user ID from the claims
+            
+            var result = await _mediator.Send(new GetCourseByIdQuery
+            {
+                CourseId = CourseId
+            });
+
+            ViewBag.Course = result.Data;
+
+            return PartialView("_ReadByIdPartialView");
+        }
+
         public async Task<IActionResult> Index()
         {
             return View();

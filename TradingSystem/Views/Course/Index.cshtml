@@ -166,6 +166,18 @@
 </div>
 
 
+<!-- Modal to show course details or edit form -->
+<div class="modal fade" id="courseModal" tabindex="-1" aria-labelledby="courseModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content" id="courseModalContent">
+            <!-- Content will be loaded here -->
+        </div>
+    </div>
+</div>
+
+
+
+
 <script src="~/LayoutDasbord/assets/vendor/libs/jquery/jquery.js"></script>
 
 
@@ -401,7 +413,18 @@
         }
 
         function editCourse(courseId) {
-            window.location.href = `/Course/Edit/${courseId}`;
+            debugger
+            // window.location.href = `/Course/Edit/${courseId}`;
+            $.ajax({
+                url: `/Course/_ReadByIdPartialView?CourseId=${courseId}`,
+                type: 'GET',
+                success: function(response) {
+                    debugger
+                    $('#courseModalContent').html(response);
+                    $('#courseModal').modal('show');
+                },
+                
+		    });
         }
 
         function deleteCourse(courseId, courseName) {
