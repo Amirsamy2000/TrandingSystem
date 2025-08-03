@@ -9,14 +9,13 @@ using TrandingSystem.Domain.Interfaces;
 
 internal class GetAllCoursesHandler : IRequestHandler<GetAllCoursesQuery, Response<List<CourseDto>>>
 {
-    private readonly ICourseRepository _courseRepository;
-    private readonly IUserRepository _userRepository;
     private readonly IMapper _mapper;
+    private readonly IUnitOfWork _unitOfWork;
 
-    public GetAllCoursesHandler(ICourseRepository courseRepository, IUserRepository userRepository, IMapper mapper)
+
+    public GetAllCoursesHandler(IUnitOfWork unitOfWork, IUserRepository userRepository, IMapper mapper)
     {
-        _courseRepository = courseRepository;
-        _userRepository = userRepository;
+        _unitOfWork = unitOfWork;
         _mapper = mapper;
     }
 
@@ -24,7 +23,7 @@ internal class GetAllCoursesHandler : IRequestHandler<GetAllCoursesQuery, Respon
     {
         try
         {
-            var user = _userRepository.ReadById(request.UserId);
+            var user = _unitOfWork.Users.ReadById(request.UserId);
 
             if (user == null)
             {
@@ -35,11 +34,11 @@ internal class GetAllCoursesHandler : IRequestHandler<GetAllCoursesQuery, Respon
 
             if (user.Role?.RoleName.ToLower() == "admin")
             {
-                courses = _courseRepository.Read();
+                courses = _unitOfWork.Courses.Read();
             }
             else if (user.Role?.RoleName.ToLower() == "lecturer")
             {
-                courses = _courseRepository.GetCoursesByLecturerId(request.UserId);
+                courses = _unitOfWork.Courses.GetCoursesByLecturerId(request.UserId);
             }
             else
             {

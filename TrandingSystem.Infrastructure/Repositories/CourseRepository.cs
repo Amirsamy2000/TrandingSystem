@@ -46,7 +46,7 @@ namespace TrandingSystem.Infrastructure.Repositories
 
         public Course ReadById(int Id)
         {
-            throw new NotImplementedException();
+            return _context.Courses.Find(Id);
         }
 
         public Course Update(Course Element)
@@ -55,7 +55,10 @@ namespace TrandingSystem.Infrastructure.Repositories
         }
         public Course Delete(int Id)
         {
-            throw new NotImplementedException();
+            var course = _context.Courses.Find(Id);
+            _context.Courses.Remove(course);
+            _context.SaveChanges();
+            return course;
         }
 
         
