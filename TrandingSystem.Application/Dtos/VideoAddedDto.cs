@@ -10,7 +10,9 @@ namespace TrandingSystem.Application.Dtos
         public string TitleEN { get; set; }
         public string TitleAR { get; set; }
 
-
+              /// <summary>
+              /// gerges h h h h 
+              /// </summary>
         public string DescriptionEN { get; set; }
         public string DescriptionAR { get; set; }
 
