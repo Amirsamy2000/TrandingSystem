@@ -135,10 +135,28 @@
   <data name="FailureUpdate" xml:space="preserve">
     <value>حدث خطأ أثناء تعديل  الفيديو</value>
   </data>
-  <data name="InvalidImageExtension2" xml:space="preserve">
+  <data name="InvalidImageExtension" xml:space="preserve">
     <value>امتداد الصورة غير صالح. الامتدادات المسموح بها: JPG، PNG، GIF، WebP.</value>
   </data>
   <data name="NotFoundVideo" xml:space="preserve">
     <value>لم يتم العثور علي الفديو</value>
+  </data>
+  <data name="AddVideoSuccess" xml:space="preserve">
+    <value>تمت إضافة الفيديو الجديد بنجاح.</value>
+  </data>
+  <data name="AddnewVideoFail" xml:space="preserve">
+    <value>فشلت إضافة الفيديو الجديد. يُرجى المحاولة مرة أخرى.</value>
+  </data>
+  <data name="AddImageFail" xml:space="preserve">
+    <value>فشل تحميل الصورة. يُرجى المحاولة مرة أخرى.</value>
+  </data>
+  <data name="AddVideofaild" xml:space="preserve">
+    <value>فشل تحميل  الفديو يُرجى المحاولة مرة أخرى.</value>
+  </data>
+  <data name="OnlyVideoTypesAllowed" xml:space="preserve">
+    <value>يُسمح فقط بأنواع الفيديو (MP4، AVI، MOV، MKV).</value>
+  </data>
+  <data name="InvalidVideoExtension" xml:space="preserve">
+    <value>امتداد ملف الفيديو غير صالح. الصيغ المسموح بها: MP4، AVI، MOV، MKV.</value>
   </data>
 </root>
