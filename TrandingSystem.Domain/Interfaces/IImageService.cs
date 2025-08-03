@@ -2,8 +2,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http.Headers;
+using System.Net.Http.Json;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
+using TrandingSystem.Domain.Entities;
 
 namespace TrandingSystem.Domain.Interfaces
 {
@@ -11,5 +15,10 @@ namespace TrandingSystem.Domain.Interfaces
     {
         Task<string> SaveImageAsync(IFormFile imageFile, string existingFileName = null);
         Task<bool> DeleteImageAsync(string fileName);
+
+        Task<string> SaveVideoAsync(IFormFile videoFile);
+        Task<bool> DeleteVideoAsync(string videoFileName);
+
+
     }
 }

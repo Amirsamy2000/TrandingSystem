@@ -135,10 +135,28 @@
   <data name="FailureUpdate" xml:space="preserve">
     <value>An error occurred while Updating the video</value>
   </data>
-  <data name="InvalidImageExtension2" xml:space="preserve">
+  <data name="InvalidImageExtension" xml:space="preserve">
     <value>Invalid image file extension. Allowed: JPG, PNG, GIF, WebP.</value>
   </data>
   <data name="NotFoundVideo" xml:space="preserve">
     <value>Video not found.</value>
+  </data>
+  <data name="AddVideoSuccess" xml:space="preserve">
+    <value>New video added successfully.</value>
+  </data>
+  <data name="AddnewVideoFail" xml:space="preserve">
+    <value>Adding new video failed. Please try again.</value>
+  </data>
+  <data name="AddImageFail" xml:space="preserve">
+    <value>Image upload failed. Please try again.</value>
+  </data>
+  <data name="AddVideofaild" xml:space="preserve">
+    <value>Video upload failed. Please try again.</value>
+  </data>
+  <data name="OnlyVideoTypesAllowed" xml:space="preserve">
+    <value>Only video types are allowed (MP4, AVI, MOV, MKV).</value>
+  </data>
+  <data name="InvalidVideoExtension" xml:space="preserve">
+    <value>Invalid video file extension. Allowed: MP4, AVI, MOV, MKV.</value>
   </data>
 </root>

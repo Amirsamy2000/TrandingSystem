@@ -5,7 +5,8 @@ using System.Collections.Generic;
 
 namespace TrandingSystem.Domain.Entities
 {
-    public partial class Video
+    public  class Video
+
     {
         public int VideoId { get; set; }
 

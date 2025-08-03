@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 using TrandingSystem.Domain.Entities;
 using TrandingSystem.Domain.Interfaces;
+
 using TrandingSystem.Infrastructure.Data;
 
 namespace TrandingSystem.Infrastructure.Repositories
@@ -18,9 +15,11 @@ namespace TrandingSystem.Infrastructure.Repositories
         }
 
         // Add New Video
-        public Video Create(Video Object)
+        public Video Create(Video newVideo)
         {
-            throw new KeyNotFoundException();
+          _db.Videos.Add(newVideo);
+            return newVideo;
+
         }
 
         // delete video
