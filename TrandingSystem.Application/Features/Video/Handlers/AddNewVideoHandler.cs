@@ -65,7 +65,7 @@ namespace TrandingSystem.Application.Features.Video.Handlers
                 _unitOfWork.Videos.Create(newVideo);
                 await _unitOfWork.SaveChangesAsync();
                 return Response<bool>.SuccessResponse(true, _localizer["AddVideoSuccess"]);
-
+                // bre
 
 
 
