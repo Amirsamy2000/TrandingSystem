@@ -159,4 +159,10 @@
   <data name="InvalidVideoExtension" xml:space="preserve">
     <value>Invalid video file extension. Allowed: MP4, AVI, MOV, MKV.</value>
   </data>
+  <data name="Nagtivenumber" xml:space="preserve">
+    <value>Negative values are not allowed.</value>
+  </data>
+  <data name="InvaildCost" xml:space="preserve">
+    <value>Cost is not required for free videos.</value>
+  </data>
 </root>

@@ -117,55 +117,25 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Adduser" xml:space="preserve">
-    <value>اضافة مستخدم</value>
-  </data>
-  <data name="Add" xml:space="preserve">
-    <value>اضافة كورس</value>
-  </data>
-  <data name="user" xml:space="preserve">
-    <value>المستخدمون</value>
-  </data>
-  <data name="Addcommunty" xml:space="preserve">
-    <value>اضافة مجتمع</value>
-  </data>
-  <data name="Dashboard" xml:space="preserve">
-    <value>لوحة تحكم</value>
-  </data>
-  <data name="dispalycommunty" xml:space="preserve">
-    <value>المجتمعات</value>
-  </data>
-  <data name="dispalyuser" xml:space="preserve">
-    <value>اسم الموقع</value>
-  </data>
-  <data name="course" xml:space="preserve">
-    <value>الكورسات</value>
-  </data>
-  <data name="dispaly" xml:space="preserve">
-    <value>عرض الدورات</value>
-  </data>
-  <data name="communty" xml:space="preserve">
-    <value>المجتمعات</value>
-  </data>
-  <data name="Videos" xml:space="preserve">
-    <value>فديوهات</value>
-  </data>
-  <data name="AddVideo" xml:space="preserve">
-    <value>اضافة فديو</value>
-  </data>
-  <data name="DisplatVideo" xml:space="preserve">
-    <value>عرض الفديوهات</value>
-  </data>
-  <data name="ChoiceCourse" xml:space="preserve">
-    <value>من فضلك اختار الكورس</value>
-  </data>
-  <data name="btnShowAllVideo" xml:space="preserve">
-    <value>عرض الفديوهات</value>
-  </data>
-  <data name="AllOrder" xml:space="preserve">
-    <value>Enrollment Requests</value>
+  <data name="Acceted" xml:space="preserve">
+    <value>المقبولة</value>
   </data>
   <data name="Orders" xml:space="preserve">
     <value>طلبات</value>
+  </data>
+  <data name="OrdersRequest" xml:space="preserve">
+    <value>طلبات تسجيل الطلاب</value>
+  </data>
+  <data name="Pennding" xml:space="preserve">
+    <value>المعلقة</value>
+  </data>
+  <data name="Reject" xml:space="preserve">
+    <value>المرفوضة</value>
+  </data>
+  <data name="Total" xml:space="preserve">
+    <value>الاجمالي</value>
+  </data>
+  <data name="View" xml:space="preserve">
+    <value>عرض     </value>
   </data>
 </root>

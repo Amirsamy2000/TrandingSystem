@@ -3,9 +3,12 @@
 @using TrandingSystem.Controllers
 
 @inject IStringLocalizer<VideosController> Localizer
-@model IEnumerable<TrandingSystem.Application.Dtos.CourseDto>
-
-
+@model VideoAddedDto;
+@{
+    var courses =  TempData["Course"] as IEnumerable<CourseDto>;
+    // int x = 110;
+    // int o = 220;
+}
 <div class="row d-flex justify-content-center">
 
 
@@ -16,32 +19,36 @@
 
             </div>
             <div class="card-body">
-                <form asp-action="AddVideo" asp-controller="Videos" method="post" enctype="multipart/form-data">
+                <form enctype="multipart/form-data" id="AddNewVideoForm">
+                    @Html.AntiForgeryToken()
 
+                    <!-- رسائل التحقق العامة -->
+                    @* <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div> *@
 
                     @* Title *@
                     <div class="row mb-3">
-                        <label class="col-sm-4 col-form-label" for="basic-icon-default-fullname">@Localizer["TitleAR"]</label>
+                        <label class="col-sm-4 col-form-label"   >@Localizer["TitleAR"]</label>
                         <div class="col-sm-8">
-                            <div class="input-group input-group-merge speech-to-text">
-                                <input type="text" class="form-control" placeholder="Say it" aria-describedby="text-to-speech-addon">
-                                <span class="input-group-text" id="text-to-speech-addon">
-                                    <i class="bx bx-microphone cursor-pointer text-to-speech-toggle"></i>
-                                </span>
-                            </div>
+
+                            <input asp-for="TitleAR" id="InputTitleAR" class="form-control" oninput="GeneralRequiredFiled('InputTitleAR', '@Localizer["Required"]', 'TitleAR')" />
+                                <br />
+                                <span      name="TitleAR" id="TitleAR" class="text-danger"></span>
+                           
                         </div>
                     </div>
+
+
+                  
+
+
+
 
                     <div class="row mb-3">
                         <label class="col-sm-4 col-form-label" for="basic-icon-default-fullname">@Localizer["TitleEN"]</label>
                         <div class="col-sm-8">
-                            <div class="input-group input-group-merge speech-to-text">
-                                <input type="text" class="form-control" placeholder="Say it" aria-describedby="text-to-speech-addon">
-                                <span class="input-group-text" id="text-to-speech-addon">
-                                    <i class="bx bx-microphone cursor-pointer text-to-speech-toggle"></i>
-                                </span>
-                            </div>
-                        </div>
+                            <input asp-for="TitleEN" id="InputTitleEN" class="form-control" oninput="GeneralRequiredFiled('InputTitleEN', '@Localizer["Required"]', 'TitleEN')" />
+                                <span      name="TitleEN" id="TitleEN" class="text-danger"></span>
+                         </div>
                     </div>
                     @* end *@
 
@@ -49,25 +56,18 @@
                     <div class="row mb-3">
                         <label class="col-sm-4 form-label" for="basic-icon-default-message">@Localizer["DescriptionAR"]</label>
                         <div class="col-sm-8">
-                            <div class="input-group input-group-merge speech-to-text">
-                                <textarea class="form-control" placeholder="Say it" rows="3"></textarea>
-                                <span class="input-group-text" id="text-to-speech-addon">
-                                    <i class="bx bx-microphone cursor-pointer text-to-speech-toggle"></i>
-                                </span>
-                            </div>
-                        </div>
+                            <textarea asp-for="DescriptionAR" id="IputDescriptionAR" class="form-control" rows="3" oninput="GeneralRequiredFiled('IputDescriptionAR', '@Localizer["Required"]', 'DescriptionAR')"></textarea>
+                               
+                                <span name="DescriptionAR" class="text-danger" id="DescriptionAR"></span>
+                         </div>
                     </div>
 
                     <div class="row mb-3">
                         <label class="col-sm-4 form-label" for="basic-icon-default-message">@Localizer["DescriptionEN"]</label>
                         <div class="col-sm-8">
-                            <div class="input-group input-group-merge speech-to-text">
-                                <textarea class="form-control" placeholder="Say it" rows="3"></textarea>
-                                <span class="input-group-text" id="text-to-speech-addon">
-                                    <i class="bx bx-microphone cursor-pointer text-to-speech-toggle"></i>
-                                </span>
-                            </div>
-                        </div>
+                            <textarea asp-for="DescriptionEN" id="inputDescriptionEN" class="form-control" rows="3" oninput="GeneralRequiredFiled('inputDescriptionEN', '@Localizer["Required"]', 'DescriptionEN')"></textarea>
+                                <span name="DescriptionEN" class="text-danger" id="DescriptionEN"></span>
+                         </div>
                     </div>
                     @* end *@
 
@@ -75,21 +75,20 @@
                     <div class="row mb-3">
                         <label class="col-sm-4 form-label" for="basic-icon-default-message">@Localizer["Course"]</label>
                         <div class="col-sm-8">
-                            <div class="input-group input-group-merge speech-to-text">
-                                <select class="form-control">
-                                    <select  class="form-control">
-                                        @if (ViewBag.Courses != null)
+
+                            <select class="form-control" asp-for="CourseId" id="SelectCourseId">
+                                        @if (courses != null)
                                         {
-                                            foreach (var course in ViewBag.Courses as List<CourseDto>)
+                                            foreach (var course in courses  )
                                             {
-                                                <option value="">@course.TitleEN</option>
+                                                <option value="@course.CourseId">@course.TitleEN</option>
                                             }
                                         }
                                     </select>
-                                </select>
+                            <span  id="CourseId" class="text-danger"></span>
 
                             </div>
-                        </div>
+                     
                     </div>
                     @* end *@
 
@@ -97,13 +96,10 @@
                     <div class="row mb-3">
                         <label class="col-sm-4 col-form-label" for="basic-icon-default-company">@Localizer["ImageVideoUrl"]</label>
                         <div class="col-sm-8">
-                            <div class="input-group input-group-merge">
-                                <span id="basic-icon-default-company2" class="input-group-text">
-                                    <i class="bx bx-buildings"></i>
-                                </span>
-                                <input type="file" class="form-control" id="inputGroupFile02" accept="image/*">
-                            </div>
-                        </div>
+
+                            <input asp-for="ImageVideoUrl" id="InputImageVideoUrl" type="file" accept="image/*" class="form-control" onchange="validateImageFile('InputImageVideoUrl','ImageVideoUrl','@Localizer["AllowImageExtntion"]')" />
+                            <span name="ImageVideoUrl" id="ImageVideoUrl" class="text-danger"></span>
+                         </div>
                     </div>
                     @* end *@
 
@@ -111,43 +107,50 @@
                     <div class="row mb-3">
                         <label class="col-sm-4 col-form-label" for="basic-icon-default-company">@Localizer["VideoUrl"]</label>
                         <div class="col-sm-8">
-                            <div class="input-group input-group-merge">
-                                <span id="basic-icon-default-company2" class="input-group-text">
-                                    <i class="bx bx-buildings"></i>
-                                </span>
-                                <input type="file" class="form-control" id="inputGroupFile02" placeholder="don">
-                            </div>
-                        </div>
+                            <input asp-for="VideoUrl" type="file" id="inputVideoUrl" class="form-control" onchange="validateVideoFile('inputVideoUrl', 'VideoUrl','@Localizer["AllowVideoExtensiion"]')" />
+                                <span      id="VideoUrl" class="text-danger"></span>
+                         </div>
                     </div>
                     @* end *@
 
                     @* Paid And Active *@
                     <div class="row mb-3 d-flex justify-content-center ">
                         @* Active *@
-                        <div class="col-4">
-                            <div class="row  d-flex justify-content-center">
-                                <label class="col-sm-4 col-form-label " for="basic-icon-default-company">@Localizer["IsActive"]</label>
-                                <div class="col-sm-8">
+                        <div class="col-2">
+                            <div class="row ">
+                                <label class="col-sm-6 col-form-label " for="basic-icon-default-company">@Localizer["IsActive"]</label>
+                                <div class="col-sm-6">
                                     <div class="input-group input-group-merge mt-1">
 
-                                        <input class="form-check-input mt-1" type="checkbox" value="" id="checkIndeterminate" checked>
+                                        <input asp-for="IsActive" class="form-check-input" type="checkbox" />
                                     </div>
                                 </div>
                             </div>
                         </div>
                         @* end *@
-                        <div class="col-4">
-                            <div class="row d-flex justify-content-center">
-                                <label class="col-sm-4 col-form-label" for="basic-icon-default-company">@Localizer["IsPaid"]</label>
-                                <div class="col-sm-8">
+                        <div class="col-2">
+                            <div class="row  ">
+                                <label class="col-sm-6 col-form-label" for="basic-icon-default-company">@Localizer["IsPaid"]</label>
+                                <div class="col-sm-6">
                                     <div class="input-group input-group-merge">
 
-                                        <input class="form-check-input mt-1" type="checkbox" value="" id="checkIndeterminate">
+                                        <input asp-for="IsPaid" class="form-check-input" type="checkbox" id="Ispaid" onchange="handleIsPaidChangeInAddNewVideo('Ispaid','Costadd')" />
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        @* notify *@
+                        <div class="col-8">
+                            <div class="row ">
+                                <label class="col-sm-8 col-form-label" for="basic-icon-default-company">@Localizer["notfiy"]</label>
+                                <div class="col-sm-4">
+                                    <div class="input-group input-group-merge">
 
+                                        <input asp-for="notfiy" class="form-check-input" type="checkbox" id="notfiy" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     @* end *@
 
@@ -156,22 +159,32 @@
                     <div class="row mb-3">
                         <label class="col-sm-4 col-form-label" for="basic-icon-default-email">@Localizer["Cost"]</label>
                         <div class="col-sm-8">
-                            <div class="input-group input-group-merge">
-                                <span class="input-group-text">$</span>
-                                <input type="text" class="form-control" placeholder="00" aria-label="Amount (to the nearest dollar)" value="0">
-                                <span class="input-group-text">.00</span>
+                                
+                                <input asp-for="Cost" type="number" class="form-control" id="Costadd" value="0"
+                                   oninput="validateCost('@Localizer["InvaildCost"]','Ispaid','Costadd','spanCost','@Localizer["Nagtivenumber"]','@Localizer["CostForPaid"]')" />
+                                <span id="spanCost" class="text-danger"></span>
+                            <span name="Cost" id="spanCost" class="text-danger"></span>
+
                             </div>
-                        </div>
+                           
+
+                        
                     </div>
                     @* end *@
 
                     <div class="row justify-content-end">
                         <div class="col-sm-8">
-                            <button type="submit" class="btn btn-primary pl-3 pr-3">@Localizer["Send"]</button>
+                            <button type="button" onclick="SubmitAddNewVideo()" class="btn btn-primary px-4"> @Localizer["Send"]</button>
                         </div>
                     </div>
                 </form>
+               
             </div>
+          
         </div>
     </div>
 </div>
+
+  <script>
+
+  </script>

@@ -5,6 +5,7 @@ using TradingSystem.Application.Common.Response;
 using TrandingSystem.Application.Dtos;
 using TrandingSystem.Application.Features.Video.Queries;
 using TrandingSystem.Domain.Interfaces;
+using TrandingSystem.Infrastructure.Constants;
 
 namespace TrandingSystem.Application.Features.Video.Handlers
 {
@@ -30,7 +31,22 @@ namespace TrandingSystem.Application.Features.Video.Handlers
                         : "Sorry, this video does not exist or may have already been deleted.";
                     return Response<ViedoUpdateDto>.ErrorResponse(NotFountMessage);
                 }
-                var videoDto = _mapper.Map<ViedoUpdateDto>(video);
+                var videoDto = new ViedoUpdateDto()
+                {
+                    TitleAR = video.TitleAR,
+                    TitleEN = video.TitleEN,
+                    DescriptionAR = video.DescriptionAR,
+                    DescriptionEN = video.DescriptionEN,
+                    VideoId = video.VideoId,
+                    Cost = video.Cost ?? 0,
+                    IsActive = video.IsActive ?? false,
+                    IsPaid = video.IsPaid ?? false,
+                    CreadteBy = video.CreadteBy,
+                    CreatedAt = video.CreatedAt ?? DateTime.Now,
+                    CourseId = video.CourseId,
+                    LibraryVideoUrl = BunnaySetting.libraryId,
+                    VideoUrl = video.VideoUrl,
+                };
 
                 return Response<ViedoUpdateDto>.SuccessResponse(videoDto);
             }

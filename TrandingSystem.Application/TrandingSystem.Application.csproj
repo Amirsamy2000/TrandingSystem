@@ -9,6 +9,7 @@
   <ItemGroup>
     <Folder Include="Features\Category\Commands\" />
     <Folder Include="Features\Users\Queries\" />
+    <Folder Include="Validators\" />
   </ItemGroup>
 
   <ItemGroup>

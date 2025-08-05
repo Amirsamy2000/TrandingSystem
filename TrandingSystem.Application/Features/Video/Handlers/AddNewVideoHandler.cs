@@ -15,11 +15,11 @@ namespace TrandingSystem.Application.Features.Video.Handlers
     public class AddNewVideoHandler : IRequestHandler<AddNewVideoCommand, Response<bool>>
     {
       private readonly IUnitOfWork _unitOfWork;
-      private readonly IImageService _imageService;
+      private readonly IFileService _imageService;
      private readonly IStringLocalizer<ValidationMessages> _localizer;
      private readonly IMapper _mapper;
 
-        public AddNewVideoHandler(IUnitOfWork unitOfWork, IImageService imageService ,IStringLocalizer<ValidationMessages>localizer,IMapper mapper)
+        public AddNewVideoHandler(IUnitOfWork unitOfWork, IFileService imageService ,IStringLocalizer<ValidationMessages>localizer,IMapper mapper)
         {
             _unitOfWork = unitOfWork;
             _imageService = imageService;
@@ -32,7 +32,7 @@ namespace TrandingSystem.Application.Features.Video.Handlers
             try
             {
                 // Save If Image video
-                string imageUrl=  _imageService.SaveVideoAsync(request.VideoAddedDto.ImageVideoUrl).Result;
+                string imageUrl=  _imageService.SaveImageAsync(request.VideoAddedDto.ImageVideoUrl).Result;
                 if (string.IsNullOrEmpty(imageUrl))
                 {
                     return Response<bool>.ErrorResponse(_localizer["AddImageFail"]);
@@ -56,11 +56,11 @@ namespace TrandingSystem.Application.Features.Video.Handlers
                     IsActive = request.VideoAddedDto.IsActive,
                     IsPaid = request.VideoAddedDto.IsPaid,
                     ImageVideoUrl = imageUrl,
-                    CreadteBy=request.UserId,
+                    VideoUrl = videoUrl,
+                    CreadteBy =request.UserId,
                     CreatedAt=DateTime.Now,
-
-
                 };
+
                 // Add Video to Database
                 _unitOfWork.Videos.Create(newVideo);
                 await _unitOfWork.SaveChangesAsync();
