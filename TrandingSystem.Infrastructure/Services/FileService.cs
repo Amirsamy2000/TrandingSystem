@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System;
 using System.Collections.Generic;
@@ -8,12 +9,13 @@ using System.Net.Http.Json;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using TrandingSystem.Domain.Entities;
 using TrandingSystem.Domain.Interfaces;
 using TrandingSystem.Infrastructure.Constants;
 
 namespace TrandingSystem.Infrastructure.Services
 {
-    public class ImageService : IImageService
+    public class FileService : IFileService
     {
         private readonly string _imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/UploadVideos");
 
@@ -28,10 +30,34 @@ namespace TrandingSystem.Infrastructure.Services
             return false;
         }
 
-        public Task<bool> DeleteVideoAsync(string videoFileName)
+        public async Task<bool> DeleteVideoAsync(string VideoId)
         {
-            throw new NotImplementedException();
+            var url = $"https://video.bunnycdn.com/library/{BunnaySetting.libraryId}/videos/{VideoId}";
+            using var client = new HttpClient();
+            client.DefaultRequestHeaders.Add("AccessKey", BunnaySetting.apiKey);
+            var response = await client.DeleteAsync(url);
+            return   response.IsSuccessStatusCode;
         }
+
+        public string GenerateBunnyToken(string libraryId, string videoId, string signingKey)
+        {
+            var expires = DateTimeOffset.UtcNow.AddMinutes(60).ToUnixTimeSeconds();
+
+            // التوقيع الصحيح: key + videoId + expires
+            var payload = signingKey + videoId + expires;
+
+            using var sha256 = System.Security.Cryptography.SHA256.Create();
+            var hash = sha256.ComputeHash(System.Text.Encoding.UTF8.GetBytes(payload));
+            var token = BitConverter.ToString(hash).Replace("-", "").ToLower();
+
+            // رابط المشغل الرسمي من Bunny
+            var url = $"https://iframe.mediadelivery.net/embed/{libraryId}/{videoId}" +
+                      $"?token={token}&expires={expires}" +
+                      $"&autoplay=true&loop=false&muted=false&preload=false&responsive=true";
+
+            return url;
+        }
+
 
         public async Task<string> SaveImageAsync(IFormFile imageFile, string existingFileName = null)
         {
@@ -69,6 +95,7 @@ namespace TrandingSystem.Infrastructure.Services
                 var videoTitle = Path.GetFileNameWithoutExtension(videoFile.FileName);
 
                 using var client = new HttpClient();
+                client.Timeout = TimeSpan.FromMinutes(10);
                 client.DefaultRequestHeaders.Add("AccessKey", apiKey);
 
                 // Step 1: Create video entry
@@ -107,5 +134,8 @@ namespace TrandingSystem.Infrastructure.Services
 
             }
         }
+
+
+
     }
 }

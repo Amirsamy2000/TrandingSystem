@@ -5,17 +5,18 @@ using TradingSystem.Application.Common.Response;
 using TrandingSystem.Application.Features.Video.Commands;
 using TrandingSystem.Domain.Interfaces;
 using TrandingSystem.Domain.Entities;
+using TrandingSystem.Application.Resources;
 
 namespace TrandingSystem.Application.Features.Video.Handlers
 {
     public class UpdateVideoHandler : IRequestHandler<UpdateVideoCommand, Response<bool>>
     {
         private readonly IUnitOfWork _unitofwork;
-        private readonly IStringLocalizer<UpdateVideoHandler> _localizer;
-        private readonly IImageService _imageService;
+        private readonly IStringLocalizer<ValidationMessages> _localizer;
+        private readonly IFileService _imageService;
         private readonly IMapper _mapper;
 
-        public UpdateVideoHandler(IUnitOfWork unitOfWork, IStringLocalizer<UpdateVideoHandler> localizer, IImageService imageService,IMapper mapper)
+        public UpdateVideoHandler(IUnitOfWork unitOfWork, IStringLocalizer<ValidationMessages> localizer, IFileService imageService,IMapper mapper)
         {
             _unitofwork = unitOfWork;
             _localizer = localizer;
@@ -33,17 +34,23 @@ namespace TrandingSystem.Application.Features.Video.Handlers
                     return Response<bool>.ErrorResponse(_localizer["NotFound"]);
                 }
 
-                var UpdatedVideo= _mapper.Map(request.viedoUpdateDto, video);
-                UpdatedVideo.VideoUrl = video.VideoUrl;
-                UpdatedVideo.ImageVideoUrl = video.ImageVideoUrl;
-                // Ckeck Addmin Update Image Or Not 
+                video.TitleAR = request.viedoUpdateDto.TitleAR;
+                video.TitleEN = request.viedoUpdateDto.TitleEN;
+                video.DescriptionAR = request.viedoUpdateDto.DescriptionAR;
+                video.DescriptionEN = request.viedoUpdateDto.DescriptionEN;
+                video.IsPaid = request.viedoUpdateDto.IsPaid;
+                video.Cost = request.viedoUpdateDto.Cost;
+                video.IsActive = request.viedoUpdateDto.IsActive;
+                
+
 
 
                 if (request.viedoUpdateDto.ImageVideoUrl != null)
                 {
                     // save new image then delete old image
-                    string UpdatedUrlImageOfVideo = await _imageService.SaveImageAsync(request.viedoUpdateDto.ImageVideoUrl);
-                    UpdatedVideo.ImageVideoUrl = UpdatedUrlImageOfVideo;
+                    string oldImageUrl = video.ImageVideoUrl;
+                    string UpdatedUrlImageOfVideo = await _imageService.SaveImageAsync(request.viedoUpdateDto.ImageVideoUrl, oldImageUrl);
+                   video.ImageVideoUrl = UpdatedUrlImageOfVideo;
 
                 }
                 _unitofwork.SaveChangesAsync();

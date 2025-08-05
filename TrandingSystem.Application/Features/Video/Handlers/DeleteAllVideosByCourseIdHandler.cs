@@ -15,9 +15,11 @@ namespace TrandingSystem.Application.Features.Video.Handlers
     public class DeleteAllVideosByCourseIdHandler : IRequestHandler<DeleteAllVideosByCourseIdCommand, Response<bool>>
     {
         private readonly IUnitOfWork _unitOfWork;
-        public DeleteAllVideosByCourseIdHandler(IUnitOfWork unitOfWork)
+        private readonly IFileService _fileservice;
+        public DeleteAllVideosByCourseIdHandler(IUnitOfWork unitOfWork, IFileService fileservice)
         {
             _unitOfWork = unitOfWork;
+            _fileservice = fileservice;
         }
 
         public async Task<Response<bool>> Handle(DeleteAllVideosByCourseIdCommand request, CancellationToken cancellationToken)
@@ -29,6 +31,12 @@ namespace TrandingSystem.Application.Features.Video.Handlers
                 {
                     var notFoundMsg = request.Culture == "ar" ? "لا توجد فيديوهات لحذفها" : "No videos to delete";
                     return Response<bool>.ErrorResponse(notFoundMsg, status: System.Net.HttpStatusCode.NotFound);
+
+                }
+                foreach(var video in AllVideos)
+                {
+                    await _fileservice.DeleteVideoAsync(video.VideoUrl);
+                    await  _fileservice.DeleteImageAsync(video.VideoUrl);
 
                 }
                 _unitOfWork.Videos.DeleteAllVideosByCourseId(AllVideos.ToList());

@@ -17,13 +17,13 @@
 
                     <!-- رسائل التحقق العامة -->
                     <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
-                    
+
                     <!-- Title AR -->
                     <div class="row mb-3">
                         <label class="col-sm-4 col-form-label">@Localizer["TitleAR"]</label>
                         <div class="col-sm-8">
-                            <input asp-for="TitleAR" class="form-control" />
-                            <span asp-validation-for="TitleAR" class="text-danger"></span>
+                            <input asp-for="TitleAR" class="form-control" id="InputTitleAR" oninput="GeneralRequiredFiled('InputTitleAR', '@Localizer["Required"]', 'TitleAR')" />
+                            <span id="TitleAR"  class="text-danger"></span>
                         </div>
                     </div>
 
@@ -31,8 +31,8 @@
                     <div class="row mb-3">
                         <label class="col-sm-4 col-form-label">@Localizer["TitleEN"]</label>
                         <div class="col-sm-8">
-                            <input asp-for="TitleEN" class="form-control" />
-                            <span asp-validation-for="TitleEN" class="text-danger"></span>
+                            <input asp-for="TitleEN" class="form-control" id="InputTitleEN" oninput="GeneralRequiredFiled('InputTitleEN', '@Localizer["Required"]', 'TitleEN')" />
+                            <span id="TitleEN" class="text-danger"></span>
                         </div>
                     </div>
 
@@ -40,8 +40,8 @@
                     <div class="row mb-3">
                         <label class="col-sm-4 col-form-label">@Localizer["DescriptionAR"]</label>
                         <div class="col-sm-8">
-                            <textarea asp-for="DescriptionAR" class="form-control" rows="3"></textarea>
-                            <span asp-validation-for="DescriptionAR" class="text-danger"></span>
+                            <textarea asp-for="DescriptionAR" class="form-control" id="IputDescriptionAR" rows="3" oninput="GeneralRequiredFiled('IputDescriptionAR', '@Localizer["Required"]', 'DescriptionAR')"></textarea>
+                            <span id="DescriptionAR" class="text-danger"></span>
                         </div>
                     </div>
 
@@ -49,8 +49,8 @@
                     <div class="row mb-3">
                         <label class="col-sm-4 col-form-label">@Localizer["DescriptionEN"]</label>
                         <div class="col-sm-8">
-                            <textarea asp-for="DescriptionEN" class="form-control" rows="3"></textarea>
-                            <span asp-validation-for="DescriptionEN" class="text-danger"></span>
+                            <textarea asp-for="DescriptionEN" class="form-control" id="inputDescriptionEN" rows="3" oninput="GeneralRequiredFiled('inputDescriptionEN', '@Localizer["Required"]', 'DescriptionEN')"></textarea>
+                            <span id="DescriptionEN" class="text-danger"></span>
                         </div>
                     </div>
 
@@ -58,16 +58,25 @@
                     <div class="row mb-3">
                         <label class="col-sm-4 col-form-label">@Localizer["Course"]</label>
                         <div class="col-sm-8">
-                            <select asp-for="CourseId" class="form-control">
+                            <select asp-for="CourseId" class="form-control" id="SelectCourseId">
                                 @if (ViewBag.Courses != null)
                                 {
-                                    foreach (var course in ViewBag.Courses as List<CourseDto>)
+                                    foreach (var course in (List<CourseDto>)ViewBag.Courses)
                                     {
-                                        <option value="">@course.TitleEN</option>
+                                        if ((int)ViewData["CourseId"] == course.CourseId)
+                                        {
+                                            <option value="@course.CourseId" selected>@course.TitleEN</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@course.CourseId" >@course.TitleEN</option>
+
+                                        }
                                     }
-                                }
-                            </select>
-                            <span asp-validation-for="CourseId" class="text-danger"></span>
+    }
+</select>
+
+                            <span id="CourseId" class="text-danger"></span>
                         </div>
                     </div>
 
@@ -75,8 +84,8 @@
                     <div class="row mb-3">
                         <label class="col-sm-4 col-form-label">@Localizer["ImageVideoUrl"]</label>
                         <div class="col-sm-8">
-                            <input asp-for="ImageVideoUrl" type="file" accept="image/*" class="form-control" />
-                            <span asp-validation-for="ImageVideoUrl" class="text-danger"></span>
+                            <input asp-for="ImageVideoUrl" type="file" accept="image/*" id="InputImageVideoUrl" class="form-control" onchange="validateImageFile('InputImageVideoUrl','ImageVideoUrl','@Localizer["AllowImageExtntion"]')" />
+                            <span id="ImageVideoUrl" class="text-danger"></span>
                         </div>
                     </div>
 
@@ -95,7 +104,7 @@
                         <!-- IsPaid -->
                         <div class="col-4">
                             <div class="form-check">
-                                <input asp-for="IsPaid" class="form-check-input" type="checkbox" id="Ispaid" onchange="handleIsPaidChange(@Model.Cost)" />
+                                <input asp-for="IsPaid" class="form-check-input" type="checkbox" id="Ispaid" onchange="handleIsPaidChangeInAddNewVideo('Ispaid','Cost')" />
                                 <label class="form-check-label" asp-for="IsPaid">@Localizer["IsPaid"]</label>
                             </div>
                         </div>
@@ -107,10 +116,10 @@
                         <div class="col-sm-8">
                             <div class="input-group">
                                 <span class="input-group-text">$</span>
-                                <input asp-for="Cost" class="form-control" id="Cost" />
+                                <input asp-for="Cost" class="form-control" id="Cost" oninput="validateCost('@Localizer["InvaildCost"]','Ispaid','Cost','spanCost','@Localizer["Nagtivenumber"]','@Localizer["CostForPaid"]')" />
                                 <span class="input-group-text">.00</span>
                             </div>
-                            <span asp-validation-for="Cost" class="text-danger"></span>
+                            <span id="spanCost" class="text-danger"></span>
                         </div>
                     </div>
                     <!-- Hidden Fields -->

@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Required" xml:space="preserve">
-    <value>This field is required</value>
+    <value>هذا الحقل مطلوب</value>
   </data>
   <data name="OnlyImageTypesAllowed" xml:space="preserve">
     <value>يُسمح فقط بأنواع الصور (JPG، PNG، GIF، WebP).</value>
@@ -158,5 +158,11 @@
   </data>
   <data name="InvalidVideoExtension" xml:space="preserve">
     <value>امتداد ملف الفيديو غير صالح. الصيغ المسموح بها: MP4، AVI، MOV، MKV.</value>
+  </data>
+  <data name="Nagtivenumber" xml:space="preserve">
+    <value>لا يُسمح بإدخال أرقام سالبة</value>
+  </data>
+  <data name="InvaildCost" xml:space="preserve">
+    <value>هذا الفيديو مجاني، لا تدخل أي تكلفة.</value>
   </data>
 </root>
