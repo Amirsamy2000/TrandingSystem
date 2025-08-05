@@ -4,8 +4,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Diagnostics;
-using TrandingSystem.Infrastructure.Data;
+using System.Security.Claims;
+using TrandingSystem.Application.Features.Courses.Queries;
 using TrandingSystem.Domain.Entities;
+using TrandingSystem.Infrastructure.Data;
+
+using AutoMapper;
+using MediatR;
 
 namespace WebApplication1.Controllers
 {
@@ -13,11 +18,15 @@ namespace WebApplication1.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly db23617Context _db;
+        private readonly IMediator _mediator;
+        private readonly IMapper _mapper;
 
-        public HomeController(ILogger<HomeController> logger,     db23617Context options)
+        public HomeController(ILogger<HomeController> logger,     db23617Context options, IMediator mediator, IMapper mapper)
         {
             _logger = logger;
             _db = options;
+            _mediator = mediator;
+            _mapper = mapper;
         }
 
         public IActionResult Index()
@@ -49,9 +58,10 @@ namespace WebApplication1.Controllers
             return View();
         }
 
-        public IActionResult Courses()
+        public async Task<IActionResult> Courses()
         {
-            return View();
+            var result = await _mediator.Send(new GetAllCoursesQuery());
+            return View(result.Data);
         }
 
         public IActionResult CoursesDetails()
