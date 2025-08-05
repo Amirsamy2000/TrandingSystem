@@ -46,9 +46,7 @@ namespace TrandingSystem.Infrastructure.Data
         public virtual DbSet<NotificationSetting> NotificationSettings { get; set; }
 
         public virtual DbSet<NotificationsQueue> NotificationsQueues { get; set; }
-
-        public virtual DbSet<Order> Orders { get; set; }
-
+        
         public virtual DbSet<UserSession> UserSessions { get; set; }
 
         public virtual DbSet<UsersConnection> UsersConnections { get; set; }
@@ -72,7 +70,6 @@ namespace TrandingSystem.Infrastructure.Data
             modelBuilder.ApplyConfiguration(new Configurations.NotificationChannelConfiguration());
             modelBuilder.ApplyConfiguration(new Configurations.NotificationSettingConfiguration());
             modelBuilder.ApplyConfiguration(new Configurations.NotificationsQueueConfiguration());
-            modelBuilder.ApplyConfiguration(new Configurations.OrderConfiguration());
             modelBuilder.ApplyConfiguration(new Configurations.RoleConfiguration());
             modelBuilder.ApplyConfiguration(new Configurations.UserConfiguration());
             modelBuilder.ApplyConfiguration(new Configurations.UserSessionConfiguration());

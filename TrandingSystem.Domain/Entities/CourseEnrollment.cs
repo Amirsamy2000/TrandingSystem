@@ -17,6 +17,12 @@ namespace TrandingSystem.Domain.Entities
 
         public bool IsConfirmed { get; set; }
 
+        // Merged fields from Order:
+        public string ReceiptImagePath { get; set; }
+        public byte? OrderStatus { get; set; }   // nullable to allow missing data
+        public int? ConfirmedBy { get; set; }
+        public DateTime? CreatedAt { get; set; } // preserves the original Order.CreatedAt
+
         public virtual Course Course { get; set; }
 
         public virtual User User { get; set; }

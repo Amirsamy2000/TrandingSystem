@@ -48,8 +48,6 @@ namespace TrandingSystem.Domain.Entities
 
         public virtual ICollection<LiveSession> LiveSessions { get; set; } = new List<LiveSession>();
 
-        public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
-
         public virtual ICollection<Video> Videos { get; set; } = new List<Video>();
     }
 }

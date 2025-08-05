@@ -16,6 +16,23 @@ namespace TrandingSystem.Infrastructure.Data.Configurations
 
             entity.Property(e => e.EnrollmentDate).HasColumnType("datetime");
 
+            // New mappings
+            entity.Property(e => e.ReceiptImagePath)
+                  .HasMaxLength(500)
+                  .IsUnicode(false)
+                  .IsRequired(false);
+
+            entity.Property(e => e.OrderStatus)
+                  .HasColumnType("tinyint")
+                  .IsRequired(false);
+
+            entity.Property(e => e.ConfirmedBy)
+                  .IsRequired(false);
+
+            entity.Property(e => e.CreatedAt)
+                  .HasColumnType("datetime")
+                  .IsRequired(false);
+
             entity.HasOne(d => d.Course).WithMany(p => p.CourseEnrollments)
                 .HasForeignKey(d => d.CourseId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
@@ -26,7 +43,6 @@ namespace TrandingSystem.Infrastructure.Data.Configurations
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__CourseEnr__UserI__662B2B3B");
 
- 
         }
 
      }

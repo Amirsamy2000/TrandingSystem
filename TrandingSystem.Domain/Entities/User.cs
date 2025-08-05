@@ -34,8 +34,6 @@ public partial class User : IdentityUser<int>
 
     public virtual ICollection<NotificationsQueue> NotificationsQueues { get; set; } = new List<NotificationsQueue>();
 
-    public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
-
     public virtual Role Role { get; set; }
 
     public virtual ICollection<UserSession> UserSessions { get; set; } = new List<UserSession>();
