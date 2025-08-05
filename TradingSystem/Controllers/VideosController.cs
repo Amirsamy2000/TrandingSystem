@@ -10,8 +10,9 @@ using TrandingSystem.Application.Dtos;
 using TrandingSystem.Application.Features.Courses.Commands;
 using TrandingSystem.Application.Features.Courses.Queries;
 using TrandingSystem.Application.Features.Video.Commands;
+using TrandingSystem.Application.Features.Video.Handlers;
 using TrandingSystem.Application.Features.Video.Queries;
-using TrandingSystem.Application.Validators;
+//using TrandingSystem.Application.Validators;
 using TrandingSystem.Domain.Entities;
 
 
@@ -20,28 +21,31 @@ namespace TrandingSystem.Controllers
     public class VideosController : Controller
     {
         private readonly IMediator _mediator;
-        private readonly IValidator<ViedoUpdateDto> _validator;
+      //  private readonly IValidator<ViedoUpdateDto> _validator;
+        //private readonly IValidator<VideoAddedDto> _validator2;
 
-      
-        public VideosController(IMediator mediator, IValidator<ViedoUpdateDto> validator)
+
+        public VideosController(IMediator mediator)
         {
             _mediator = mediator;
-            _validator = validator;
+           // _validator = validator;
+            
         }
         // this View For Display All Videos For Course Use CourseId
         public IActionResult Videos(CancellationToken cancellationToken, int CourseId = 1)
         {
             var culture = Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName;
             //@ViewData["Master"] = @locaizer[""]
-            var response= _mediator.Send(new GetVideosByCourseIdQuery(1, culture), cancellationToken);
-            if (!response.Result.Success)
+            var response= _mediator.Send(new GetVideosByCourseIdQuery(CourseId, culture), cancellationToken).Result;
+            if (!response.Success)
             {
                // return to Erro Page
             }
-          //  ViewData["CourseName"] = response.Result.Data2.ToString();
+            //  ViewData["CourseName"] = response.Result.Data2.ToString();
 
-
-            return View(response.Result.Data);
+            ViewBag.CourseId = CourseId;
+            ViewBag.CourseName = response.Message;
+            return View(response.Data);
         }
 
 
@@ -57,15 +61,16 @@ namespace TrandingSystem.Controllers
 
             int userId = int.Parse(userIdClaim.Value);
 
-            var Rescourses =  _mediator.Send(new GetAllCoursesQuery { UserId=userId}).Result;
+            var Rescourses = _mediator.Send(new GetAllCoursesQuery { UserId = userId }).Result;
+
+            TempData["Course"] = Rescourses.Data;
 
 
 
-            ViewBag.Courses = Rescourses;
-
-            return PartialView("_PartialAddVideo", Rescourses.Data);
+            return PartialView("_PartialAddVideo");
         }
 
+        [HttpGet]
         public IActionResult PartialViewUpdateNewVideo(int VideId ,int CourseId=0)
         {
             var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
@@ -89,16 +94,16 @@ namespace TrandingSystem.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public  async Task<IActionResult> SubmitUpdateVideo(ViedoUpdateDto UpdateedVideo)
+        public  async Task<IActionResult> SubmitUpdateVideo([FromForm] ViedoUpdateDto UpdateedVideo)
         {
-            var validationResult = await _validator.ValidateAsync(UpdateedVideo);
-            if (!validationResult.IsValid)
-            {
-                foreach (var error in validationResult.Errors)
-                    ModelState.AddModelError(error.PropertyName, error.ErrorMessage);
+            //var validationResult = await _validator.ValidateAsync(UpdateedVideo);
+            //if (!validationResult.IsValid)
+            //{
+            //    foreach (var error in validationResult.Errors)
+            //        ModelState.AddModelError(error.PropertyName, error.ErrorMessage);
 
-                return PartialView("_PartialUpdateVideo", UpdateedVideo);
-            }
+            //    return PartialView("_PartialUpdateVideo", UpdateedVideo);
+            //}
             var response = _mediator.Send(new UpdateVideoCommand(UpdateedVideo, Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName)).Result;
 
             return Json(response);
@@ -108,8 +113,38 @@ namespace TrandingSystem.Controllers
 
         public IActionResult AddNewVideo(int CourseId = 0)
         {
-            
+            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
+
+            if (userIdClaim == null)
+            {
+                return Unauthorized("User ID not found in token.");
+            }
+
+            int userId = int.Parse(userIdClaim.Value);
+
+            var Rescourses = _mediator.Send(new GetAllCoursesQuery { UserId = userId }).Result;
+
+            TempData["Course"] = Rescourses.Data;
             return View();
+        }
+
+        // Submit Add New Video
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public async Task<IActionResult> SubmitAddNewVideo(  VideoAddedDto newVideo)
+        {
+            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
+
+            if (userIdClaim == null)
+            {
+                return Unauthorized("User ID not found in token.");
+            }
+
+            int userId = int.Parse(userIdClaim.Value);
+          
+           var response = _mediator.Send(new AddNewVideoCommand(newVideo, userId)).Result;
+
+            return Json(response);
         }
 
         [HttpPost]
@@ -149,11 +184,9 @@ namespace TrandingSystem.Controllers
         [HttpGet]
         public IActionResult DisplayVideo(int VideoId)
         {
-           
-            return Json(Response<string>.SuccessResponse(
-                         message: "Failed to block the video.",
-                         data: "https://www.youtube.com/embed/lUVepezRfRw?list=PLc50qE8XmwQSRmaVLJxje3tEnU2ROGK_x"
-                     ));
+            var response = _mediator.Send(new GetSingnedUrlVideoQuery(VideoId)).Result;
+          
+            return Json(response);
 
         }
 

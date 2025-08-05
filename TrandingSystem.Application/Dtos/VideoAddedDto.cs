@@ -20,11 +20,12 @@ namespace TrandingSystem.Application.Dtos
         public decimal Cost { get; set; } = 0;
 
         public DateTime CreatedAt { get; set; }
-        public int CreadteBy { get; set; }
+        public int? CreadteBy { get; set; }
 
         public bool IsActive { get; set; }
         public IFormFile ImageVideoUrl { get; set; }
 
         public IFormFile VideoUrl { get; set; }
+        public bool notfiy { set; get; }
     }
 }

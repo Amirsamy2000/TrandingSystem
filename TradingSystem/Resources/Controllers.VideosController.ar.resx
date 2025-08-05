@@ -162,4 +162,40 @@
   <data name="UpdateNewVideo" xml:space="preserve">
     <value>تعديل بيانات الفديو</value>
   </data>
+  <data name="notfiy" xml:space="preserve">
+    <value>إشعار كل المشتركين في الكورس</value>
+  </data>
+  <data name="Required" xml:space="preserve">
+    <value>هذا الحقل مطلوب</value>
+  </data>
+  <data name="AllowImageExtntion" xml:space="preserve">
+    <value>امتداد الصورة غير صالح. الامتدادات المسموح بها: JPG، PNG، GIF، WebP.</value>
+  </data>
+  <data name="AllowVideoExtensiion" xml:space="preserve">
+    <value>امتداد ملف الفيديو غير صالح. الصيغ المسموح بها: MP4، AVI، MOV، MKV.</value>
+  </data>
+  <data name="Nagtivenumber" xml:space="preserve">
+    <value>لا يُسمح بإدخال أرقام سالبة</value>
+  </data>
+  <data name="InvaildCost" xml:space="preserve">
+    <value>هذا الفيديو مجاني، لا تدخل أي تكلفة.</value>
+  </data>
+  <data name="TitleEN1" xml:space="preserve">
+    <value>العنوان  (عربي)</value>
+  </data>
+  <data name="IspaidCost" xml:space="preserve">
+    <value>يحب ادخال تكلفة الفديو</value>
+  </data>
+  <data name="CostForPaid" xml:space="preserve">
+    <value>يجب ادخال تكلفة الفديو</value>
+  </data>
+  <data name="VideoSubmitError" xml:space="preserve">
+    <value>خطأ أثناء تنفيذ العملية</value>
+  </data>
+  <data name="NoVideosMessage" xml:space="preserve">
+    <value>لا توجد فديوهات لهذة الكورس </value>
+  </data>
+  <data name="NoVideosMessage1" xml:space="preserve">
+    <value>قم بإضافة فيديوهات جديدة</value>
+  </data>
 </root>

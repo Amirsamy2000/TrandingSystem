@@ -1,4 +1,5 @@
 using FluentValidation;
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc.Razor;
@@ -6,7 +7,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using System.Globalization;
 using TrandingSystem.Application.Dtos;
-using TrandingSystem.Application.Validators;
 using TrandingSystem.Domain.Entities;
 using TrandingSystem.Domain.Interfaces;
 using TrandingSystem.Infrastructure.Data;
@@ -28,7 +28,7 @@ builder.Services.AddScoped<ICourseRepository, CourseRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-builder.Services.AddScoped<IImageService, ImageService>();
+builder.Services.AddScoped<IFileService, FileService>();
 //builder.Services.AddScoped<IWasabiUploader, WasabiUploader>();
 // Identity مع Roles و EF Store
 builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true)
@@ -43,8 +43,10 @@ builder.Services.AddControllersWithViews()
     .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
     .AddDataAnnotationsLocalization();
 
+//builder.Services.AddTransient<IValidator<VideoAddedDto>, VideoAddDtoVaildator>();
 //builder.Services.AddTransient<IValidator<ViedoUpdateDto>, VideoUpdateDtoValidator>();
-builder.Services.AddValidatorsFromAssemblyContaining<VideoUpdateDtoValidator>();
+//builder.Services.AddValidatorsFromAssemblyContaining<VideoUpdateDtoValidator>();
+
 
 builder.Services.AddHttpContextAccessor();
 
@@ -64,6 +66,17 @@ builder.Services.Configure<SecurityStampValidatorOptions>(options =>
     options.ValidationInterval = TimeSpan.Zero;
 });
 
+// For Expend Size For Request
+builder.Services.Configure<FormOptions>(options =>
+{
+    options.MultipartBodyLengthLimit = 500_000_000; // مثلاً 500 ميجا
+});
+
+// Kestrel
+builder.WebHost.ConfigureKestrel(serverOptions =>
+{
+    serverOptions.Limits.MaxRequestBodySize = 500_000_000; // 500 ميجا
+});
 var app = builder.Build();
 
 // Configure Middleware

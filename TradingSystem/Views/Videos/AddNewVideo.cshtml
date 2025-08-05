@@ -1,4 +1,6 @@
-﻿
+﻿@using Microsoft.Extensions.Localization
+@using TrandingSystem.Controllers
+@inject IStringLocalizer<VideosController> Localizer
 @{
     ViewData["Title"] = "AddNewVideo";
     Layout = "~/Views/Shared/_LayoutDasbord.cshtml";
@@ -6,8 +8,7 @@
 
 @await Html.PartialAsync("_PartialAddVideo")
 
-<button onclick="sweat()"> swaet</button>
-
+ 
 <script>
         function sweat(){
         let setting={
@@ -16,5 +17,104 @@
         }
        SweatAlterProcessing(setting);
     }
+
+
+        // Submit New Video
+       function SubmitAddNewVideo() {
+        debugger;
+        var form = $('#AddNewVideoForm')[0];
+        var data = new FormData(form);
+        var token = $('input[name="__RequestVerificationToken"]').val();
+
+        const isValid = FinalCheckVaildtion(); // ← هنا نستخدم القيمة المرجعة
+
+        console.log("--------------------fORM Data---------------");
+        console.log(form);
+
+        if (!isValid) return;
+
+        let setting = {
+            title: "@Localizer["loading"]"
+        };
+        SweatAlterProcessing(setting);
+
+        $.ajax({
+            type: "POST",
+            url: "/Videos/SubmitAddNewVideo",
+            data: data,
+            processData: false,
+            contentType: false,
+            headers: {
+                'RequestVerificationToken': token
+            },
+            success: function (res) {
+                Swal.close();
+
+                if (typeof res === "string" && res.includes("updateVideoForm")) {
+                    $("#mainPartial").html(res);
+                    return;
+                }
+
+                if (res.success) {
+                    const modalInstance = bootstrap.Modal.getInstance(document.getElementById('largeModal'));
+                    if (modalInstance) modalInstance.hide();
+
+                    SweatAlterSuccess(res.message);
+                } else {
+                    SweatAlterDanger(res.message);
+                }
+            },
+            error: function () {
+                const modalInstance = bootstrap.Modal.getInstance(document.getElementById('largeModal'));
+                if (modalInstance) modalInstance.hide();
+
+                SweatAlterDanger("@Localizer["VideoSubmitError"]");
+            }
+        });
+    }
+
+        function FinalCheckVaildtion() {
+        let isValid = true;
+
+        if (!GeneralRequiredFiled('InputTitleAR', '@Localizer["Required"]', 'TitleAR')) {
+            isValid = false;
+        }
+
+        if (!GeneralRequiredFiled('InputTitleEN', '@Localizer["Required"]', 'TitleEN')) {
+            isValid = false;
+        }
+
+        if (!GeneralRequiredFiled('inputDescriptionEN', '@Localizer["Required"]', 'DescriptionEN')) {
+            isValid = false;
+        }
+
+        if (!GeneralRequiredFiled('IputDescriptionAR', '@Localizer["Required"]', 'DescriptionAR')) {
+            isValid = false;
+        }
+
+        if (!GeneralRequiredFiled('SelectCourseId', '@Localizer["Required"]', 'CourseId')) {
+            isValid = false;
+        }
+
+        if (!validateImageFile('InputImageVideoUrl', 'ImageVideoUrl', '@Localizer["AllowImageExtntion"]')) {
+            isValid = false;
+        }
+
+        if (!validateVideoFile('inputVideoUrl', 'VideoUrl', '@Localizer["AllowVideoExtensiion"]')) {
+            isValid = false;
+        }
+
+        if (!handleIsPaidChangeInAddNewVideo('Ispaid', 'Costadd')) {
+            isValid = false;
+        }
+        
+          if (!validateCost('@Localizer["InvaildCost"]','Ispaid','Costadd','spanCost','@Localizer["Nagtivenumber"]','@Localizer["CostForPaid"]')) {
+            isValid = false;
+        }
+
+        return isValid;
+    }
+
+
 </script>
 

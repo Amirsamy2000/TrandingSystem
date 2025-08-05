@@ -223,11 +223,29 @@
                                     <div data-i18n="Without menu">@Localizer["AddVideo"]</div>
                                 </a>
                             </li>
-                            <li class="menu-item">
-                                <a asp-action="Videos" asp-controller="Videos" class="menu-link">
+                            <li class="menu-item" onclick="ChoiceCourse('@Localizer["btnShowAllVideo"]','@Localizer["ChoiceCourse"]')">
+                                <a  class="menu-link">
                                     <div data-i18n="Without navbar">@Localizer["DisplatVideo"]</div>
                                 </a>
                             </li>
+
+                        </ul>
+                    </li>
+
+                    <!-- Orders -->
+                    <li class="menu-item">
+                        <a href="javascript:void(0);" class="menu-link menu-toggle">
+                            <i class="menu-icon tf-icons bx bx-layout"></i>
+                            <div data-i18n="Layouts">@Localizer["Orders"]</div>
+                        </a>
+
+                        <ul class="menu-sub">
+                            <li class="menu-item">
+                                <a asp-action="AllOrders" asp-controller="Orders" class="menu-link">
+                                    <div data-i18n="Without menu">@Localizer["AllOrder"]</div>
+                                </a>
+                            </li>
+                          
 
                         </ul>
                     </li>
@@ -417,6 +435,29 @@
                         </div>
                     </div>
                     @* end *@
+
+                    @* Modal for choice course *@
+                    <div class="modal fade" id="modalCenter" tabindex="-1" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="modalCenterTitle"></h5>
+                                    <button type="button"
+                                            class="btn-close"
+                                            data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body" id="ChoiceCourse">
+                                   
+                                </div>
+                                <div class="modal-footer">
+                                   
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @* end *@
+
                 <!-- Content wrapper -->
             </div>
             <!-- / Layout page -->
@@ -426,11 +467,7 @@
         <div class="layout-overlay layout-menu-toggle"></div>
     </div>
     <!-- / Layout wrapper -->
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
-
-      
-
-
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
     <!-- Core JS -->
     <!-- build:js assets/vendor/js/core.js -->
     <script src="~/LayoutDasbord/assets/vendor/libs/jquery/jquery.js"></script>

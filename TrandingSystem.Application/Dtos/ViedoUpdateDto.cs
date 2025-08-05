@@ -23,7 +23,9 @@ namespace TrandingSystem.Application.Dtos
         public int  CreadteBy { get; set; }
 
         public bool IsActive { get; set; }
-        public IFormFile  ImageVideoUrl { get; set; }
-       
+        public IFormFile ImageVideoUrl { get; set; }
+        public string? LibraryVideoUrl { get; set; } 
+
+       public string? VideoUrl { get; set; }
     }
 }
