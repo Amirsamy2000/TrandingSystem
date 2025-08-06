@@ -208,20 +208,59 @@
                                 </div>
 
                                 <!-- Action Button -->
-                                <div class="mt-3">
-                                    <button class="btn btn-primary w-100 fw-semibold"
-                                            style="transition: all 0.3s ease;" onclick="location.href='/Home/CoursesDetails'">
-                                        @if (isRtl)
-                                        {
-                                            <span>عرض التفاصيل</span>
-                                            <i class="fas fa-arrow-left @(isRtl ? "me-2" : "ms-2")"></i>
-                                        }
-                                        else
-                                        {
-                                            <span>View Details</span>
-                                            <i class="fas fa-arrow-right @(isRtl ? "me-2" : "ms-2")"></i>
-                                        }
+                                <!-- Enhanced Action Buttons -->
+                                <div class="d-flex gap-3 mt-3 mb-3">
+                                    <!-- View Details Button -->
+                                    <button class="btn flex-fill fw-semibold py-2"
+                                            onclick="location.href='/Home/CoursesDetails'"
+                                            style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                                           border: none; border-radius: 12px; color: white;
+                                           transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+                                           box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+                                           position: relative; overflow: hidden;">
+                                        <span class="position-relative z-1">
+                                            @if (isRtl)
+                                            {
+                                                <span>عرض التفاصيل</span>
+                                                <i class="fas fa-arrow-left @(isRtl ? "me-2" : "ms-2")"></i>
+                                            }
+                                            else
+                                            {
+                                                <span>View Details</span>
+                                                <i class="fas fa-arrow-right @(isRtl ? "me-2" : "ms-2")"></i>
+                                            }
+                                        </span>
+                                        <!-- Button shine effect -->
+                                        <div class="position-absolute top-0 start-0 w-100 h-100"
+                                             style="background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.2) 50%, transparent 70%);
+                                            transform: translateX(-100%); transition: transform 0.6s;"></div>
                                     </button>
+
+                                    <!-- Enroll Button -->
+                                    <a href="@Url.Action("EnrollCourse", "Course", new { courseId = course.CourseId })"
+                                       class="btn flex-fill fw-semibold text-center text-decoration-none py-2"
+                                       style="background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+                                      border: none; border-radius: 12px; color: white;
+                                      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+                                      box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
+                                      position: relative; overflow: hidden;">
+                                        <span class="position-relative z-1">
+                                            @if (isRtl)
+                                            {
+                                                <span>سجّل الآن</span>
+                                                <i class="fas fa-user-plus @(isRtl ? "me-2" : "ms-2")"></i>
+                                            }
+                                            else
+                                            {
+                                                <span>Enroll Now</span>
+                                                <i class="fas fa-user-plus @(isRtl ? "me-2" : "ms-2")"></i>
+                                            }
+                                        </span>
+                                        <!-- Button shine effect -->
+                                        <div class="position-absolute top-0 start-0 w-100 h-100"
+                                             style="background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.2) 50%, transparent 70%);
+                                            transform: translateX(-100%); transition: transform 0.6s;"></div>
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -339,6 +378,76 @@
         border-radius: 4px;
     }
 </style>
+
+<style>
+    /* Enhanced hover effects */
+    .course-card:hover {
+        transform: translateY(-8px) scale(1.02);
+        box-shadow: 0 20px 40px rgba(0,0,0,0.15) !important;
+    }
+
+        .course-card:hover .course-image {
+            transform: scale(1.08);
+        }
+
+        .course-card:hover .btn div {
+            transform: translateX(100%) !important;
+        }
+
+    /* Button hover effects */
+    .course-card .btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+    }
+
+    /* Loading animation for image */
+    .course-image {
+        background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+        background-size: 200% 100%;
+        animation: loading 1.5s infinite;
+    }
+
+    @@keyframes loading {
+        0%
+
+    {
+        background-position: 200% 0;
+    }
+
+    100% {
+        background-position: -200% 0;
+    }
+
+    }
+
+    /* Responsive design improvements */
+    @@media (max-width: 768px) {
+        .course-card
+
+    {
+        margin-bottom: 2rem;
+    }
+
+    .course-card .btn {
+        padding: 12px !important;
+        font-size: 0.9rem;
+    }
+
+    }
+
+    /* Modern glassmorphism effect */
+    .course-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent);
+        z-index: 1;
+    }
+</style>
+
 
 <!-- Font Awesome CDN for icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">

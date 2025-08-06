@@ -61,6 +61,29 @@ namespace TrandingSystem.Infrastructure.Repositories
             return course;
         }
 
-        
+        public bool IsCourseEnrolled(int courseId, int userId)
+        {
+            return _context.CourseEnrollments
+                .Any(ce => ce.CourseId == courseId && ce.UserId == userId);
+        }
+
+        public bool EnrollCourse(int courseId, int userId)
+        {
+
+            var courseEnrol = new CourseEnrollment
+            {
+                CourseId = courseId,
+                UserId = userId,
+                CreatedAt = DateTime.Now,
+                IsConfirmed = false,
+                OrderStatus = 2, // Assuming OrderStatus is nullable
+            };
+
+
+            _context.CourseEnrollments.Add(courseEnrol);
+
+            _context.SaveChanges();
+            return true;
+        }
     }
 }
