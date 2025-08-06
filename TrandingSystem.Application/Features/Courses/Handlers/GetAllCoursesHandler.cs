@@ -32,7 +32,7 @@ internal class GetAllCoursesHandler : IRequestHandler<GetAllCoursesQuery, Respon
 
             List<Course> courses;
 
-            if (user.Role?.RoleName.ToLower() == "admin" || request.UserId == 0)
+            if (request.UserId == 0 || user.Role?.RoleName.ToLower() == "admin")
             {
                 courses = _unitOfWork.Courses.Read();
             }
