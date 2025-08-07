@@ -23,8 +23,8 @@ namespace TrandingSystem.Application.Features.OrdersEnorllment.Handlers
         {
             try
             {
-                var Orders = _unitOfWork.ordersEnorllment.Read().Where(x => x.OrderStatus == request.OrderStatus);
-                if (Orders.Any()) return Response< IEnumerable <OrdersDto>>.ErrorResponse(_localizer["NoDataFound"]);
+                var Orders = _unitOfWork.ordersEnorllment.Read().Where(x=>x.OrderStatus==request.OrderStatus).ToList();
+                if (Orders.Count()<0) return Response< IEnumerable <OrdersDto>>.ErrorResponse( _localizer["NoDataFound"], (IEnumerable<OrdersDto>) Orders );
 
                 IEnumerable<OrdersDto> ordersDtos = Orders.Select(order => new OrdersDto
                 {
@@ -35,12 +35,13 @@ namespace TrandingSystem.Application.Features.OrdersEnorllment.Handlers
                     OrderStatus = order.OrderStatus,
                     ConfirmedBy = order.ConfirmedBy,
                     CreatedAt = order.CreatedAt,
-                    UserName = order.User.UserName,
+                    UserName = order.User.FullName,
                     UserEmail = order.User.Email,
                     UserMobile = order.User.Mobile,
                     CourseName = order.Course.TitleEN,
                     CostCourse = order.Course.Cost,
-                    IsPaid = order.Course.IsFullyFree 
+                    IsPaid = order.Course.IsFullyFree,
+                    CashPhoneNum=order.CashPhoneNum
                 });
 
 
@@ -52,7 +53,7 @@ namespace TrandingSystem.Application.Features.OrdersEnorllment.Handlers
             catch
             {
 
-                return Response<IEnumerable<OrdersDto>>.ErrorResponse(_localizer["errorGetOrders"]);
+                return Response<IEnumerable<OrdersDto>>.ErrorResponse(_localizer["errorGetOrders"],status:System.Net.HttpStatusCode.InternalServerError);
             }
 
 

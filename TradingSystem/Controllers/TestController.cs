@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using System.Text.Json;
+using TrandingSystem.Infrastructure.Constants;
 namespace TrandingSystem.Controllers
 {
     public class TestController : Controller
@@ -30,7 +31,7 @@ namespace TrandingSystem.Controllers
 
         public async Task<IActionResult> Upload(IFormFile Video)
         {
-            var image = imageService.SaveImageAsync(Video);
+            var image = imageService.SaveImageAsync(Video, ConstantPath.PathVideoImage);
             //if (Video == null || Video.Length == 0)
             //{
             //    return BadRequest("No video file selected.");

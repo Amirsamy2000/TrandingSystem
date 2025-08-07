@@ -120,14 +120,41 @@
   <data name="AcceptedEnrollmentRequests" xml:space="preserve">
     <value>Accepted Enrollment Requests</value>
   </data>
+  <data name="AcceptedRequest" xml:space="preserve">
+    <value>Accepted </value>
+  </data>
   <data name="Acceted" xml:space="preserve">
     <value>Approved  </value>
+  </data>
+  <data name="Action" xml:space="preserve">
+    <value>Action</value>
+  </data>
+  <data name="BackReqest" xml:space="preserve">
+    <value>Back</value>
   </data>
   <data name="CancelEnrollmentRequests" xml:space="preserve">
     <value>Cancel Enrollment Requests</value>
   </data>
+  <data name="CourseCostCol" xml:space="preserve">
+    <value>Cost</value>
+  </data>
+  <data name="CousreCol" xml:space="preserve">
+    <value>Course</value>
+  </data>
+  <data name="CousreStatus" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="FaildLoad" xml:space="preserve">
+    <value>Data loading failed</value>
+  </data>
+  <data name="ImageReqest" xml:space="preserve">
+    <value>Receipt</value>
+  </data>
   <data name="loading" xml:space="preserve">
     <value>Loading...</value>
+  </data>
+  <data name="NoOrderMessage" xml:space="preserve">
+    <value>No data available to display</value>
   </data>
   <data name="Orders" xml:space="preserve">
     <value>Orders</value>
@@ -143,6 +170,18 @@
   </data>
   <data name="Reject" xml:space="preserve">
     <value>Rejected  </value>
+  </data>
+  <data name="ShowImageReqest" xml:space="preserve">
+    <value>Receipt</value>
+  </data>
+  <data name="StudenMailCol" xml:space="preserve">
+    <value>Mail</value>
+  </data>
+  <data name="StudentCol" xml:space="preserve">
+    <value>Subscriber</value>
+  </data>
+  <data name="StudentPhoneCol" xml:space="preserve">
+    <value>Phone</value>
   </data>
   <data name="Total" xml:space="preserve">
     <value>Total  </value>

@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 using TrandingSystem.Application.Features.OrdersEnorllment.Queries;
 using TrandingSystem.Models;
 
@@ -27,12 +28,21 @@ namespace TrandingSystem.Controllers
             return View(response.Data);
         }
 
-        public IActionResult GetOrderByOrderStatus(int OrderStatus)
+        [HttpGet]
+        public async Task<IActionResult> GetOrderByOrderStatus(int OrderStatus)
         {
             // Get All Order By OrderStatus
+            var Response = await _mediator.Send(new GetOrdersByOrderStatusQuery(OrderStatus));
+            if (Response.Status== System.Net.HttpStatusCode.InternalServerError) {
+                return RedirectToAction("Error", "Home", new
+                {
+                    status = (int)Response.Status,
+                    message = Response.Message
+                });
 
+            }
 
-            return PartialView("");
+            return PartialView("_PartialOdersEnrollemnt", Response.Data);
         }
     }
 }

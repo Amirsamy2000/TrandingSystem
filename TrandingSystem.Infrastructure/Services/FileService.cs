@@ -1,15 +1,10 @@
 ﻿using Microsoft.AspNetCore.Http;
-using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+ 
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
-using TrandingSystem.Domain.Entities;
+ 
 using TrandingSystem.Domain.Interfaces;
 using TrandingSystem.Infrastructure.Constants;
 
@@ -59,15 +54,15 @@ namespace TrandingSystem.Infrastructure.Services
         }
 
 
-        public async Task<string> SaveImageAsync(IFormFile imageFile, string existingFileName = null)
+        public async Task<string> SaveImageAsync(IFormFile imageFile,string ImagePath, string existingFileName = null)
         {
             // id Path Is Not Found Create it
-            if (!Directory.Exists(_imagePath))
-                Directory.CreateDirectory(_imagePath);
+            if (!Directory.Exists(ImagePath))
+                Directory.CreateDirectory(ImagePath);
 
             // Creat Image Name
             var fileName = Guid.NewGuid().ToString() + Path.GetExtension(imageFile.FileName);
-            var path = Path.Combine(_imagePath, fileName);
+            var path = Path.Combine(ImagePath, fileName);
 
             using (var stream = new FileStream(path, FileMode.Create))
             {
