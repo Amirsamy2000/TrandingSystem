@@ -1,0 +1,62 @@
+﻿using MediatR;
+using Microsoft.Extensions.Localization;
+using System.Collections.Generic;
+using TradingSystem.Application.Common.Response;
+using TrandingSystem.Application.Dtos;
+using TrandingSystem.Application.Features.OrdersEnorllment.Queries;
+using TrandingSystem.Application.Resources;
+using TrandingSystem.Domain.Interfaces;
+
+namespace TrandingSystem.Application.Features.OrdersEnorllment.Handlers
+{
+    public class GetOrdersByOrderStatusHandler : IRequestHandler<GetOrdersByOrderStatusQuery, Response<IEnumerable<OrdersDto>>>
+    {
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly IStringLocalizer<ValidationMessages> _localizer;
+        public GetOrdersByOrderStatusHandler(IUnitOfWork unitOfWork, IStringLocalizer<ValidationMessages> localizer)
+        {
+            _unitOfWork = unitOfWork;
+            _localizer = localizer;
+        }
+
+        public async Task<Response<IEnumerable<OrdersDto>>> Handle(GetOrdersByOrderStatusQuery request, CancellationToken cancellationToken)
+        {
+            try
+            {
+                var Orders = _unitOfWork.ordersEnorllment.Read().Where(x => x.OrderStatus == request.OrderStatus);
+                if (Orders.Any()) return Response< IEnumerable <OrdersDto>>.ErrorResponse(_localizer["NoDataFound"]);
+
+                IEnumerable<OrdersDto> ordersDtos = Orders.Select(order => new OrdersDto
+                {
+                    EnrollmentId = order.EnrollmentId,
+                    EnrollmentDate = order.EnrollmentDate,
+                    IsConfirmed = order.IsConfirmed,
+                    ReceiptImagePath = order.ReceiptImagePath,
+                    OrderStatus = order.OrderStatus,
+                    ConfirmedBy = order.ConfirmedBy,
+                    CreatedAt = order.CreatedAt,
+                    UserName = order.User.UserName,
+                    UserEmail = order.User.Email,
+                    UserMobile = order.User.Mobile,
+                    CourseName = order.Course.TitleEN,
+                    CostCourse = order.Course.Cost,
+                    IsPaid = order.Course.IsFullyFree 
+                });
+
+
+                return Response<IEnumerable<OrdersDto>>.SuccessResponse(ordersDtos);
+
+
+
+            }
+            catch
+            {
+
+                return Response<IEnumerable<OrdersDto>>.ErrorResponse(_localizer["errorGetOrders"]);
+            }
+
+
+           
+        }
+    }
+}

@@ -1,6 +1,8 @@
 ﻿@using Microsoft.Extensions.Localization
+@using TrandingSystem.Application.Dtos
 @using TrandingSystem.Controllers
 @inject IStringLocalizer<OrdersController> Localizer
+@model CountOrdersEnorllmentStatus
 @{
     ViewData["Title"] = "AllOrders";
     Layout = "~/Views/Shared/_LayoutDasbord.cshtml";
@@ -14,8 +16,8 @@
         <div class="alert alert-warning text-center">
             <h5 class="mb-2">@Localizer["Pennding"]</h5>
             <i class="bx bx-time text-warning fs-2"></i>
-            <h3>15</h3>
-            <button class="btn btn-outline-warning">@Localizer["View"]</button>
+            <h3>@Model.CountOrdersPending </h3>
+            <button class="btn btn-outline-warning" onclick="ShowOrdersByOrderStatus(2,'pendingOrders')">@Localizer["View"]</button>
         </div>
     </div>
 
@@ -24,8 +26,8 @@
         <div class="alert alert-danger text-center">
             <h5 class="mb-2">@Localizer["Reject"]</h5>
             <i class="bx bx-x-circle text-danger fs-2"></i>
-            <h3>8</h3>
-            <button class="btn btn-outline-danger">View</button>
+            <h3>@Model.CountOrdersCanceled </h3>
+            <button class="btn btn-outline-danger" onclick="ShowOrdersByOrderStatus(0,'cancelOrders')">View</button>
         </div>
     </div>
 
@@ -34,8 +36,8 @@
         <div class="alert alert-success text-center">
             <h5 class="mb-2">@Localizer["Acceted"]</h5>
             <i class="bx bx-check-circle text-success fs-2"></i>
-            <h3>30</h3>
-            <button class="btn btn-outline-success">View</button>
+            <h3>@Model.CountOrdersAccepted </h3>
+            <button class="btn btn-outline-success" onclick="ShowOrdersByOrderStatus(1,'acceptedOrders')">View</button>
         </div>
     </div>
 
@@ -44,44 +46,99 @@
         <div class="alert alert-secondary text-center">
             <h5 class="mb-2">@Localizer["Total"]</h5>
             <i class="bx bx-list-ul text-secondary fs-2"></i>
-            <h3>60</h3>
-            <button class="btn btn-outline-secondary">View</button>
+            <h3>@Model.CountOrdersTotal </h3>
+             <button class="btn btn-outline-secondary">View</button> 
         </div>
     </div>
 
-    <div class="accordion accordion-flush" id="accordionFlushExample">
-        <div class="accordion-item">
-            <h2 class="accordion-header" id="flush-headingOne">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                    Accordion Item #1
-                </button>
-            </h2>
-            <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-                <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the first item's accordion body.</div>
+    @* //// *@
+    <div class="col-md mb-4 mb-md-0">
+        
+        <div class="accordion mt-3 " id="accordionExample">
+            @* Pendding *@
+            <div class="card accordion-item " id="pendingOrders">
+                <h2 class="accordion-header" id="headingOne">
+                    <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#accordionOne" aria-expanded="false" aria-controls="accordionOne">
+                        @Localizer["PendingEnrollmentRequests"]
+                    </button>
+                </h2>
+
+                <div id="accordionOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample" style="">
+                    <div class="accordion-body" id="pendingOrdersbody">
+                        @* <partial name="_PartialOrdersStatus" /> *@
+
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="accordion-item">
-            <h2 class="accordion-header" id="flush-headingTwo">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
-                    Accordion Item #2
-                </button>
-            </h2>
-            <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
-                <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the second item's accordion body. Let's imagine this being filled with some actual content.</div>
+            @* end *@
+           
+            @* accpted *@
+            <div class="card accordion-item d-none" id="acceptedOrders">
+                <h2 class="accordion-header" id="headingTwo">
+                    <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#accordionTwo" aria-expanded="false" aria-controls="accordionTwo">
+                        @Localizer["AcceptedEnrollmentRequests"]
+                    </button>
+                </h2>
+                <div id="accordionTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample" style="">
+                    <div class="accordion-body" id="acceptedOrdersbody">
+                        Dessert ice cream donut oat cake jelly-o pie sugar plum cheesecake. Bear claw dragée oat cake
+                        dragée ice cream halvah tootsie roll. Danish cake oat cake pie macaroon tart donut gummies.
+                        Jelly beans candy canes carrot cake. Fruitcake chocolate chupa chups.
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="accordion-item">
-            <h2 class="accordion-header" id="flush-headingThree">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
-                    Accordion Item #3
-                </button>
-            </h2>
-            <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
-                <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting happening here in terms of content, but just filling up the space to make it look, at least at first glance, a bit more representative of how this would look in a real-world application.</div>
+               @* end *@
+
+            @* cancel *@
+            <div class="card accordion-item d-none" id="cancelOrders">
+                <h2 class="accordion-header" id="headingThree">
+                    <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#accordionThree" aria-expanded="false" aria-controls="accordionThree">
+                        @Localizer["CancelEnrollmentRequests"]
+                    </button>
+                </h2>
+                <div id="accordionThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample" style="">
+                    <div class="accordion-body" id="cancelOrdersbody">
+                       
+                    </div>
+                </div>
             </div>
+              @* end  *@
         </div>
     </div>
 </div>
 
+@section Scripts{
+                    @* SweatAlterDanger(@Localizer["loading"]) *@
 
+    <script>
+        function ShowOrdersByOrderStatus(status, id) {
+                // إظهار الكارد المخفي
+        $('#' + id).removeClass('d-none');
+
+        let setting = {
+            title: "@Localizer["loading"]"
+        };
+        SweatAlterProcessing(setting);
+
+        setTimeout(function () {
+            Swal.close();
+            // ممكن هنا تعمل Ajax وتحط الداتا في الـ body
+            // $('#' + id + 'body').html(data);
+        }, 1000);
+
+            $.ajax({
+                url: '@Url.Action("GetOrdersByStatus", "Orders")',
+                type: 'GET',
+                data: { status: status },
+                success: function (data) {
+                    $('#' + id + 'body').html(data);
+                    $('#' + id).collapse('show');
+                },
+                error: function () {
+                    alert('Error loading orders.');
+                }
+            });
+        }
+    </script>
+}
 

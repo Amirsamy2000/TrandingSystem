@@ -12,6 +12,8 @@ namespace TrandingSystem.Domain.Interfaces
         ICategoryRepository Categories { get; }
         ICourseRepository Courses { get; }
         IUserRepository Users { get; }
+        IOrdersEnorllment ordersEnorllment { get; }
+    
         Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
     }
 }

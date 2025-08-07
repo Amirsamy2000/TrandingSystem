@@ -34,7 +34,7 @@ namespace TradingSystem.Application.Common.Response
         // Static helper for error
         public static Response<T> ErrorResponse(string errorMessage, T data = default, HttpStatusCode status = HttpStatusCode.ExpectationFailed)
         {
-            return new Response<T>(data, $"Failed: {errorMessage}", false, status, errorMessage);
+            return new Response<T>(data,  errorMessage, false, status, errorMessage);
         }
 
         // Static helper for error with exception

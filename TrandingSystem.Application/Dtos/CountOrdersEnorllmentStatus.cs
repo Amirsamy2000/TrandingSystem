@@ -13,7 +13,7 @@ namespace TrandingSystem.Application.Dtos
 
         public int CountOrdersCanceled { get; set; }
 
-        //public readonly int CountOrdersTotal { get { return} };
+      public  int CountOrdersTotal { get { return CountOrdersAccepted + CountOrdersPending + CountOrdersCanceled; } }
 
     }
 }

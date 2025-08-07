@@ -6,6 +6,7 @@ using System;
 using System.Diagnostics;
 using TrandingSystem.Infrastructure.Data;
 using TrandingSystem.Domain.Entities;
+using TrandingSystem.Models;
 
 namespace WebApplication1.Controllers
 {
@@ -80,5 +81,10 @@ namespace WebApplication1.Controllers
 
         [Authorize]
         public IActionResult Dashboard() { return View(); }
+
+        public IActionResult Error(CustomeErrorModel error)
+        {
+          return View(error);
+        }
     }
 }

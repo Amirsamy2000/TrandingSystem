@@ -117,14 +117,26 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AcceptedEnrollmentRequests" xml:space="preserve">
+    <value>طلبات التسجيل المقبولة</value>
+  </data>
   <data name="Acceted" xml:space="preserve">
     <value>المقبولة</value>
+  </data>
+  <data name="CancelEnrollmentRequests" xml:space="preserve">
+    <value>طلبات التسجيل المرفوضة</value>
+  </data>
+  <data name="loading" xml:space="preserve">
+    <value>تحميل...</value>
   </data>
   <data name="Orders" xml:space="preserve">
     <value>طلبات</value>
   </data>
   <data name="OrdersRequest" xml:space="preserve">
     <value>طلبات تسجيل الطلاب</value>
+  </data>
+  <data name="PendingEnrollmentRequests" xml:space="preserve">
+    <value>طلبات التسجيل المعلقة</value>
   </data>
   <data name="Pennding" xml:space="preserve">
     <value>المعلقة</value>

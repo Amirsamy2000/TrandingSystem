@@ -22,6 +22,9 @@ namespace TrandingSystem.Infrastructure.Repositories
         private IUserRepository _Users;
         public IUserRepository Users => _Users ??= new UserRepository(_context);
 
+        private IOrdersEnorllment _ordersEnorllment;
+        public IOrdersEnorllment ordersEnorllment => _ordersEnorllment ??= new OrdersEnorllment(_context);
+
         public UnitOfWork(db23617Context context)
         {
             _context = context;

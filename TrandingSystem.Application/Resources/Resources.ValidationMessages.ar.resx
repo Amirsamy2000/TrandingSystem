@@ -165,4 +165,10 @@
   <data name="InvaildCost" xml:space="preserve">
     <value>هذا الفيديو مجاني، لا تدخل أي تكلفة.</value>
   </data>
+  <data name="errorGetOrders" xml:space="preserve">
+    <value>حدث خطأ أثناء تحميل طلبات تسجيل الطلاب.</value>
+  </data>
+  <data name="NoDataFound" xml:space="preserve">
+    <value>لا توجد طلبات اشتراك </value>
+  </data>
 </root>
