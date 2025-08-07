@@ -120,14 +120,41 @@
   <data name="AcceptedEnrollmentRequests" xml:space="preserve">
     <value>طلبات التسجيل المقبولة</value>
   </data>
+  <data name="AcceptedRequest" xml:space="preserve">
+    <value>قبول</value>
+  </data>
   <data name="Acceted" xml:space="preserve">
     <value>المقبولة</value>
+  </data>
+  <data name="Action" xml:space="preserve">
+    <value>الحدث</value>
+  </data>
+  <data name="BackReqest" xml:space="preserve">
+    <value>رجوع</value>
   </data>
   <data name="CancelEnrollmentRequests" xml:space="preserve">
     <value>طلبات التسجيل المرفوضة</value>
   </data>
+  <data name="CourseCostCol" xml:space="preserve">
+    <value>المبلغ</value>
+  </data>
+  <data name="CousreCol" xml:space="preserve">
+    <value>الكورس</value>
+  </data>
+  <data name="CousreStatus" xml:space="preserve">
+    <value>الحالة</value>
+  </data>
+  <data name="FaildLoad" xml:space="preserve">
+    <value>فشل تحميل البيانات</value>
+  </data>
+  <data name="ImageReqest" xml:space="preserve">
+    <value>الايصال</value>
+  </data>
   <data name="loading" xml:space="preserve">
     <value>تحميل...</value>
+  </data>
+  <data name="NoOrderMessage" xml:space="preserve">
+    <value>لا توجد بيانات لعرضها حاليًا.</value>
   </data>
   <data name="Orders" xml:space="preserve">
     <value>طلبات</value>
@@ -143,6 +170,18 @@
   </data>
   <data name="Reject" xml:space="preserve">
     <value>المرفوضة</value>
+  </data>
+  <data name="ShowImageReqest" xml:space="preserve">
+    <value>الايصال</value>
+  </data>
+  <data name="StudenMailCol" xml:space="preserve">
+    <value>البريد</value>
+  </data>
+  <data name="StudentCol" xml:space="preserve">
+    <value>المشترك</value>
+  </data>
+  <data name="StudentPhoneCol" xml:space="preserve">
+    <value>الموبايل</value>
   </data>
   <data name="Total" xml:space="preserve">
     <value>الاجمالي</value>

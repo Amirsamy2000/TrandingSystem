@@ -6,6 +6,7 @@ using TrandingSystem.Application.Features.Video.Commands;
 using TrandingSystem.Domain.Interfaces;
 using TrandingSystem.Domain.Entities;
 using TrandingSystem.Application.Resources;
+using TrandingSystem.Infrastructure.Constants;
 
 namespace TrandingSystem.Application.Features.Video.Handlers
 {
@@ -49,7 +50,7 @@ namespace TrandingSystem.Application.Features.Video.Handlers
                 {
                     // save new image then delete old image
                     string oldImageUrl = video.ImageVideoUrl;
-                    string UpdatedUrlImageOfVideo = await _imageService.SaveImageAsync(request.viedoUpdateDto.ImageVideoUrl, oldImageUrl);
+                    string UpdatedUrlImageOfVideo = await _imageService.SaveImageAsync(request.viedoUpdateDto.ImageVideoUrl, ConstantPath.PathVideoImage, oldImageUrl);
                    video.ImageVideoUrl = UpdatedUrlImageOfVideo;
 
                 }

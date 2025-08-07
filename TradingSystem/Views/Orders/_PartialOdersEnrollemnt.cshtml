@@ -1,0 +1,85 @@
+﻿@using Microsoft.Extensions.Localization
+@using TrandingSystem.Application.Dtos
+@using TrandingSystem.Controllers
+@inject IStringLocalizer<OrdersController> Localizer
+@model IEnumerable<OrdersDto>
+@if (Model is not null|| Model.Count() > 0)
+{
+
+    <table class="table table-hover table-bordered " id="OrdersTable">
+            <thead>
+                <tr class=" table-info" >
+
+                    <th scope="col">@Localizer["StudentCol"]</th>
+                    <th scope="col">@Localizer["StudenMailCol"]</th>
+                    <th scope="col">@Localizer["StudentPhoneCol"]</th>
+                    <th scope="col">@Localizer["CousreCol"]</th>
+                    @* <th scope="col">@Localizer["CousreStatus"]</th> *@
+                    <th scope="col">@Localizer["CourseCostCol"]</th>
+                    <th scope="col">@Localizer["ImageReqest"]</th>
+                    <th scope="col">@Localizer["Action"]</th>
+                <th scope="col">@Localizer["ShowImageReqest"]</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                
+                    @foreach (var order in Model)
+                    {
+                    <tr>
+                        <td>@order.UserName</td>
+                        <td>@order.UserEmail</td>
+                        <td>@order.UserMobile</td>
+                        <td>@order.CourseName</td>
+                        <td>@order.CostCourse</td>
+                        <td>
+                            <img src="@order.ReceiptImagePath" alt="Not Found"  width="50" height="50"/>
+                        </td>
+                        
+                        @if (order.OrderStatus==2)
+                        {
+                            <td>
+                                <button class="btn btn-success">@Localizer["AcceptedRequest"]</button>
+                            </td>
+
+                        }
+                        else
+                        {
+                            <td>
+                                <button class="btn btn-waring">@Localizer["BackReqest"]</button>
+                            </td>
+                        }
+
+                       <td>
+                            <button class="btn btn-info">@Localizer["ShowImageReqest"]</button>
+
+                       </td>
+                    </tr>
+                    }
+
+             
+            </tbody>
+        </table>
+ 
+
+ 
+}
+
+
+
+
+else
+{
+    <div class="col-12">
+        <div class="alert alert-primary   " role="alert">
+            <h4 class="alert-heading text-center">@Localizer["NoOrderMessage"]</h4>
+            <br />
+            @* <p class="text-center">@Localizer["NoVideosMessage1"]</p> *@
+        </div>
+    </div>
+}
+
+<script>
+
+</script>
+

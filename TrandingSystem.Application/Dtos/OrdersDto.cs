@@ -15,7 +15,7 @@ namespace TrandingSystem.Application.Dtos
 
         //public int CourseId { get; set; }
 
-        public DateTime EnrollmentDate { get; set; }
+        public DateTime? EnrollmentDate { get; set; }
 
         public bool IsConfirmed { get; set; }
 
@@ -24,8 +24,10 @@ namespace TrandingSystem.Application.Dtos
         public byte? OrderStatus { get; set; }   // nullable to allow missing data
         public int? ConfirmedBy { get; set; }
         public DateTime? CreatedAt { get; set; } // preserves the original Order.CreatedAt
+        public string CashPhoneNum { get; set; }
 
-      public string UserName { get; set; }
+
+        public string UserName { get; set; }
       public string UserEmail { get; set; }
       public string UserMobile { get; set; }
       public string CourseName { get; set; }

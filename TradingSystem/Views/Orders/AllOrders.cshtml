@@ -56,7 +56,7 @@
         
         <div class="accordion mt-3 " id="accordionExample">
             @* Pendding *@
-            <div class="card accordion-item " id="pendingOrders">
+            <div class="card accordion-item d-none" id="pendingOrders">
                 <h2 class="accordion-header" id="headingOne">
                     <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#accordionOne" aria-expanded="false" aria-controls="accordionOne">
                         @Localizer["PendingEnrollmentRequests"]
@@ -64,7 +64,7 @@
                 </h2>
 
                 <div id="accordionOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample" style="">
-                    <div class="accordion-body" id="pendingOrdersbody">
+                    <div class="accordion-body  table-responsive" id="pendingOrdersbody">
                         @* <partial name="_PartialOrdersStatus" /> *@
 
                     </div>
@@ -80,10 +80,8 @@
                     </button>
                 </h2>
                 <div id="accordionTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample" style="">
-                    <div class="accordion-body" id="acceptedOrdersbody">
-                        Dessert ice cream donut oat cake jelly-o pie sugar plum cheesecake. Bear claw dragée oat cake
-                        dragée ice cream halvah tootsie roll. Danish cake oat cake pie macaroon tart donut gummies.
-                        Jelly beans candy canes carrot cake. Fruitcake chocolate chupa chups.
+                    <div class="accordion-body table-responsive" id="acceptedOrdersbody">
+                      
                     </div>
                 </div>
             </div>
@@ -97,7 +95,7 @@
                     </button>
                 </h2>
                 <div id="accordionThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample" style="">
-                    <div class="accordion-body" id="cancelOrdersbody">
+                    <div class="accordion-body table-responsive" id="cancelOrdersbody">
                        
                     </div>
                 </div>
@@ -111,31 +109,48 @@
                     @* SweatAlterDanger(@Localizer["loading"]) *@
 
     <script>
-        function ShowOrdersByOrderStatus(status, id) {
+
+        // DataTable
+
+              $('#OrdersTable').DataTable({
+               
+                pageLength: 10, // عدد الصفوف الافتراضي
+               
+                ordering: true, // تمكين الترتيب
+                order: [[0, 'asc']], // ترتيب افتراضي حسب العمود الأول
+                columnDefs: [
+                    { orderable: false, targets: [5, 6, 7] } // تعطيل الترتيب في الأعمدة (الصورة + الأزرار)
+                ],
+                responsive: true,
+                dom: 'Bfrtip', // لعرض أزرار التصدير
+                buttons: [
+                    'copy', 'csv', 'excel', 'pdf', 'print'
+                ]
+            });
+       
+        function ShowOrdersByOrderStatus(status, idDiv) {
+
                 // إظهار الكارد المخفي
-        $('#' + id).removeClass('d-none');
+        $('#' + idDiv).removeClass('d-none');
 
         let setting = {
             title: "@Localizer["loading"]"
         };
         SweatAlterProcessing(setting);
-
-        setTimeout(function () {
-            Swal.close();
-            // ممكن هنا تعمل Ajax وتحط الداتا في الـ body
-            // $('#' + id + 'body').html(data);
-        }, 1000);
-
             $.ajax({
-                url: '@Url.Action("GetOrdersByStatus", "Orders")',
+                url: '@Url.Action("GetOrderByOrderStatus", "Orders")',
                 type: 'GET',
-                data: { status: status },
+                data: { OrderStatus: status },
                 success: function (data) {
-                    $('#' + id + 'body').html(data);
-                    $('#' + id).collapse('show');
+
+                    Swal.close();
+                    $('#' + idDiv + 'body').html(data);
+                    $('#' + idDiv).reomveClass("d-none")
                 },
                 error: function () {
-                    alert('Error loading orders.');
+                    Swal.close();
+
+                    SweatAlterDanger('@Localizer["FaildLoad"]')
                 }
             });
         }
