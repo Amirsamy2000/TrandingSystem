@@ -13,7 +13,7 @@ namespace TrandingSystem.Domain.Entities
 
         public int CourseId { get; set; }
 
-        public DateTime EnrollmentDate { get; set; }
+        public DateTime? EnrollmentDate { get; set; }
 
         public bool IsConfirmed { get; set; }
 
@@ -22,6 +22,8 @@ namespace TrandingSystem.Domain.Entities
         public byte? OrderStatus { get; set; }   // nullable to allow missing data
         public int? ConfirmedBy { get; set; }
         public DateTime? CreatedAt { get; set; } // preserves the original Order.CreatedAt
+
+        public string CashPhoneNum { get; set; }
 
         public virtual Course Course { get; set; }
 

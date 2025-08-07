@@ -25,14 +25,14 @@ internal class GetAllCoursesHandler : IRequestHandler<GetAllCoursesQuery, Respon
         {
             var user = _unitOfWork.Users.ReadById(request.UserId);
 
-            if (user == null)
+            if (user == null && request.UserId!=0)
             {
                 return Response<List<CourseDto>>.ErrorResponse("User not found", null, HttpStatusCode.NotFound);
             }
 
             List<Course> courses;
 
-            if (user.Role?.RoleName.ToLower() == "admin")
+            if (request.UserId == 0 || user.Role?.RoleName.ToLower() == "admin")
             {
                 courses = _unitOfWork.Courses.Read();
             }

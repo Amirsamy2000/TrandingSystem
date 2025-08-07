@@ -113,6 +113,27 @@ namespace TrandingSystem.Controllers
         }
 
 
+        [HttpGet]
+        public async Task<IActionResult> EnrollCourse(int courseId)
+        {
+
+            // Get the current user ID from the claims
+            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
+            
+
+            if (userIdClaim == null)
+            {
+                return Unauthorized("User ID not found in token.");
+            }
+
+            int userId = int.Parse(userIdClaim.Value);
+            var result = await _mediator.Send(new EnrollCourseCommand(courseId, userId));
+
+            return Ok(result);
+
+        }
+
+
         [HttpDelete]
         public async Task<IActionResult> Delete(int CourseId)
         {
