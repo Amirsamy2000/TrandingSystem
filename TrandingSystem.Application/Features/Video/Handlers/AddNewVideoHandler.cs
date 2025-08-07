@@ -8,6 +8,7 @@ using TrandingSystem.Application.Resources;
 using TrandingSystem.Domain.Interfaces;
 using TrandingSystem.Domain.Entities;
 using AutoMapper;
+using TrandingSystem.Infrastructure.Constants;
 
 
 namespace TrandingSystem.Application.Features.Video.Handlers
@@ -32,7 +33,7 @@ namespace TrandingSystem.Application.Features.Video.Handlers
             try
             {
                 // Save If Image video
-                string imageUrl=  _imageService.SaveImageAsync(request.VideoAddedDto.ImageVideoUrl).Result;
+                string imageUrl=  _imageService.SaveImageAsync(request.VideoAddedDto.ImageVideoUrl, ConstantPath.PathVideoImage).Result;
                 if (string.IsNullOrEmpty(imageUrl))
                 {
                     return Response<bool>.ErrorResponse(_localizer["AddImageFail"]);
