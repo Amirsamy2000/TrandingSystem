@@ -1,6 +1,7 @@
 ﻿@model int
-<form id="enrollForm" enctype="multipart/form-data">
-    <input type="hidden" name="courseId" value="@Model" />
+<form asp-controller="Course" asp-action="EnrollCourse" method="post" enctype="multipart/form-data">
+
+    <input type="hidden" name="courseId" id="courseId" value="@Model" />
 
     <div class="mb-3">
         <label for="RecieptImage" class="form-label">Upload Receipt</label>
@@ -11,36 +12,37 @@
 </form>
 
 
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-            const form = document.getElementById('enrollForm');
-            if (!form) return; // prevents the error if the form is not present
+@* <script> *@
+@*     document.addEventListener('DOMContentLoaded', function () { *@
+@*         debugger *@
+@*             const form = document.getElementById('enrollForm'); *@
+@*             if (!form) return; // prevents the error if the form is not present *@
 
-            form.addEventListener('submit', function (e) {
-                e.preventDefault();
+@*             form.addEventListener('submit', function (e) { *@
+@*                 e.preventDefault(); *@
 
-                const formData = new FormData(form);
-                const courseId = form.getAttribute("data-course-id");
+@*                 const formData = new FormData(form); *@
+@*                 // const courseId = form.getAttribute("data-course-id"); *@
 
-                formData.append("courseId", courseId);
+@*                 // formData.append("courseId", courseId); *@
 
-                fetch('/Course/EnrollCourse', {
-                    method: 'POST',
-                    body: formData
-                })
-                .then(res => {
-                    if (res.ok) return res.json();
-                    throw new Error("Failed to enroll.");
-                })
-                .then(data => {
-                    alert("Enrollment submitted successfully!");
-                    const modal = bootstrap.Modal.getInstance(document.getElementById('enrollModal'));
-                    modal.hide();
-                })
-                .catch(error => {
-                    alert("Error: " + error.message);
-                });
-            });
-        });
+@*                 fetch('/Course/EnrollCourse', { *@
+@*                     method: 'POST', *@
+@*                     body: formData *@
+@*                 }) *@
+@*                 .then(res => { *@
+@*                     if (res.ok) return res.json(); *@
+@*                     throw new Error("Failed to enroll."); *@
+@*                 }) *@
+@*                 .then(data => { *@
+@*                     alert("Enrollment submitted successfully!"); *@
+@*                     const modal = bootstrap.Modal.getInstance(document.getElementById('enrollModal')); *@
+@*                     modal.hide(); *@
+@*                 }) *@
+@*                 .catch(error => { *@
+@*                     alert("Error: " + error.message); *@
+@*                 }); *@
+@*             }); *@
+@*         }); *@
 
-</script>
+@* </script> *@
