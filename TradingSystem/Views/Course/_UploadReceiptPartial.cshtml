@@ -1,0 +1,46 @@
+﻿@model int
+<form id="enrollForm" enctype="multipart/form-data">
+    <input type="hidden" name="courseId" value="@Model" />
+
+    <div class="mb-3">
+        <label for="RecieptImage" class="form-label">Upload Receipt</label>
+        <input type="file" class="form-control" name="RecieptImage" id="RecieptImage" accept="image/*" required />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Enroll</button>
+</form>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+            const form = document.getElementById('enrollForm');
+            if (!form) return; // prevents the error if the form is not present
+
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+
+                const formData = new FormData(form);
+                const courseId = form.getAttribute("data-course-id");
+
+                formData.append("courseId", courseId);
+
+                fetch('/Course/EnrollCourse', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(res => {
+                    if (res.ok) return res.json();
+                    throw new Error("Failed to enroll.");
+                })
+                .then(data => {
+                    alert("Enrollment submitted successfully!");
+                    const modal = bootstrap.Modal.getInstance(document.getElementById('enrollModal'));
+                    modal.hide();
+                })
+                .catch(error => {
+                    alert("Error: " + error.message);
+                });
+            });
+        });
+
+</script>

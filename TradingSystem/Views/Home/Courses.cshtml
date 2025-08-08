@@ -237,13 +237,14 @@
                                     </button>
 
                                     <!-- Enroll Button -->
-                                    <a href="@Url.Action("EnrollCourse", "Course", new { courseId = course.CourseId })"
+                                    <a href="javascript:void(0);"
+                                       onclick="openEnrollModal(@course.CourseId)"
                                        class="btn flex-fill fw-semibold text-center text-decoration-none py-2"
                                        style="background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
-                                      border: none; border-radius: 12px; color: white;
-                                      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-                                      box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
-                                      position: relative; overflow: hidden;">
+                                          border: none; border-radius: 12px; color: white;
+                                          transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+                                          box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
+                                          position: relative; overflow: hidden;">
                                         <span class="position-relative z-1">
                                             @if (isRtl)
                                             {
@@ -256,11 +257,12 @@
                                                 <i class="fas fa-user-plus @(isRtl ? "me-2" : "ms-2")"></i>
                                             }
                                         </span>
-                                        <!-- Button shine effect -->
                                         <div class="position-absolute top-0 start-0 w-100 h-100"
                                              style="background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.2) 50%, transparent 70%);
-                                            transform: translateX(-100%); transition: transform 0.6s;"></div>
+                                                    transform: translateX(-100%); transition: transform 0.6s;">
+                                        </div>
                                     </a>
+
                                 </div>
                             </div>
                         </div>
@@ -299,6 +301,22 @@
         </div>
     </div>
 </section>
+
+
+<div class="modal fade" id="enrollModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Upload Receipt</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="enrollModalBody">
+                <!-- Partial view will be loaded here -->
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <style>
     .course-card {
@@ -469,5 +487,21 @@
                 }, index * 100);
             });
         });
+
+
+
+        function openEnrollModal(courseId) {
+            fetch(`/Course/UploadReceiptPartial?courseId=${courseId}`)
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById("enrollModalBody").innerHTML = html;
+                    let modal = new bootstrap.Modal(document.getElementById("enrollModal"));
+                    modal.show();
+                });
+        }
+    
+
+
+
     </script>
 }

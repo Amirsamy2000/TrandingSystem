@@ -67,7 +67,7 @@ namespace TrandingSystem.Infrastructure.Repositories
                 .Any(ce => ce.CourseId == courseId && ce.UserId == userId);
         }
 
-        public bool EnrollCourse(int courseId, int userId)
+        public bool EnrollCourse(int courseId, int userId, string RecieptUrl)
         {
 
             var courseEnrol = new CourseEnrollment
@@ -76,6 +76,7 @@ namespace TrandingSystem.Infrastructure.Repositories
                 UserId = userId,
                 CreatedAt = DateTime.Now,
                 IsConfirmed = false,
+                ReceiptImagePath = RecieptUrl,
                 OrderStatus = 2, // Assuming OrderStatus is nullable
             };
 

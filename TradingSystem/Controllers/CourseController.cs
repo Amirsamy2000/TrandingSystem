@@ -113,13 +113,10 @@ namespace TrandingSystem.Controllers
         }
 
 
-        [HttpGet]
-        public async Task<IActionResult> EnrollCourse(int courseId)
+        [HttpPost]
+        public async Task<IActionResult> EnrollCourse(int courseId, IFormFile RecieptImage)
         {
-
-            // Get the current user ID from the claims
             var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
-            
 
             if (userIdClaim == null)
             {
@@ -127,9 +124,20 @@ namespace TrandingSystem.Controllers
             }
 
             int userId = int.Parse(userIdClaim.Value);
-            var result = await _mediator.Send(new EnrollCourseCommand(courseId, userId));
+
+            var result = await _mediator.Send(new EnrollCourseCommand(courseId, userId, RecieptImage));
 
             return Ok(result);
+        }
+
+
+
+
+        [HttpGet]
+        public IActionResult UploadReceiptPartial(int courseId)
+        {
+            //ViewBag.CourseId = courseId;
+            return PartialView("_UploadReceiptPartial",courseId);
 
         }
 
