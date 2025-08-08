@@ -42,8 +42,11 @@ namespace TrandingSystem.Application.Features.Courses.Handlers
                     return Task.FromResult(Response<bool>.ErrorResponse("User is already enrolled in this course"));
                 }
 
-
-                string imageUrl = _imageService.SaveImageAsync(request.ReceiptImage, ConstantPath.PathdReceiptsImage).Result;
+                string imageUrl = null;
+                if (request.ReceiptImage != null)
+                {
+                    imageUrl = _imageService.SaveImageAsync(request.ReceiptImage, ConstantPath.PathdReceiptsImage).Result;
+                }
                 
                 
                 

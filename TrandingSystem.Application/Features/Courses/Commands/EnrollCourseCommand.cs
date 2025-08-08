@@ -13,7 +13,7 @@ namespace TrandingSystem.Application.Features.Courses.Commands
     {
         public int CourseId { get; set; }
         public int UserId { get; set; }
-        public IFormFile ReceiptImage { get; set; }
+        public IFormFile? ReceiptImage { get; set; }
         public EnrollCourseCommand(int courseId, int userId, IFormFile Reciept)
         {
             CourseId = courseId;

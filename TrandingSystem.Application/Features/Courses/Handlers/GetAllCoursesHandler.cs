@@ -51,6 +51,8 @@ internal class GetAllCoursesHandler : IRequestHandler<GetAllCoursesQuery, Respon
             }
 
             var courseDtos = _mapper.Map<List<CourseDto>>(courses);
+            
+
             return Response<List<CourseDto>>.SuccessResponse(courseDtos);
         }
         catch (Exception ex)

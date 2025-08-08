@@ -38,5 +38,9 @@ namespace TrandingSystem.Application.Dtos
         public bool? IsActive { get; set; }
 
         public string? ImageCourseUrl { get; set; }
+
+        //public List<int> EnrolledUsers{ get; set; }
+        public List<CourseEnrollment> CourseEnrollments { get; set; }
+
     }
 }

@@ -114,7 +114,7 @@ namespace TrandingSystem.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> EnrollCourse(int courseId, IFormFile RecieptImage)
+        public async Task<IActionResult> EnrollCourse(int courseId, IFormFile? RecieptImage)
         {
             var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
 
@@ -134,9 +134,9 @@ namespace TrandingSystem.Controllers
 
 
         [HttpGet]
-        public IActionResult UploadReceiptPartial(int courseId)
+        public IActionResult UploadReceiptPartial(int courseId,bool IsFree)
         {
-            //ViewBag.CourseId = courseId;
+            ViewBag.IsFree = IsFree;
             return PartialView("_UploadReceiptPartial",courseId);
 
         }

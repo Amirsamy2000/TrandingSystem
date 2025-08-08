@@ -30,7 +30,7 @@ namespace TrandingSystem.Infrastructure.Repositories
 
         public List<Course> Read()
         {
-            return _context.Courses.ToList();
+            return _context.Courses.Include(c=>c.CourseEnrollments).ToList();
         }
 
         public List<Course> GetCoursesByLecturerId(int lecturerId)
@@ -69,6 +69,7 @@ namespace TrandingSystem.Infrastructure.Repositories
 
         public bool EnrollCourse(int courseId, int userId, string RecieptUrl)
         {
+            
 
             var courseEnrol = new CourseEnrollment
             {
@@ -77,7 +78,7 @@ namespace TrandingSystem.Infrastructure.Repositories
                 CreatedAt = DateTime.Now,
                 IsConfirmed = false,
                 ReceiptImagePath = RecieptUrl,
-                OrderStatus = 2, // Assuming OrderStatus is nullable
+                OrderStatus = (byte?)(ReadById(courseId).Cost<= 0 ? 1 : 2), // Assuming OrderStatus is nullable is bendding
             };
 
 
@@ -85,6 +86,14 @@ namespace TrandingSystem.Infrastructure.Repositories
 
             _context.SaveChanges();
             return true;
+        }
+
+        public List<int> CourseEnrolledUsers(int courseId)
+        {
+            return _context.CourseEnrollments
+                .Where(ce => ce.CourseId == courseId)
+                .Select(ce => ce.UserId)
+                .ToList();
         }
     }
 }
