@@ -6,6 +6,54 @@
 @if (Model is not null|| Model.Count() > 0)
 {
 
+    <style>
+        .dataTables_filter input {
+            padding: 6px 10px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            width: 250px;
+            font-size: 14px;
+        }
+
+        .dt-button, .custom-btn {
+            background-color: #007bff !important;
+            color: white !important;
+            padding: 6px 12px;
+            border-radius: 6px;
+            border: none;
+            font-size: 14px;
+            margin-left: 5px;
+            cursor: pointer;
+        }
+
+            .dt-button:hover, .custom-btn:hover {
+                background-color: #0056b3 !important;
+            }
+
+        .dataTables_filter input {
+            class: "form-control"
+        }
+
+        .dataTables_length select {
+            padding: 8px !important;
+            background-color: #007bff !important;
+            color: white !important;
+           
+           
+        }
+
+        #OrdersTable_filter label::before {
+            content: "" !important
+        }
+
+        #OrdersTable_filter label {
+            font-size: 0 !important; /* Hide text */
+        }
+
+        #OrdersTable_filter input {
+            font-size: 14px !important; /* Restore input font size */
+        }
+    </style>
     <table class="table table-hover table-bordered " id="OrdersTable">
             <thead>
                 <tr class=" table-info" >
@@ -56,7 +104,292 @@
                        </td>
                     </tr>
                     }
+                    @* For Test *@
+            <tr >
+                <td class="sorting_1">Amir200</td>
+                <td>Amir200@gmail.com</td>
+                <td>01122873492</td>
+                <td>Basic to Forex Trading</td>
+                <td>0</td>
+                <td>
+                    <img src="https://templates.mediamodifier.com/645119b4d85926511979ab4b/regular-shopping-receipt-template.jpg" alt="Not Found" width="50" height="50">
+                </td>
 
+                <td>
+                    <button class="btn btn-success">قبول</button>
+                </td>
+
+                <td>
+                    <button class="btn btn-info">الايصال</button>
+
+                </td>
+            </tr>
+            <tr>
+                <td class="sorting_1">Amir200</td>
+                <td>Amir200@gmail.com</td>
+                <td>01122873492</td>
+                <td>Basic to Forex Trading</td>
+                <td>0</td>
+                <td>
+                    <img src="https://templates.mediamodifier.com/645119b4d85926511979ab4b/regular-shopping-receipt-template.jpg" alt="Not Found" width="50" height="50">
+                </td>
+
+                <td>
+                    <button class="btn btn-success">قبول</button>
+                </td>
+
+                <td>
+                    <button class="btn btn-info">الايصال</button>
+
+                </td>
+            </tr>
+            <tr>
+                <td class="sorting_1">Amir200</td>
+                <td>Amir200@gmail.com</td>
+                <td>01122873492</td>
+                <td>Basic to Forex Trading</td>
+                <td>0</td>
+                <td>
+                    <img src="https://templates.mediamodifier.com/645119b4d85926511979ab4b/regular-shopping-receipt-template.jpg" alt="Not Found" width="50" height="50">
+                </td>
+
+                <td>
+                    <button class="btn btn-success">قبول</button>
+                </td>
+
+                <td>
+                    <button class="btn btn-info">الايصال</button>
+
+                </td>
+            </tr>
+            <tr>
+                <td class="sorting_1">Amir200</td>
+                <td>Amir200@gmail.com</td>
+                <td>01122873492</td>
+                <td>Basic to Forex Trading</td>
+                <td>0</td>
+                <td>
+                    <img src="https://templates.mediamodifier.com/645119b4d85926511979ab4b/regular-shopping-receipt-template.jpg" alt="Not Found" width="50" height="50">
+                </td>
+
+                <td>
+                    <button class="btn btn-success">قبول</button>
+                </td>
+
+                <td>
+                    <button class="btn btn-info">الايصال</button>
+
+                </td>
+            </tr>
+            <tr >
+                <td class="sorting_1">Amir200</td>
+                <td>Amir200@gmail.com</td>
+                <td>01122873492</td>
+                <td>Basic to Forex Trading</td>
+                <td>0</td>
+                <td>
+                    <img src="https://templates.mediamodifier.com/645119b4d85926511979ab4b/regular-shopping-receipt-template.jpg" alt="Not Found" width="50" height="50">
+                </td>
+
+                <td>
+                    <button class="btn btn-success">قبول</button>
+                </td>
+
+                <td>
+                    <button class="btn btn-info">الايصال</button>
+
+                </td>
+            </tr>
+            <tr>
+                <td class="sorting_1">Amir200</td>
+                <td>Amir200@gmail.com</td>
+                <td>01122873492</td>
+                <td>Basic to Forex Trading</td>
+                <td>0</td>
+                <td>
+                    <img src="https://templates.mediamodifier.com/645119b4d85926511979ab4b/regular-shopping-receipt-template.jpg" alt="Not Found" width="50" height="50">
+                </td>
+
+                <td>
+                    <button class="btn btn-success">قبول</button>
+                </td>
+
+                <td>
+                    <button class="btn btn-info">الايصال</button>
+
+                </td>
+            </tr>
+            <tr >
+                <td class="sorting_1">Amir200</td>
+                <td>Amir200@gmail.com</td>
+                <td>01122873492</td>
+                <td>Basic to Forex Trading</td>
+                <td>0</td>
+                <td>
+                    <img src="https://templates.mediamodifier.com/645119b4d85926511979ab4b/regular-shopping-receipt-template.jpg" alt="Not Found" width="50" height="50">
+                </td>
+
+                <td>
+                    <button class="btn btn-success">قبول</button>
+                </td>
+
+                <td>
+                    <button class="btn btn-info">الايصال</button>
+
+                </td>
+            </tr>
+            <tr >
+                <td class="sorting_1">Amir200</td>
+                <td>Amir200@gmail.com</td>
+                <td>01122873492</td>
+                <td>Basic to Forex Trading</td>
+                <td>0</td>
+                <td>
+                    <img src="https://templates.mediamodifier.com/645119b4d85926511979ab4b/regular-shopping-receipt-template.jpg" alt="Not Found" width="50" height="50">
+                </td>
+
+                <td>
+                    <button class="btn btn-success">قبول</button>
+                </td>
+
+                <td>
+                    <button class="btn btn-info">الايصال</button>
+
+                </td>
+            </tr>
+            <tr >
+                <td class="sorting_1">Amir200</td>
+                <td>Amir200@gmail.com</td>
+                <td>01122873492</td>
+                <td>Basic to Forex Trading</td>
+                <td>0</td>
+                <td>
+                    <img src="https://templates.mediamodifier.com/645119b4d85926511979ab4b/regular-shopping-receipt-template.jpg" alt="Not Found" width="50" height="50">
+                </td>
+
+                <td>
+                    <button class="btn btn-success">قبول</button>
+                </td>
+
+                <td>
+                    <button class="btn btn-info">الايصال</button>
+
+                </td>
+            </tr>
+            <tr >
+                <td class="sorting_1">Amir200</td>
+                <td>Amir200@gmail.com</td>
+                <td>01122873492</td>
+                <td>Basic to Forex Trading</td>
+                <td>0</td>
+                <td>
+                    <img src="https://templates.mediamodifier.com/645119b4d85926511979ab4b/regular-shopping-receipt-template.jpg" alt="Not Found" width="50" height="50">
+                </td>
+
+                <td>
+                    <button class="btn btn-success">قبول</button>
+                </td>
+
+                <td>
+                    <button class="btn btn-info">الايصال</button>
+
+                </td>
+            </tr>
+            <tr >
+                <td class="sorting_1">Amir200</td>
+                <td>Amir200@gmail.com</td>
+                <td>01122873492</td>
+                <td>Basic to Forex Trading</td>
+                <td>0</td>
+                <td>
+                    <img src="https://templates.mediamodifier.com/645119b4d85926511979ab4b/regular-shopping-receipt-template.jpg" alt="Not Found" width="50" height="50">
+                </td>
+
+                <td>
+                    <button class="btn btn-success">قبول</button>
+                </td>
+
+                <td>
+                    <button class="btn btn-info">الايصال</button>
+
+                </td>
+            </tr>
+            <tr >
+                <td class="sorting_1">Amir200</td>
+                <td>Amir200@gmail.com</td>
+                <td>01122873492</td>
+                <td>Basic to Forex Trading</td>
+                <td>0</td>
+                <td>
+                    <img src="https://templates.mediamodifier.com/645119b4d85926511979ab4b/regular-shopping-receipt-template.jpg" alt="Not Found" width="50" height="50">
+                </td>
+
+                <td>
+                    <button class="btn btn-success">قبول</button>
+                </td>
+
+                <td>
+                    <button class="btn btn-info">الايصال</button>
+
+                </td>
+            </tr>
+            <tr>
+                <td class="sorting_1">Amir200</td>
+                <td>Amir200@gmail.com</td>
+                <td>01122873492</td>
+                <td>Basic to Forex Trading</td>
+                <td>0</td>
+                <td>
+                    <img src="https://templates.mediamodifier.com/645119b4d85926511979ab4b/regular-shopping-receipt-template.jpg" alt="Not Found" width="50" height="50">
+                </td>
+
+                <td>
+                    <button class="btn btn-success">قبول</button>
+                </td>
+
+                <td>
+                    <button class="btn btn-info">الايصال</button>
+
+                </td>
+            </tr>
+            <tr>
+                <td class="sorting_1">Amir200</td>
+                <td>Amir200@gmail.com</td>
+                <td>01122873492</td>
+                <td>Basic to Forex Trading</td>
+                <td>0</td>
+                <td>
+                    <img src="https://templates.mediamodifier.com/645119b4d85926511979ab4b/regular-shopping-receipt-template.jpg" alt="Not Found" width="50" height="50">
+                </td>
+
+                <td>
+                    <button class="btn btn-success">قبول</button>
+                </td>
+
+                <td>
+                    <button class="btn btn-info">الايصال</button>
+
+                </td>
+            </tr>
+            <tr>
+                <td class="sorting_1">Amir200</td>
+                <td>Amir200@gmail.com</td>
+                <td>01122873492</td>
+                <td>Basic to Forex Trading</td>
+                <td>0</td>
+                <td>
+                    <img src="https://templates.mediamodifier.com/645119b4d85926511979ab4b/regular-shopping-receipt-template.jpg" alt="Not Found" width="50" height="50">
+                </td>
+
+                <td>
+                    <button class="btn btn-success">قبول</button>
+                </td>
+
+                <td>
+                    <button class="btn btn-info">الايصال</button>
+
+                </td>
+            </tr>
              
             </tbody>
         </table>
@@ -79,7 +412,22 @@ else
     </div>
 }
 
-<script>
 
+<script>
+   $('#OrdersTable').DataTable({
+    pageLength: 5,
+    lengthMenu: [[5, 10, 25, -1], [5, 10, 25, "All"]],
+    language: {
+        lengthMenu: "_MENU_"
+    },
+    ordering: true,
+    order: [[0, 'asc']],
+    columnDefs: [
+        { orderable: false, targets: [5, 6, 7] }
+    ],
+    responsive: true,
+    dom: 'Blfrtip', // هنا التعديل الهام
+    buttons: ['copy', 'excel', 'print']
+});
 </script>
 

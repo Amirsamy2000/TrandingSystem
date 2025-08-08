@@ -112,21 +112,7 @@
 
         // DataTable
 
-              $('#OrdersTable').DataTable({
-               
-                pageLength: 10, // عدد الصفوف الافتراضي
-               
-                ordering: true, // تمكين الترتيب
-                order: [[0, 'asc']], // ترتيب افتراضي حسب العمود الأول
-                columnDefs: [
-                    { orderable: false, targets: [5, 6, 7] } // تعطيل الترتيب في الأعمدة (الصورة + الأزرار)
-                ],
-                responsive: true,
-                dom: 'Bfrtip', // لعرض أزرار التصدير
-                buttons: [
-                    'copy', 'csv', 'excel', 'pdf', 'print'
-                ]
-            });
+             
        
         function ShowOrdersByOrderStatus(status, idDiv) {
 
