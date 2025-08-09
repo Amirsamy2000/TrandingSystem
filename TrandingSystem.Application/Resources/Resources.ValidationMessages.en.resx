@@ -171,4 +171,13 @@
   <data name="NoDataFound" xml:space="preserve">
     <value>No subscription requests found</value>
   </data>
+  <data name="OrderNotFound" xml:space="preserve">
+    <value>Order Request Not Found</value>
+  </data>
+  <data name="GeneralOperationDone" xml:space="preserve">
+    <value>The Operation is successfully</value>
+  </data>
+  <data name="GeneralError" xml:space="preserve">
+    <value>Something went wrong, please try again later</value>
+  </data>
 </root>

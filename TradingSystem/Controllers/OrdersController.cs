@@ -1,7 +1,11 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using TradingSystem.Application.Common.Response;
+using TrandingSystem.Application.Features.OrdersEnorllment.Commands;
 using TrandingSystem.Application.Features.OrdersEnorllment.Queries;
+using TrandingSystem.Domain.Entities;
 using TrandingSystem.Models;
 
 namespace TrandingSystem.Controllers
@@ -9,9 +13,12 @@ namespace TrandingSystem.Controllers
     public class OrdersController : Controller
     {
         private readonly IMediator _mediator;
-        public OrdersController(IMediator mediator)
+        private readonly UserManager<User> _userManager;
+
+        public OrdersController(IMediator mediator,UserManager<User> userManager)
         {
             _mediator = mediator;
+            _userManager = userManager;
         }
         public IActionResult AllOrders()
         {
@@ -43,6 +50,18 @@ namespace TrandingSystem.Controllers
             }
 
             return PartialView("_PartialOdersEnrollemnt", Response.Data);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ChangeOrderStatus(int orderId,int newStatus=0)
+        {
+            // This gets the user object from the Identity system
+            var user = await _userManager.GetUserAsync(User);
+
+            if (user == null)
+                return Unauthorized(new { message = "Not logged in" });
+            var res = _mediator.Send(new ConfirmedOrderRequestCommand(orderId, DateTime.Now, user.Id)).Result;
+            return Json(res);
         }
     }
 }

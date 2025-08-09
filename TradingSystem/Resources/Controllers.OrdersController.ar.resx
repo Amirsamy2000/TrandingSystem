@@ -123,6 +123,9 @@
   <data name="AcceptedRequest" xml:space="preserve">
     <value>قبول</value>
   </data>
+  <data name="AcceptedRequestMess" xml:space="preserve">
+    <value>هل متاكد من قبول طلب التسجيل؟</value>
+  </data>
   <data name="Acceted" xml:space="preserve">
     <value>المقبولة</value>
   </data>
@@ -132,8 +135,20 @@
   <data name="BackReqest" xml:space="preserve">
     <value>رجوع</value>
   </data>
+  <data name="BackReqestMess" xml:space="preserve">
+    <value>سيتم انتقال طلب التسجيل الي الطلبات المعلقة</value>
+  </data>
   <data name="CancelEnrollmentRequests" xml:space="preserve">
     <value>طلبات التسجيل المرفوضة</value>
+  </data>
+  <data name="canclesweet" xml:space="preserve">
+    <value>الغاء</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>اغلاق</value>
+  </data>
+  <data name="confirmsweet" xml:space="preserve">
+    <value>نعم</value>
   </data>
   <data name="CourseCostCol" xml:space="preserve">
     <value>المبلغ</value>
@@ -147,6 +162,9 @@
   <data name="FaildLoad" xml:space="preserve">
     <value>فشل تحميل البيانات</value>
   </data>
+  <data name="GeneralmessForSuccess" xml:space="preserve">
+    <value>تمت العملية بنجاح</value>
+  </data>
   <data name="ImageReqest" xml:space="preserve">
     <value>الايصال</value>
   </data>
@@ -155,6 +173,9 @@
   </data>
   <data name="NoOrderMessage" xml:space="preserve">
     <value>لا توجد بيانات لعرضها حاليًا.</value>
+  </data>
+  <data name="orderdate" xml:space="preserve">
+    <value>التاريخ</value>
   </data>
   <data name="Orders" xml:space="preserve">
     <value>طلبات</value>
@@ -170,6 +191,18 @@
   </data>
   <data name="Reject" xml:space="preserve">
     <value>المرفوضة</value>
+  </data>
+  <data name="RejectedRequest" xml:space="preserve">
+    <value>رفض</value>
+  </data>
+  <data name="RejectedRequestMess" xml:space="preserve">
+    <value>هل متاكد من رفض طلب التسجيل؟</value>
+  </data>
+  <data name="RjectedRequest" xml:space="preserve">
+    <value>رفض</value>
+  </data>
+  <data name="ServerError" xml:space="preserve">
+    <value>خطأ أثناء الاتصال بالخادم</value>
   </data>
   <data name="ShowImageReqest" xml:space="preserve">
     <value>الايصال</value>

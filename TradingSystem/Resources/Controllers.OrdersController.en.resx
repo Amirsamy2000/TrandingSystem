@@ -123,6 +123,9 @@
   <data name="AcceptedRequest" xml:space="preserve">
     <value>Accepted </value>
   </data>
+  <data name="AcceptedRequestMess" xml:space="preserve">
+    <value>Are you sure your  enrollment  request will be accepted?</value>
+  </data>
   <data name="Acceted" xml:space="preserve">
     <value>Approved  </value>
   </data>
@@ -132,8 +135,20 @@
   <data name="BackReqest" xml:space="preserve">
     <value>Back</value>
   </data>
+  <data name="BackReqestMess" xml:space="preserve">
+    <value>The Enrollment request will be transferred to pending requests.</value>
+  </data>
   <data name="CancelEnrollmentRequests" xml:space="preserve">
     <value>Cancel Enrollment Requests</value>
+  </data>
+  <data name="canclesweet" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="confirmsweet" xml:space="preserve">
+    <value>Yes</value>
   </data>
   <data name="CourseCostCol" xml:space="preserve">
     <value>Cost</value>
@@ -147,6 +162,9 @@
   <data name="FaildLoad" xml:space="preserve">
     <value>Data loading failed</value>
   </data>
+  <data name="GeneralmessForSuccess" xml:space="preserve">
+    <value>The operation was successful.</value>
+  </data>
   <data name="ImageReqest" xml:space="preserve">
     <value>Receipt</value>
   </data>
@@ -155,6 +173,9 @@
   </data>
   <data name="NoOrderMessage" xml:space="preserve">
     <value>No data available to display</value>
+  </data>
+  <data name="orderdate" xml:space="preserve">
+    <value>Date</value>
   </data>
   <data name="Orders" xml:space="preserve">
     <value>Orders</value>
@@ -170,6 +191,18 @@
   </data>
   <data name="Reject" xml:space="preserve">
     <value>Rejected  </value>
+  </data>
+  <data name="RejectedRequest" xml:space="preserve">
+    <value>Reject</value>
+  </data>
+  <data name="RejectedRequestMess" xml:space="preserve">
+    <value>Are you sure your enrollment request will be rejected?</value>
+  </data>
+  <data name="RjectedRequest" xml:space="preserve">
+    <value>Reject</value>
+  </data>
+  <data name="ServerError" xml:space="preserve">
+    <value>Error while connecting to server</value>
   </data>
   <data name="ShowImageReqest" xml:space="preserve">
     <value>Receipt</value>

@@ -33,12 +33,13 @@ namespace TrandingSystem.Infrastructure.Repositories
 
         public CourseEnrollment ReadById(int Id)
         {
-            throw new NotImplementedException();
+            return _db.CourseEnrollments.Where(x=>x.EnrollmentId==Id).FirstOrDefault();
         }
 
         public CourseEnrollment Update(CourseEnrollment Element)
         {
-            throw new NotImplementedException();
+            _db.CourseEnrollments.Update(Element);
+            return Element;
         }
     }
 }

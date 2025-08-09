@@ -171,4 +171,13 @@
   <data name="NoDataFound" xml:space="preserve">
     <value>لا توجد طلبات اشتراك </value>
   </data>
+  <data name="OrderNotFound" xml:space="preserve">
+    <value>طلب التسجيل غير موجود</value>
+  </data>
+  <data name="GeneralOperationDone" xml:space="preserve">
+    <value>تمت العملية بنجاح</value>
+  </data>
+  <data name="GeneralError" xml:space="preserve">
+    <value>حدث خطأ ما، يرجى المحاولة مرة أخرى لاحقًا</value>
+  </data>
 </root>

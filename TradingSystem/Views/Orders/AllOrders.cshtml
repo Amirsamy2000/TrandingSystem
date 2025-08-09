@@ -16,7 +16,7 @@
         <div class="alert alert-warning text-center">
             <h5 class="mb-2">@Localizer["Pennding"]</h5>
             <i class="bx bx-time text-warning fs-2"></i>
-            <h3>@Model.CountOrdersPending </h3>
+            <h3 id="CountPending">@Model.CountOrdersPending </h3>
             <button class="btn btn-outline-warning" onclick="ShowOrdersByOrderStatus(2,'pendingOrders')">@Localizer["View"]</button>
         </div>
     </div>
@@ -26,7 +26,7 @@
         <div class="alert alert-danger text-center">
             <h5 class="mb-2">@Localizer["Reject"]</h5>
             <i class="bx bx-x-circle text-danger fs-2"></i>
-            <h3>@Model.CountOrdersCanceled </h3>
+            <h3 id="CountCanceled">@Model.CountOrdersCanceled </h3>
             <button class="btn btn-outline-danger" onclick="ShowOrdersByOrderStatus(0,'cancelOrders')">View</button>
         </div>
     </div>
@@ -36,7 +36,7 @@
         <div class="alert alert-success text-center">
             <h5 class="mb-2">@Localizer["Acceted"]</h5>
             <i class="bx bx-check-circle text-success fs-2"></i>
-            <h3>@Model.CountOrdersAccepted </h3>
+            <h3 id="CountAccepted">@Model.CountOrdersAccepted </h3>
             <button class="btn btn-outline-success" onclick="ShowOrdersByOrderStatus(1,'acceptedOrders')">View</button>
         </div>
     </div>
@@ -112,6 +112,21 @@
 
         // DataTable
 
+            //   $('.OrdersTable').DataTable({
+
+            //     pageLength: 10, عدد الصفوف الافتراضي
+
+            //     ordering: true, تمكين الترتيب
+            //     order: [[0, 'asc']], ترتيب افتراضي حسب العمود الأول
+            //     columnDefs: [
+            //         { orderable: false, targets: [5, 6, 7] } تعطيل الترتيب في الأعمدة (الصورة + الأزرار)
+            //     ],
+            //     responsive: true,
+            //     dom: 'Bfrtip', لعرض أزرار التصدير
+            //     buttons: [
+            //         'copy', 'excel', 'pdf', 
+            //     ]
+            // });
              
        
         function ShowOrdersByOrderStatus(status, idDiv) {
