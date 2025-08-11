@@ -117,64 +117,112 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Adduser" xml:space="preserve">
-    <value>Add User</value>
+  <data name="TitleEN" xml:space="preserve">
+    <value>Title (Arabic)</value>
   </data>
-  <data name="Add" xml:space="preserve">
-    <value>Add Course</value>
+  <data name="Send" xml:space="preserve">
+    <value>Save Video</value>
   </data>
-  <data name="user" xml:space="preserve">
-    <value>Users</value>
+  <data name="TitleAR" xml:space="preserve">
+    <value>Title (English)</value>
   </data>
-  <data name="Addcommunty" xml:space="preserve">
-    <value>Add Community</value>
+  <data name="DescriptionEN" xml:space="preserve">
+    <value>Description (English)</value>
   </data>
-  <data name="Dashboard" xml:space="preserve">
-    <value>Dashboard</value>
+  <data name="DescriptionAR" xml:space="preserve">
+    <value>Description (Aarbic)</value>
   </data>
-  <data name="dispalycommunty" xml:space="preserve">
-    <value>Communities</value>
+  <data name="VideoUrl" xml:space="preserve">
+    <value>Video</value>
   </data>
-  <data name="dispalyuser" xml:space="preserve">
-    <value>Stie Name</value>
+  <data name="DeleteAll" xml:space="preserve">
+    <value>حذف جميع الجلسات</value>
   </data>
-  <data name="course" xml:space="preserve">
-    <value>Courses</value>
+  <data name="IsPaid" xml:space="preserve">
+    <value>Paid</value>
   </data>
-  <data name="dispaly" xml:space="preserve">
-    <value>Display Courses</value>
+  <data name="Cost" xml:space="preserve">
+    <value>التكلفة</value>
   </data>
-  <data name="communty" xml:space="preserve">
-    <value>Communities</value>
+  <data name="IsActive" xml:space="preserve">
+    <value>Active </value>
   </data>
-  <data name="Videos" xml:space="preserve">
-    <value>Videos</value>
+  <data name="ImageVideoUrl" xml:space="preserve">
+    <value>Image Video</value>
   </data>
-  <data name="AddVideo" xml:space="preserve">
-    <value>Add Video</value>
+  <data name="Course" xml:space="preserve">
+    <value>Course</value>
   </data>
-  <data name="Displasession" xml:space="preserve">
-    <value>Dispaly Sessions</value>
+  <data name="UnBlock" xml:space="preserve">
+    <value>الغاء الخظر</value>
   </data>
-  <data name="DisplatVideo" xml:space="preserve">
-    <value>Dispaly Videos</value>
+  <data name="UpdateNewVideo" xml:space="preserve">
+    <value>Update Video Data</value>
   </data>
-  <data name="ChoiceCourse" xml:space="preserve">
-    <value>Please choose a course</value>
+  <data name="notfiy" xml:space="preserve">
+    <value>Notify all subscribers of the course</value>
   </data>
-  <data name="btnShowAllSession" xml:space="preserve">
-    <value>Show Sessions</value>
+  <data name="Required" xml:space="preserve">
+    <value>This Field Is Required</value>
   </data>
-  <data name="AllOrder" xml:space="preserve">
-    <value>Enrollment Requests</value>
+  <data name="AllowImageExtntion" xml:space="preserve">
+    <value>Invalid image file extension. Allowed: JPG, PNG, GIF, WebP.</value>
   </data>
-  <data name="Orders" xml:space="preserve">
-    <value>Orders</value>
+  <data name="AllowVideoExtensiion" xml:space="preserve">
+    <value>Invalid video file extension. Allowed: MP4, AVI, MOV, MKV.</value>
   </data>
-  <data name="livesession" xml:space="preserve">
-    <value>Sessions</value>
+  <data name="Nagtivenumber" xml:space="preserve">
+    <value>Negative values are not allowed.</value>
   </data>
-  <data name="btnShowAllVideo" xml:space="preserve">
-    <value>Show Videos</value>
+  <data name="InvaildCost" xml:space="preserve">
+    <value>Cost is not required for free videos.</value>
+  </data>
+  <data name="TitleEN1" xml:space="preserve">
+    <value>Title (Arabic)</value>
+  </data>
+  <data name="IspaidCost" xml:space="preserve">
+    <value>Should Enter Cost Of Video</value>
+  </data>
+  <data name="CostForPaid" xml:space="preserve">
+    <value>Should Enter Cost Of Video</value>
+  </data>
+  <data name="VideoSubmitError" xml:space="preserve">
+    <value>Some error occurred. Try again.</value>
+  </data>
+  <data name="NoVideosMessage" xml:space="preserve">
+    <value>لا توجد جلسات لهذة الكورس </value>
+  </data>
+  <data name="NoVideosMessage1" xml:space="preserve">
+    <value>قم بإضافة  جلسات جديدة</value>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>جلسات  البث المباشر</value>
+  </data>
+  <data name="AddNewlive" xml:space="preserve">
+    <value>اضافة بث  جديد</value>
+  </data>
+  <data name="Update" xml:space="preserve">
+    <value>تعديل</value>
+  </data>
+  <data name="Display" xml:space="preserve">
+    <value>عرض</value>
+  </data>
+  <data name="Block" xml:space="preserve">
+    <value>حظر</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>حذف</value>
+  </data>
+  <data name="Date" xml:space="preserve">
+    <value>التاريخ</value>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>الحالة</value>
+  </data>
+  <data name="Paid" xml:space="preserve">
+    <value>مدفوع</value>
+  </data>
+  <data name="Unpaid" xml:space="preserve">
+    <value>مجاني</value>
   </data>
 </root>

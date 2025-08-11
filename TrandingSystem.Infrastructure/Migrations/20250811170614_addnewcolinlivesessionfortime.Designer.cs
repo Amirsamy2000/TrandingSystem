@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TrandingSystem.Infrastructure.Data;
 
@@ -11,9 +12,11 @@ using TrandingSystem.Infrastructure.Data;
 namespace TrandingSystem.Infrastructure.Migrations
 {
     [DbContext(typeof(db23617Context))]
-    partial class db23617ContextModelSnapshot : ModelSnapshot
+    [Migration("20250811170614_addnewcolinlivesessionfortime")]
+    partial class addnewcolinlivesessionfortime
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -161,7 +164,7 @@ namespace TrandingSystem.Infrastructure.Migrations
 
                     b.HasIndex("CreateBy");
 
-                    b.ToTable("Categories", (string)null);
+                    b.ToTable("Categories");
                 });
 
             modelBuilder.Entity("TrandingSystem.Domain.Entities.Community", b =>
@@ -205,7 +208,7 @@ namespace TrandingSystem.Infrastructure.Migrations
 
                     b.HasIndex("CourseId");
 
-                    b.ToTable("Communities", (string)null);
+                    b.ToTable("Communities");
                 });
 
             modelBuilder.Entity("TrandingSystem.Domain.Entities.CommunityMember", b =>
@@ -240,7 +243,7 @@ namespace TrandingSystem.Infrastructure.Migrations
                     b.HasIndex(new[] { "CommunityId", "UserId" }, "UQ_Community_User")
                         .IsUnique();
 
-                    b.ToTable("CommunityMembers", (string)null);
+                    b.ToTable("CommunityMembers");
                 });
 
             modelBuilder.Entity("TrandingSystem.Domain.Entities.ContactInfo", b =>
@@ -346,7 +349,7 @@ namespace TrandingSystem.Infrastructure.Migrations
 
                     b.HasIndex("CreateBy");
 
-                    b.ToTable("Courses", (string)null);
+                    b.ToTable("Courses");
                 });
 
             modelBuilder.Entity("TrandingSystem.Domain.Entities.CourseEnrollment", b =>
@@ -393,7 +396,7 @@ namespace TrandingSystem.Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("CourseEnrollments", (string)null);
+                    b.ToTable("CourseEnrollments");
                 });
 
             modelBuilder.Entity("TrandingSystem.Domain.Entities.CourseLecturer", b =>
@@ -414,7 +417,7 @@ namespace TrandingSystem.Infrastructure.Migrations
 
                     b.HasIndex("LecturerId");
 
-                    b.ToTable("CourseLecturers", (string)null);
+                    b.ToTable("CourseLecturers");
                 });
 
             modelBuilder.Entity("TrandingSystem.Domain.Entities.CourseRating", b =>
@@ -447,7 +450,7 @@ namespace TrandingSystem.Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("CourseRatings", (string)null);
+                    b.ToTable("CourseRatings");
                 });
 
             modelBuilder.Entity("TrandingSystem.Domain.Entities.LandingPageContent", b =>
@@ -561,7 +564,7 @@ namespace TrandingSystem.Infrastructure.Migrations
 
                     b.HasIndex("CreadteBy");
 
-                    b.ToTable("LiveSessions", (string)null);
+                    b.ToTable("LiveSessions");
                 });
 
             modelBuilder.Entity("TrandingSystem.Domain.Entities.Message", b =>
@@ -593,7 +596,7 @@ namespace TrandingSystem.Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Messages", (string)null);
+                    b.ToTable("Messages");
                 });
 
             modelBuilder.Entity("TrandingSystem.Domain.Entities.NotificationChannel", b =>
@@ -636,7 +639,7 @@ namespace TrandingSystem.Infrastructure.Migrations
                     b.HasKey("ChannelId")
                         .HasName("PK__Notifica__38C3E814D01982C0");
 
-                    b.ToTable("NotificationChannels", (string)null);
+                    b.ToTable("NotificationChannels");
                 });
 
             modelBuilder.Entity("TrandingSystem.Domain.Entities.NotificationSetting", b =>
@@ -669,7 +672,7 @@ namespace TrandingSystem.Infrastructure.Migrations
                     b.HasKey("SettingId")
                         .HasName("PK__Notifica__54372B1DF745D745");
 
-                    b.ToTable("NotificationSettings", (string)null);
+                    b.ToTable("NotificationSettings");
                 });
 
             modelBuilder.Entity("TrandingSystem.Domain.Entities.NotificationsQueue", b =>
@@ -879,7 +882,7 @@ namespace TrandingSystem.Infrastructure.Migrations
                         .IsUnique()
                         .HasFilter("[SessionToken] IS NOT NULL");
 
-                    b.ToTable("UserSessions", (string)null);
+                    b.ToTable("UserSessions");
                 });
 
             modelBuilder.Entity("TrandingSystem.Domain.Entities.UsersConnection", b =>
@@ -900,7 +903,7 @@ namespace TrandingSystem.Infrastructure.Migrations
                     b.HasKey("UserId", "ConnId")
                         .HasName("PK_Compist");
 
-                    b.ToTable("UsersConnections", (string)null);
+                    b.ToTable("UsersConnections");
                 });
 
             modelBuilder.Entity("TrandingSystem.Domain.Entities.Video", b =>
@@ -965,7 +968,7 @@ namespace TrandingSystem.Infrastructure.Migrations
 
                     b.HasIndex("CreadteBy");
 
-                    b.ToTable("Videos", (string)null);
+                    b.ToTable("Videos");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>

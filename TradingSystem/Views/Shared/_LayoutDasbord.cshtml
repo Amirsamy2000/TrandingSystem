@@ -224,7 +224,7 @@
                                     <div data-i18n="Without menu">@Localizer["AddVideo"]</div>
                                 </a>
                             </li>
-                            <li class="menu-item" onclick="ChoiceCourse('@Localizer["btnShowAllVideo"]','@Localizer["ChoiceCourse"]')">
+                            <li class="menu-item" onclick="ChoiceCourse('@Localizer["btnShowAllVideo"]','@Localizer["ChoiceCourse"]',0)">
                                 <a  class="menu-link">
                                     <div data-i18n="Without navbar">@Localizer["DisplatVideo"]</div>
                                 </a>
@@ -241,16 +241,29 @@
                         </a>
 
                         <ul class="menu-sub">
-                            <li class="menu-item">
+                            <li class="menu-item" >
                                 <a asp-action="AllOrders" asp-controller="Orders" class="menu-link">
                                     <div data-i18n="Without menu">@Localizer["AllOrder"]</div>
                                 </a>
                             </li>
-                          
-
                         </ul>
                     </li>
 
+                    <!-- sessions -->
+                    <li class="menu-item">
+                        <a href="javascript:void(0);" class="menu-link menu-toggle">
+                            <i class="menu-icon tf-icons bx bx-layout"></i>
+                            <div data-i18n="Layouts">@Localizer["livesession"]</div>
+                        </a>
+
+                        <ul class="menu-sub">
+                            <li class="menu-item" onclick="ChoiceCourse('@Localizer["btnShowAllSession"]','@Localizer["ChoiceCourse"]',1)">
+                                <a  class="menu-link">
+                                    <div data-i18n="Without menu">@Localizer["Displasession"]</div>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
                     <!-- Test -->
                     <li class="menu-item">
                         <a href="" class="menu-link menu-toggle">

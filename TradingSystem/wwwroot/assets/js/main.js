@@ -222,7 +222,7 @@ function handleIsPaidChangeInAddNewVideo(idpaid, idcost) {
 
 
 // Show Pop To Choice Cousre then Dispaly  videos
-function ChoiceCourse(text,text2) {
+function ChoiceCourse(text,text2,numUrl) {
     debugger
     $.ajax({
         url: '/Course/ReadAll',
@@ -248,7 +248,7 @@ function ChoiceCourse(text,text2) {
 
                 html += `</select>
                     </div>
-                    <div class='col-12'>  <button type="button" class="btn btn-outline-info" onclick="GoToPageDiplayVideos()"> ${text} </button>
+                    <div class='col-12'>  <button type="button" class="btn btn-outline-info" onclick="GoToPageDiplayVideos(${numUrl})"> ${text} </button>
                      </div>
                      </div>`;           
                 
@@ -287,9 +287,14 @@ function ChoiceCourse(text,text2) {
 
 
 /// Go To Page Display Videos
-function GoToPageDiplayVideos() {
-    debugger
-    window.location.href = '/Videos/Videos?CourseId=' + $("#courseSelect").val();
+function GoToPageDiplayVideos(numUrl) {
+    if (numUrl === 0) {
+        window.location.href = '/Videos/Videos?CourseId=' + $("#courseSelect").val();
+
+    }
+    else {
+        window.location.href = '/LiveSession/LiveSessions?CourseId=' + $("#courseSelect").val();
+    }
 }
 
 

@@ -1,0 +1,190 @@
+﻿@using Microsoft.Extensions.Localization
+@using TrandingSystem.Application.Dtos
+@using TrandingSystem.Controllers
+
+@inject IStringLocalizer<LiveSessionController> Localizer
+@model VideoAddedDto;
+@{
+    var courses = TempData["Course"] as IEnumerable<CourseDto>;
+    // int x = 110;
+    // int o = 220;
+}
+<div class="row d-flex justify-content-center">
+
+
+    <div class="col-10" id="mainPartial">
+        <div class="card mb-4">
+            <div class="card-header d-flex align-items-center justify-content-between">
+                <h5 class="mb-0 text-primary">@Localizer["AddNewVideo"]</h5>
+
+            </div>
+            <div class="card-body">
+                <form enctype="multipart/form-data" id="AddNewVideoForm">
+                    @Html.AntiForgeryToken()
+
+                    <!-- رسائل التحقق العامة -->
+                    @* <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div> *@
+
+                    @* Title *@
+                    <div class="row mb-3">
+                        <label class="col-sm-4 col-form-label">@Localizer["TitleAR"]</label>
+                        <div class="col-sm-8">
+
+                            <input asp-for="TitleAR" id="InputTitleAR" class="form-control" oninput="GeneralRequiredFiled('InputTitleAR', '@Localizer["Required"]', 'TitleAR')" />
+                            <br />
+                            <span name="TitleAR" id="TitleAR" class="text-danger"></span>
+
+                        </div>
+                    </div>
+
+
+
+
+
+
+
+                    <div class="row mb-3">
+                        <label class="col-sm-4 col-form-label" for="basic-icon-default-fullname">@Localizer["TitleEN"]</label>
+                        <div class="col-sm-8">
+                            <input asp-for="TitleEN" id="InputTitleEN" class="form-control" oninput="GeneralRequiredFiled('InputTitleEN', '@Localizer["Required"]', 'TitleEN')" />
+                            <span name="TitleEN" id="TitleEN" class="text-danger"></span>
+                        </div>
+                    </div>
+                    @* end *@
+
+                    @* Description *@
+                    <div class="row mb-3">
+                        <label class="col-sm-4 form-label" for="basic-icon-default-message">@Localizer["DescriptionAR"]</label>
+                        <div class="col-sm-8">
+                            <textarea asp-for="DescriptionAR" id="IputDescriptionAR" class="form-control" rows="3" oninput="GeneralRequiredFiled('IputDescriptionAR', '@Localizer["Required"]', 'DescriptionAR')"></textarea>
+
+                            <span name="DescriptionAR" class="text-danger" id="DescriptionAR"></span>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label class="col-sm-4 form-label" for="basic-icon-default-message">@Localizer["DescriptionEN"]</label>
+                        <div class="col-sm-8">
+                            <textarea asp-for="DescriptionEN" id="inputDescriptionEN" class="form-control" rows="3" oninput="GeneralRequiredFiled('inputDescriptionEN', '@Localizer["Required"]', 'DescriptionEN')"></textarea>
+                            <span name="DescriptionEN" class="text-danger" id="DescriptionEN"></span>
+                        </div>
+                    </div>
+                    @* end *@
+
+                    @* Course *@
+                    <div class="row mb-3">
+                        <label class="col-sm-4 form-label" for="basic-icon-default-message">@Localizer["Course"]</label>
+                        <div class="col-sm-8">
+
+                            <select class="form-control" asp-for="CourseId" id="SelectCourseId">
+                                @if (courses != null)
+                                {
+                                    foreach (var course in courses)
+                                    {
+                                        <option value="@course.CourseId">@course.TitleEN</option>
+                                    }
+                                }
+                            </select>
+                            <span id="CourseId" class="text-danger"></span>
+
+                        </div>
+
+                    </div>
+                    @* end *@
+
+                    @* Image *@
+                    <div class="row mb-3">
+                        <label class="col-sm-4 col-form-label" for="basic-icon-default-company">@Localizer["ImageVideoUrl"]</label>
+                        <div class="col-sm-8">
+
+                            <input asp-for="ImageVideoUrl" id="InputImageVideoUrl" type="file" accept="image/*" class="form-control" onchange="validateImageFile('InputImageVideoUrl','ImageVideoUrl','@Localizer["AllowImageExtntion"]')" />
+                            <span name="ImageVideoUrl" id="ImageVideoUrl" class="text-danger"></span>
+                        </div>
+                    </div>
+                    @* end *@
+
+                    @* Video *@
+                    <div class="row mb-3">
+                        <label class="col-sm-4 col-form-label" for="basic-icon-default-company">@Localizer["VideoUrl"]</label>
+                        <div class="col-sm-8">
+                            <input asp-for="VideoUrl" type="file" id="inputVideoUrl" class="form-control" onchange="validateVideoFile('inputVideoUrl', 'VideoUrl','@Localizer["AllowVideoExtensiion"]')" />
+                            <span id="VideoUrl" class="text-danger"></span>
+                        </div>
+                    </div>
+                    @* end *@
+
+                    @* Paid And Active *@
+                    <div class="row mb-3 d-flex justify-content-center ">
+                        @* Active *@
+                        <div class="col-2">
+                            <div class="row ">
+                                <label class="col-sm-6 col-form-label " for="basic-icon-default-company">@Localizer["IsActive"]</label>
+                                <div class="col-sm-6">
+                                    <div class="input-group input-group-merge mt-1">
+
+                                        <input asp-for="IsActive" class="form-check-input" type="checkbox" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @* end *@
+                        <div class="col-2">
+                            <div class="row  ">
+                                <label class="col-sm-6 col-form-label" for="basic-icon-default-company">@Localizer["IsPaid"]</label>
+                                <div class="col-sm-6">
+                                    <div class="input-group input-group-merge">
+
+                                        <input asp-for="IsPaid" class="form-check-input" type="checkbox" id="Ispaid" onchange="handleIsPaidChangeInAddNewVideo('Ispaid','Costadd')" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @* notify *@
+                        <div class="col-8">
+                            <div class="row ">
+                                <label class="col-sm-8 col-form-label" for="basic-icon-default-company">@Localizer["notfiy"]</label>
+                                <div class="col-sm-4">
+                                    <div class="input-group input-group-merge">
+
+                                        <input asp-for="notfiy" class="form-check-input" type="checkbox" id="notfiy" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @* end *@
+
+
+                    @* Cost *@
+                    <div class="row mb-3">
+                        <label class="col-sm-4 col-form-label" for="basic-icon-default-email">@Localizer["Cost"]</label>
+                        <div class="col-sm-8">
+
+                            <input asp-for="Cost" type="number" class="form-control" id="Costadd" value="0"
+                                   oninput="validateCost('@Localizer["InvaildCost"]','Ispaid','Costadd','spanCost','@Localizer["Nagtivenumber"]','@Localizer["CostForPaid"]')" />
+                            <span id="spanCost" class="text-danger"></span>
+                            <span name="Cost" id="spanCost" class="text-danger"></span>
+
+                        </div>
+
+
+
+                    </div>
+                    @* end *@
+
+                    <div class="row justify-content-end">
+                        <div class="col-sm-8">
+                            <button type="button" onclick="SubmitAddNewVideo()" class="btn btn-primary px-4"> @Localizer["Send"]</button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+
+</script>

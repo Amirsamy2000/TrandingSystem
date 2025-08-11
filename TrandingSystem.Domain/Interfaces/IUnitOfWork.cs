@@ -13,7 +13,8 @@ namespace TrandingSystem.Domain.Interfaces
         ICourseRepository Courses { get; }
         IUserRepository Users { get; }
         IOrdersEnorllment ordersEnorllment { get; }
-    
+        ILiveSessionRepositry LiveSessionRepositry { get; }
+
         Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
     }
 }

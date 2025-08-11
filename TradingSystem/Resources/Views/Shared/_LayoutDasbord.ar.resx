@@ -153,19 +153,28 @@
   <data name="AddVideo" xml:space="preserve">
     <value>اضافة فديو</value>
   </data>
+  <data name="Displasession" xml:space="preserve">
+    <value>عرض الجلسات</value>
+  </data>
   <data name="DisplatVideo" xml:space="preserve">
     <value>عرض الفديوهات</value>
   </data>
   <data name="ChoiceCourse" xml:space="preserve">
     <value>من فضلك اختار الكورس</value>
   </data>
-  <data name="btnShowAllVideo" xml:space="preserve">
-    <value>عرض الفديوهات</value>
+  <data name="btnShowAllSession" xml:space="preserve">
+    <value>عرض الجلسات</value>
   </data>
   <data name="AllOrder" xml:space="preserve">
     <value>طلبات التسجيل</value>
   </data>
   <data name="Orders" xml:space="preserve">
     <value>طلبات</value>
+  </data>
+  <data name="livesession" xml:space="preserve">
+    <value>الجلسات</value>
+  </data>
+  <data name="btnShowAllVideo" xml:space="preserve">
+    <value>عرض الفديوهات</value>
   </data>
 </root>

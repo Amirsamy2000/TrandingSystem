@@ -1,0 +1,135 @@
+﻿@using Microsoft.Extensions.Localization
+@using TrandingSystem.Application.Dtos
+@model IEnumerable<LiveSessionsDto>
+@using Microsoft.AspNetCore.Mvc.Localization
+@using TrandingSystem.Controllers
+@inject IStringLocalizer<LiveSessionController> Localizer
+@{
+    ViewData["Title"] = "LiveSessions";
+    Layout = "~/Views/Shared/_LayoutDasbord.cshtml";
+    var culture = new System.Globalization.CultureInfo(ViewBag.Culture ?? "en-US");
+
+}
+
+<style>
+    .description-clamp {
+    max-height: 3.6em; /* تقريبا سطرين */
+    overflow: hidden;
+    position: relative;
+    transition: max-height 0.3s ease-in-out;
+    cursor: pointer;
+    }
+
+    .description-clamp:hover {
+    max-height: 500px; /* ارتفاع كبير يسمح بظهور كل المحتوى */
+    }
+
+    .Add-infoCard {
+    background-color: #eee;
+    border-radius: 6px;
+    padding-top: 10px
+    }
+
+    .modal-body {
+    padding: 0px !important;
+    }
+</style>
+<h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">@Localizer["Title"] /</span>@(ViewBag.CourseName ?? "Un") </h4>
+
+<div class="row mb-3 ">
+    <div class="col">
+
+        <button class="btn btn-primary" onclick="DispalPatialAddNewVideo()">  <i class='menu-icon tf-icons bx bx-plus'></i> @Localizer["AddNewlive"]</button>
+        <button class="btn btn-danger" onclick="DeleteAllVideos(@ViewBag.CourseId??0)">  <i class='menu-icon bx bx-trash tf-icons bx bx-plus'></i> @Localizer["DeleteAll"]</button>
+    </div>
+</div>
+<div class="row mb-5">
+    @if (Model.Count() > 0)
+    {
+        @foreach (var session in Model)
+        {
+            @* card one *@
+            <div class="col-md-6 col-lg-4 mb-3">
+                <div class="card h-100">
+                    <img class="card-img-top" src="~/@session.ImageSessionUrl" alt="Card image cap" />
+                    <div class="card-body p-2">
+                        <h5 class="card-title">@session.Title</h5>
+                        <p class="card-text description-clamp">
+                            @session.Description
+                        </p>
+                        @if (session.ScheduledAt>DateTime.Now)
+                        {
+                            <a onclick="DispalPatialUppdateNewVideo(@session.SessionId)" class="btn btn-outline-primary  m-1">@Localizer["Update"]</a>
+                            @* <a onclick="DisplayVideo(@session.SessionId)" class="btn btn-outline-info  m-1">@Localizer["Display"] </a> *@
+                            @if (session.IsActive == true)
+                            {
+                                <a onclick="BlockVideo(@session.SessionId,false)" class="btn btn-outline-warning  m-1">@Localizer["Block"]</a>
+
+                            }
+                            else
+                            {
+                                <a onclick="BlockVideo(@session.SessionId,true)" class="btn btn-outline-warning  m-1">@Localizer["UnBlock"]</a>
+
+                            }
+
+                            <a data-id="" onclick="DeleteVideo(@session.SessionId)" class="btn btn-outline-danger  m-1">@Localizer["Delete"]</a>
+                        }
+                        <hr />
+                        <div class="row p-2">
+                            <div class="col-12 d-flex justify-content-between align-items-center Add-infoCard">
+                                <h5>@Localizer["Date"]</h5>
+                                <p>@session.ScheduledAt.ToString("dd/MM/yyyy", culture)  || @(session.ScheduledAt.ToString("hh:mm tt"))</p>
+                            </div>
+                            <div class="col-12 d-flex justify-content-between align-items-center mt-2 Add-infoCard">
+                                <h5 class=" ">@Localizer["Status"]</h5>
+                                @if (session.IsLocked??false)
+                                {
+                                    <p class="">@Localizer["Paid"]</p>
+                                }
+                                else
+                                {
+                                    <p class="">@Localizer["Unpaid"]</p>
+                                }
+                            </div>
+                            <div class="col-12 d-flex justify-content-between align-items-center mt-2 Add-infoCard">
+                                <h5>@Localizer["Cost"]</h5>
+                                <p>@session.Cost $</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+        }
+
+    }
+
+    else
+    {
+        <div class="col-12">
+            <div class="alert alert-primary   " role="alert">
+                <h4 class="alert-heading text-center">@Localizer["NoVideosMessage"]</h4>
+                <br />
+                <p class="text-center">@Localizer["NoVideosMessage1"]</p>
+            </div>
+        </div>
+
+    }
+</div>
+<div class="modal fade" id="youTubeModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <iframe src=""
+                    loading="lazy"
+                    style="border: none;"
+                    allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
+                    allowfullscreen
+                    width="100%"
+                    height="400" id="UrlVideo">
+            </iframe>
+        </div>
+    </div>
+</div>
+

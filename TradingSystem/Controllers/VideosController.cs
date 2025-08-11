@@ -37,11 +37,7 @@ namespace TrandingSystem.Controllers
             var culture = Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName;
             //@ViewData["Master"] = @locaizer[""]
             var response= _mediator.Send(new GetVideosByCourseIdQuery(CourseId, culture), cancellationToken).Result;
-            if (!response.Success)
-            {
-               // return to Erro Page
-            }
-            //  ViewData["CourseName"] = response.Result.Data2.ToString();
+         
 
             ViewBag.CourseId = CourseId;
             ViewBag.CourseName = response.Message;

@@ -25,6 +25,8 @@ namespace TrandingSystem.Infrastructure.Repositories
         private IOrdersEnorllment _ordersEnorllment;
         public IOrdersEnorllment ordersEnorllment => _ordersEnorllment ??= new OrdersEnorllment(_context);
 
+        private ILiveSessionRepositry _liveSession;
+        public ILiveSessionRepositry LiveSessionRepositry => _liveSession ??= new LiveSessionRepository(_context);
         public UnitOfWork(db23617Context context)
         {
             _context = context;
