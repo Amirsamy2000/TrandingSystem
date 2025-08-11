@@ -1,8 +1,6 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "CoursesDetails";
 }
-
 <!-- Page Title -->
 <div class="page-title" data-aos="fade">
     <div class="heading">
@@ -32,8 +30,8 @@
         <div class="row">
             <div class="col-lg-8">
                 <img src="~/assets/img/course-details.jpg" class="img-fluid" alt="">
-                <h3>Et enim incidunt fuga tempora</h3>
-                <p>
+                <h3></h3>
+                <p>Et enim incidunt fuga tempora
                     Qui et explicabo voluptatem et ab qui vero et voluptas. Sint voluptates temporibus quam autem. Atque nostrum voluptatum laudantium a doloremque enim et ut dicta. Nostrum ducimus est iure minima totam doloribus nisi ullam deserunt. Corporis aut officiis sit nihil est. Labore aut sapiente aperiam.
                     Qui voluptas qui vero ipsum ea voluptatem. Omnis et est. Voluptatem officia voluptatem adipisci et iusto provident doloremque consequatur. Quia et porro est. Et qui corrupti laudantium ipsa.
                     Eum quasi saepe aperiam qui delectus quaerat in. Vitae mollitia ipsa quam. Ipsa aut qui numquam eum iste est dolorum. Rem voluptas ut sit ut.
@@ -67,6 +65,13 @@
     </div>
 
 </section><!-- /Courses Course Details Section -->
+
+
+<div id="videoList">
+    @await Html.PartialAsync("~/Views/Videos/_VideosPartialView.cshtml", new { CourseId = 1 })
+</div>
+
+
 <!-- Tabs Section -->
 <section id="tabs" class="tabs section">
 
