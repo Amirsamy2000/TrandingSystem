@@ -48,6 +48,7 @@ namespace TrandingSystem.Controllers
             return View(response.Data);
         }
 
+        [HttpGet]
         public IActionResult PartialVideos(CancellationToken cancellationToken, int CourseId = 1)
         {
             var culture = Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName;

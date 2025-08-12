@@ -220,7 +220,7 @@
                                     @if (course.CourseEnrollments.FirstOrDefault(ce => ce.UserId == userId)?.OrderStatus == 1)
                                     {
                                         <button class="btn flex-fill fw-semibold py-2"
-                                                onclick="location.href='/Home/CoursesDetails'"
+                                                onclick="location.href='/Home/CoursesDetails?CourseId=@course.CourseId'"
                                                 style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
                                                border: none; border-radius: 12px; color: white;
                                                transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
