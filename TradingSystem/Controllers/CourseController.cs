@@ -89,7 +89,7 @@ namespace TrandingSystem.Controllers
         {
             return View();
         }
-
+         
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] CourseVM model)
         {
