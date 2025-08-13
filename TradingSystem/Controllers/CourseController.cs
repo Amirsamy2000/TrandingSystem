@@ -91,7 +91,7 @@ namespace TrandingSystem.Controllers
         }
            
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] CourseVM model)
+        public async Task<IActionResult> Create(CourseVM model)
         {
             if (!ModelState.IsValid)
             {
