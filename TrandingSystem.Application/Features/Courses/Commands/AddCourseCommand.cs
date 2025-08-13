@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,6 +35,8 @@ namespace TrandingSystem.Application.Features.Courses.Commands
         public bool? IsFullyFree { get; set; }
 
         public bool? IsActive { get; set; }
+        public IFormFile? CourseImage { get; set; }
+
 
 
     }

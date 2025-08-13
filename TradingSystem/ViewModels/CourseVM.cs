@@ -10,13 +10,13 @@
 
         public string DescriptionAR { get; set; }
 
-        public int CategoryId { get; set; }
+        public int? CategoryId { get; set; }
 
         public decimal Cost { get; set; }
 
         public bool? CommunityAutoCreate { get; set; }
 
-        public bool IsLive { get; set; }
+        public bool? IsLive { get; set; }
 
         public int? CreateBy { get; set; }
 
@@ -25,6 +25,9 @@
         public bool? IsFullyFree { get; set; }
 
         public bool? IsActive { get; set; }
+
+        public IFormFile? CourseImage { get; set; }
+
         public string? ImageCourseUrl { get; set; }
 
     }

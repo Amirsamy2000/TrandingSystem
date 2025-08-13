@@ -95,5 +95,13 @@ namespace TrandingSystem.Infrastructure.Repositories
                 .Select(ce => ce.UserId)
                 .ToList();
         }
+
+        public List<User> GetLecturesByCourseId(int CourseId)
+        {
+            return _context.CourseLecturers
+                .Where(cl => cl.CourseId == CourseId)
+                .Select(cl => cl.Lecturer)
+                .ToList();
+        }
     }
 }

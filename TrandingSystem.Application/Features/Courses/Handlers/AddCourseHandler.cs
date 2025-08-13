@@ -1,14 +1,15 @@
-﻿using MediatR;
+﻿using AutoMapper;
+using MediatR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TradingSystem.Application.Common.Response;
+using TrandingSystem.Application.Features.Courses.Commands;
 using TrandingSystem.Domain.Entities;
 using TrandingSystem.Domain.Interfaces;
-using AutoMapper;
-using TrandingSystem.Application.Features.Courses.Commands;
-using TradingSystem.Application.Common.Response;
+using TrandingSystem.Infrastructure.Constants;
 
 namespace TrandingSystem.Application.Features.Courses.Handlers
 {
@@ -17,11 +18,14 @@ namespace TrandingSystem.Application.Features.Courses.Handlers
         private readonly IUnitOfWork _unitOfWork;
 
         private readonly IMapper _mapper;
+        private readonly IFileService _imageService;
 
-        public AddCourseHandler(IUnitOfWork unitOfWork, IMapper mapper)
+
+        public AddCourseHandler(IUnitOfWork unitOfWork, IMapper mapper, IFileService imageService)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
+            _imageService = imageService;
         }
 
         public async Task<Response<Course>> Handle(AddCourseCommand request, CancellationToken cancellationToken)
@@ -33,6 +37,13 @@ namespace TrandingSystem.Application.Features.Courses.Handlers
                 {
                     return Response<Course>.ErrorResponse("Invalid course data");
                 }
+
+                if(request.CourseImage != null)
+                {
+                    course.ImageCourseUrl = _imageService.SaveImageAsync(request.CourseImage, ConstantPath.PathdCoursesImages).Result;
+
+                }
+
 
                 var result = _unitOfWork.Courses.Create(course);
 
