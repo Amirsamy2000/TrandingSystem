@@ -209,7 +209,7 @@
 
 	debugger
 	$.ajax({
-		url: '/Videos/PartialVideos?CourseId=1', // Adjust URL to match your route
+		url: '/Videos/PartialVideos?CourseId=@Model.CourseId', // Adjust URL to match your route
 		type: 'GET',
 		success: function (html) {
 			debugger
