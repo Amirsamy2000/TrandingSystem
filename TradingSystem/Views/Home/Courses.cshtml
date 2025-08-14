@@ -1,4 +1,5 @@
-﻿@using TrandingSystem.Application.Dtos
+﻿@using System.Security.Claims
+@using TrandingSystem.Application.Dtos
 @inject IHttpContextAccessor HttpContextAccessor
 @inject IViewLocalizer Localizer
 @using Microsoft.AspNetCore.Localization
@@ -21,6 +22,10 @@
     var paddingStart = isRtl ? "pe-3" : "ps-3";
     var paddingEnd = isRtl ? "ps-3" : "pe-3";
     var borderStart = isRtl ? "border-end" : "border-start";
+
+
+    var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
+    int? userId = userIdClaim != null ? int.Parse(userIdClaim.Value) : (int?)null;
 }
 
 <section class="courses-section py-5 bg-light" dir="@dirAttribute">
@@ -60,6 +65,7 @@
                     <div class="col-12 col-md-6 col-lg-4">
                         <div class="card h-100 shadow-sm border-0 course-card">
                             <!-- Course Image -->
+                            <h1>@course.CourseId</h1>
                             <div class="position-relative overflow-hidden">
                                 @if (!string.IsNullOrEmpty(course.ImageCourseUrl))
                                 {
@@ -210,57 +216,95 @@
                                 <!-- Action Button -->
                                 <!-- Enhanced Action Buttons -->
                                 <div class="d-flex gap-3 mt-3 mb-3">
-                                    <!-- View Details Button -->
-                                    <button class="btn flex-fill fw-semibold py-2"
-                                            onclick="location.href='/Home/CoursesDetails'"
-                                            style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-                                           border: none; border-radius: 12px; color: white;
-                                           transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-                                           box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
-                                           position: relative; overflow: hidden;">
-                                        <span class="position-relative z-1">
-                                            @if (isRtl)
-                                            {
-                                                <span>عرض التفاصيل</span>
-                                                <i class="fas fa-arrow-left @(isRtl ? "me-2" : "ms-2")"></i>
-                                            }
-                                            else
-                                            {
-                                                <span>View Details</span>
-                                                <i class="fas fa-arrow-right @(isRtl ? "me-2" : "ms-2")"></i>
-                                            }
-                                        </span>
-                                        <!-- Button shine effect -->
-                                        <div class="position-absolute top-0 start-0 w-100 h-100"
-                                             style="background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.2) 50%, transparent 70%);
-                                            transform: translateX(-100%); transition: transform 0.6s;"></div>
-                                    </button>
+                                    <!-- Go To Course Button -->
+                                    @if (course.CourseEnrollments.FirstOrDefault(ce => ce.UserId == userId)?.OrderStatus == 1)
+                                    {
+                                        <button class="btn flex-fill fw-semibold py-2"
+                                                onclick="location.href='/Home/CoursesDetails?CourseId=@course.CourseId'"
+                                                style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                                               border: none; border-radius: 12px; color: white;
+                                               transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+                                               box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+                                               position: relative; overflow: hidden;">
+                                            <span class="position-relative z-1">
+                                                @if (isRtl)
+                                                {
+                                                    <span>أبدأ الدوره</span>
+                                                    <i class="fas fa-arrow-left @(isRtl ? "me-2" : "ms-2")"></i>
+                                                }
+                                                else
+                                                {
+                                                    <span>Go To Course</span>
+                                                    <i class="fas fa-arrow-right @(isRtl ? "me-2" : "ms-2")"></i>
+                                                }
+                                            </span>
+                                            <!-- Button shine effect -->
+                                            <div class="position-absolute top-0 start-0 w-100 h-100"
+                                                 style="background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.2) 50%, transparent 70%);
+                                                transform: translateX(-100%); transition: transform 0.6s;"></div>
+                                        </button>
+                                    }
 
-                                    <!-- Enroll Button -->
-                                    <a href="@Url.Action("EnrollCourse", "Course", new { courseId = course.CourseId })"
-                                       class="btn flex-fill fw-semibold text-center text-decoration-none py-2"
-                                       style="background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
-                                      border: none; border-radius: 12px; color: white;
-                                      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-                                      box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
-                                      position: relative; overflow: hidden;">
-                                        <span class="position-relative z-1">
-                                            @if (isRtl)
-                                            {
-                                                <span>سجّل الآن</span>
-                                                <i class="fas fa-user-plus @(isRtl ? "me-2" : "ms-2")"></i>
-                                            }
-                                            else
-                                            {
-                                                <span>Enroll Now</span>
-                                                <i class="fas fa-user-plus @(isRtl ? "me-2" : "ms-2")"></i>
-                                            }
-                                        </span>
-                                        <!-- Button shine effect -->
-                                        <div class="position-absolute top-0 start-0 w-100 h-100"
-                                             style="background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.2) 50%, transparent 70%);
-                                            transform: translateX(-100%); transition: transform 0.6s;"></div>
-                                    </a>
+                                    else if (course.CourseEnrollments.FirstOrDefault(ce => ce.UserId == userId)?.OrderStatus == 2)
+                                    {
+                                        <!--Pending button-->
+                                        <a href="javascript:void(0);"
+                                           class="btn flex-fill fw-semibold text-center text-decoration-none py-2"
+                                           style="background: linear-gradient(135deg, #ffc107 0%, #ffca2c 100%);
+                                                  border: none; border-radius: 12px; color: white;
+                                                  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+                                                  box-shadow: 0 4px 15px rgba(255, 193, 7, 0.4);
+                                                  position: relative; overflow: hidden; cursor: not-allowed;">
+                                            <span class="position-relative z-1">
+                                                @if (isRtl)
+                                                {
+                                                    <span>قيد الانتظار</span>
+                                                    <i class="fas fa-clock @(isRtl ? "me-2" : "ms-2")"></i>
+                                                }
+                                                else
+                                                {
+                                                    <span>Pending</span>
+                                                    <i class="fas fa-clock @(isRtl ? "me-2" : "ms-2")"></i>
+                                                }
+                                            </span>
+                                            <div class="position-absolute top-0 start-0 w-100 h-100"
+                                                 style="background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.2) 50%, transparent 70%);
+                                                        transform: translateX(-100%); transition: transform 0.6s;">
+                                            </div>
+                                        </a>
+
+
+                                    }
+                                    else
+                                    {
+                                         <!-- Enroll Button -->
+                                        <a href="javascript:void(0);"
+                                           onclick="openEnrollModal(@course.CourseId, @(course.Cost <= 0 ? "true" : "false"))"
+                                           class="btn flex-fill fw-semibold text-center text-decoration-none py-2"
+                                           style="background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+                                                  border: none; border-radius: 12px; color: white;
+                                                  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+                                                  box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
+                                                  position: relative; overflow: hidden;">
+                                            <span class="position-relative z-1">
+                                                @if (isRtl)
+                                                {
+                                                    <span>سجّل الآن</span>
+                                                    <i class="fas fa-user-plus @(isRtl ? "me-2" : "ms-2")"></i>
+                                                }
+                                                else
+                                                {
+                                                    <span>Enroll Now</span>
+                                                    <i class="fas fa-user-plus @(isRtl ? "me-2" : "ms-2")"></i>
+                                                }
+                                            </span>
+                                            <div class="position-absolute top-0 start-0 w-100 h-100"
+                                                 style="background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.2) 50%, transparent 70%);
+                                                        transform: translateX(-100%); transition: transform 0.6s;">
+                                            </div>
+                                        </a>
+
+                                    }
                                 </div>
                             </div>
                         </div>
@@ -299,6 +343,22 @@
         </div>
     </div>
 </section>
+
+
+<div class="modal fade" id="enrollModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Upload Receipt</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="enrollModalBody">
+                <!-- Partial view will be loaded here -->
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <style>
     .course-card {
@@ -469,5 +529,22 @@
                 }, index * 100);
             });
         });
+
+
+
+        function openEnrollModal(courseId,IsFree) {
+            debugger
+            fetch(`/Course/UploadReceiptPartial?courseId=${courseId}&IsFree=${IsFree}`)
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById("enrollModalBody").innerHTML = html;
+                    let modal = new bootstrap.Modal(document.getElementById("enrollModal"));
+                    modal.show();
+                });
+        }
+    
+
+
+
     </script>
 }

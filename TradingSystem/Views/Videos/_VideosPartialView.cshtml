@@ -1,0 +1,483 @@
+﻿@using Microsoft.Extensions.Localization
+@using TrandingSystem.Application.Dtos
+@model IEnumerable<VideoDto>
+@using Microsoft.AspNetCore.Mvc.Localization
+@using TrandingSystem.Controllers
+@inject IViewLocalizer Localizer
+@inject IStringLocalizer<VideosController> Localizer2
+<style>
+    .description-clamp {
+        max-height: 3.6em;
+        overflow: hidden;
+        position: relative;
+        transition: max-height 0.3s ease-in-out;
+        cursor: pointer;
+    }
+
+        .description-clamp::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 1.5em;
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0), #fff);
+        }
+
+        .description-clamp:hover {
+            max-height: 500px;
+        }
+
+    .Add-infoCard {
+        background-color: #f8f9fa;
+        border-radius: 8px;
+        padding: 8px 12px;
+    }
+
+    .card {
+        border: none;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+        }
+
+    .card-img-top {
+        object-fit: cover;
+        height: 180px;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+    }
+
+    @@media (max-width: 576px) {
+        .card-img-top
+
+    {
+        height: 150px;
+    }
+
+    }
+</style>
+
+<h4 class="fw-bold py-3 mb-4">
+    <span class="text-muted fw-light">@Localizer["Title"] /</span>
+    @(ViewBag.CourseName ?? "Un")
+</h4>
+
+<div class="row g-4">
+    @if (Model.Any())
+    {
+        @foreach (var video in Model)
+        {
+            <div class="col-sm-6 col-md-4 col-lg-3">
+                <div class="card h-100">
+                    <img class="card-img-top" src="~/@video.ImageVideoUrl" alt="@video.Title" />
+                    <div class="card-body p-3 d-flex flex-column">
+                        <h5 class="card-title mb-2">@video.Title</h5>
+                        <p class="card-text description-clamp mb-3">
+                            @video.Description
+                        </p>
+
+                        <div class="mt-auto">
+                            <a onclick="DisplayVideo(@video.VideoId)" class="btn btn-sm btn-outline-info me-1">@Localizer["Display"]</a>
+                            @* Other action buttons can go here *@
+                        </div>
+
+                        <hr class="my-3" />
+
+                        <div class="Add-infoCard mb-2 d-flex justify-content-between">
+                            <strong>@Localizer["Date"]</strong>
+                            <span>@video.CreatedAt</span>
+                        </div>
+                        <div class="Add-infoCard mb-2 d-flex justify-content-between">
+                            <strong>@Localizer["Status"]</strong>
+                            <span>@(video.IsPaid? Localizer["Paid"] : Localizer["Unpaid"])</span>
+                        </div>
+                        <div class="Add-infoCard d-flex justify-content-between">
+                            <strong>@Localizer["Cost"]</strong>
+                            <span>@video.Cost $</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <div class="col-12">
+            <div class="alert alert-primary text-center" role="alert">
+                <h4>@Localizer2["NoVideosMessage"]</h4>
+                <p class="mb-0">@Localizer2["NoVideosMessage1"]</p>
+            </div>
+        </div>
+    }
+</div>
+
+    <script>
+
+
+
+        // For Block Video
+            function BlockVideo(id, status) {
+               let response=status==true?"@Localizer["titleBlock1"]":"@Localizer["titleBlock"]"
+            debugger;
+            let model = {
+                title: response,
+                icon: "warning",
+                confirmButtonText: "@Localizer["confirmButtonTextBlock"]",
+                cancelButtonText: "@Localizer["cancelButtonTextBlock"]",
+                url:  `/Videos/BlockVideo?VideoId=${id}&Status=${status}`,
+                method: "POST",
+
+                responseSuccess: "@Localizer["responseSuccessBlock"]",
+                responseDanger: "@Localizer["responseDangerBlock"]"
+            };
+            DrawAlter(model);
+        }
+
+        // For Delet Videos
+          function DeleteVideo(id) {
+            debugger;
+              let model = {
+                title: "@Localizer["titleDelete"]",
+                icon: "question",
+                confirmButtonText: "@Localizer["confirmButtonTextBlock"]",
+                cancelButtonText: "@Localizer["cancelButtonTextBlock"]",
+                url:  `/Videos/DeleteVideo?VideoId=${id}`,
+                method: "POST",
+
+                responseSuccess: "@Localizer["responseSuccessBlock"]",
+                responseDanger: "@Localizer["responseDangerBlock"]"
+            };
+            DrawAlter(model);
+        }
+
+         // For Delet Videos
+          function DeleteAllVideos(id) {
+            debugger;
+              let model = {
+                title: "@Localizer["titleDeleteall"]",
+                icon: "error",
+                confirmButtonText: "@Localizer["confirmButtonTextBlock"]",
+                cancelButtonText: "@Localizer["cancelButtonTextBlock"]",
+                url:  `/Videos/DeleteAllVideos?CourseId=${id}`,
+                method: "POST",
+
+                responseSuccess: "@Localizer["responseSuccessBlock"]",
+                responseDanger: "@Localizer["responseDangerBlock"]"
+            };
+            DrawAlter(model);
+        }
+
+
+
+        // Dispal Patial Add New Video
+        function DispalPatialAddNewVideo(){
+              let setting={
+
+                title:"@Localizer["loading"]"
+            }
+            SweatAlterProcessing(setting)
+            $.ajax({
+                url:"/Videos/PartialViewAddNewVideo",
+                type:"GET",
+                success:function(data){
+                     Swal.close();
+                    $("#modalbody").html(data)
+                    $("#mainPartial").removeClass('col-10')
+                     $("#mainPartial").addClass('col-12')
+                   // استخدم كود Bootstrap 5 لعرض المودال
+                    var myModal = new bootstrap.Modal(document.getElementById('largeModal'), {
+              backdrop: 'static',     // يمنع الإغلاق عند الضغط على الخلفية, // أو static لو عايز تمنع إغلاقه بالضغط على الخلفية
+                keyboard: false      // يسمح بإغلاقه بزر Esc
+        });
+            myModal.show();
+                }
+
+            })
+        }
+
+           // Dispal Patial Update New Video
+        function DispalPatialUppdateNewVideo(id){
+
+            let setting={
+
+                title:"@Localizer["loading"]"
+            }
+            SweatAlterProcessing(setting)
+
+            $.ajax({
+                url:"/Videos/PartialViewUpdateNewVideo",
+                type:"GET",
+                data:{
+                    CourseId:@(ViewBag.CourseId),
+                    VideId:id
+
+                },
+                success:function(data){
+                                         Swal.close();
+
+                    $("#modalbody").html(data)
+                    $("#mainPartial").removeClass('col-10')
+                     $("#mainPartial").addClass('col-12')
+                   // استخدم كود Bootstrap 5 لعرض المودال
+                    var myModal = new bootstrap.Modal(document.getElementById('largeModal'), {
+              backdrop: 'static',     // يمنع الإغلاق عند الضغط على الخلفية, // أو static لو عايز تمنع إغلاقه بالضغط على الخلفية
+                keyboard: false      // يسمح بإغلاقه بزر Esc
+        });
+            myModal.show();
+                },
+
+
+
+            })
+        }
+         // For Dipaly Video As Youtube
+            function DisplayVideo(id) {
+            $.ajax({
+                url: "/Videos/DisplayVideo",
+                type: "GET",
+                data: { VideoId: id }, // ✅ كانت ناقصة =
+                success: function (res) {
+                    console.log("====================================================")
+                    console.log(res)
+                    // تأكد أن res.Data يحتوي على رابط فيديو صالح
+                    $('#UrlVideo').attr('src', res.data);
+
+                    // عرض المودال
+                    var myModal = new bootstrap.Modal(document.getElementById('youTubeModal'));
+                    myModal.show();
+                },
+                error: function (res) {
+                    console.error("Error loading video", res);
+                }
+            });
+        }
+        // For Change Is Paid
+               function handleIsPaidChange(cost) {
+            if (!$("#Ispaid").is(":checked")) {
+                // لو مش مدفوع، خليه 0.00
+                $("#Cost").val("0.00");
+            } else {
+                // لو مدفوع، خليه القيمة الأصلية (مثلاً 30.00)
+                let normalizedCost = parseFloat(cost).toFixed(2).replace(",", ".");
+                $("#Cost").val(normalizedCost);
+            }
+        }
+                $(function () {
+            $("#updateVideoForm").validate();
+        });
+
+
+
+
+
+
+
+
+             // Submit Update  Video
+          function SubmitUpdateVideo() {
+            debugger;
+
+            var form = $('#updateVideoForm')[0];
+            var data = new FormData(form);
+            var token = $('input[name="__RequestVerificationToken"]').val();
+
+            const isValid = FinalCheckVaildtionUpdate(); // ← هنا نستخدم القيمة المرجعة
+
+
+
+            if (!isValid) return;
+
+            let setting = {
+                title: "@Localizer["loading"]"
+            };
+             bootstrap.Modal.getInstance(document.getElementById('largeModal')).hide()
+            SweatAlterProcessing(setting);
+
+            $.ajax({
+                type: "POST",
+                url: "/Videos/SubmitUpdateVideo",
+                data: data,
+                processData: false,
+                contentType: false,
+                headers: {
+                    'RequestVerificationToken': token
+                },
+                success: function (res) {
+                    Swal.close();
+
+                    if (typeof res === "string" && res.includes("updateVideoForm")) {
+                        $("#mainPartial").html(res);
+                        return;
+                    }
+
+                    if (res.status==200) {
+                        console.log("=====================================Update")
+                        console.log(res)
+                        const modalInstance = bootstrap.Modal.getInstance(document.getElementById('largeModal'));
+                        if (modalInstance) modalInstance.hide();
+
+
+                        SweatAlterSuccess(res.message);
+                    } else {
+                        SweatAlterDanger(res.message);
+                    }
+                },
+                error: function () {
+                    const modalInstance = bootstrap.Modal.getInstance(document.getElementById('largeModal'));
+                    if (modalInstance) modalInstance.hide();
+
+                    SweatAlterDanger("@Localizer2["VideoSubmitError"]");
+                }
+            });
+        }
+            // Check Vaildtion For Update
+          function FinalCheckVaildtionUpdate() {
+            let isValid = true;
+
+            if (!GeneralRequiredFiled('InputTitleAR', '@Localizer2["Required"]', 'TitleAR')) {
+                isValid = false;
+            }
+
+            if (!GeneralRequiredFiled('InputTitleEN', '@Localizer2["Required"]', 'TitleEN')) {
+                isValid = false;
+            }
+
+            if (!GeneralRequiredFiled('inputDescriptionEN', '@Localizer2["Required"]', 'DescriptionEN')) {
+                isValid = false;
+            }
+
+            if (!GeneralRequiredFiled('IputDescriptionAR', '@Localizer2["Required"]', 'DescriptionAR')) {
+                isValid = false;
+            }
+
+            if (!GeneralRequiredFiled('SelectCourseId', '@Localizer2["Required"]', 'CourseId')) {
+                isValid = false;
+            }
+
+            if ($('#InputImageVideoUrl')[0].files.length &&!validateImageFile('InputImageVideoUrl', 'ImageVideoUrl', '@Localizer2["AllowImageExtntion"]')) {
+                isValid = false;
+            }
+
+
+
+            if (!handleIsPaidChangeInAddNewVideo('Ispaid', 'Costadd')) {
+                isValid = false;
+            }
+              if (!validateCost('@Localizer2["InvaildCost"]','Ispaid','Cost','spanCost','@Localizer2["Nagtivenumber"]','@Localizer2["CostForPaid"]')) {
+                isValid = false;
+            }
+
+            return isValid;
+        }
+
+
+
+             // Submit New Video
+           function SubmitAddNewVideo() {
+            debugger;
+
+            var form = $('#AddNewVideoForm')[0];
+            var data = new FormData(form);
+            var token = $('input[name="__RequestVerificationToken"]').val();
+
+            const isValid = FinalCheckVaildtion(); // ← هنا نستخدم القيمة المرجعة
+
+            console.log("-----------------------------------");
+            console.log(isValid);
+
+            if (!isValid) return;
+
+            let setting = {
+                title: "@Localizer["loading"]"
+            };
+            bootstrap.Modal.getInstance(document.getElementById('largeModal')).hide()
+            SweatAlterProcessing(setting);
+
+
+            $.ajax({
+                type: "POST",
+                url: "/Videos/SubmitAddNewVideo",
+                data: data,
+                processData: false,
+                contentType: false,
+                headers: {
+                    'RequestVerificationToken': token
+                },
+                success: function (res) {
+                    Swal.close();
+
+                    if (typeof res === "string" && res.includes("updateVideoForm")) {
+                        $("#mainPartial").html(res);
+                        return;
+                    }
+
+                    if (res.success) {
+                        const modalInstance = bootstrap.Modal.getInstance(document.getElementById('largeModal'));
+                        if (modalInstance) modalInstance.hide();
+
+                        SweatAlterSuccess(res.message);
+                    } else {
+                        SweatAlterDanger(res.message);
+                    }
+                },
+                error: function () {
+                    const modalInstance = bootstrap.Modal.getInstance(document.getElementById('largeModal'));
+                    if (modalInstance) modalInstance.hide();
+
+                    SweatAlterDanger("@Localizer2["VideoSubmitError"]");
+                }
+            });
+        }
+
+            function FinalCheckVaildtion() {
+            let isValid = true;
+
+            if (!GeneralRequiredFiled('InputTitleAR', '@Localizer2["Required"]', 'TitleAR')) {
+                isValid = false;
+            }
+
+            if (!GeneralRequiredFiled('InputTitleEN', '@Localizer2["Required"]', 'TitleEN')) {
+                isValid = false;
+            }
+
+            if (!GeneralRequiredFiled('inputDescriptionEN', '@Localizer2["Required"]', 'DescriptionEN')) {
+                isValid = false;
+            }
+
+            if (!GeneralRequiredFiled('IputDescriptionAR', '@Localizer2["Required"]', 'DescriptionAR')) {
+                isValid = false;
+            }
+
+            if (!GeneralRequiredFiled('SelectCourseId', '@Localizer2["Required"]', 'CourseId')) {
+                isValid = false;
+            }
+
+            if (!validateImageFile('InputImageVideoUrl', 'ImageVideoUrl', '@Localizer2["AllowImageExtntion"]')) {
+                isValid = false;
+            }
+
+            if (!validateVideoFile('inputVideoUrl', 'VideoUrl', '@Localizer2["AllowVideoExtensiion"]')) {
+                isValid = false;
+            }
+
+            if (!handleIsPaidChangeInAddNewVideo('Ispaid', 'Costadd')) {
+                isValid = false;
+            }
+
+              if (!validateCost('@Localizer["InvaildCost"]','Ispaid','Costadd','spanCost','@Localizer2["Nagtivenumber"]','@Localizer2["CostForPaid"]')) {
+                isValid = false;
+            }
+
+            return isValid;
+        }
+
+
+
+
+    </script>
+

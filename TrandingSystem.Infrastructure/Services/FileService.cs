@@ -54,27 +54,35 @@ namespace TrandingSystem.Infrastructure.Services
         }
 
 
-        public async Task<string> SaveImageAsync(IFormFile imageFile,string ImagePath, string existingFileName = null)
+        public async Task<string> SaveImageAsync(IFormFile imageFile, string imagePath, string existingFileName = null)
         {
-            // id Path Is Not Found Create it
-            if (!Directory.Exists(ImagePath))
-                Directory.CreateDirectory(ImagePath);
+            // Ensure directory exists
+            if (!Directory.Exists(imagePath))
+                Directory.CreateDirectory(imagePath);
 
-            // Creat Image Name
+            // Create new image name
             var fileName = Guid.NewGuid().ToString() + Path.GetExtension(imageFile.FileName);
-            var path = Path.Combine(ImagePath, fileName);
+            var filePath = Path.Combine(imagePath, fileName);
 
-            using (var stream = new FileStream(path, FileMode.Create))
+            // Save new file
+            using (var stream = new FileStream(filePath, FileMode.Create))
             {
                 await imageFile.CopyToAsync(stream);
             }
 
-            /// After save New Image Delete Old Image
+            // Delete old file if exists
             if (!string.IsNullOrEmpty(existingFileName))
                 await DeleteImageAsync(existingFileName);
 
-           return Path.Combine("UploadVideos", fileName).Replace("\\", "/");
+            // Return relative path for browser (e.g., /CoursesImages/fileName.png)
+            var relativePath = "/" + Path.GetRelativePath(
+                Path.Combine(Directory.GetCurrentDirectory(), "wwwroot"),
+                filePath
+            ).Replace("\\", "/");
+
+            return relativePath;
         }
+
 
         public async Task<string> SaveVideoAsync(IFormFile videoFile)
         {
