@@ -177,4 +177,7 @@
   <data name="btnShowAllVideo" xml:space="preserve">
     <value>عرض الفديوهات</value>
   </data>
+  <data name="AddNewasession" xml:space="preserve">
+    <value>اضافة بث</value>
+  </data>
 </root>

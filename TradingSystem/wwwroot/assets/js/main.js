@@ -147,7 +147,7 @@ function validateImageFile(id, errorSpanId, messagge) {
 }
 
 function validateCost(messagePaid, idIspaid, idCost,  idspanerror, messageFree,mess) {
-   debugger
+    
     let isPaid = $('#' + idIspaid).is(':checked');
     let costInput = $('#' + idCost);
     let cost = parseFloat(costInput.val());
@@ -298,6 +298,53 @@ function GoToPageDiplayVideos(numUrl) {
 }
 
 
+
+
+
+function validateDateTime(idspanDate, idspanTime, textEmpty, textPast, timepast) {
+    debugger
+    const dateInput = document.getElementById('inputScheduledAt').value;
+    const timeInput = document.getElementById('inputScheduledTime').value;
+
+    if (!dateInput) {
+        $("#" + idspanDate).text(textEmpty);
+        return false;
+    }
+
+    const selectedDate = new Date(dateInput);
+    selectedDate.setHours(0, 0, 0, 0);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    if (selectedDate < today) {
+        $("#" + idspanDate).text(textPast);
+        return false;
+    }
+
+    if (!timeInput) {
+        $("#" + idspanTime).text(textEmpty);
+        return false;
+    }
+
+    // لو التاريخ هو اليوم نتحقق من الوقت
+    if (selectedDate.getTime() === today.getTime()) {
+        const now = new Date();
+        // نفصل الساعات والدقائق من الوقت المختار
+        const [hours, minutes] = timeInput.split(':').map(Number);
+
+        const selectedDateTime = new Date();
+        selectedDateTime.setHours(hours, minutes, 0, 0);
+
+        if (selectedDateTime < now) {
+            $("#" + idspanTime).text(timepast);
+            return false;
+        }
+    }
+    $("#" + idspanTime).text("");
+    $("#" + idspanDate).text("");
+
+    return true; // صالح
+}
 
 
 

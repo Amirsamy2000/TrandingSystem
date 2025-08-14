@@ -11,5 +11,7 @@ namespace TrandingSystem.Domain.Interfaces
     public interface ILiveSessionRepositry: IDomainInterface<LiveSession>
     {
         IQueryable<LiveSession> GetAllLiveSessionsForCouse(int CourseId);
+
+        void DeleteAllSessionsByCourseId(List<LiveSession> liveSessions);
     }
 }

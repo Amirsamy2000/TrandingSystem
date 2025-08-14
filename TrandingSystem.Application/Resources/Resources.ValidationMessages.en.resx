@@ -180,4 +180,16 @@
   <data name="GeneralError" xml:space="preserve">
     <value>Something went wrong, please try again later</value>
   </data>
+  <data name="AddLiveSessionSuccess" xml:space="preserve">
+    <value>New live  added successfully.</value>
+  </data>
+  <data name="GeneralServerFail" xml:space="preserve">
+    <value>An error occurred while saving live, try again</value>
+  </data>
+  <data name="notFoundMessage" xml:space="preserve">
+    <value>Sorry, this live session does not exist or may have already been deleted.</value>
+  </data>
+  <data name="Notfoundlives" xml:space="preserve">
+    <value>There are no sessions for this course.</value>
+  </data>
 </root>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,9 +24,11 @@ namespace TrandingSystem.Application.Dtos
 
         public string YoutubeLink { get; set; }
         public DateTime ScheduledAt { get; set; }
-        public string ImageSessionUrl { get; set; }
+        public TimeSpan? ScheduledTime { get; set; }
 
-        public bool? IsLocked { get; set; }
+        public IFormFile ImageSessionUrl { get; set; }
+
+        public bool IsLocked { get; set; }
 
         public decimal? Cost { get; set; }
 
@@ -33,7 +36,9 @@ namespace TrandingSystem.Application.Dtos
 
         public int CreadteBy { get; set; }
 
-        public bool? IsActive { get; set; }
+        public bool IsActive { get; set; }
+        public bool notfiy { set; get; }
+
 
 
     }

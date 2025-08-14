@@ -25,6 +25,7 @@ namespace TrandingSystem.Application.Dtos
         public string ImageSessionUrl { get; set; }
 
         public bool? IsLocked { get; set; }
+        public TimeSpan? ScheduledTime { get; set; }
 
         public decimal? Cost { get; set; }
 

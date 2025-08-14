@@ -3,23 +3,27 @@
 @using TrandingSystem.Controllers
 
 @inject IStringLocalizer<LiveSessionController> Localizer
-@model VideoAddedDto;
+@model LiveSessionAddDto;
 @{
     var courses = TempData["Course"] as IEnumerable<CourseDto>;
     // int x = 110;
     // int o = 220;
+    var today = DateTime.UtcNow.ToString("yyyy-MM-dd");
+    int y = 0;
+
 }
 <div class="row d-flex justify-content-center">
 
 
     <div class="col-10" id="mainPartial">
         <div class="card mb-4">
-            <div class="card-header d-flex align-items-center justify-content-between">
-                <h5 class="mb-0 text-primary">@Localizer["AddNewVideo"]</h5>
-
+            <div class="card-header d-flex align-items-center justify-content-between mb-3" style="background-color :#cdf3fb">
+                
+                <h5 class="mb-0 text-gray">@Localizer["AddNewlive"]</h5>
+                <i class='menu-icon tf-icons bx bx-plus'></i>
             </div>
             <div class="card-body">
-                <form enctype="multipart/form-data" id="AddNewVideoForm">
+                <form enctype="multipart/form-data" id="AddNewLiveSession">
                     @Html.AntiForgeryToken()
 
                     <!-- رسائل التحقق العامة -->
@@ -97,18 +101,35 @@
                         <label class="col-sm-4 col-form-label" for="basic-icon-default-company">@Localizer["ImageVideoUrl"]</label>
                         <div class="col-sm-8">
 
-                            <input asp-for="ImageVideoUrl" id="InputImageVideoUrl" type="file" accept="image/*" class="form-control" onchange="validateImageFile('InputImageVideoUrl','ImageVideoUrl','@Localizer["AllowImageExtntion"]')" />
-                            <span name="ImageVideoUrl" id="ImageVideoUrl" class="text-danger"></span>
+                            <input asp-for="ImageSessionUrl" id="InputImageSessionUrl" type="file" accept="image/*" class="form-control" onchange="validateImageFile('InputImageSessionUrl','ImageSessionUrl','@Localizer["AllowImageExtntion"]')" />
+                            <span name="ImageSessionUrl" id="ImageSessionUrl" class="text-danger"></span>
                         </div>
                     </div>
                     @* end *@
 
-                    @* Video *@
+                    @* Link Youtub *@
                     <div class="row mb-3">
-                        <label class="col-sm-4 col-form-label" for="basic-icon-default-company">@Localizer["VideoUrl"]</label>
+                        <label class="col-sm-4 col-form-label" for="basic-icon-default-company">@Localizer["linkLive"]</label>
                         <div class="col-sm-8">
-                            <input asp-for="VideoUrl" type="file" id="inputVideoUrl" class="form-control" onchange="validateVideoFile('inputVideoUrl', 'VideoUrl','@Localizer["AllowVideoExtensiion"]')" />
-                            <span id="VideoUrl" class="text-danger"></span>
+                            <input asp-for="YoutubeLink" type="text" class="form-control" id="inputYoutubKink" oninput="GeneralRequiredFiled('inputYoutubKink', '@Localizer["Required"]', 'YoutubeLink')" />
+                            <span id="YoutubeLink" class="text-danger"></span>
+                        </div>
+                    </div>
+                    @* end *@
+
+
+                    @*  Date and time *@
+                    <div class="row mb-3">
+                        <label class="col-sm-4 col-form-label" for="basic-icon-default-company">@Localizer["Date"]</label>
+                        <div class="col-sm-3">
+                            <input asp-for="ScheduledAt" class="form-control" type="date" id="inputScheduledAt"  min="@today" value="@today" />
+                            <span id="ScheduledAt" class="text-danger"></span>
+                        </div>
+
+                        <label class="col-sm-2 col-form-label" for="basic-icon-default-company">@Localizer["Time"]</label>
+                        <div class="col-sm-3">
+                            <input asp-for="ScheduledTime" class="form-control" type="time" id="inputScheduledTime" oninput="GeneralRequiredFiled('inputScheduledTime', '@Localizer["Required"]', 'ScheduledTime')" />
+                            <span id="ScheduledTime" class="text-danger"></span>
                         </div>
                     </div>
                     @* end *@
@@ -134,7 +155,7 @@
                                 <div class="col-sm-6">
                                     <div class="input-group input-group-merge">
 
-                                        <input asp-for="IsPaid" class="form-check-input" type="checkbox" id="Ispaid" onchange="handleIsPaidChangeInAddNewVideo('Ispaid','Costadd')" />
+                                        <input asp-for="IsLocked" class="form-check-input" type="checkbox" id="Ispaid" onchange="handleIsPaidChangeInAddNewVideo('Ispaid','Costadd')" />
                                     </div>
                                 </div>
                             </div>
@@ -174,7 +195,7 @@
 
                     <div class="row justify-content-end">
                         <div class="col-sm-8">
-                            <button type="button" onclick="SubmitAddNewVideo()" class="btn btn-primary px-4"> @Localizer["Send"]</button>
+                            <button type="button" onclick="SubmitAddNewLiveSession()" class="btn btn-primary px-4"> @Localizer["Send"]</button>
                         </div>
                     </div>
                 </form>

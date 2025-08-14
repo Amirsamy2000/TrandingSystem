@@ -39,8 +39,8 @@
 <div class="row mb-3 ">
     <div class="col">
 
-        <button class="btn btn-primary" onclick="DispalPatialAddNewVideo()">  <i class='menu-icon tf-icons bx bx-plus'></i> @Localizer["AddNewlive"]</button>
-        <button class="btn btn-danger" onclick="DeleteAllVideos(@ViewBag.CourseId??0)">  <i class='menu-icon bx bx-trash tf-icons bx bx-plus'></i> @Localizer["DeleteAll"]</button>
+        <button class="btn btn-primary" onclick="DispalPatialAddNewLive()">  <i class='menu-icon tf-icons bx bx-plus'></i> @Localizer["AddNewlive"]</button>
+        <button class="btn btn-danger" onclick="DeleteAllSessions(@ViewBag.CourseId??0)">  <i class='menu-icon bx bx-trash tf-icons bx bx-plus'></i> @Localizer["DeleteAll"]</button>
     </div>
 </div>
 <div class="row mb-5">
@@ -51,7 +51,7 @@
             @* card one *@
             <div class="col-md-6 col-lg-4 mb-3">
                 <div class="card h-100">
-                    <img class="card-img-top" src="~/@session.ImageSessionUrl" alt="Card image cap" />
+                    <img class="card-img-top" src="~/@session.ImageSessionUrl" alt="Card image cap" width="200" height="300"/>
                     <div class="card-body p-2">
                         <h5 class="card-title">@session.Title</h5>
                         <p class="card-text description-clamp">
@@ -59,26 +59,30 @@
                         </p>
                         @if (session.ScheduledAt>DateTime.Now)
                         {
-                            <a onclick="DispalPatialUppdateNewVideo(@session.SessionId)" class="btn btn-outline-primary  m-1">@Localizer["Update"]</a>
+                            <a onclick="DispalPatialUppdateLive(@session.SessionId)" class="btn btn-outline-primary  m-1">@Localizer["Update"]</a>
                             @* <a onclick="DisplayVideo(@session.SessionId)" class="btn btn-outline-info  m-1">@Localizer["Display"] </a> *@
                             @if (session.IsActive == true)
                             {
-                                <a onclick="BlockVideo(@session.SessionId,false)" class="btn btn-outline-warning  m-1">@Localizer["Block"]</a>
+                                <a onclick="Blocklive(@session.SessionId,false)" class="btn btn-outline-warning  m-1">@Localizer["Block"]</a>
 
                             }
                             else
                             {
-                                <a onclick="BlockVideo(@session.SessionId,true)" class="btn btn-outline-warning  m-1">@Localizer["UnBlock"]</a>
+                                <a onclick="Blocklive(@session.SessionId,true)" class="btn btn-outline-warning  m-1">@Localizer["UnBlock"]</a>
 
                             }
 
-                            <a data-id="" onclick="DeleteVideo(@session.SessionId)" class="btn btn-outline-danger  m-1">@Localizer["Delete"]</a>
+                            <a data-id="" onclick="DeleteLive(@session.SessionId)" class="btn btn-outline-danger  m-1">@Localizer["Delete"]</a>
                         }
                         <hr />
                         <div class="row p-2">
                             <div class="col-12 d-flex justify-content-between align-items-center Add-infoCard">
                                 <h5>@Localizer["Date"]</h5>
-                                <p>@session.ScheduledAt.ToString("dd/MM/yyyy", culture)  || @(session.ScheduledAt.ToString("hh:mm tt"))</p>
+                                <p>
+                                    @session.ScheduledAt.ToString("dd/MM/yyyy", culture)  || @(session.ScheduledTime.HasValue
+                            ? DateTime.Today.Add(session.ScheduledTime.Value).ToString("hh:mm tt")
+                            : "No time")
+                                </p>
                             </div>
                             <div class="col-12 d-flex justify-content-between align-items-center mt-2 Add-infoCard">
                                 <h5 class=" ">@Localizer["Status"]</h5>
@@ -132,4 +136,354 @@
         </div>
     </div>
 </div>
+@section Scripts {
+ 
+
+    <script>
+
+        // For Block live
+            function Blocklive(id, status) {
+               let response=status==true?"@Localizer["titleBlock1"]":"@Localizer["titleBlock"]"
+            debugger;
+            let model = {
+                title: response,
+                icon: "warning",
+                confirmButtonText: "@Localizer["confirmButtonTextBlock"]",
+                cancelButtonText: "@Localizer["cancelButtonTextBlock"]",
+                url:  `/LiveSession/BlockLiveSession?SessionId=${id}&Status=${status}`,
+                method: "POST",
+
+                responseSuccess: "@Localizer["responseSuccessAllCurd"]",
+                responseDanger: "@Localizer["responseDangerAllCurd"]"
+            };
+            DrawAlter(model);
+        }
+
+        // For Delet live
+          function DeleteLive(id) {
+            debugger;
+              let model = {
+                title: "@Localizer["titleDelete"]",
+                icon: "question",
+                confirmButtonText: "@Localizer["confirmButtonTextBlock"]",
+                cancelButtonText: "@Localizer["cancelButtonTextBlock"]",
+                url:  `/LiveSession/DeleteLiveSession?sessionId=${id}`,
+                method: "POST",
+                responseSuccess: "@Localizer["responseSuccessAllCurd"]",
+                responseDanger: "@Localizer["responseDangerAllCurd"]"
+            };
+            DrawAlter(model);
+        }
+
+         // For Delet Lives
+          function DeleteAllSessions(id) {
+            debugger;
+              let model = {
+                title: "@Localizer["titleDeleteall"]",
+                icon: "error",
+                confirmButtonText: "@Localizer["confirmButtonTextBlock"]",
+                cancelButtonText: "@Localizer["cancelButtonTextBlock"]",
+                url:  `/LiveSession/DeleteAllLiveSessions?CourseId=${id}`,
+                method: "POST",
+
+                responseSuccess: "@Localizer["responseSuccessAllCurd"]",
+                responseDanger: "@Localizer["responseDangerAllCurd"]"
+            };
+            DrawAlter(model);
+        }
+
+
+
+        // Dispal Patial Add New Video
+        function DispalPatialAddNewLive(){
+              let setting={
+
+                title:"@Localizer["loading"]"
+            }
+            SweatAlterProcessing(setting)
+            $.ajax({
+                url:"/LiveSession/PartialViewAddNewLiveSession",
+                type:"GET",
+                success:function(data){
+                     Swal.close();
+                    $("#modalbody").html(data)
+                    $("#mainPartial").removeClass('col-10')
+                     $("#mainPartial").addClass('col-12')
+                   // استخدم كود Bootstrap 5 لعرض المودال
+                    var myModal = new bootstrap.Modal(document.getElementById('largeModal'), {
+              backdrop: 'static',     // يمنع الإغلاق عند الضغط على الخلفية, // أو static لو عايز تمنع إغلاقه بالضغط على الخلفية
+                keyboard: false      // يسمح بإغلاقه بزر Esc
+        });
+            myModal.show();
+                }
+
+            })
+        }
+
+          // Dispal Patial Update New live
+        function DispalPatialUppdateLive(id){
+
+            let setting={
+
+                title:"@Localizer["loading"]"
+            }
+            SweatAlterProcessing(setting)
+
+            $.ajax({
+                url:"/LiveSession/PartialUpdateLiveSession",
+                type:"GET",
+                data:{
+                    SesstionId:id
+
+                },
+                success:function(data){
+                                         Swal.close();
+
+                    $("#modalbody").html(data)
+                    $("#mainPartial").removeClass('col-10')
+                     $("#mainPartial").addClass('col-12')
+                   // استخدم كود Bootstrap 5 لعرض المودال
+                    var myModal = new bootstrap.Modal(document.getElementById('largeModal'), {
+              backdrop: 'static',     // يمنع الإغلاق عند الضغط على الخلفية, // أو static لو عايز تمنع إغلاقه بالضغط على الخلفية
+                keyboard: false      // يسمح بإغلاقه بزر Esc
+        });
+            myModal.show();
+                },
+
+
+
+            })
+        }
+        
+        // For Change Is Paid
+               function handleIsPaidChange(cost) {
+            if (!$("#Ispaid").is(":checked")) {
+                // لو مش مدفوع، خليه 0.00
+                $("#Cost").val("0.00");
+            } else {
+                // لو مدفوع، خليه القيمة الأصلية (مثلاً 30.00)
+                let normalizedCost = parseFloat(cost).toFixed(2).replace(",", ".");
+                $("#Cost").val(normalizedCost);
+            }
+        }
+                $(function () {
+            $("#updateVideoForm").validate();
+        });
+
+             // Submit Update  Live
+          function SubmitUpdateLive() {
+            debugger;
+
+            var form = $('#UpdateLiveSession')[0];
+            var data = new FormData(form);
+            var token = $('input[name="__RequestVerificationToken"]').val();
+
+            const isValid = FinalCheckVaildtionUpdate(); // ← هنا نستخدم القيمة المرجعة
+
+
+
+            if (!isValid) return;
+
+            let setting = {
+                title: "@Localizer["loading"]"
+            };
+             bootstrap.Modal.getInstance(document.getElementById('largeModal')).hide()
+            SweatAlterProcessing(setting);
+
+            $.ajax({
+                type: "POST",
+                url: "/LiveSession/SubmitUpdateLiveSession",
+                data: data,
+                processData: false,
+                contentType: false,
+                headers: {
+                    'RequestVerificationToken': token
+                },
+                success: function (res) {
+                    Swal.close();
+
+                    if (typeof res === "string" && res.includes("updateVideoForm")) {
+                        $("#mainPartial").html(res);
+                        return;
+                    }
+
+                    if (res.status==200) {
+                        console.log("=====================================Update")
+                        console.log(res)
+                        const modalInstance = bootstrap.Modal.getInstance(document.getElementById('largeModal'));
+                        if (modalInstance) modalInstance.hide();
+
+
+                        SweatAlterSuccess(res.message);
+                    } else {
+                        SweatAlterDanger(res.message);
+                    }
+                },
+                error: function () {
+                    const modalInstance = bootstrap.Modal.getInstance(document.getElementById('largeModal'));
+                    if (modalInstance) modalInstance.hide();
+
+                    SweatAlterDanger("@Localizer["VideoSubmitError"]");
+                }
+            });
+        }
+            // Check Vaildtion For Update
+              function FinalCheckVaildtionUpdate() {
+            let isValid = true;
+
+            if (!GeneralRequiredFiled('InputTitleAR', '@Html.Raw(Localizer["Required"])', 'TitleAR')) {
+                isValid = false;
+            }
+
+            if (!GeneralRequiredFiled('InputTitleEN', '@Html.Raw(Localizer["Required"])', 'TitleEN')) {
+                isValid = false;
+            }
+
+            if (!GeneralRequiredFiled('inputDescriptionEN', '@Html.Raw(Localizer["Required"])', 'DescriptionEN')) {
+                isValid = false;
+            }
+
+            if (!GeneralRequiredFiled('IputDescriptionAR', '@Html.Raw(Localizer["Required"])', 'DescriptionAR')) {
+                isValid = false;
+            }
+             if (!GeneralRequiredFiled('inputYoutubKink', '@Html.Raw(Localizer["Required"])', 'YoutubeLink')) {
+                isValid = false;
+            }
+            if (!GeneralRequiredFiled('SelectCourseId', '@Html.Raw(Localizer["Required"])', 'CourseId')) {
+                isValid = false;
+            }
+            if (!GeneralRequiredFiled('inputScheduledTime', '@Html.Raw(Localizer["Required"])', 'ScheduledTime')) {
+                isValid = false;
+            }
+
+            if ($('#InputImageSessionUrlUpdate')[0].files.length&&!validateImageFile('InputImageSessionUrlUpdate', 'ImageSessionUrl', '@Html.Raw(Localizer["AllowImageExtntion"])')) {
+                isValid = false;
+            }
+
+            if (!validateDateTime('ScheduledAt', 'ScheduledTime', '@Html.Raw(Localizer["Required"])','@Html.Raw(Localizer["datapast"])','@Html.Raw(Localizer["timepast"])')) {
+                isValid = false;
+            }
+
+            if (!handleIsPaidChangeInAddNewVideo('Ispaid', 'Costadd')) {
+                isValid = false;
+            }
+
+              if (!validateCost('@Html.Raw(Localizer["InvaildCost"])','Ispaid','Costadd','spanCost','@Html.Raw(Localizer["Nagtivenumber"])','@Html.Raw(Localizer["CostForPaid"])')) {
+                isValid = false;
+            }
+
+            return isValid;
+        }
+
+
+
+          
+
+          // Submit New live
+           function SubmitAddNewLiveSession() {
+            debugger;
+            var form = $('#AddNewLiveSession')[0];
+            var data = new FormData(form);
+            var token = $('input[name="__RequestVerificationToken"]').val();
+
+            const isValid = FinalCheckVaildtion(); // ← هنا نستخدم القيمة المرجعة
+
+            console.log("--------------------fORM Data---------------");
+            console.log(form);
+
+            if (!isValid) return;
+
+            let setting = {
+                title: "@Localizer["loading"]"
+            };
+            SweatAlterProcessing(setting);
+
+            $.ajax({
+                type: "POST",
+                url: "/LiveSession/SubmitAddNewLiveSession",
+                data: data,
+                processData: false,
+                contentType: false,
+                headers: {
+                    'RequestVerificationToken': token
+                },
+                success: function (res) {
+                    Swal.close();
+
+                    if (typeof res === "string" && res.includes("updateVideoForm")) {
+                        $("#mainPartial").html(res);
+                        return;
+                    }
+
+                    if (res.success) {
+                        const modalInstance = bootstrap.Modal.getInstance(document.getElementById('largeModal'));
+                        if (modalInstance) modalInstance.hide();
+
+                        SweatAlterSuccess(res.message);
+                    } else {
+                        SweatAlterDanger(res.message);
+                    }
+                },
+                error: function () {
+                    const modalInstance = bootstrap.Modal.getInstance(document.getElementById('largeModal'));
+                    if (modalInstance) modalInstance.hide();
+
+                    SweatAlterDanger("@Localizer["VideoSubmitError"]");
+                }
+            });
+        }
+
+            function FinalCheckVaildtion() {
+            let isValid = true;
+
+            if (!GeneralRequiredFiled('InputTitleAR', '@Html.Raw(Localizer["Required"])', 'TitleAR')) {
+                isValid = false;
+            }
+
+            if (!GeneralRequiredFiled('InputTitleEN', '@Html.Raw(Localizer["Required"])', 'TitleEN')) {
+                isValid = false;
+            }
+
+            if (!GeneralRequiredFiled('inputDescriptionEN', '@Html.Raw(Localizer["Required"])', 'DescriptionEN')) {
+                isValid = false;
+            }
+
+            if (!GeneralRequiredFiled('IputDescriptionAR', '@Html.Raw(Localizer["Required"])', 'DescriptionAR')) {
+                isValid = false;
+            }
+             if (!GeneralRequiredFiled('inputYoutubKink', '@Html.Raw(Localizer["Required"])', 'YoutubeLink')) {
+                isValid = false;
+            }
+            if (!GeneralRequiredFiled('SelectCourseId', '@Html.Raw(Localizer["Required"])', 'CourseId')) {
+                isValid = false;
+            }
+            if (!GeneralRequiredFiled('inputScheduledTime', '@Html.Raw(Localizer["Required"])', 'ScheduledTime')) {
+                isValid = false;
+            }
+
+            if (!validateImageFile('InputImageSessionUrl', 'ImageSessionUrl', '@Html.Raw(Localizer["AllowImageExtntion"])')) {
+                isValid = false;
+            }
+
+            if (!validateDateTime('ScheduledAt', 'ScheduledTime', '@Html.Raw(Localizer["Required"])','@Html.Raw(Localizer["datapast"])','@Html.Raw(Localizer["timepast"])')) {
+                isValid = false;
+            }
+
+            if (!handleIsPaidChangeInAddNewVideo('Ispaid', 'Costadd')) {
+                isValid = false;
+            }
+
+              if (!validateCost('@Html.Raw(Localizer["InvaildCost"])','Ispaid','Costadd','spanCost','@Html.Raw(Localizer["Nagtivenumber"])','@Html.Raw(Localizer["CostForPaid"])')) {
+                isValid = false;
+            }
+
+            return isValid;
+        }
+
+
+
+
+
+    </script>
+}
 

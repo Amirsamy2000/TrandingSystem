@@ -180,4 +180,16 @@
   <data name="GeneralError" xml:space="preserve">
     <value>حدث خطأ ما، يرجى المحاولة مرة أخرى لاحقًا</value>
   </data>
+  <data name="AddLiveSessionSuccess" xml:space="preserve">
+    <value>تمت إضافة  البث الجديد بنجاح.</value>
+  </data>
+  <data name="GeneralServerFail" xml:space="preserve">
+    <value>حدث خطأ أثناء حفظ البث المباشر، حاول مرة أخرى</value>
+  </data>
+  <data name="notFoundMessage" xml:space="preserve">
+    <value>عذرًا، هذه الجلسة  غير موجود قد تم حذفها بالفعل</value>
+  </data>
+  <data name="Notfoundlives" xml:space="preserve">
+    <value>لاتوجد جلسات لهذا الكورس</value>
+  </data>
 </root>

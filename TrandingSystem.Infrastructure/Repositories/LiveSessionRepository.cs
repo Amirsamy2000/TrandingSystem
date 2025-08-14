@@ -19,12 +19,20 @@ namespace TrandingSystem.Infrastructure.Repositories
         }
         public LiveSession Create(LiveSession Object)
         {
-            throw new NotImplementedException();
+            _db.LiveSessions.Add(Object);
+            return Object;
         }
 
         public LiveSession Delete(int Id)
         {
-            throw new NotImplementedException();
+            var session = _db.LiveSessions.Find(Id);
+            if (session != null)
+            {
+                _db.LiveSessions.Remove(session);
+                return session;
+            }
+            return null;
+
         }
 
         public List<LiveSession> Read()
@@ -34,17 +42,23 @@ namespace TrandingSystem.Infrastructure.Repositories
 
         public LiveSession ReadById(int Id)
         {
-            throw new NotImplementedException();
+            return _db.LiveSessions.Find(Id);
         }
 
         public LiveSession Update(LiveSession Element)
         {
-            throw new NotImplementedException();
+            _db.LiveSessions.Update(Element);
+            return Element;
         }
 
         public IQueryable<LiveSession> GetAllLiveSessionsForCouse(int courseId)
         {
             return _db.LiveSessions.Where(x => x.CourseId == courseId);
+        }
+
+        public void DeleteAllSessionsByCourseId(List<LiveSession> liveSessions)
+        {
+            _db.LiveSessions.RemoveRange(liveSessions);
         }
     }
 }
