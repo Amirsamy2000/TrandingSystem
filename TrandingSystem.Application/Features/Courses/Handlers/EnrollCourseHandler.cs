@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using TradingSystem.Application.Common.Response;
 using TrandingSystem.Application.Features.Courses.Commands;
 using TrandingSystem.Domain.Interfaces;
+using TrandingSystem.Infrastructure.Constants;
 
 namespace TrandingSystem.Application.Features.Courses.Handlers
 {
@@ -17,10 +18,14 @@ namespace TrandingSystem.Application.Features.Courses.Handlers
 
         private readonly IMapper _mapper;
 
-        public EnrollCourseHandler(IUnitOfWork unitOfWork, IMapper mapper)
+        private readonly IFileService _imageService;
+
+
+        public EnrollCourseHandler(IUnitOfWork unitOfWork, IMapper mapper, IFileService imageService)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
+            _imageService = imageService;
         }
         public Task<Response<bool>> Handle(EnrollCourseCommand request, CancellationToken cancellationToken)
         {
@@ -36,7 +41,19 @@ namespace TrandingSystem.Application.Features.Courses.Handlers
                 {
                     return Task.FromResult(Response<bool>.ErrorResponse("User is already enrolled in this course"));
                 }
-                var result = _unitOfWork.Courses.EnrollCourse(request.CourseId, request.UserId);
+
+                string imageUrl = null;
+                if (request.ReceiptImage != null)
+                {
+                    imageUrl = _imageService.SaveImageAsync(request.ReceiptImage, ConstantPath.PathdReceiptsImage).Result;
+                }
+                
+                
+                
+                
+                var result = _unitOfWork.Courses.EnrollCourse(request.CourseId, request.UserId,imageUrl);
+
+
                 if (result)
                 {
                     return Task.FromResult(Response<bool>.SuccessResponse(true, "User enrolled successfully"));

@@ -44,6 +44,25 @@ namespace TrandingSystem.Controllers
             return View(response.Data);
         }
 
+        [HttpGet]
+        public IActionResult PartialVideos(CancellationToken cancellationToken, int CourseId = 1)
+        {
+            var culture = Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName;
+            //@ViewData["Master"] = @locaizer[""]
+            var response = _mediator.Send(new GetVideosByCourseIdQuery(CourseId, culture), cancellationToken).Result;
+            if (!response.Success)
+            {
+                // return to Erro Page
+                return PartialView("_ErrorPartialView");
+            }
+            //  ViewData["CourseName"] = response.Result.Data2.ToString();
+
+            ViewBag.CourseId = CourseId;
+            ViewBag.CourseName = response.Message;
+            return PartialView("_VideosPartialView", response.Data);
+        }
+
+
 
         // this Partial View For Display Add New Video Form
         public IActionResult PartialViewAddNewVideo()

@@ -1,17 +1,11 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using AutoMapper;
+using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Diagnostics;
-using System.Security.Claims;
 using TrandingSystem.Application.Features.Courses.Queries;
-using TrandingSystem.Domain.Entities;
 using TrandingSystem.Infrastructure.Data;
 using TrandingSystem.Models;
-
-using AutoMapper;
-using MediatR;
 
 namespace WebApplication1.Controllers
 {
@@ -65,9 +59,10 @@ namespace WebApplication1.Controllers
             return View(result.Data);
         }
 
-        public IActionResult CoursesDetails()
+        public IActionResult CoursesDetails(int CourseId, CancellationToken cancellationToken)
         {
-            return View();
+            var course  = _mediator.Send(new GetCourseByIdQuery{CourseId = CourseId}, cancellationToken).Result;
+            return View(course.Data);
         }
 
         public IActionResult Contact()

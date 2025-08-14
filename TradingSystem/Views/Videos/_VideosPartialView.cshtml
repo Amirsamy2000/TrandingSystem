@@ -5,114 +5,119 @@
 @using TrandingSystem.Controllers
 @inject IViewLocalizer Localizer
 @inject IStringLocalizer<VideosController> Localizer2
-@{
-    ViewData["Title"] = "Videos";
-    Layout = "~/Views/Shared/_LayoutDasbord.cshtml";
-    
-}
 <style>
     .description-clamp {
-    max-height: 3.6em; /* تقريبا سطرين */
-    overflow: hidden;
-    position: relative;
-    transition: max-height 0.3s ease-in-out;
-    cursor: pointer;
+        max-height: 3.6em;
+        overflow: hidden;
+        position: relative;
+        transition: max-height 0.3s ease-in-out;
+        cursor: pointer;
     }
 
-    .description-clamp:hover {
-    max-height: 500px; /* ارتفاع كبير يسمح بظهور كل المحتوى */
-    }
-    .Add-infoCard{
-    background-color: #eee;
-    border-radius: 6px;
-    padding-top:10px
+        .description-clamp::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 1.5em;
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0), #fff);
+        }
+
+        .description-clamp:hover {
+            max-height: 500px;
+        }
+
+    .Add-infoCard {
+        background-color: #f8f9fa;
+        border-radius: 8px;
+        padding: 8px 12px;
     }
 
-    .modal-body{
-    padding: 0px !important;
+    .card {
+        border: none;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+        }
+
+    .card-img-top {
+        object-fit: cover;
+        height: 180px;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+    }
+
+    @@media (max-width: 576px) {
+        .card-img-top
+
+    {
+        height: 150px;
+    }
+
     }
 </style>
-<h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">@Localizer["Title"] /</span>@(ViewBag.CourseName??"Un") </h4>
 
-<div class="row mb-3 ">
-    <div class="col">
+<h4 class="fw-bold py-3 mb-4">
+    <span class="text-muted fw-light">@Localizer["Title"] /</span>
+    @(ViewBag.CourseName ?? "Un")
+</h4>
 
-        <button class="btn btn-primary" onclick="DispalPatialAddNewVideo()">  <i class='menu-icon tf-icons bx bx-plus'></i> @Localizer["Add"]</button>
-        <button class="btn btn-danger" onclick="DeleteAllVideos(@ViewBag.CourseId??0)">  <i class='menu-icon bx bx-trash tf-icons bx bx-plus'></i> @Localizer["DeleteAll"]</button>
-    </div>
-</div>
-<div class="row mb-5">
-    @if (Model.Count()>0)
+<div class="row g-4">
+    @if (Model.Any())
     {
         @foreach (var video in Model)
         {
-            @* card one *@
-            <div class="col-md-6 col-lg-4 mb-3">
+            <div class="col-sm-6 col-md-4 col-lg-3">
                 <div class="card h-100">
-                    <img class="card-img-top" src="@video.ImageVideoUrl" alt="Card image cap" />
-                    <div class="card-body p-2">
-                        <h5 class="card-title">@video.Title</h5>
-                        <p class="card-text description-clamp">
+                    <img class="card-img-top" src="@video.ImageVideoUrl" alt="@video.Title" />
+                    <div class="card-body p-3 d-flex flex-column">
+                        <h5 class="card-title mb-2">@video.Title</h5>
+                        <p class="card-text description-clamp mb-3">
                             @video.Description
                         </p>
-                        <a onclick="DispalPatialUppdateNewVideo(@video.VideoId)" class="btn btn-outline-primary  m-1">@Localizer["Update"]</a>
-                        <a onclick="DisplayVideo(@video.VideoId)" class="btn btn-outline-info  m-1">@Localizer["Display"] </a>
-                        @if (video.IsActive == true)
-                        {
-                            <a onclick="BlockVideo(@video.VideoId,false)" class="btn btn-outline-warning  m-1">@Localizer["Block"]</a>
 
-                        }
-                        else
-                        {
-                            <a onclick="BlockVideo(@video.VideoId,true)" class="btn btn-outline-warning  m-1">@Localizer["UnBlock"]</a>
+                        <div class="mt-auto">
+                            <a onclick="DisplayVideo(@video.VideoId)" class="btn btn-sm btn-outline-info me-1">@Localizer["Display"]</a>
+                            @* Other action buttons can go here *@
+                        </div>
 
-                        }
+                        <hr class="my-3" />
 
-                        <a data-id="" onclick="DeleteVideo(@video.VideoId)" class="btn btn-outline-danger  m-1">@Localizer["Delete"]</a>
-                        <hr />
-                        <div class="row p-2">
-                            <div class="col-12 d-flex justify-content-between align-items-center Add-infoCard">
-                                <h5>@Localizer["Date"]</h5>
-                                <p>@video.CreatedAt</p>
-                            </div>
-                            <div class="col-12 d-flex justify-content-between align-items-center mt-2 Add-infoCard">
-                                <h5 class=" ">@Localizer["Status"]</h5>
-                                @if (video.IsPaid)
-                                {
-                                    <p class="">@Localizer["Paid"]</p>
-                                }
-                                else
-                                {
-                                    <p class="">@Localizer["Unpaid"]</p>
-                                }
-                            </div>
-                            <div class="col-12 d-flex justify-content-between align-items-center mt-2 Add-infoCard">
-                                <h5>@Localizer["Cost"]</h5>
-                                <p>@video.Cost $</p>
-                            </div>
+                        <div class="Add-infoCard mb-2 d-flex justify-content-between">
+                            <strong>@Localizer["Date"]</strong>
+                            <span>@video.CreatedAt</span>
+                        </div>
+                        <div class="Add-infoCard mb-2 d-flex justify-content-between">
+                            <strong>@Localizer["Status"]</strong>
+                            <span>@(video.IsPaid? Localizer["Paid"] : Localizer["Unpaid"])</span>
+                        </div>
+                        <div class="Add-infoCard d-flex justify-content-between">
+                            <strong>@Localizer["Cost"]</strong>
+                            <span>@video.Cost $</span>
                         </div>
                     </div>
                 </div>
             </div>
 
-           
-           
+
         }
-
     }
-
     else
     {
         <div class="col-12">
-            <div class="alert alert-primary   " role="alert">
-                <h4 class="alert-heading text-center">@Localizer2["NoVideosMessage"]</h4>
-                <br />
-                <p class="text-center">@Localizer2["NoVideosMessage1"]</p>
+            <div class="alert alert-primary text-center" role="alert">
+                <h4>@Localizer2["NoVideosMessage"]</h4>
+                <p class="mb-0">@Localizer2["NoVideosMessage1"]</p>
             </div>
         </div>
-        
     }
 </div>
+
 <div class="modal fade" id="youTubeModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -127,12 +132,10 @@
         </div>
     </div>
 </div>
-@section Scripts {
-    <partial name="_ValidationScriptsPartial" />
 
 
     <script>
-      
+
 
 
         // For Block Video
@@ -187,7 +190,7 @@
             DrawAlter(model);
         }
 
-      
+
 
         // Dispal Patial Add New Video
         function DispalPatialAddNewVideo(){
@@ -219,11 +222,11 @@
         function DispalPatialUppdateNewVideo(id){
 
             let setting={
-                
+
                 title:"@Localizer["loading"]"
             }
             SweatAlterProcessing(setting)
-           
+
             $.ajax({
                 url:"/Videos/PartialViewUpdateNewVideo",
                 type:"GET",
@@ -245,7 +248,7 @@
         });
             myModal.show();
                 },
-           
+
 
 
             })
@@ -291,7 +294,7 @@
 
 
 
-       
+
 
              // Submit Update  Video
           function SubmitUpdateVideo() {
@@ -303,7 +306,7 @@
 
             const isValid = FinalCheckVaildtionUpdate(); // ← هنا نستخدم القيمة المرجعة
 
-            
+
 
             if (!isValid) return;
 
@@ -335,7 +338,7 @@
                         console.log(res)
                         const modalInstance = bootstrap.Modal.getInstance(document.getElementById('largeModal'));
                         if (modalInstance) modalInstance.hide();
-                        
+
 
                         SweatAlterSuccess(res.message);
                     } else {
@@ -378,7 +381,7 @@
                 isValid = false;
             }
 
-           
+
 
             if (!handleIsPaidChangeInAddNewVideo('Ispaid', 'Costadd')) {
                 isValid = false;
@@ -391,7 +394,7 @@
         }
 
 
-       
+
              // Submit New Video
            function SubmitAddNewVideo() {
             debugger;
@@ -495,5 +498,4 @@
 
 
     </script>
-}
 

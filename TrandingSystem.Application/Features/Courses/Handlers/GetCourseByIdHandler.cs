@@ -32,6 +32,7 @@ namespace TrandingSystem.Application.Features.Courses.Handlers
                 if (course != null)
                 {
                     var dto = _mapper.Map<CourseDto>(course);
+                    dto.Lectures = _mapper.Map<List<UserDto>>(_unitOfWork.Courses.GetLecturesByCourseId(dto.CourseId));
                     return Task.FromResult(Response<CourseDto>.SuccessResponse(dto));
                 }
                 return Task.FromResult(Response<CourseDto>.ErrorResponse("there is no course with this criteria",null,HttpStatusCode.NotFound));

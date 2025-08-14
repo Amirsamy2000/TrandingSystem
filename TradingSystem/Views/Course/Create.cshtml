@@ -157,8 +157,8 @@
                                 </div>
 
                                 <div class="col-md-6 mb-3">
-                                    <label for="ImageCourseUrl" class="form-label">Course Image</label>
-                                    <input type="file" class="form-control" id="ImageCourseUrl" name="ImageCourseUrl"
+                                    <label for="CourseImage" class="form-label">Course Image</label>
+                                    <input type="file" class="form-control" id="CourseImage" name="CourseImage"
                                            accept="image/*">
                                     <small class="form-text text-muted">Optional: Upload a course image (JPG, PNG, GIF)</small>
                                     <img id="imagePreview" class="image-preview" alt="Image Preview">
@@ -246,7 +246,7 @@
             loadCategories();
 
             // Image preview functionality
-            $('#ImageCourseUrl').on('change', function() {
+            $('#CourseImage').on('change', function() {
                 const file = this.files[0];
                 if (file) {
                     const reader = new FileReader();
@@ -315,7 +315,10 @@
             });
         }
 
-        async function submitCourse() {
+
+
+
+                async function submitCourse() {
             const submitBtn = $('#submitBtn');
             const originalText = submitBtn.html();
 
@@ -323,37 +326,34 @@
             submitBtn.prop('disabled', true).html('<i class="fas fa-spinner fa-spin me-1"></i>Creating...');
 
             try {
-                let imageUrl = null;
+                // Prepare form data
+                const formData = new FormData();
+                formData.append('TitleEN', $('#titleEN').val());
+                formData.append('TitleAR', $('#titleAR').val());
+                formData.append('DescriptionEN', $('#descriptionEN').val());
+                formData.append('DescriptionAR', $('#descriptionAR').val());
+                formData.append('CategoryId', $('#categoryId').val());
+                formData.append('Cost', $('#cost').val());
+                formData.append('CreateAt', $('#createAt').val());
+                formData.append('CommunityAutoCreate', $('#communityAutoCreate').is(':checked'));
+                formData.append('IsLive', $('#isLive').is(':checked'));
+                formData.append('IsFullyFree', $('#isFullyFree').is(':checked'));
+                formData.append('IsActive', $('#isActive').is(':checked'));
 
-                // Handle image upload if file is selected
-                const imageFile = $('#ImageCourseUrl')[0].files[0];
-                if (imageFile) {
-                    imageUrl = await uploadImage(imageFile);
+                // Append file if selected
+                const courseImage = $('#CourseImage')[0].files[0];
+                if (courseImage) {
+                    formData.append('CourseImage', courseImage);
                 }
 
-                // Prepare form data as JSON
-                const courseData = {
-                    titleEN: $('#titleEN').val(),
-                    titleAR: $('#titleAR').val(),
-                    descriptionEN: $('#descriptionEN').val(),
-                    descriptionAR: $('#descriptionAR').val(),
-                    categoryId: parseInt($('#categoryId').val()),
-                    cost: parseFloat($('#cost').val()),
-                    createAt: $('#createAt').val(),
-                    ImageCourseUrl: imageUrl,
-                    communityAutoCreate: $('#communityAutoCreate').is(':checked'),
-                    isLive: $('#isLive').is(':checked'),
-                    isFullyFree: $('#isFullyFree').is(':checked'),
-                    isActive: $('#isActive').is(':checked')
-                };
-
-                // Submit via AJAX
+                // AJAX submit
                 $.ajax({
                     url: '/Course/Create',
                     type: 'POST',
-                    contentType: 'application/json',
-                    data: JSON.stringify(courseData),
-                    success: function(response) {
+                    data: formData,
+                    processData: false, // prevent jQuery from converting FormData
+                    contentType: false, // let browser set the content type (multipart/form-data)
+                    success: function () {
                         Swal.fire({
                             title: 'Success',
                             text: 'Course created successfully',
@@ -361,12 +361,11 @@
                             confirmButtonColor: '#696CFF'
                         }).then((result) => {
                             if (result.isConfirmed) {
-                                // Redirect to courses list or stay on form (clear it)
                                 window.location.href = '/Course';
                             }
                         });
                     },
-                    error: function(xhr) {
+                    error: function (xhr) {
                         let errorMessage = 'An error occurred while creating the course.';
 
                         if (xhr.responseJSON && xhr.responseJSON.message) {
@@ -382,8 +381,7 @@
                             confirmButtonColor: '#696CFF'
                         });
                     },
-                    complete: function() {
-                        // Reset button state
+                    complete: function () {
                         submitBtn.prop('disabled', false).html(originalText);
                     }
                 });
@@ -397,10 +395,99 @@
                     confirmButtonColor: '#696CFF'
                 });
 
-                // Reset button state
                 submitBtn.prop('disabled', false).html(originalText);
             }
         }
+
+
+
+
+        // async function submitCourse() {
+        //     const submitBtn = $('#submitBtn');
+        //     const originalText = submitBtn.html();
+
+        //     // Show loading state
+        //     submitBtn.prop('disabled', true).html('<i class="fas fa-spinner fa-spin me-1"></i>Creating...');
+
+        //     try {
+        //         let imageUrl = null;
+
+        //         // Handle image upload if file is selected
+        //         const imageFile = $('#CourseImage')[0].files[0];
+        //         if (imageFile) {
+        //             imageUrl = await uploadImage(imageFile);
+        //         }
+
+        //         // Prepare form data as JSON
+        //         const courseData = {
+        //             titleEN: $('#titleEN').val(),
+        //             titleAR: $('#titleAR').val(),
+        //             descriptionEN: $('#descriptionEN').val(),
+        //             descriptionAR: $('#descriptionAR').val(),
+        //             categoryId: parseInt($('#categoryId').val()),
+        //             cost: parseFloat($('#cost').val()),
+        //             createAt: $('#createAt').val(),
+        //             CourseImage: imageUrl,
+        //             communityAutoCreate: $('#communityAutoCreate').is(':checked'),
+        //             isLive: $('#isLive').is(':checked'),
+        //             isFullyFree: $('#isFullyFree').is(':checked'),
+        //             isActive: $('#isActive').is(':checked')
+        //         };
+
+        //         // Submit via AJAX
+        //         $.ajax({
+        //             url: '/Course/Create',
+        //             type: 'POST',
+        //             contentType: 'application/json',
+        //             data: JSON.stringify(courseData),
+        //             success: function(response) {
+        //                 Swal.fire({
+        //                     title: 'Success',
+        //                     text: 'Course created successfully',
+        //                     icon: 'success',
+        //                     confirmButtonColor: '#696CFF'
+        //                 }).then((result) => {
+        //                     if (result.isConfirmed) {
+        //                         // Redirect to courses list or stay on form (clear it)
+        //                         window.location.href = '/Course';
+        //                     }
+        //                 });
+        //             },
+        //             error: function(xhr) {
+        //                 let errorMessage = 'An error occurred while creating the course.';
+
+        //                 if (xhr.responseJSON && xhr.responseJSON.message) {
+        //                     errorMessage = xhr.responseJSON.message;
+        //                 } else if (xhr.responseText) {
+        //                     errorMessage = xhr.responseText;
+        //                 }
+
+        //                 Swal.fire({
+        //                     title: 'Error',
+        //                     text: errorMessage,
+        //                     icon: 'error',
+        //                     confirmButtonColor: '#696CFF'
+        //                 });
+        //             },
+        //             complete: function() {
+        //                 // Reset button state
+        //                 submitBtn.prop('disabled', false).html(originalText);
+        //             }
+        //         });
+
+        //     } catch (error) {
+        //         console.error('Error:', error);
+        //         Swal.fire({
+        //             title: 'Error',
+        //             text: 'An unexpected error occurred. Please try again.',
+        //             icon: 'error',
+        //             confirmButtonColor: '#696CFF'
+        //         });
+
+        //         // Reset button state
+        //         submitBtn.prop('disabled', false).html(originalText);
+        //     }
+        // }
     </script>
 </body>
 </html>
