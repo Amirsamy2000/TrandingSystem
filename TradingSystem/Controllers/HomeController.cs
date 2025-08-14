@@ -59,7 +59,13 @@ namespace WebApplication1.Controllers
             return View(result.Data);
         }
 
-        public IActionResult CoursesDetails(int CourseId, CancellationToken cancellationToken)
+        public IActionResult GoToCourse(int CourseId, CancellationToken cancellationToken)
+        {
+            var course  = _mediator.Send(new GetCourseByIdQuery{CourseId = CourseId}, cancellationToken).Result;
+            return View(course.Data);
+        }
+
+        public IActionResult CourseDetails(int CourseId, CancellationToken cancellationToken)
         {
             var course  = _mediator.Send(new GetCourseByIdQuery{CourseId = CourseId}, cancellationToken).Result;
             return View(course.Data);

@@ -147,4 +147,34 @@
   <data name="dasbord" xml:space="preserve">
     <value>لوحة تحكم</value>
   </data>
+  <data name="Service1" xml:space="preserve">
+    <value>كورسات تداول  </value>
+  </data>
+  <data name="Service2" xml:space="preserve">
+    <value>تحليلات يومية </value>
+  </data>
+  <data name="Service3" xml:space="preserve">
+    <value>دعم وإرشاد</value>
+  </data>
+  <data name="Service4" xml:space="preserve">
+    <value>مؤشرات وأدوات</value>
+  </data>
+  <data name="Service5" xml:space="preserve">
+    <value> ادوات ذكاء اصطناعي</value>
+  </data>
+  <data name="Address" xml:space="preserve">
+    <value>مصر / القاهرة</value>
+  </data>
+  <data name="UsefulLinks" xml:space="preserve">
+    <value>روابط مفيدة</value>
+  </data>
+  <data name="OurServices" xml:space="preserve">
+    <value>خدمتنا</value>
+  </data>
+  <data name="OurNewsletter" xml:space="preserve">
+    <value>نشرتنا الإخبارية</value>
+  </data>
+  <data name="OurNewsletterBody" xml:space="preserve">
+    <value>اشترك في النشرة الإخبارية لدينا لتحصل على أحدث الأخبار حول منتجاتنا وخدماتنا!</value>
+  </data>
 </root>
