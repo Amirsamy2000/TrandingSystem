@@ -1,14 +1,13 @@
 ﻿@using Microsoft.Extensions.Localization
 @using TrandingSystem.Controllers
-@inject IStringLocalizer<VideosController> Localizer
+@inject IStringLocalizer<LiveSessionController> Localizer
 @{
-    ViewData["Title"] = "AddNewVideo";
+    ViewData["Title"] = "AddNewLiveSession";
     Layout = "~/Views/Shared/_LayoutDasbord.cshtml";
 }
 
-@await Html.PartialAsync("_PartialAddVideo")
+@await Html.PartialAsync("_PartialAddLiveSession")
 
- 
 <script>
         function sweat(){
         let setting={
@@ -19,10 +18,10 @@
     }
 
 
-        // Submit New Video
-       function SubmitAddNewVideo() {
+        // Submit New live
+       function SubmitAddNewLiveSession() {
         debugger;
-        var form = $('#AddNewVideoForm')[0];
+        var form = $('#AddNewLiveSession')[0];
         var data = new FormData(form);
         var token = $('input[name="__RequestVerificationToken"]').val();
 
@@ -40,7 +39,7 @@
 
         $.ajax({
             type: "POST",
-            url: "/Videos/SubmitAddNewVideo",
+            url: "/LiveSession/SubmitAddNewLiveSession",
             data: data,
             processData: false,
             contentType: false,
@@ -91,23 +90,28 @@
         if (!GeneralRequiredFiled('IputDescriptionAR', '@Html.Raw(Localizer["Required"])', 'DescriptionAR')) {
             isValid = false;
         }
-
+         if (!GeneralRequiredFiled('inputYoutubKink', '@Html.Raw(Localizer["Required"])', 'YoutubeLink')) {
+            isValid = false;
+        }
         if (!GeneralRequiredFiled('SelectCourseId', '@Html.Raw(Localizer["Required"])', 'CourseId')) {
             isValid = false;
-        }
-
-        if (!validateImageFile('InputImageVideoUrl', 'ImageVideoUrl', '@Html.Raw(Localizer["AllowImageExtntion"])')) {
+        }  
+        if (!GeneralRequiredFiled('inputScheduledTime', '@Html.Raw(Localizer["Required"])', 'ScheduledTime')) {
             isValid = false;
         }
 
-        if (!validateVideoFile('inputVideoUrl', 'VideoUrl', '@Html.Raw(Localizer["AllowVideoExtensiion"])')) {
+        if (!validateImageFile('InputImageSessionUrl', 'ImageSessionUrl', '@Html.Raw(Localizer["AllowImageExtntion"])')) {
+            isValid = false;
+        }
+
+        if (!validateDateTime('ScheduledAt', 'ScheduledTime', '@Html.Raw(Localizer["Required"])','@Html.Raw(Localizer["datapast"])','@Html.Raw(Localizer["timepast"])')) {
             isValid = false;
         }
 
         if (!handleIsPaidChangeInAddNewVideo('Ispaid', 'Costadd')) {
             isValid = false;
         }
-        
+
           if (!validateCost('@Html.Raw(Localizer["InvaildCost"])','Ispaid','Costadd','spanCost','@Html.Raw(Localizer["Nagtivenumber"])','@Html.Raw(Localizer["CostForPaid"])')) {
             isValid = false;
         }
@@ -115,6 +119,8 @@
         return isValid;
     }
 
+      
 
 </script>
+
 

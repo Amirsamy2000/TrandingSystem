@@ -53,14 +53,14 @@ namespace TrandingSystem.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> ChangeOrderStatus(int orderId,int newStatus=0)
+        public async Task<IActionResult> ChangeOrderStatus(int orderId,bool newStatus)
         {
             // This gets the user object from the Identity system
             var user = await _userManager.GetUserAsync(User);
 
             if (user == null)
                 return Unauthorized(new { message = "Not logged in" });
-            var res = _mediator.Send(new ConfirmedOrderRequestCommand(orderId, DateTime.Now, user.Id)).Result;
+            var res = _mediator.Send(new ConfirmedOrderRequestCommand(orderId, DateTime.Now, user.Id, newStatus)).Result;
             return Json(res);
         }
     }

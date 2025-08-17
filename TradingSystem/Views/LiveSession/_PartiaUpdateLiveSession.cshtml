@@ -2,24 +2,28 @@
 @using TrandingSystem.Application.Dtos
 @using TrandingSystem.Controllers
 
-@inject IStringLocalizer<VideosController> Localizer
-@model VideoAddedDto;
+@inject IStringLocalizer<LiveSessionController> Localizer
+@model LiveSessionAddDto;
 @{
-    var courses =  TempData["Course"] as IEnumerable<CourseDto>;
+    var courses = TempData["Course"] as IEnumerable<CourseDto>;
     // int x = 110;
     // int o = 220;
+    var today = DateTime.UtcNow.ToString("yyyy-MM-dd");
+    int y = 0;
+
 }
 <div class="row d-flex justify-content-center">
 
 
     <div class="col-10" id="mainPartial">
         <div class="card mb-4">
-            <div class="card-header d-flex align-items-center justify-content-between mb-3" style="background-color:#cdf3fb">
-                <h5 class="mb-0 text-gray">@Localizer["AddNewVideo"]</h5>
-                <i class="menu-icon tf-icons bx bx-plus" style="transition: transform 0.3s ease;"></i>
+            <div class="card-header d-flex align-items-center justify-content-between mb-3" style="background-color :#cdf3fb">
+
+                <h5 class="mb-0 text-gray">@Localizer["UpdateNewlive"]</h5>
+                <i class='menu-icon tf-icons bx bx-plus'></i>
             </div>
             <div class="card-body">
-                <form enctype="multipart/form-data" id="AddNewVideoForm">
+                <form enctype="multipart/form-data" id="UpdateLiveSession">
                     @Html.AntiForgeryToken()
 
                     <!-- رسائل التحقق العامة -->
@@ -27,18 +31,18 @@
 
                     @* Title *@
                     <div class="row mb-3">
-                        <label class="col-sm-4 col-form-label"   >@Localizer["TitleAR"]</label>
+                        <label class="col-sm-4 col-form-label">@Localizer["TitleAR"]</label>
                         <div class="col-sm-8">
 
                             <input asp-for="TitleAR" id="InputTitleAR" class="form-control" oninput="GeneralRequiredFiled('InputTitleAR', '@Localizer["Required"]', 'TitleAR')" />
-                                <br />
-                                <span      name="TitleAR" id="TitleAR" class="text-danger"></span>
-                           
+                            <br />
+                            <span name="TitleAR" id="TitleAR" class="text-danger"></span>
+
                         </div>
                     </div>
 
 
-                  
+
 
 
 
@@ -47,8 +51,8 @@
                         <label class="col-sm-4 col-form-label" for="basic-icon-default-fullname">@Localizer["TitleEN"]</label>
                         <div class="col-sm-8">
                             <input asp-for="TitleEN" id="InputTitleEN" class="form-control" oninput="GeneralRequiredFiled('InputTitleEN', '@Localizer["Required"]', 'TitleEN')" />
-                                <span      name="TitleEN" id="TitleEN" class="text-danger"></span>
-                         </div>
+                            <span name="TitleEN" id="TitleEN" class="text-danger"></span>
+                        </div>
                     </div>
                     @* end *@
 
@@ -57,17 +61,17 @@
                         <label class="col-sm-4 form-label" for="basic-icon-default-message">@Localizer["DescriptionAR"]</label>
                         <div class="col-sm-8">
                             <textarea asp-for="DescriptionAR" id="IputDescriptionAR" class="form-control" rows="3" oninput="GeneralRequiredFiled('IputDescriptionAR', '@Localizer["Required"]', 'DescriptionAR')"></textarea>
-                               
-                                <span name="DescriptionAR" class="text-danger" id="DescriptionAR"></span>
-                         </div>
+
+                            <span name="DescriptionAR" class="text-danger" id="DescriptionAR"></span>
+                        </div>
                     </div>
 
                     <div class="row mb-3">
                         <label class="col-sm-4 form-label" for="basic-icon-default-message">@Localizer["DescriptionEN"]</label>
                         <div class="col-sm-8">
                             <textarea asp-for="DescriptionEN" id="inputDescriptionEN" class="form-control" rows="3" oninput="GeneralRequiredFiled('inputDescriptionEN', '@Localizer["Required"]', 'DescriptionEN')"></textarea>
-                                <span name="DescriptionEN" class="text-danger" id="DescriptionEN"></span>
-                         </div>
+                            <span name="DescriptionEN" class="text-danger" id="DescriptionEN"></span>
+                        </div>
                     </div>
                     @* end *@
 
@@ -77,18 +81,26 @@
                         <div class="col-sm-8">
 
                             <select class="form-control" asp-for="CourseId" id="SelectCourseId">
-                                        @if (courses != null)
+                                @if (courses != null)
+                                {
+                                    foreach (var course in courses)
+                                    {
+                                        if (Model.CourseId == course.CourseId)
                                         {
-                                            foreach (var course in courses  )
-                                            {
-                                                <option value="@course.CourseId">@course.TitleEN</option>
-                                            }
+                                            <option value="@course.CourseId" selected>@course.TitleEN</option>
                                         }
-                                    </select>
-                            <span  id="CourseId" class="text-danger"></span>
+                                        else
+                                        {
+                                            <option value="@course.CourseId">@course.TitleEN</option>
 
-                            </div>
-                     
+                                        }
+                                    }
+                                }
+                            </select>
+                            <span id="CourseId" class="text-danger"></span>
+
+                        </div>
+
                     </div>
                     @* end *@
 
@@ -97,19 +109,36 @@
                         <label class="col-sm-4 col-form-label" for="basic-icon-default-company">@Localizer["ImageVideoUrl"]</label>
                         <div class="col-sm-8">
 
-                            <input asp-for="ImageVideoUrl" id="InputImageVideoUrl" type="file" accept="image/*" class="form-control" onchange="validateImageFile('InputImageVideoUrl','ImageVideoUrl','@Localizer["AllowImageExtntion"]')" />
-                            <span name="ImageVideoUrl" id="ImageVideoUrl" class="text-danger"></span>
-                         </div>
+                            <input asp-for="ImageSessionUrl" id="InputImageSessionUrlUpdate" type="file" accept="image/*" class="form-control" onchange="validateImageFile('InputImageSessionUrlUpdate','ImageSessionUrl','@Localizer["AllowImageExtntion"]')" />
+                            <span name="ImageSessionUrl" id="ImageSessionUrl" class="text-danger"></span>
+                        </div>
                     </div>
                     @* end *@
 
-                    @* Video *@
+                    @* Link Youtub *@
                     <div class="row mb-3">
-                        <label class="col-sm-4 col-form-label" for="basic-icon-default-company">@Localizer["VideoUrl"]</label>
+                        <label class="col-sm-4 col-form-label" for="basic-icon-default-company">@Localizer["linkLive"]</label>
                         <div class="col-sm-8">
-                            <input asp-for="VideoUrl" type="file" id="inputVideoUrl" class="form-control" onchange="validateVideoFile('inputVideoUrl', 'VideoUrl','@Localizer["AllowVideoExtensiion"]')" />
-                                <span      id="VideoUrl" class="text-danger"></span>
-                         </div>
+                            <input asp-for="YoutubeLink" type="text" class="form-control" id="inputYoutubKink" oninput="GeneralRequiredFiled('inputYoutubKink', '@Localizer["Required"]', 'YoutubeLink')" />
+                            <span id="YoutubeLink" class="text-danger"></span>
+                        </div>
+                    </div>
+                    @* end *@
+
+
+                    @*  Date and time *@
+                    <div class="row mb-3">
+                        <label class="col-sm-4 col-form-label" for="basic-icon-default-company">@Localizer["Date"]</label>
+                        <div class="col-sm-3">
+                            <input asp-for="ScheduledAt" class="form-control" type="date" id="inputScheduledAt"   />
+                            <span id="ScheduledAt" class="text-danger"></span>
+                        </div>
+
+                        <label class="col-sm-2 col-form-label" for="basic-icon-default-company">@Localizer["Time"]</label>
+                        <div class="col-sm-3">
+                            <input asp-for="ScheduledTime" class="form-control" type="time" id="inputScheduledTime" oninput="GeneralRequiredFiled('inputScheduledTime', '@Localizer["Required"]', 'ScheduledTime')" />
+                            <span id="ScheduledTime" class="text-danger"></span>
+                        </div>
                     </div>
                     @* end *@
 
@@ -134,7 +163,7 @@
                                 <div class="col-sm-6">
                                     <div class="input-group input-group-merge">
 
-                                        <input asp-for="IsPaid" class="form-check-input" type="checkbox" id="Ispaid" onchange="handleIsPaidChangeInAddNewVideo('Ispaid','Costadd')" />
+                                        <input asp-for="IsLocked" class="form-check-input" type="checkbox" id="Ispaid" onchange="handleIsPaidChangeInAddNewVideo('Ispaid','Costadd')" />
                                     </div>
                                 </div>
                             </div>
@@ -142,11 +171,11 @@
                         @* notify *@
                         <div class="col-8">
                             <div class="row ">
-                                <label class="col-sm-8 col-form-label" for="basic-icon-default-company">@Localizer["notfiy"]</label>
+                                <label class="col-sm-8 col-form-label" for="basic-icon-default-company">@Localizer["notfiyUpdate"]</label>
                                 <div class="col-sm-4">
                                     <div class="input-group input-group-merge">
 
-                                        <input asp-for="notfiy" class="form-check-input" type="checkbox" id="notfiy" />
+                                        <input asp-for="notfiy" class="form-check-input" type="checkbox" id="notfiy"  />
                                     </div>
                                 </div>
                             </div>
@@ -159,32 +188,32 @@
                     <div class="row mb-3">
                         <label class="col-sm-4 col-form-label" for="basic-icon-default-email">@Localizer["Cost"]</label>
                         <div class="col-sm-8">
-                                
-                                <input asp-for="Cost" type="number" class="form-control" id="Costadd" value="0"
+
+                            <input asp-for="Cost" type="number" class="form-control" id="Costadd" 
                                    oninput="validateCost('@Localizer["InvaildCost"]','Ispaid','Costadd','spanCost','@Localizer["Nagtivenumber"]','@Localizer["CostForPaid"]')" />
-                                <span id="spanCost" class="text-danger"></span>
+                            <span id="spanCost" class="text-danger"></span>
                             <span name="Cost" id="spanCost" class="text-danger"></span>
 
-                            </div>
-                           
+                        </div>
 
-                        
+                        <input asp-for="SessionId" hidden/>
+
                     </div>
                     @* end *@
 
                     <div class="row justify-content-end">
                         <div class="col-sm-8">
-                            <button type="button" onclick="SubmitAddNewVideo()" class="btn btn-primary px-4"> @Localizer["Send"]</button>
+                            <button type="button" onclick="SubmitUpdateLive()" class="btn btn-primary px-4"> @Localizer["Send"]</button>
                         </div>
                     </div>
                 </form>
-               
+
             </div>
-          
+
         </div>
     </div>
 </div>
 
-  <script>
+<script>
 
-  </script>
+</script>

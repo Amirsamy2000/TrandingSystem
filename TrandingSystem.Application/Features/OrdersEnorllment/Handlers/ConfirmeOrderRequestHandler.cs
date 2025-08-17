@@ -32,7 +32,7 @@ namespace TrandingSystem.Application.Features.OrdersEnorllment.Handlers
 
                 order.ConfirmedBy = request.ConfirmedBy;
                 order.EnrollmentDate = request.CreatedAt;
-                order.OrderStatus = 1; // Assuming 1 means confirmed
+                order.OrderStatus = request.Status ? (byte)1 : (byte)0;
                 order.IsConfirmed = true;
                 _unitOfWork.ordersEnorllment.Update(order);
                 await _unitOfWork.SaveChangesAsync();

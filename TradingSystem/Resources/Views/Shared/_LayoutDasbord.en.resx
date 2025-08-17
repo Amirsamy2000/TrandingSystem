@@ -177,4 +177,7 @@
   <data name="btnShowAllVideo" xml:space="preserve">
     <value>Show Videos</value>
   </data>
+  <data name="AddNewasession" xml:space="preserve">
+    <value>Add Live</value>
+  </data>
 </root>

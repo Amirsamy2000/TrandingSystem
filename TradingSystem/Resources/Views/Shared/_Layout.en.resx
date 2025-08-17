@@ -136,7 +136,7 @@
     <value>Get Started</value>
   </data>
   <data name="SiteName" xml:space="preserve">
-    <value>Stie Name</value>
+    <value>Saif Al Qadi Community</value>
   </data>
   <data name="Courses" xml:space="preserve">
     <value>Courses</value>
@@ -146,5 +146,35 @@
   </data>
   <data name="dasbord" xml:space="preserve">
     <value>Dashboard</value>
+  </data>
+  <data name="Service1" xml:space="preserve">
+    <value>Trading Courses</value>
+  </data>
+  <data name="Service2" xml:space="preserve">
+    <value>Daily Analysis</value>
+  </data>
+  <data name="Service3" xml:space="preserve">
+    <value>Support and guidance</value>
+  </data>
+  <data name="Service4" xml:space="preserve">
+    <value>Indicators and tools</value>
+  </data>
+  <data name="Service5" xml:space="preserve">
+    <value>Artificial intelligence tools</value>
+  </data>
+  <data name="Address" xml:space="preserve">
+    <value>Egypt / Cairo</value>
+  </data>
+  <data name="UsefulLinks" xml:space="preserve">
+    <value>Useful Links</value>
+  </data>
+  <data name="OurServices" xml:space="preserve">
+    <value>Our Services</value>
+  </data>
+  <data name="OurNewsletter" xml:space="preserve">
+    <value>Our Newsletter</value>
+  </data>
+  <data name="OurNewsletterBody" xml:space="preserve">
+    <value>Subscribe to our newsletter and receive the latest news about our products and services!</value>
   </data>
 </root>

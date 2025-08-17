@@ -118,76 +118,61 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="TitleEN" xml:space="preserve">
-    <value>Title (Arabic)</value>
+    <value>العنوان  (انجليزي)</value>
   </data>
   <data name="Send" xml:space="preserve">
-    <value>Save Video</value>
+    <value>حفظ البث</value>
   </data>
   <data name="TitleAR" xml:space="preserve">
-    <value>Title (English)</value>
+    <value>العنوان  (عربي)</value>
   </data>
   <data name="DescriptionEN" xml:space="preserve">
-    <value>Description (English)</value>
+    <value>الوصف (انجليزي)</value>
   </data>
   <data name="DescriptionAR" xml:space="preserve">
-    <value>Description (Aarbic)</value>
-  </data>
-  <data name="VideoUrl" xml:space="preserve">
-    <value>Video</value>
+    <value>الوصف (عربي)</value>
   </data>
   <data name="DeleteAll" xml:space="preserve">
     <value>حذف جميع الجلسات</value>
   </data>
   <data name="IsPaid" xml:space="preserve">
-    <value>Paid</value>
+    <value>مدفوع</value>
   </data>
   <data name="Cost" xml:space="preserve">
     <value>التكلفة</value>
   </data>
   <data name="IsActive" xml:space="preserve">
-    <value>Active </value>
+    <value>نشط</value>
   </data>
   <data name="ImageVideoUrl" xml:space="preserve">
-    <value>Image Video</value>
+    <value>صورة البث</value>
   </data>
   <data name="Course" xml:space="preserve">
-    <value>Course</value>
+    <value> اختار كورس</value>
   </data>
   <data name="UnBlock" xml:space="preserve">
     <value>الغاء الخظر</value>
   </data>
-  <data name="UpdateNewVideo" xml:space="preserve">
-    <value>Update Video Data</value>
-  </data>
   <data name="notfiy" xml:space="preserve">
-    <value>Notify all subscribers of the course</value>
+    <value>إشعار كل المشتركين في الكورس</value>
   </data>
   <data name="Required" xml:space="preserve">
-    <value>This Field Is Required</value>
+    <value>هذا الحقل مطلوب</value>
   </data>
   <data name="AllowImageExtntion" xml:space="preserve">
-    <value>Invalid image file extension. Allowed: JPG, PNG, GIF, WebP.</value>
-  </data>
-  <data name="AllowVideoExtensiion" xml:space="preserve">
-    <value>Invalid video file extension. Allowed: MP4, AVI, MOV, MKV.</value>
+    <value>امتداد الصورة غير صالح. الامتدادات المسموح بها: JPG، PNG، GIF، WebP.</value>
   </data>
   <data name="Nagtivenumber" xml:space="preserve">
-    <value>Negative values are not allowed.</value>
+    <value>لا يُسمح بإدخال أرقام سالبة</value>
   </data>
   <data name="InvaildCost" xml:space="preserve">
-    <value>Cost is not required for free videos.</value>
-  </data>
-  <data name="TitleEN1" xml:space="preserve">
-    <value>Title (Arabic)</value>
+    <value>هذا البث مجاني، لا تدخل أي تكلفة.</value>
   </data>
   <data name="IspaidCost" xml:space="preserve">
-    <value>Should Enter Cost Of Video</value>
+    <value>يحب ادخال تكلفة البث</value>
   </data>
   <data name="CostForPaid" xml:space="preserve">
-    <value>Should Enter Cost Of Video</value>
-  </data>
-  <data name="VideoSubmitError" xml:space="preserve">
-    <value>Some error occurred. Try again.</value>
+    <value>يجب ادخال تكلفة البث</value>
   </data>
   <data name="NoVideosMessage" xml:space="preserve">
     <value>لا توجد جلسات لهذة الكورس </value>
@@ -224,5 +209,47 @@
   </data>
   <data name="Unpaid" xml:space="preserve">
     <value>مجاني</value>
+  </data>
+  <data name="linkLive" xml:space="preserve">
+    <value>رابط البث</value>
+  </data>
+  <data name="loading" xml:space="preserve">
+    <value>جار التحميل.....</value>
+  </data>
+  <data name="timepast" xml:space="preserve">
+    <value>الوقت لا يمكن أن يكون في الماضي</value>
+  </data>
+  <data name="datapast" xml:space="preserve">
+    <value>التاريخ لا يمكن أن يكون في الماضي</value>
+  </data>
+  <data name="UpdateNewlive" xml:space="preserve">
+    <value>تعديل بث  جديد</value>
+  </data>
+  <data name="notfiyUpdate" xml:space="preserve">
+    <value>إخطار جميع المشتركين بالدورة بعد تعديل البيانات</value>
+  </data>
+  <data name="responseSuccessAllCurd" xml:space="preserve">
+    <value>تم تنفيذ الحدف بنجاح </value>
+  </data>
+  <data name="responseDangerAllCurd" xml:space="preserve">
+    <value>حدث خطأ أثناء تنفيذ العملية </value>
+  </data>
+  <data name="titleDeleteall" xml:space="preserve">
+    <value>هل أنت متأكد من حذف جميع الجلسات؟ </value>
+  </data>
+  <data name="titleDelete" xml:space="preserve">
+    <value>هل أنت متأكد من حذف البث؟ </value>
+  </data>
+  <data name="cancelButtonTextBlock" xml:space="preserve">
+    <value>لا</value>
+  </data>
+  <data name="confirmButtonTextBlock" xml:space="preserve">
+    <value>نعم</value>
+  </data>
+  <data name="titleBlock1" xml:space="preserve">
+    <value>هل أنت متأكد من الغاء حظر البث؟ </value>
+  </data>
+  <data name="titleBlock" xml:space="preserve">
+    <value>هل أنت متأكد من حظر البث؟ </value>
   </data>
 </root>
