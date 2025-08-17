@@ -3,12 +3,9 @@ using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Localization;
 using TrandingSystem.Application.Features.Courses.Queries;
-using TrandingSystem.Application.Resources;
 using TrandingSystem.Infrastructure.Data;
 using TrandingSystem.Models;
-
 
 namespace WebApplication1.Controllers
 {
@@ -18,19 +15,14 @@ namespace WebApplication1.Controllers
         private readonly db23617Context _db;
         private readonly IMediator _mediator;
         private readonly IMapper _mapper;
-        private readonly IStringLocalizer<ValidationMessages> _localizer;
 
-
-        public HomeController(ILogger<HomeController> logger,     db23617Context options, IMediator mediator, IMapper mapper, IStringLocalizer<ValidationMessages> localizer)
+        public HomeController(ILogger<HomeController> logger,     db23617Context options, IMediator mediator, IMapper mapper)
         {
             _logger = logger;
             _db = options;
             _mediator = mediator;
             _mapper = mapper;
-            _localizer = localizer;
         }
-
-        
 
         public IActionResult Index()
         {
@@ -41,13 +33,6 @@ namespace WebApplication1.Controllers
 
            
         }
-        
-
-        public string test()
-        {
-            return _localizer["AvailableCourses"];
-        }
-
         public IActionResult About()
         {
             return View();

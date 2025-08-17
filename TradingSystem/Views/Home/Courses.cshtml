@@ -1,14 +1,10 @@
 ﻿@using System.Security.Claims
-@using Microsoft.Extensions.Localization
 @using TrandingSystem.Application.Dtos
 @inject IHttpContextAccessor HttpContextAccessor
-@* @inject IViewLocalizer Localizer *@
+@inject IViewLocalizer Localizer
 @using Microsoft.AspNetCore.Localization
 @using Microsoft.AspNetCore.Http
 @using Microsoft.AspNetCore.Mvc.Localization
-@using WebApplication1.Controllers
-@inject IStringLocalizer<HomeController> Localizer2
-
 @model IEnumerable<CourseDto>
 
 @{
@@ -38,8 +34,14 @@
         <div class="row mb-5">
             <div class="col-12 text-center">
                 <h1 class="display-4 fw-bold text-primary mb-3">
-                    <span>@Localizer2["AvailableCourses"]</span>
-
+                    @if (isRtl)
+                    {
+                        <span>الدورات المتاحة</span>
+                    }
+                    else
+                    {
+                        <span>Available Courses</span>
+                    }
                 </h1>
                 <p class="lead text-muted">
                     @if (isRtl)
