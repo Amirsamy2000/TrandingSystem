@@ -51,7 +51,9 @@ namespace TrandingSystem.Infrastructure.Repositories
 
         public Course Update(Course Element)
         {
-            throw new NotImplementedException();
+            _context.Courses.Update(Element);
+            _context.SaveChanges();
+            return Element;
         }
         public Course Delete(int Id)
         {

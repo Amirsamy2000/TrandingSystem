@@ -114,6 +114,31 @@ namespace TrandingSystem.Controllers
 
 
         [HttpPost]
+        public async Task<IActionResult> update(CourseVM model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model); // Re-display the form with validation messages
+            }
+
+            var command = _mapper.Map<UpdateCourseCommand>(model);
+
+            var result = await _mediator.Send(command);
+
+            if (!result.Success)
+            {
+                ModelState.AddModelError(string.Empty, result.Message);
+                return View(model);
+            }
+
+            // Redirect to index or success page
+            return RedirectToAction("Index");
+        }
+
+
+
+
+        [HttpPost]
         public async Task<IActionResult> EnrollCourse(int courseId, IFormFile? RecieptImage)
         {
             var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
