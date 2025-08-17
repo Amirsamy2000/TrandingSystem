@@ -13,6 +13,7 @@ namespace TrandingSystem.Application.Features.Courses.Commands
 {
     public class UpdateCourseCommand : IRequest<Response<CourseDto>>
     {
+        public int CourseId { get; set; }
         public string TitleEN { get; set; }
 
         public string TitleAR { get; set; }

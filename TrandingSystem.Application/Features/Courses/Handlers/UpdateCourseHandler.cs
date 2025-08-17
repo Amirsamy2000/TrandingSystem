@@ -32,21 +32,22 @@ namespace TrandingSystem.Application.Features.Courses.Handlers
         {
             try
             {
-                var course = _mapper.Map<Course>(request);
-                if (course == null)
+                var existingCourse = _unitOfWork.Courses.ReadById(request.CourseId);
+                if (existingCourse == null)
                 {
-                    return Task.FromResult( Response<CourseDto>.ErrorResponse("Invalid course data"));
+                    return Task.FromResult(Response<CourseDto>.ErrorResponse("Invalid course data"));
                 }
+
+                // update the existing entity
+                _mapper.Map(request, existingCourse);
 
                 if (request.CourseImage != null)
                 {
-                    course.ImageCourseUrl = _imageService.SaveImageAsync(request.CourseImage, ConstantPath.PathdCoursesImages).Result;
-
+                    existingCourse.ImageCourseUrl = _imageService.SaveImageAsync(request.CourseImage, ConstantPath.PathdCoursesImages).Result;
                 }
 
-                // TODO : Add created by field
+                var result = _unitOfWork.Courses.Update(existingCourse);
 
-                var result = _unitOfWork.Courses.Update(course);
 
                 if (result == null)
                 {

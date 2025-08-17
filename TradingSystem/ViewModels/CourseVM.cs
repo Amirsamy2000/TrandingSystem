@@ -2,6 +2,7 @@
 {
     public class CourseVM
     {
+        public int? CourseId { get; set; }
         public string TitleEN { get; set; }
 
         public string TitleAR { get; set; }

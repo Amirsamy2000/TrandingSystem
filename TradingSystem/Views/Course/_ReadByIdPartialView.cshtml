@@ -1,7 +1,529 @@
-﻿@{
-    var course = ViewBag.Course;
+﻿@using TrandingSystem.Application.Dtos
+@{
+    CourseDto course = ViewBag.Course;
 }
 
+
+
+@{
+    ViewData["Title"] = "Create Course";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Course - Sneat Admin</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+
+
+
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .sneat-primary {
+            background-color: #696CFF !important;
+            border-color: #696CFF !important;
+        }
+
+            .sneat-primary:hover {
+                background-color: #5a5cfc !important;
+                border-color: #5a5cfc !important;
+            }
+
+        .form-control:focus {
+            border-color: #696CFF;
+            box-shadow: 0 0 0 0.2rem rgba(105, 108, 255, 0.25);
+        }
+
+        .form-check-input:checked {
+            background-color: #696CFF;
+            border-color: #696CFF;
+        }
+
+        .card {
+            border: none;
+            box-shadow: 0 0.25rem 1rem rgba(161, 172, 184, 0.15);
+        }
+
+        .image-preview {
+            max-width: 200px;
+            max-height: 200px;
+            border-radius: 8px;
+            border: 2px dashed #dee2e6;
+            padding: 10px;
+            margin-top: 10px;
+            display: none;
+        }
+
+        .currency-input {
+            position: relative;
+        }
+
+        .currency-symbol {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #6c757d;
+            z-index: 10;
+        }
+
+        .currency-input input {
+            padding-left: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid py-4">
+        <div class="row justify-content-center">
+            <div class="col-12 col-lg-10">
+                <div class="card shadow rounded-3">
+                    <div class="card-header bg-white py-3">
+                        <h4 class="card-title mb-0 text-dark">
+                            <i class="fas fa-plus-circle me-2" style="color: #696CFF;"></i>
+                            Create New Course
+                        </h4>
+                    </div>
+
+                    <div class="card-body p-4">
+                        <form id="courseCreateForm">
+                            <div class="row">
+
+                                <input id="CourseId" value="@course.CourseId" name="CourseId" hidden />
+                                <!-- Course Titles -->
+                                <div class="col-md-6 mb-3">
+                                    <label for="titleEN" class="form-label">Course Title (English) <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="titleEN" name="titleEN"
+                                           value="@course.TitleEN" required>
+                                    <div class="invalid-feedback">
+                                        Please provide a valid English title.
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 mb-3">
+                                    <label for="titleAR" class="form-label">Course Title (Arabic) <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="titleAR" name="titleAR"
+                                           value="@course.TitleAR" required dir="rtl">
+                                    <div class="invalid-feedback">
+                                        Please provide a valid Arabic title.
+                                    </div>
+                                </div>
+
+                                <!-- Descriptions -->
+                                <div class="col-md-6 mb-3">
+                                    <label for="descriptionEN" class="form-label">Description (English) <span class="text-danger">*</span></label>
+                                    <textarea class="form-control" id="descriptionEN" name="descriptionEN"
+                                              rows="4" required>@course.DescriptionEN</textarea>
+                                    <div class="invalid-feedback">
+                                        Please provide a valid English description.
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 mb-3">
+                                    <label for="descriptionAR" class="form-label">Description (Arabic) <span class="text-danger">*</span></label>
+                                    <textarea class="form-control" id="descriptionAR" name="descriptionAR"
+                                              rows="4" required dir="rtl">@course.DescriptionEN</textarea>
+                                    <div class="invalid-feedback">
+                                        Please provide a valid Arabic description.
+                                    </div>
+                                </div>
+
+                                <!-- Category and Cost -->
+                                <div class="col-md-6 mb-3">
+                                    <label for="categoryId" class="form-label">Category <span class="text-danger">*</span></label>
+                                    <select class="form-control" id="categoryId" name="categoryId" required>
+                                        <option value="">Select a category...</option>
+                                    </select>
+                                    <div class="invalid-feedback">
+                                        Please select a category.
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 mb-3">
+                                    <label for="cost" class="form-label">Cost <span class="text-danger">*</span></label>
+                                    <div class="currency-input">
+                                        <span class="currency-symbol">$</span>
+                                        <input type="number" class="form-control" id="cost" name="cost"
+                                               value="@course.Cost" step="0.01" min="0" required>
+                                    </div>
+                                    <div class="invalid-feedback">
+                                        Please provide a valid cost.
+                                    </div>
+                                </div>
+
+                                <!-- Create Date and Image -->
+                                <div class="col-md-6 mb-3">
+                                    <label for="createAt" class="form-label">Create Date</label>
+                                    <input type="datetime-local" class="form-control" id="createAt" value="@course.CreateAt" name="createAt">
+                                </div>
+
+                                <div class="col-md-6 mb-3">
+                                    <label for="CourseImage" class="form-label">Course Image</label>
+                                    <input type="file" class="form-control" id="CourseImage" name="CourseImage"
+                                           accept="image/*">
+                                    <small class="form-text text-muted">Optional: Upload a course image (JPG, PNG, GIF)</small>
+                                    <img id="imagePreview" class="image-preview" alt="Image Preview">
+                                </div>
+
+                                <!-- Toggle Switches -->
+                                <div class="col-12 mb-4">
+                                    <h5 class="mb-3 text-secondary">Course Settings</h5>
+                                    <div class="row">
+                                        <div class="col-md-3 mb-3">
+                                            <div class="form-check form-switch">
+                                                <input class="form-check-input" type="checkbox" id="communityAutoCreate" name="communityAutoCreate" @(course.CommunityAutoCreate == true ? "checked" : "")>
+                                                <label class="form-check-label" for="communityAutoCreate">
+                                                    Auto Create Community
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-3 mb-3">
+                                            <div class="form-check form-switch">
+                                                <input class="form-check-input" type="checkbox" id="isLive" name="isLive" @(course.IsLive ? "checked" : "")>
+                                                <label class="form-check-label" for="isLive">
+                                                    Live Course
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-3 mb-3">
+                                            <div class="form-check form-switch">
+                                                <input class="form-check-input" type="checkbox" id="isFullyFree" name="isFullyFree" @(course.IsFullyFree == true ? "checked" : "")>
+                                                <label class="form-check-label" for="isFullyFree">
+                                                    Fully Free
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-3 mb-3">
+                                            <div class="form-check form-switch">
+                                                <input class="form-check-input" type="checkbox" id="isActive" name="isActive" @(course.IsActive == true ? "checked" : "")>
+                                                <label class="form-check-label" for="isActive">
+                                                    Active
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Submit Button -->
+                            <div class="row">
+                                <div class="col-12 d-flex justify-content-end">
+                                    <button type="button" class="btn btn-secondary me-2" onclick="window.history.back()">
+                                        <i class="fas fa-arrow-left me-1"></i>Cancel
+                                    </button>
+                                    <button type="submit" class="btn btn-primary sneat-primary" id="submitBtn">
+                                        <i class="fas fa-save me-1"></i>Update Course
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+
+    <!-- Font Awesome (for icons) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            // Set default create date to now
+            const now = new Date();
+            now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+            $('#createAt').val(now.toISOString().slice(0, 16));
+
+            // Load categories via AJAX
+            loadCategories();
+                    let initialImageUrl = "@course.ImageCourseUrl";
+
+            let file = null;
+
+            // Show existing image if available
+            if (initialImageUrl) {
+                $('#imagePreview').attr('src', initialImageUrl).show();
+            }
+
+            // Image preview functionality
+            $('#CourseImage').on('change', function() {
+                file = this.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        $('#imagePreview').attr('src', e.target.result).show();
+                    };
+                    reader.readAsDataURL(file);
+                } else {
+                    $('#imagePreview').hide();
+                }
+            });
+
+
+            // Form submission
+            $('#courseCreateForm').on('submit', function(e) {
+                e.preventDefault();
+
+                if (this.checkValidity() === false) {
+                    e.stopPropagation();
+                    $(this).addClass('was-validated');
+                    return;
+                }
+
+                submitCourse();
+            });
+        });
+
+        function loadCategories() {
+            debugger
+            $.ajax({
+                url: '/Categories/Read',
+                type: 'GET',
+                dataType: 'json',
+                success: function(data) {
+                    debugger
+                    const categorySelect = $('#categoryId');
+                    categorySelect.empty().append('<option value="">Select a category...</option>');
+
+                    // Filter only active categories
+                    const activeCategories = data.data;//data.data.filter(cat => cat.isActive === true);
+
+                    activeCategories.forEach(function(category) {
+                        debugger
+                        if(category.categoryId != @(course.CategoryId) )
+                        {
+                            categorySelect.append(
+                               `<option value="${category.categoryId}">${category.categoryNameEn}</option>`
+                            );
+                        } else {
+                            categorySelect.append(
+                                `<option value="${category.categoryId}" selected>${category.categoryNameEn}</option>`
+                            );
+                        }
+
+                    });
+                },
+                error: function() {
+                    Swal.fire({
+                        title: 'Error',
+                        text: 'Failed to load categories. Please try again.',
+                        icon: 'error',
+                        confirmButtonColor: '#696CFF'
+                    });
+                }
+            });
+        }
+
+        async function uploadImage(file) {
+            // Simulate image upload - replace with actual upload logic
+            return new Promise((resolve) => {
+                setTimeout(() => {
+                    // Mock response with a dummy URL
+                    const mockUrl = `/uploads/courses/${file.name}`;
+                    resolve(mockUrl);
+                }, 1000);
+            });
+        }
+
+
+
+
+        async function submitCourse() {
+            const submitBtn = $('#submitBtn');
+            const originalText = submitBtn.html();
+
+            // Show loading state
+            submitBtn.prop('disabled', true).html('<i class="fas fa-spinner fa-spin me-1"></i>Creating...');
+
+            try {
+                // Prepare form data
+                const formData = new FormData();
+                formData.append('CourseId',$('#CourseId').val());
+                formData.append('TitleEN', $('#titleEN').val());
+                formData.append('TitleAR', $('#titleAR').val());
+                formData.append('DescriptionEN', $('#descriptionEN').val());
+                formData.append('DescriptionAR', $('#descriptionAR').val());
+                formData.append('CategoryId', $('#categoryId').val());
+                formData.append('Cost', $('#cost').val());
+                formData.append('CreateAt', $('#createAt').val());
+                formData.append('CommunityAutoCreate', $('#communityAutoCreate').is(':checked'));
+                formData.append('IsLive', $('#isLive').is(':checked'));
+                formData.append('IsFullyFree', $('#isFullyFree').is(':checked'));
+                formData.append('IsActive', $('#isActive').is(':checked'));
+
+                // Append file if selected
+                const courseImage = $('#CourseImage')[0].files[0];
+                if (courseImage) {
+                    formData.append('CourseImage', courseImage);
+                }
+
+                // AJAX submit
+                $.ajax({
+                    url: '/Course/update',
+                    type: 'POST',
+                    data: formData,
+                    processData: false, // prevent jQuery from converting FormData
+                    contentType: false, // let browser set the content type (multipart/form-data)
+                    success: function () {
+                        Swal.fire({
+                            title: 'Success',
+                            text: 'Course created successfully',
+                            icon: 'success',
+                            confirmButtonColor: '#696CFF'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                window.location.href = '/Course';
+                            }
+                        });
+                    },
+                    error: function (xhr) {
+                        let errorMessage = 'An error occurred while creating the course.';
+
+                        if (xhr.responseJSON && xhr.responseJSON.message) {
+                            errorMessage = xhr.responseJSON.message;
+                        } else if (xhr.responseText) {
+                            errorMessage = xhr.responseText;
+                        }
+
+                        Swal.fire({
+                            title: 'Error',
+                            text: errorMessage,
+                            icon: 'error',
+                            confirmButtonColor: '#696CFF'
+                        });
+                    },
+                    complete: function () {
+                        submitBtn.prop('disabled', false).html(originalText);
+                    }
+                });
+
+            } catch (error) {
+                console.error('Error:', error);
+                Swal.fire({
+                    title: 'Error',
+                    text: 'An unexpected error occurred. Please try again.',
+                    icon: 'error',
+                    confirmButtonColor: '#696CFF'
+                });
+
+                submitBtn.prop('disabled', false).html(originalText);
+            }
+        }
+
+
+
+
+        // async function submitCourse() {
+        //     const submitBtn = $('#submitBtn');
+        //     const originalText = submitBtn.html();
+
+        //     // Show loading state
+        //     submitBtn.prop('disabled', true).html('<i class="fas fa-spinner fa-spin me-1"></i>Creating...');
+
+        //     try {
+        //         let imageUrl = null;
+
+        //         // Handle image upload if file is selected
+        //         const imageFile = $('#CourseImage')[0].files[0];
+        //         if (imageFile) {
+        //             imageUrl = await uploadImage(imageFile);
+        //         }
+
+        //         // Prepare form data as JSON
+        //         const courseData = {
+        //             titleEN: $('#titleEN').val(),
+        //             titleAR: $('#titleAR').val(),
+        //             descriptionEN: $('#descriptionEN').val(),
+        //             descriptionAR: $('#descriptionAR').val(),
+        //             categoryId: parseInt($('#categoryId').val()),
+        //             cost: parseFloat($('#cost').val()),
+        //             createAt: $('#createAt').val(),
+        //             CourseImage: imageUrl,
+        //             communityAutoCreate: $('#communityAutoCreate').is(':checked'),
+        //             isLive: $('#isLive').is(':checked'),
+        //             isFullyFree: $('#isFullyFree').is(':checked'),
+        //             isActive: $('#isActive').is(':checked')
+        //         };
+
+        //         // Submit via AJAX
+        //         $.ajax({
+        //             url: '/Course/Create',
+        //             type: 'POST',
+        //             contentType: 'application/json',
+        //             data: JSON.stringify(courseData),
+        //             success: function(response) {
+        //                 Swal.fire({
+        //                     title: 'Success',
+        //                     text: 'Course created successfully',
+        //                     icon: 'success',
+        //                     confirmButtonColor: '#696CFF'
+        //                 }).then((result) => {
+        //                     if (result.isConfirmed) {
+        //                         // Redirect to courses list or stay on form (clear it)
+        //                         window.location.href = '/Course';
+        //                     }
+        //                 });
+        //             },
+        //             error: function(xhr) {
+        //                 let errorMessage = 'An error occurred while creating the course.';
+
+        //                 if (xhr.responseJSON && xhr.responseJSON.message) {
+        //                     errorMessage = xhr.responseJSON.message;
+        //                 } else if (xhr.responseText) {
+        //                     errorMessage = xhr.responseText;
+        //                 }
+
+        //                 Swal.fire({
+        //                     title: 'Error',
+        //                     text: errorMessage,
+        //                     icon: 'error',
+        //                     confirmButtonColor: '#696CFF'
+        //                 });
+        //             },
+        //             complete: function() {
+        //                 // Reset button state
+        //                 submitBtn.prop('disabled', false).html(originalText);
+        //             }
+        //         });
+
+        //     } catch (error) {
+        //         console.error('Error:', error);
+        //         Swal.fire({
+        //             title: 'Error',
+        //             text: 'An unexpected error occurred. Please try again.',
+        //             icon: 'error',
+        //             confirmButtonColor: '#696CFF'
+        //         });
+
+        //         // Reset button state
+        //         submitBtn.prop('disabled', false).html(originalText);
+        //     }
+        // }
+    </script>
+</body>
+</html>
+
+
+
+
+@* 
 <div class="modal-body">
     <form action="update" method="post" enctype="multipart/form-data" id="editCourseForm">
         <input type="hidden" name="CourseId" value="@course.CourseId" />
@@ -42,10 +564,14 @@
             </div>
 
             <div class="col-md-6 mb-3">
-                <label for="ImageCourseUrl" class="form-label">Image URL</label>
-                <input type="text" class="form-control" id="ImageCourseUrl" name="ImageCourseUrl"
-                       value="@course.ImageCourseUrl" />
-            </div>
+                                    <label for="CourseImage" class="form-label">Course Image</label>
+                                    <input type="file" class="form-control" id="CourseImage" name="CourseImage"
+                                           accept="image/*">
+                                    <small class="form-text text-muted">Optional: Upload a course image (JPG, PNG, GIF)</small>
+                                    <img id="imagePreview" class="image-preview" alt="Image Preview">
+                                </div>
+
+            
 
             <div class="col-md-6 mb-3">
                 <label class="form-label">Create Date</label>
@@ -89,4 +615,4 @@
             <button type="submit" class="btn btn-primary">Update Course</button>
         </div>
     </form>
-</div>
+</div> *@
