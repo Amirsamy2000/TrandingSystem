@@ -18,6 +18,19 @@
 
     @* <a class="btn btn-primary w-100 " > view Details </a> *@
 
+    <form asp-controller="Course" asp-action="EnrollCourse" method="post" enctype="multipart/form-data">
+
+        <input type="hidden" name="courseId" id="courseId" value="@Model" />
+
+        <div class="mb-3">
+            <label for="RecieptImage" class="form-label">Upload Receipt</label>
+            <input type="file" class="form-control" name="RecieptImage" id="RecieptImage" accept="image/*" required />
+        </div>
+
+        <button type="submit" class="btn btn-primary">Enroll</button>
+    </form>
+
+@* 
     <form action="/Course/EnrollCourse" method="post" enctype="multipart/form-data">
         <input type="hidden" name="courseId" value="@Model" />
         <input hidden type="file" name="RecieptImage" />
@@ -32,7 +45,7 @@
             <span class="position-relative z-1">
 
                 <span>Enroll Now</span>
-                <i class="fas fa-arrow-right @(true ? "me-2" : "ms-2")"></i>@*isRtl*@
+                <i class="fas fa-arrow-right @(true ? "me-2" : "ms-2")"></i>
 
             </span>
             <!-- Button shine effect -->
@@ -43,7 +56,7 @@
     </form>
 
 
-    
+     *@
 
 }
 else

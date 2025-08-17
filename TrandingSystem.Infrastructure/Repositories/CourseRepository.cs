@@ -78,7 +78,7 @@ namespace TrandingSystem.Infrastructure.Repositories
                 CreatedAt = DateTime.Now,
                 IsConfirmed = false,
                 ReceiptImagePath = RecieptUrl,
-                OrderStatus = (byte?)(ReadById(courseId).Cost<= 0 ? 1 : 2), // Assuming OrderStatus is nullable is bendding
+                OrderStatus = 2 // (byte?)(ReadById(courseId).Cost<= 0 ? 1 : 2), // Assuming OrderStatus is nullable is bendding
             };
 
 
