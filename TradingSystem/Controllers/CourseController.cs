@@ -118,18 +118,18 @@ namespace TrandingSystem.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View(model); // Re-display the form with validation messages
+                return RedirectToAction("Index"); // Re-display the form with validation messages
             }
 
             var command = _mapper.Map<UpdateCourseCommand>(model);
 
             var result = await _mediator.Send(command);
 
-            if (!result.Success)
-            {
-                ModelState.AddModelError(string.Empty, result.Message);
-                return View(model);
-            }
+            //if (!result.Success)
+            //{
+            //    ModelState.AddModelError(string.Empty, result.Message);
+            //    return View(model);
+            //}
 
             // Redirect to index or success page
             return RedirectToAction("Index");
