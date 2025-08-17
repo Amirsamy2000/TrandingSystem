@@ -177,4 +177,7 @@
   <data name="OurNewsletterBody" xml:space="preserve">
     <value>اشترك في النشرة الإخبارية لدينا لتحصل على أحدث الأخبار حول منتجاتنا وخدماتنا!</value>
   </data>
+  <data name="Logout" xml:space="preserve">
+    <value>خروج</value>
+  </data>
 </root>

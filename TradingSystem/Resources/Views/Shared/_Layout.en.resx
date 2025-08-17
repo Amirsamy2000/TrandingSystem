@@ -177,4 +177,7 @@
   <data name="OurNewsletterBody" xml:space="preserve">
     <value>Subscribe to our newsletter and receive the latest news about our products and services!</value>
   </data>
+  <data name="Logout" xml:space="preserve">
+    <value>LogOut</value>
+  </data>
 </root>
