@@ -198,4 +198,93 @@
   <data name="NoVideosMessage1" xml:space="preserve">
     <value>Add new videos</value>
   </data>
+  <data name="AboutUs" xml:space="preserve">
+    <value>About Us</value>
+  </data>
+  <data name="AboutUsBody" xml:space="preserve">
+    <value>Welcome to Saif El Qadi Trading Hub – where we create a real difference for every trader who aims to succeed. We believe that “Trading is not luck… it’s knowledge and tools that make the difference,” and that’s why we’ve built a complete ecosystem designed to elevate your trading journey.
+</value>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="Students" xml:space="preserve">
+    <value>Students</value>
+  </data>
+  <data name="Courses" xml:space="preserve">
+    <value>Courses</value>
+  </data>
+  <data name="Events" xml:space="preserve">
+    <value>Events</value>
+  </data>
+  <data name="Trainers" xml:space="preserve">
+    <value>Trainers</value>
+  </data>
+  <data name="SecAbout1" xml:space="preserve">
+    <value>A Professional Platform to Learn Trading from Scratch</value>
+  </data>
+  <data name="SecAbout2" xml:space="preserve">
+    <value>Trading with Saif El Qadi is different.
+We don’t just teach you how to trade – we give you every tool, signal, and insight you need to become a confident and successful trader</value>
+  </data>
+  <data name="SecAbout3" xml:space="preserve">
+    <value>Comprehensive Trading Courses – beginner to advanced</value>
+  </data>
+  <data name="SecAbout4" xml:space="preserve">
+    <value>Daily &amp; Precise Market Analysis – Forex, Gold, Indices, Crypto</value>
+  </data>
+  <data name="SecAbout5" xml:space="preserve">
+    <value>Exclusive Indicators &amp; Tools – confident, profitable decisions.</value>
+  </data>
+  <data name="SecAbout6" xml:space="preserve">
+    <value>Read More</value>
+  </data>
+  <data name="SecAbout7" xml:space="preserve">
+    <value>AI-Powered Solutions – fast &amp; accurate market analysis</value>
+  </data>
+  <data name="SecAbout8" xml:space="preserve">
+    <value>Direct Mentorship &amp; Support – you’ll never trade alone.</value>
+  </data>
+  <data name="SecAbout9" xml:space="preserve">
+    <value>Special Bonuses &amp; Rewards – for our trading community</value>
+  </data>
+  <data name="SecAbout10" xml:space="preserve">
+    <value>Direct Mentorship &amp; Support – you’ll never trade alone.</value>
+  </data>
+  <data name="TrustMeTradingWithSaif" xml:space="preserve">
+    <value>Trust me, trading with Saif El Qadi is different.</value>
+  </data>
+  <data name="TradingWithSaifIntro" xml:space="preserve">
+    <value>We don’t just teach you how to trade – we give you every tool, signal, and insight you need.</value>
+  </data>
+  <data name="ExpertTradingCoursesTitle" xml:space="preserve">
+    <value>Expert Trading Courses</value>
+  </data>
+  <data name="ExpertTradingCoursesText" xml:space="preserve">
+    <value>Step-by-step programs, from beginner to advanced, to build a strong foundation and master trading strategies.</value>
+  </data>
+  <data name="PowerfulMarketAnalysisTitle" xml:space="preserve">
+    <value>Powerful Market Analysis</value>
+  </data>
+  <data name="PowerfulMarketAnalysisText" xml:space="preserve">
+    <value>Daily updates and professional insights on Forex, Gold, Indices, and Cryptocurrencies.</value>
+  </data>
+  <data name="AccurateSignalsTitle" xml:space="preserve">
+    <value>Accurate Signals &amp; Trade Setups</value>
+  </data>
+  <data name="AccurateSignalsText" xml:space="preserve">
+    <value>Ready-to-use signals with clear entry points, targets, and risk management</value>
+  </data>
+  <data name="AIPoweredToolsTitle" xml:space="preserve">
+    <value>AI-Powered Trading Tools</value>
+  </data>
+  <data name="AIPoweredToolsText" xml:space="preserve">
+    <value>Cutting-edge technology that helps you analyze markets and make smarter decisions.</value>
+  </data>
+  <data name="PersonalGuidanceTitle" xml:space="preserve">
+    <value>Personal Guidance &amp; Mentorship</value>
+  </data>
+  <data name="PersonalGuidanceText" xml:space="preserve">
+    <value>You’re never alone – we support you every step of the way.</value>
+  </data>
 </root>
