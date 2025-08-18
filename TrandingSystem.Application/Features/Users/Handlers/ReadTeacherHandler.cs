@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using TradingSystem.Application.Common.Response;
 using TrandingSystem.Application.Dtos;
 using TrandingSystem.Application.Features.Users.Queries;
 using TrandingSystem.Domain.Entities;
@@ -13,7 +14,7 @@ using TrandingSystem.Domain.Interfaces;
 
 namespace TrandingSystem.Application.Features.Users.Handlers
 {
-    public class ReadTeacherHandler : IRequestHandler<ReadTeachersQuery, List<UserDto>>
+    public class ReadTeacherHandler : IRequestHandler<ReadTeachersQuery, Response<List<UserDto>>>
     {
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
@@ -31,9 +32,11 @@ namespace TrandingSystem.Application.Features.Users.Handlers
             {
                 var users = _unitOfWork.Users.ReadAllTeacher();
 
-                if (users == null || !users.Any())
+               var usersDto = _mapper.Map<List<UserDto>>(users);
+
+                if (usersDto == null || !usersDto.Any())
                 {
-                    return Response<List<CourseDto>>.ErrorResponse("No courses found", null, HttpStatusCode.NotFound);
+                    return Task.FromResult(Response<List<UserDto>>.ErrorResponse("No teachers found", null, HttpStatusCode.NotFound));
                 }
 
                 var courseDtos = _mapper.Map<List<CourseDto>>(courses);
