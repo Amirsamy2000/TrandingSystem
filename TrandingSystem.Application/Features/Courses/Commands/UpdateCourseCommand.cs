@@ -1,8 +1,19 @@
-﻿namespace TrandingSystem.ViewModels
+﻿using Amazon.Runtime.Internal;
+using MediatR;
+using Microsoft.AspNetCore.Http;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using TradingSystem.Application.Common.Response;
+using TrandingSystem.Application.Dtos;
+
+namespace TrandingSystem.Application.Features.Courses.Commands
 {
-    public class CourseVM
+    public class UpdateCourseCommand : IRequest<Response<CourseDto>>
     {
-        public int? CourseId { get; set; }
+        public int CourseId { get; set; }
         public string TitleEN { get; set; }
 
         public string TitleAR { get; set; }
@@ -11,13 +22,13 @@
 
         public string DescriptionAR { get; set; }
 
-        public int? CategoryId { get; set; }
+        public int CategoryId { get; set; }
 
         public decimal Cost { get; set; }
 
         public bool? CommunityAutoCreate { get; set; }
 
-        public bool? IsLive { get; set; }
+        public bool IsLive { get; set; }
 
         public int? CreateBy { get; set; }
 
@@ -26,10 +37,7 @@
         public bool? IsFullyFree { get; set; }
 
         public bool? IsActive { get; set; }
-
         public IFormFile? CourseImage { get; set; }
-
-        public string? ImageCourseUrl { get; set; }
 
     }
 }

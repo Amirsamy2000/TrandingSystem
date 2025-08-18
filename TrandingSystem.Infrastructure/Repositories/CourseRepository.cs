@@ -51,7 +51,9 @@ namespace TrandingSystem.Infrastructure.Repositories
 
         public Course Update(Course Element)
         {
-            throw new NotImplementedException();
+            _context.Courses.Update(Element);
+            _context.SaveChanges();
+            return Element;
         }
         public Course Delete(int Id)
         {
@@ -78,7 +80,7 @@ namespace TrandingSystem.Infrastructure.Repositories
                 CreatedAt = DateTime.Now,
                 IsConfirmed = false,
                 ReceiptImagePath = RecieptUrl,
-                OrderStatus = (byte?)(ReadById(courseId).Cost<= 0 ? 1 : 2), // Assuming OrderStatus is nullable is bendding
+                OrderStatus = 2 // (byte?)(ReadById(courseId).Cost<= 0 ? 1 : 2), // Assuming OrderStatus is nullable is bendding
             };
 
 

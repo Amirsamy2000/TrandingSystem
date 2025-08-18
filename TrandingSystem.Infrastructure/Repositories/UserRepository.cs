@@ -28,9 +28,18 @@ namespace TrandingSystem.Infrastructure.Repositories
             throw new NotImplementedException();
         }
 
+        public List<User> ReadAllTeacher()
+        {
+            return _context.Users
+                .Where(u => _context.CourseLecturers
+                    .Select(cl => cl.LecturerId)
+                    .Contains(u.Id))
+                .ToList();
+        }
+
         public List<User> Read()
         {
-            throw new NotImplementedException();
+            return _context.Users.ToList();
         }
 
         public User ReadById(int Id)
