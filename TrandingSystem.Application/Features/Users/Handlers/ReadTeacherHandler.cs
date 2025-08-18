@@ -26,31 +26,24 @@ namespace TrandingSystem.Application.Features.Users.Handlers
             _mapper = mapper;
         }
 
-        public Task<List<UserDto>> Handle(ReadTeachersQuery request, CancellationToken cancellationToken)
+        public Task<Response<List<UserDto>>> Handle(ReadTeachersQuery request, CancellationToken cancellationToken)
         {
             try
             {
                 var users = _unitOfWork.Users.ReadAllTeacher();
 
-               var usersDto = _mapper.Map<List<UserDto>>(users);
+               List<UserDto> usersDto = _mapper.Map<List<UserDto>>(users);
 
                 if (usersDto == null || !usersDto.Any())
                 {
                     return Task.FromResult(Response<List<UserDto>>.ErrorResponse("No teachers found", null, HttpStatusCode.NotFound));
                 }
 
-                var courseDtos = _mapper.Map<List<CourseDto>>(courses);
-
-
-                foreach (var courseDto in courseDtos)
-                {
-                    courseDto.Lectures = _mapper.Map<List<UserDto>>(_unitOfWork.Courses.GetLecturesByCourseId(courseDto.CourseId));
-                }
-                return Response<List<CourseDto>>.SuccessResponse(courseDtos);
+                return Task.FromResult(Response<List<UserDto>>.SuccessResponse(usersDto));
             }
             catch (Exception ex)
             {
-                return Response<List<CourseDto>>.ErrorWithException("An error occurred", ex.Message);
+                return Task.FromResult(Response<List<UserDto>>.ErrorWithException("An error occurred", ex.Message));
             }
         }
     }
