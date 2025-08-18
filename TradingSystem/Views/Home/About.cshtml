@@ -1,4 +1,6 @@
-﻿
+﻿@using Microsoft.Extensions.Localization
+@using TrandingSystem.Controllers
+@inject IStringLocalizer<VideosController> Localizer
 @{
     ViewData["Title"] = "About";
 }
@@ -9,8 +11,8 @@
         <div class="container">
             <div class="row d-flex justify-content-center text-center">
                 <div class="col-lg-8">
-                    <h1>About Us<br></h1>
-                    <p class="mb-0">Odio et unde deleniti. Deserunt numquam exercitationem. Officiis quo odio sint voluptas consequatur ut a odio voluptatem. Sit dolorum debitis veritatis natus dolores. Quasi ratione sint. Sit quaerat ipsum dolorem.</p>
+                    <h1>@Localizer["AboutUs"]<br></h1>
+                    <p class="mb-0">@Localizer["AboutUsBody"]</p>
                 </div>
             </div>
         </div>
@@ -18,41 +20,44 @@
     <nav class="breadcrumbs">
         <div class="container">
             <ol>
-                <li><a href="index.html">Home</a></li>
-                <li class="current">About Us<br></li>
+                <li><a href="index.html">@Localizer["Home"]</a></li>
+                <li class="current">@Localizer["AboutUs"]<br></li>
             </ol>
         </div>
     </nav>
 </div><!-- End Page Title -->
-<!-- About Us Section -->
-<section id="about-us" class="section about-us">
+<!-- About Section -->
+<section id="about" class="about section">
 
     <div class="container">
 
         <div class="row gy-4">
 
             <div class="col-lg-6 order-1 order-lg-2" data-aos="fade-up" data-aos-delay="100">
-                <img src="~/assets/img/about-2.jpg" class="img-fluid" alt="">
+                <img src="~/assets/img/about.jpg" class="img-fluid" alt="">
             </div>
 
             <div class="col-lg-6 order-2 order-lg-1 content" data-aos="fade-up" data-aos-delay="200">
-                <h3>Voluptatem dignissimos provident quasi corporis</h3>
+                <h3>@Localizer["SecAbout1"]</h3>
                 <p class="fst-italic">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-                    magna aliqua.
+                    @Localizer["SecAbout2"]
                 </p>
                 <ul>
-                    <li><i class="bi bi-check-circle"></i> <span>Ullamco laboris nisi ut aliquip ex ea commodo consequat.</span></li>
-                    <li><i class="bi bi-check-circle"></i> <span>Duis aute irure dolor in reprehenderit in voluptate velit.</span></li>
-                    <li><i class="bi bi-check-circle"></i> <span>Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate trideta storacalaperda mastiro dolore eu fugiat nulla pariatur.</span></li>
+                    <li><i class="bi bi-check-circle"></i> <span>@Localizer["SecAbout3"]</span></li>
+                    <li><i class="bi bi-check-circle"></i> <span>@Localizer["SecAbout4"]</span></li>
+                    <li><i class="bi bi-check-circle"></i> <span>@Localizer["SecAbout5"]</span></li>
+                    <li><i class="bi bi-check-circle"></i> <span>@Localizer["SecAbout7"]</span></li>
+                    <li><i class="bi bi-check-circle"></i> <span>@Localizer["SecAbout8"]</span></li>
+                    <li><i class="bi bi-check-circle"></i> <span>@Localizer["SecAbout9"]</span></li>
                 </ul>
+                <a href="#" class="read-more"><span>@Localizer["SecAbout6"]</span><i class="bi bi-arrow-right"></i></a>
             </div>
 
         </div>
 
     </div>
 
-</section><!-- /About Us Section -->
+</section><!-- /About Section -->
 <!-- Counts Section -->
 <section id="counts" class="section counts light-background">
 
@@ -63,28 +68,28 @@
             <div class="col-lg-3 col-md-6">
                 <div class="stats-item text-center w-100 h-100">
                     <span data-purecounter-start="0" data-purecounter-end="1232" data-purecounter-duration="1" class="purecounter"></span>
-                    <p>Students</p>
+                    <p>@Localizer["Students"]</p>
                 </div>
             </div><!-- End Stats Item -->
 
             <div class="col-lg-3 col-md-6">
                 <div class="stats-item text-center w-100 h-100">
                     <span data-purecounter-start="0" data-purecounter-end="64" data-purecounter-duration="1" class="purecounter"></span>
-                    <p>Courses</p>
+                    <p>@Localizer["Courses"]</p>
                 </div>
             </div><!-- End Stats Item -->
 
             <div class="col-lg-3 col-md-6">
                 <div class="stats-item text-center w-100 h-100">
                     <span data-purecounter-start="0" data-purecounter-end="42" data-purecounter-duration="1" class="purecounter"></span>
-                    <p>Events</p>
+                    <p>@Localizer["Events"]</p>
                 </div>
             </div><!-- End Stats Item -->
 
             <div class="col-lg-3 col-md-6">
                 <div class="stats-item text-center w-100 h-100">
                     <span data-purecounter-start="0" data-purecounter-end="24" data-purecounter-duration="1" class="purecounter"></span>
-                    <p>Trainers</p>
+                    <p>@Localizer["Trainers"]</p>
                 </div>
             </div><!-- End Stats Item -->
 
@@ -93,13 +98,16 @@
     </div>
 
 </section><!-- /Counts Section -->
+
+<!-- Testimonials Section -->
+
 <!-- Testimonials Section -->
 <section id="testimonials" class="testimonials section">
 
     <!-- Section Title -->
     <div class="container section-title" data-aos="fade-up">
-        <h2>Testimonials</h2>
-        <p>What are they saying</p>
+        <h2>@Localizer["TrustMeTradingWithSaif"]</h2>
+        <p>@Localizer["TradingWithSaifIntro"]</p>
     </div><!-- End Section Title -->
 
     <div class="container" data-aos="fade-up" data-aos-delay="100">
@@ -132,95 +140,65 @@
             </script>
             <div class="swiper-wrapper">
 
+                <!-- Expert Trading Courses -->
                 <div class="swiper-slide">
                     <div class="testimonial-wrap">
                         <div class="testimonial-item">
-                            <img src="~/assets/img/testimonials/testimonials-1.jpg" class="testimonial-img" alt="">
-                            <h3>Saul Goodman</h3>
-                            <h4>Ceo &amp; Founder</h4>
-                            <div class="stars">
-                                <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                            </div>
+                            <h3>@Localizer["ExpertTradingCoursesTitle"]</h3>
                             <p>
-                                <i class="bi bi-quote quote-icon-left"></i>
-                                <span>Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus. Accusantium quam, ultricies eget id, aliquam eget nibh et. Maecen aliquam, risus at semper.</span>
-                                <i class="bi bi-quote quote-icon-right"></i>
+                                <span>@Localizer["ExpertTradingCoursesText"]</span>
                             </p>
                         </div>
                     </div>
-                </div><!-- End testimonial item -->
+                </div>
 
+                <!-- Powerful Market Analysis -->
                 <div class="swiper-slide">
                     <div class="testimonial-wrap">
                         <div class="testimonial-item">
-                            <img src="~/assets/img/testimonials/testimonials-2.jpg" class="testimonial-img" alt="">
-                            <h3>Sara Wilsson</h3>
-                            <h4>Designer</h4>
-                            <div class="stars">
-                                <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                            </div>
+                            <h3>@Localizer["PowerfulMarketAnalysisTitle"]</h3>
                             <p>
-                                <i class="bi bi-quote quote-icon-left"></i>
-                                <span>Export tempor illum tamen malis malis eram quae irure esse labore quem cillum quid cillum eram malis quorum velit fore eram velit sunt aliqua noster fugiat irure amet legam anim culpa.</span>
-                                <i class="bi bi-quote quote-icon-right"></i>
+                                <span>@Localizer["PowerfulMarketAnalysisText"]</span>
                             </p>
                         </div>
                     </div>
-                </div><!-- End testimonial item -->
+                </div>
 
+                <!-- Accurate Signals & Trade Setups -->
                 <div class="swiper-slide">
                     <div class="testimonial-wrap">
                         <div class="testimonial-item">
-                            <img src="~/assets/img/testimonials/testimonials-3.jpg" class="testimonial-img" alt="">
-                            <h3>Jena Karlis</h3>
-                            <h4>Store Owner</h4>
-                            <div class="stars">
-                                <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                            </div>
+                            <h3>@Localizer["AccurateSignalsTitle"]</h3>
                             <p>
-                                <i class="bi bi-quote quote-icon-left"></i>
-                                <span>Enim nisi quem export duis labore cillum quae magna enim sint quorum nulla quem veniam duis minim tempor labore quem eram duis noster aute amet eram fore quis sint minim.</span>
-                                <i class="bi bi-quote quote-icon-right"></i>
+                                <span>@Localizer["AccurateSignalsText"]</span>
                             </p>
                         </div>
                     </div>
-                </div><!-- End testimonial item -->
+                </div>
 
+                <!-- AI-Powered Trading Tools -->
                 <div class="swiper-slide">
                     <div class="testimonial-wrap">
                         <div class="testimonial-item">
-                            <img src="~/assets/img/testimonials/testimonials-4.jpg" class="testimonial-img" alt="">
-                            <h3>Matt Brandon</h3>
-                            <h4>Freelancer</h4>
-                            <div class="stars">
-                                <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                            </div>
+                            <h3>@Localizer["AIPoweredToolsTitle"]</h3>
                             <p>
-                                <i class="bi bi-quote quote-icon-left"></i>
-                                <span>Fugiat enim eram quae cillum dolore dolor amet nulla culpa multos export minim fugiat minim velit minim dolor enim duis veniam ipsum anim magna sunt elit fore quem dolore labore illum veniam.</span>
-                                <i class="bi bi-quote quote-icon-right"></i>
+                                <span>@Localizer["AIPoweredToolsText"]</span>
                             </p>
                         </div>
                     </div>
-                </div><!-- End testimonial item -->
+                </div>
 
+                <!-- Personal Guidance & Mentorship -->
                 <div class="swiper-slide">
                     <div class="testimonial-wrap">
                         <div class="testimonial-item">
-                            <img src="~/assets/img/testimonials/testimonials-5.jpg" class="testimonial-img" alt="">
-                            <h3>John Larson</h3>
-                            <h4>Entrepreneur</h4>
-                            <div class="stars">
-                                <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                            </div>
+                            <h3>@Localizer["PersonalGuidanceTitle"]</h3>
                             <p>
-                                <i class="bi bi-quote quote-icon-left"></i>
-                                <span>Quis quorum aliqua sint quem legam fore sunt eram irure aliqua veniam tempor noster veniam enim culpa labore duis sunt culpa nulla illum cillum fugiat legam esse veniam culpa fore nisi cillum quid.</span>
-                                <i class="bi bi-quote quote-icon-right"></i>
+                                <span>@Localizer["PersonalGuidanceText"]</span>
                             </p>
                         </div>
                     </div>
-                </div><!-- End testimonial item -->
+                </div>
 
             </div>
             <div class="swiper-pagination"></div>
@@ -229,4 +207,3 @@
     </div>
 
 </section><!-- /Testimonials Section -->
-

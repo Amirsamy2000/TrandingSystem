@@ -133,97 +133,136 @@
     <value>A Professional Platform to Learn Trading from Scratch</value>
   </data>
   <data name="Why Choose Our Platform?" xml:space="preserve">
-    <value>Why Choose Our Platform?</value>
+    <value>Why Choose Saif El Qadi?</value>
   </data>
   <data name="Learings3" xml:space="preserve">
-    <value>We are a team of professionals specialized in building online trading education platforms
-
-</value>
+    <value>we combine education, technology, and real-time market expertise to deliver a complete trading ecosystem designed for your success</value>
   </data>
   <data name="Learings2" xml:space="preserve">
     <value>Leading Tomorrow</value>
   </data>
   <data name="Learings1" xml:space="preserve">
-    <value>Learning Today,</value>
+    <value>Saif El Qadi Trading Hub,</value>
   </data>
   <data name="SecAbout2" xml:space="preserve">
-    <value>  We provide a comprehensive learning experience in the world of trading, with high-quality content, live sessions, and full course management through an intuitive dashboard.</value>
+    <value>Trading with Saif El Qadi is different.
+We don’t just teach you how to trade – we give you every tool, signal, and insight you need to become a confident and successful trader</value>
   </data>
   <data name="SecAbout3" xml:space="preserve">
-    <value>Well-structured courses covering trading basics and strategies.</value>
+    <value>Comprehensive Trading Courses – beginner to advanced</value>
   </data>
   <data name="SecAbout4" xml:space="preserve">
-    <value>Recorded videos and live sessions with expert instructors.</value>
+    <value>Daily &amp; Precise Market Analysis – Forex, Gold, Indices, Crypto</value>
   </data>
   <data name="SecAbout5" xml:space="preserve">
-    <value>User dashboard, membership system, and real-time performance tracking.</value>
+    <value>Exclusive Indicators &amp; Tools – confident, profitable decisions.</value>
   </data>
   <data name="SecAbout6" xml:space="preserve">
     <value>Read More</value>
   </data>
   <data name="Our trading education" xml:space="preserve">
-    <value>Our trading education platform offers expert-led courses, live market analysis...
-</value>
+    <value>Trading is not just numbers and charts – it’s knowledge, tools, and smart decisions. That’s why Saif El Qadi Trading Hub gives you everything you need to trade smarter, safer, and more profitably</value>
   </data>
   <data name="Real Market Strategies" xml:space="preserve">
     <value>Real Market Strategies
 </value>
   </data>
   <data name="Learn proven strategies" xml:space="preserve">
-    <value>Learn proven strategies with real-world applications through our in-depth sessions...
-</value>
+    <value>Step-by-step trading courses and daily market insights – Forex, Gold, Indices, and Cryptocurrencies.</value>
   </data>
   <data name="Expert Mentors" xml:space="preserve">
     <value>Expert Mentors
 </value>
   </data>
   <data name="Our instructors" xml:space="preserve">
-    <value>Our instructors are seasoned traders with years of experience...
-</value>
+    <value>Guidance from professional traders with years of experience, plus personal mentorship and support.</value>
   </data>
   <data name="Community &amp; Suppor" xml:space="preserve">
     <value>Community &amp; Support
 </value>
   </data>
   <data name="Join a growing community of traders" xml:space="preserve">
-    <value>Join a growing community of traders, attend live Q&amp;As...
-
-</value>
+    <value>A global trading community, trusted brokers, and exclusive rewards – so you’ll never trade alone.</value>
   </data>
   <data name="Feature1" xml:space="preserve">
-    <value>Active trading community</value>
+    <value>Global Community</value>
   </data>
   <data name="Feature2" xml:space="preserve">
-    <value>Certified Certificates</value>
+    <value>Professional Journey</value>
   </data>
   <data name="Feature3" xml:space="preserve">
-    <value>Various trading strategies</value>
+    <value>Comprehensive Courses</value>
   </data>
   <data name="Feature4" xml:space="preserve">
-    <value>Modern tools and techniques</value>
+    <value>Smart Tools</value>
   </data>
   <data name="Feature5" xml:space="preserve">
-    <value>Continuously updated courses</value>
+    <value>Exclusive Rewards</value>
   </data>
   <data name="Feature6" xml:space="preserve">
-    <value>Learn from professionals</value>
+    <value>Real Opportunities</value>
   </data>
   <data name="Feature7" xml:space="preserve">
-    <value>Direct Market Analysis</value>
+    <value>Daily Analytics</value>
   </data>
   <data name="Feature8" xml:space="preserve">
-    <value>Highly rated by learners</value>
+    <value>Live Streaming Sessions</value>
   </data>
   <data name="Feature9" xml:space="preserve">
-    <value>Trading Basics</value>
+    <value>Advanced Technologies</value>
   </data>
   <data name="Feature10" xml:space="preserve">
-    <value>Instant Market Updates</value>
+    <value>Trusted Brokers</value>
   </data>
   <data name="Feature11" xml:space="preserve">
-    <value>Easy to use interface</value>
+    <value>Secure Trading</value>
   </data>
   <data name="Feature12" xml:space="preserve">
-    <value>Live broadcast sessions</value>
+    <value>Live Support</value>
+  </data>
+  <data name="SecAbout7" xml:space="preserve">
+    <value>AI-Powered Solutions – fast &amp; accurate market analysis</value>
+  </data>
+  <data name="SecAbout8" xml:space="preserve">
+    <value>Direct Mentorship &amp; Support – you’ll never trade alone.</value>
+  </data>
+  <data name="SecAbout9" xml:space="preserve">
+    <value>Special Bonuses &amp; Rewards – for our trading community</value>
+  </data>
+  <data name="SecAbout10" xml:space="preserve">
+    <value>Direct Mentorship &amp; Support – you’ll never trade alone.</value>
+  </data>
+  <data name="OurServer" xml:space="preserve">
+    <value>Our service</value>
+  </data>
+  <data name="OurServerSubject" xml:space="preserve">
+    <value>What will you get with us?</value>
+  </data>
+  <data name="Education" xml:space="preserve">
+    <value>Education</value>
+  </data>
+  <data name="EducationSubject" xml:space="preserve">
+    <value>Comprehensive Trading Courses</value>
+  </data>
+  <data name="EducationBody" xml:space="preserve">
+    <value>From beginners to professional, clear practical strategies that will make you trade with confidence</value>
+  </data>
+  <data name="Marketing" xml:space="preserve">
+    <value>Market Analysis</value>
+  </data>
+  <data name="Marketingtitle" xml:space="preserve">
+    <value>Daily &amp; Accurate Market Insights</value>
+  </data>
+  <data name="MarketingSubject" xml:space="preserve">
+    <value>Accurate daily reports on Forex, Gold, Indices and Cryptocurrencies.</value>
+  </data>
+  <data name="Content" xml:space="preserve">
+    <value>AI Tools</value>
+  </data>
+  <data name="ContentTitle" xml:space="preserve">
+    <value>Smart AI-Powered Indicators</value>
+  </data>
+  <data name="Contentbody" xml:space="preserve">
+    <value>Smart tools that read the market accurately and quickly to give you a competitive advantage.</value>
   </data>
 </root>

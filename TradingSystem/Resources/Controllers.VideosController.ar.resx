@@ -198,4 +198,91 @@
   <data name="NoVideosMessage1" xml:space="preserve">
     <value>قم بإضافة فيديوهات جديدة</value>
   </data>
+  <data name="AboutUs" xml:space="preserve">
+    <value>من نحن</value>
+  </data>
+  <data name="AboutUsBody" xml:space="preserve">
+    <value>أهلاً بكم في مركز سيف القاضي للتداول، حيث نُحدث فرقاً حقيقياً لكل متداول يسعى للنجاح. نؤمن بأن "التداول ليس حظاً... بل المعرفة والأدوات هي ما يُحدث الفرق"، ولذلك أنشأنا نظاماً متكاملاً مُصمماً خصيصاً للارتقاء برحلتك في التداول.</value>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>الرئيسية</value>
+  </data>
+  <data name="Students" xml:space="preserve">
+    <value>طلاب</value>
+  </data>
+  <data name="Courses" xml:space="preserve">
+    <value>دورات</value>
+  </data>
+  <data name="Events" xml:space="preserve">
+    <value>فعاليات</value>
+  </data>
+  <data name="Trainers" xml:space="preserve">
+    <value>محاضرين</value>
+  </data>
+  <data name="SecAbout1" xml:space="preserve">
+    <value>منصة احترافية لتعلّم التداول من الصفر حتى الاحتراف</value>
+  </data>
+  <data name="SecAbout2" xml:space="preserve">
+    <value>التداول مع سيف القاضي مختلف. لا نكتفي بتعليمك كيفية التداول، بل نوفر لك كل الأدوات والإشارات والرؤى التي تحتاجها لتصبح متداولًا واثقًا وناجحًا.</value>
+  </data>
+  <data name="SecAbout3" xml:space="preserve">
+    <value> دورات تداول شاملة – من المبتدئ حتى المتقدم.</value>
+  </data>
+  <data name="SecAbout4" xml:space="preserve">
+    <value>تحليلات يومية دقيقة – للفوركس، الذهب، المؤشرات، والعملات الرقمية</value>
+  </data>
+  <data name="SecAbout5" xml:space="preserve">
+    <value>مؤشرات وأدوات حصرية – قرارات واثقة ومربحة</value>
+  </data>
+  <data name="SecAbout6" xml:space="preserve">
+    <value>اعرف المزيد</value>
+  </data>
+  <data name="SecAbout7" xml:space="preserve">
+    <value>حلول مدعومة بالذكاء الاصطناعي – تحليل أسرع وأكثر دقة</value>
+  </data>
+  <data name="SecAbout8" xml:space="preserve">
+    <value>توجيه ودعم مباشر – لن تكون وحدك في رحلتك</value>
+  </data>
+  <data name="SecAbout9" xml:space="preserve">
+    <value>توجيه ودعم مباشر – لن تكون وحدك في رحلتك</value>
+  </data>
+  <data name="SecAbout10" xml:space="preserve">
+    <value>توجيه ودعم مباشر – لن تكون وحدك في رحلتك</value>
+  </data>
+  <data name="TrustMeTradingWithSaif" xml:space="preserve">
+    <value>ثق بي، التداول مع سيف القاضي مختلف.</value>
+  </data>
+  <data name="TradingWithSaifIntro" xml:space="preserve">
+    <value>نحن لا نعلمك فقط كيفية التداول – بل نوفر لك كل الأدوات والإشارات والرؤى التي تحتاجها.</value>
+  </data>
+  <data name="ExpertTradingCoursesTitle" xml:space="preserve">
+    <value>دورات التداول الاحترافية</value>
+  </data>
+  <data name="ExpertTradingCoursesText" xml:space="preserve">
+    <value>برامج خطوة بخطوة، من المبتدئين حتى المتقدمين، لبناء أساس قوي وإتقان استراتيجيات التداول.</value>
+  </data>
+  <data name="PowerfulMarketAnalysisTitle" xml:space="preserve">
+    <value>التحليل السوقي القوي</value>
+  </data>
+  <data name="PowerfulMarketAnalysisText" xml:space="preserve">
+    <value>تحديثات يومية ورؤى احترافية عن الفوركس، الذهب، المؤشرات والعملات الرقمية.</value>
+  </data>
+  <data name="AccurateSignalsTitle" xml:space="preserve">
+    <value>إشارات التداول الدقيقة</value>
+  </data>
+  <data name="AccurateSignalsText" xml:space="preserve">
+    <value>إشارات جاهزة للاستخدام مع نقاط دخول واضحة، وأهداف، وإدارة المخاطر.</value>
+  </data>
+  <data name="AIPoweredToolsTitle" xml:space="preserve">
+    <value>أدوات التداول المدعومة بالذكاء الاصطناعي</value>
+  </data>
+  <data name="AIPoweredToolsText" xml:space="preserve">
+    <value>تقنيات متقدمة تساعدك على تحليل الأسواق واتخاذ قرارات تداول أذكى.</value>
+  </data>
+  <data name="PersonalGuidanceTitle" xml:space="preserve">
+    <value>الإرشاد الشخصي والدعم</value>
+  </data>
+  <data name="PersonalGuidanceText" xml:space="preserve">
+    <value>أنت لست وحدك – نحن ندعمك في كل خطوة من خطوات رحلتك التداولية.</value>
+  </data>
 </root>
