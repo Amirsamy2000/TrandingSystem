@@ -54,6 +54,55 @@
     * Author: BootstrapMade.com
     * License: https://bootstrapmade.com/license/
     ======================================================== -->
+
+    <style>
+        @@media (max-width: 768px) {
+            .logo-img
+
+        {
+            max-height: 45px;
+        }
+
+        }
+
+        .logo-img {
+            max-height: 69px !important;
+            margin-right: 10px;
+            object-fit: contain;
+        }
+
+        .logo {
+            align-items: center; /* keeps text aligned with logo */
+        }
+
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+            .logo:hover {
+                color: gold; /* highlight on hover */
+            }
+
+        .logo-img {
+            max-height: 40px; /* keeps logo tidy */
+            margin-right: 8px; /* spacing in LTR */
+        }
+
+        html[dir="rtl"] .logo-img {
+            margin-right: 0;
+            margin-left: 8px; /* spacing in RTL */
+        }
+
+        .sitename {
+            text-transform: capitalize;
+            font-family: 'Poppins', sans-serif;
+        }
+
+    </style>
 </head>
 
 <body class="index-page">
@@ -61,16 +110,20 @@
     <header id="header" class="header d-flex align-items-center sticky-top">
         <div class="container-fluid container-xl position-relative d-flex align-items-center">
 
-            <a asp-action="Index" asp-controller="Home" class="logo d-flex align-items-center @(currentCulture == "ar"?"ms-auto":"me-auto")">
-                <!-- Uncomment the line below if you also wish to use an image logo -->
-                <!-- <img src="~/assets/img/logo.png" alt=""> -->
-                <h1 class="sitename" style="text-transform:capitalize">@Localizer["SiteName"]</h1>
+            <a asp-action="Index" asp-controller="Home"
+               class="logo d-flex align-items-center @(currentCulture == "ar" ? "ms-auto" : "me-auto")">
+                <img src="~/assets/img/SaifLogo/logo-removebg-preview.png"
+                     srcset="~/assets/img/SaifLogo/logo-removebg-preview.png 1x, ~/assets/img/SaifLogo/logo-removebg-preview.png 2x"
+                     alt="@Localizer["SiteName"] Logo"
+                     class="logo-img">
+                <span class="sitename d-none d-sm-inline">@Localizer["SiteName"]</span>
             </a>
+
 
             <nav id="navmenu" class="navmenu">
                 <ul>
                   @* Change Language *@
-                    <li><a asp-controller="Home" asp-action="Dashboard" class="active">@Localizer["dasbord"]<br></a></li>
+                    <li><a asp-controller="Home" asp-action="Dashboard">@Localizer["dasbord"]<br></a></li>
                     <li><a asp-controller="Home" asp-action="Index" class="active">@Localizer["Home"]<br></a></li>
                     <li><a asp-controller="Home" asp-action="About">@Localizer["About"]</a></li>
                     <li><a asp-controller="Home" asp-action="Courses">@Localizer["Courses"]</a></li>
