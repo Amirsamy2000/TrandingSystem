@@ -105,5 +105,19 @@ namespace TrandingSystem.Infrastructure.Repositories
                 .Select(cl => cl.Lecturer)
                 .ToList();
         }
+
+        public List<User> AssignTeacherToCourse(int courseId, List<int> TeachersId)
+        {
+            foreach(var teacherId in TeachersId)
+            {
+                _context.CourseLecturers.Add(new CourseLecturer
+                {
+                    CourseId = courseId,
+                    LecturerId = teacherId,                    
+                });
+            }
+            _context.SaveChanges();
+            return _context.Users.Where(u => TeachersId.Contains(u.Id)).ToList();
+        }
     }
 }

@@ -6,6 +6,7 @@ using System.Security.Claims;
 using TradingSystem.Application.Common.Response;
 using TrandingSystem.Application.Features.Courses.Commands;
 using TrandingSystem.Application.Features.Courses.Queries;
+using TrandingSystem.Application.Features.Users.Queries;
 using TrandingSystem.Domain.Entities;
 using TrandingSystem.ViewModels;
 
@@ -79,6 +80,33 @@ namespace TrandingSystem.Controllers
             return PartialView("_ReadByIdPartialView");
         }
 
+        [HttpGet]
+        public async Task<IActionResult> AssignTeacherForCourse(int CourseId)
+        {
+            // Get the current user ID from the claims
+
+            var result = await _mediator.Send(new ReadTeachersQuery());
+
+            return PartialView("_AssignTeacherForCourse", result.Data);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AssignTeacherToCourse(int CourseId, List<int> TeachersId)
+        {
+            // Get the current user ID from the claims
+            var result = await _mediator.Send(new AssignTeacherToCourseCommand
+            {
+                CourseId = CourseId,
+                TeachersId = TeachersId
+            });
+            if (!result.Success)
+            {
+                ModelState.AddModelError(string.Empty, result.Message);
+                return NotFound();
+            }
+            return RedirectToAction("Index");
+        }
+
         public async Task<IActionResult> Index()
         {
             return View();
@@ -135,7 +163,7 @@ namespace TrandingSystem.Controllers
             return RedirectToAction("Index");
         }
 
-
+        
 
 
         [HttpPost]
