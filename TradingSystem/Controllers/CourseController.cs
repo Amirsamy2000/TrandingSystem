@@ -83,28 +83,104 @@ namespace TrandingSystem.Controllers
         [HttpGet]
         public async Task<IActionResult> AssignTeacherForCourse(int CourseId)
         {
-            // Get the current user ID from the claims
+            try
+            {
+                var result = await _mediator.Send(new ReadTeachersQuery());
 
-            var result = await _mediator.Send(new ReadTeachersQuery());
+                if (!result.Success || result.Data == null)
+                {
+                    return PartialView("_ErrorPartial", "Failed to load teachers.");
+                }
 
-            return PartialView("_AssignTeacherForCourse", result.Data);
+                // You can also pass CourseId to the view if needed
+                ViewBag.CourseId = CourseId;
+
+                return PartialView("_AssignTeacherForCourse", result.Data);
+            }
+            catch (Exception ex)
+            {
+                // Log the exception
+                // _logger.LogError(ex, "Error loading teachers for course assignment");
+
+                return PartialView("_ErrorPartial", "An error occurred while loading teachers.");
+            }
         }
 
         [HttpPost]
         public async Task<IActionResult> AssignTeacherToCourse(int CourseId, List<int> TeachersId)
         {
-            // Get the current user ID from the claims
-            var result = await _mediator.Send(new AssignTeacherToCourseCommand
+            try
             {
-                CourseId = CourseId,
-                TeachersId = TeachersId
-            });
-            if (!result.Success)
-            {
-                ModelState.AddModelError(string.Empty, result.Message);
-                return NotFound();
+                // Validate input
+                if (CourseId <= 0)
+                {
+                    ModelState.AddModelError(string.Empty, "Invalid course selected.");
+                    return BadRequest(ModelState);
+                }
+
+                if (TeachersId == null || !TeachersId.Any())
+                {
+                    ModelState.AddModelError(string.Empty, "At least one teacher must be selected.");
+                    return BadRequest(ModelState);
+                }
+
+                // Remove duplicates and invalid IDs
+                TeachersId = TeachersId.Where(id => id > 0).Distinct().ToList();
+
+                if (!TeachersId.Any())
+                {
+                    ModelState.AddModelError(string.Empty, "No valid teachers selected.");
+                    return BadRequest(ModelState);
+                }
+
+                var result = await _mediator.Send(new AssignTeacherToCourseCommand
+                {
+                    CourseId = CourseId,
+                    TeachersId = TeachersId
+                });
+
+                if (!result.Success)
+                {
+                    ModelState.AddModelError(string.Empty, result.Message);
+
+                    // If this is an AJAX request, return error as JSON
+                    if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
+                    {
+                        return Json(new { success = false, message = result.Message });
+                    }
+
+                    return NotFound();
+                }
+
+                // Success response
+                if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
+                {
+                    return Json(new
+                    {
+                        success = true,
+                        message = $"Successfully assigned {TeachersId.Count} teacher(s) to the course.",
+                        redirectUrl = Url.Action("Index")
+                    });
+                }
+
+                TempData["SuccessMessage"] = $"Successfully assigned {TeachersId.Count} teacher(s) to the course.";
+                return RedirectToAction("Index");
             }
-            return RedirectToAction("Index");
+            catch (Exception ex)
+            {
+                // Log the exception
+                // _logger.LogError(ex, "Error assigning teachers to course {CourseId}", CourseId);
+
+                var errorMessage = "An error occurred while assigning teachers to the course.";
+
+                if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
+                {
+                    return Json(new { success = false, message = errorMessage });
+                }
+
+                ModelState.AddModelError(string.Empty, errorMessage);
+                return BadRequest(ModelState);
+            }
         }
 
         public async Task<IActionResult> Index()

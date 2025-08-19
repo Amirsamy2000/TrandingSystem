@@ -12,7 +12,7 @@ namespace TrandingSystem.Infrastructure.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<CourseLecturer> entity)
         {
-            entity.HasNoKey();
+            //entity.HasNoKey();
 
             entity.HasOne(d => d.Course).WithMany()
                 .HasForeignKey(d => d.CourseId)

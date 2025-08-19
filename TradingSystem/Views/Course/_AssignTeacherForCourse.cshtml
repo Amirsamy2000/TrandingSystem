@@ -1,0 +1,81 @@
+﻿@using TrandingSystem.Application.Dtos
+@model IEnumerable<UserDto>
+@{
+    var courseId = ViewBag.CourseId;
+}
+
+<form method="post" action="@Url.Action("AssignTeacherToCourse", "Course")">
+    <input type="hidden" name="CourseId" value="@courseId" />
+
+    <div id="teacherSelects">
+        <div class="d-flex align-items-center mb-2 teacher-select">
+            <select class="form-select teacher-dropdown" name="TeachersId" required onchange="filterTeachers()">
+                <option value="">-- Select Teacher --</option>
+                @foreach (var teacher in Model)
+                {
+                    <option value="@teacher.Id">@teacher.FullName</option>
+                }
+            </select>
+            <button type="button" class="btn btn-sm btn-success ms-2" onclick="addTeacherSelect(this)">+</button>
+        </div>
+    </div>
+
+
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="submit" class="btn btn-primary">Confirm</button>
+    </div>
+</form>
+
+
+<script>
+
+        // نخزن النسخة الأصلية من الـ options مرة واحدة
+    let originalOptions = null;
+
+    function initOriginalOptions() {
+        if (!originalOptions) {
+            originalOptions = $("#teacherSelects select:first").html();
+        }
+    }
+
+    function addTeacherSelect(button) {
+        initOriginalOptions(); // نتأكد إن عندنا النسخة الأصلية
+
+        var selectHtml = `
+            <div class="d-flex align-items-center mb-2 teacher-select">
+                <select class="form-select teacher-dropdown" name="TeachersId" required onchange="filterTeachers()">
+                    ${originalOptions}
+                </select>
+                <button type="button" class="btn btn-sm btn-success ms-2" onclick="addTeacherSelect(this)">+</button>
+                <button type="button" class="btn btn-sm btn-danger ms-2" onclick="removeTeacherSelect(this)">-</button>
+            </div>`;
+
+        $("#teacherSelects").append(selectHtml);
+
+        filterTeachers(); // نعمل فلترة مباشرة بعد الإضافة
+    }
+
+    function filterTeachers() {
+        var selected = $(".teacher-dropdown").map(function () {
+            return $(this).val();
+        }).get();
+
+        $(".teacher-dropdown").each(function () {
+            var currentVal = $(this).val();
+            $(this).find("option").each(function () {
+                if ($(this).val() !== "" && selected.includes($(this).val()) && $(this).val() !== currentVal) {
+                    $(this).hide();
+                } else {
+                    $(this).show();
+                }
+            });
+        });
+    }
+
+    function removeTeacherSelect(button) {
+        $(button).closest(".teacher-select").remove();
+        filterTeachers(); // نفلتر بعد الإزالة كمان
+    }
+
+</script>
