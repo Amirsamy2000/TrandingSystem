@@ -85,7 +85,10 @@ namespace TrandingSystem.Controllers
         {
             try
             {
-                var result = await _mediator.Send(new ReadTeachersQuery());
+                var result = await _mediator.Send(new ReadNotAssignedTeachersQuery
+                {
+                    CourseId = CourseId
+                });
 
                 if (!result.Success || result.Data == null)
                 {
@@ -94,6 +97,7 @@ namespace TrandingSystem.Controllers
 
                 // You can also pass CourseId to the view if needed
                 ViewBag.CourseId = CourseId;
+                ViewBag.AssignedLectures = result.Data2;
 
                 return PartialView("_AssignTeacherForCourse", result.Data);
             }

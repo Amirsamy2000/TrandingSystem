@@ -2,6 +2,38 @@
 @model IEnumerable<UserDto>
 @{
     var courseId = ViewBag.CourseId;
+    List<UserDto> AssignedLectures = ViewBag.AssignedLectures;
+}
+
+@if (AssignedLectures != null && AssignedLectures.Any())
+{
+    <h5>Assigned Teachers</h5>
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Teacher Name</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var lecturer in AssignedLectures)
+            {
+                <tr>
+                    <td>@lecturer.FullName</td>
+                    <td>
+                        <form method="post"
+                              action="@Url.Action("RemoveTeacherFromCourse", "Course", new { TeacherId = lecturer.Id, CourseId = courseId })"
+                              style="display:inline">
+                            <button type="submit" class="btn btn-sm btn-danger"
+                                    onclick="return confirm('Are you sure you want to remove this teacher from the course?');">
+                                Remove
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 }
 
 <form method="post" action="@Url.Action("AssignTeacherToCourse", "Course")">
