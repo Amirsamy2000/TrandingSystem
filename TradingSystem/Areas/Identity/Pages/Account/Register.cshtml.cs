@@ -93,6 +93,14 @@ namespace TrandingSystem.Areas.Identity.Pages.Account
             [Display(Name = "Email")]
             public string Email { get; set; }
 
+
+            [Required]
+            [DataType(DataType.PostalCode)]
+            [MaxLength(14)]
+            [Display(Name = "National ID")]
+            public string NationalId { get; set; }
+
+
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
@@ -129,9 +137,18 @@ namespace TrandingSystem.Areas.Identity.Pages.Account
                 var user = CreateUser();
                 user.FullName = Input.FullName; // Set required property
                 user.Mobile = Input.Mobile; // Set required property
+                user.NationalId = Input.NationalId; // ✅ Add this line
 
                 // Assign default role by name (e.g., "User")
                 var dbContext = HttpContext.RequestServices.GetService(typeof(TrandingSystem.Infrastructure.Data.db23617Context)) as TrandingSystem.Infrastructure.Data.db23617Context;
+                // ✅ Check if NationalId already exists
+                var existingUser = await dbContext.Users.FirstOrDefaultAsync(u => u.NationalId == Input.NationalId);
+                if (existingUser != null)
+                {
+                    ModelState.AddModelError("Input.NationalId", "This National ID is already registered.");
+                    return Page();
+                }
+
                 var defaultRole = await dbContext.Roles.FirstOrDefaultAsync(r => r.Name == "User");
                 if (defaultRole != null)
                 {
