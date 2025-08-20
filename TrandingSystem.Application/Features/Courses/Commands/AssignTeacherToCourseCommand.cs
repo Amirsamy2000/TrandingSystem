@@ -6,12 +6,12 @@ using System.Text;
 using System.Threading.Tasks;
 using TradingSystem.Application.Common.Response;
 using TrandingSystem.Application.Dtos;
-using TrandingSystem.Domain.Entities;
 
-namespace TrandingSystem.Application.Features.Users.Queries
+namespace TrandingSystem.Application.Features.Courses.Commands
 {
-    public class ReadTeachersQuery:IRequest<Response<List<UserDto>>>
+    public class AssignTeacherToCourseCommand:IRequest<Response<List<UserDto>>>
     {
-
+        public int CourseId { get; set; }
+        public List<int> TeachersId { get; set; }
     }
 }
