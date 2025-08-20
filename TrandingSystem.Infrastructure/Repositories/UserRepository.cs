@@ -31,9 +31,7 @@ namespace TrandingSystem.Infrastructure.Repositories
         public List<User> ReadAllTeacher()
         {
             return _context.Users
-                .Where(u => _context.CourseLecturers
-                    .Select(cl => cl.LecturerId)
-                    .Contains(u.Id))
+                .Where(u => u.RoleId == 3)
                 .ToList();
         }
 
