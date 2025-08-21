@@ -110,6 +110,33 @@ namespace TrandingSystem.Controllers
             }
         }
 
+        [HttpDelete]
+        public async Task<IActionResult> RemoveTeacherFromCourse(int TeacherId,int CourseId)
+        {
+            try
+            {
+                Response<bool> result = await _mediator.Send(new RemoveTeacherFromCourseCommand
+                {
+                    CourseId = CourseId,
+                    TeacherId = TeacherId
+                });
+
+                if (!result.Success || result.Data == null)
+                {
+                    return PartialView("_ErrorPartial", "Failed to remove Teacher.");
+                }
+
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                // Log the exception
+                // _logger.LogError(ex, "Error loading teachers for course assignment");
+
+                return PartialView("_ErrorPartial", "An error occurred while loading teachers.");
+            }
+        }
+
         [HttpPost]
         public async Task<IActionResult> AssignTeacherToCourse(int CourseId, List<int> TeachersId)
         {

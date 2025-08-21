@@ -119,5 +119,15 @@ namespace TrandingSystem.Infrastructure.Repositories
             _context.SaveChanges();
             return _context.Users.Where(u => TeachersId.Contains(u.Id)).ToList();
         }
+
+        public bool RemoveTeacherFromCourse(int courseId, int teacherId)
+        {
+            _context.CourseLecturers.RemoveRange(
+                _context.CourseLecturers
+                .Where(cl => cl.CourseId == courseId && cl.LecturerId == teacherId)
+            );
+            _context.SaveChanges();
+            return true;
+        }
     }
 }
