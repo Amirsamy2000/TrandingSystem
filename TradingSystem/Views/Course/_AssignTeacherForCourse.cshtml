@@ -124,7 +124,7 @@
         .then(response => {
             if (response.ok) {
                 // Remove the row directly from the table (no reload)
-                document.querySelector(`#row-${teacherId}`).remove();
+                openAssignTeacherModal(courseId)
             } else {
                 alert("Failed to remove teacher.");
             }
