@@ -1,5 +1,8 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
+using System.Security.Claims;
+using TrandingSystem.Domain.Entities;
 using TrandingSystem.Domain.Interfaces;
 
 namespace TradingSystem.Controllers
@@ -18,6 +21,12 @@ namespace TradingSystem.Controllers
 
         public async Task<IActionResult> Room(int id)
         {
+            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
+
+            if (!await _communityRepo.IsUserInCommunityAsync(id, int.Parse(userIdClaim.Value)))
+                throw new HubException("Not a member of this community.");
+
+            
             var community = await _communityRepo.GetByIdAsync(id);
             if (community == null)
                 return NotFound();
