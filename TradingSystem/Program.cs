@@ -14,6 +14,7 @@ using TrandingSystem.Infrastructure.Repositories;
 using TrandingSystem.Infrastructure.Services;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using TrandingSystem.Areas.Identity.Email;
+using TradingSystem.Hubs;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -33,6 +34,9 @@ builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IFileService, FileService>();
 builder.Services.AddTransient<IEmailSender, SmtpEmailSender>();
+builder.Services.AddScoped<ICommunityRepository, CommunityRepository>();
+builder.Services.AddScoped<IMessageRepository, MessageRepository>();
+builder.Services.AddSignalR();
 
 //builder.Services.AddScoped<IWasabiUploader, WasabiUploader>();
 // Identity مع Roles و EF Store
@@ -107,5 +111,7 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.MapRazorPages();
+
+app.MapHub<CommunityHub>("/hubs/community");
 
 app.Run();
