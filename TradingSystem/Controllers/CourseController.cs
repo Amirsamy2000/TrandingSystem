@@ -287,7 +287,7 @@ namespace TrandingSystem.Controllers
 
             var result = await _mediator.Send(new EnrollCourseCommand(courseId, userId, RecieptImage));
 
-            return RedirectToAction("Courses","Home");
+            return Json(result);
         }
 
 

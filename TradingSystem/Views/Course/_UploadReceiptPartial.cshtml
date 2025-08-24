@@ -18,7 +18,7 @@
 
     @* <a class="btn btn-primary w-100 " > view Details </a> *@
 
-    <form asp-controller="Course" asp-action="EnrollCourse" method="post" enctype="multipart/form-data">
+    <form onclick="submitEnrol()" id="enrollForm" asp-controller="Course" asp-action="EnrollCourse" method="post" enctype="multipart/form-data">
 
         <input type="hidden" name="courseId" id="courseId" value="@Model" />
 
@@ -83,7 +83,7 @@ else
 
 
 
-    <form asp-controller="Course" asp-action="EnrollCourse" method="post" enctype="multipart/form-data">
+    <form id="enrollForm" asp-controller="Course" asp-action="EnrollCourse" method="post" enctype="multipart/form-data">
 
         <input type="hidden" name="courseId" id="courseId" value="@Model" />
 
@@ -92,10 +92,12 @@ else
             <input type="file" class="form-control" name="RecieptImage" id="RecieptImage" accept="image/*" required />
         </div>
 
-        <button type="submit" class="btn btn-primary">Enroll</button>
+        <button type="submit" onclick="submitEnrol();" class="btn btn-primary">Enroll</button>
     </form>
 }
 
+
+<div id="responseMsg" class="mt-2 text-success"></div>
 
 
 @* <script> *@
@@ -132,3 +134,11 @@ else
 @*         }); *@
 
 @* </script> *@
+
+
+
+
+
+
+
+
