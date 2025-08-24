@@ -27,6 +27,15 @@ namespace TrandingSystem.Infrastructure.Repositories
 
         private ILiveSessionRepositry _liveSession;
         public ILiveSessionRepositry LiveSessionRepositry => _liveSession ??= new LiveSessionRepository(_context);
+
+        private ICommunityRepository _community;
+        public ICommunityRepository Communities => _community ??= new CommunityRepository(_context);
+
+        private ICommunityMemberRepository communityMember;
+        public ICommunityMemberRepository CommunityMember => communityMember?? new CommunityMemberRepository(_context);
+
+        //public ICommunityRepository CommunityRepository => throw new NotImplementedException();
+
         public UnitOfWork(db23617Context context)
         {
             _context = context;

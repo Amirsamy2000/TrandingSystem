@@ -30,7 +30,7 @@ namespace TrandingSystem.Infrastructure.Repositories
 
         public List<User> Read()
         {
-            throw new NotImplementedException();
+            return _context.Users.ToList();
         }
 
         public User ReadById(int Id)

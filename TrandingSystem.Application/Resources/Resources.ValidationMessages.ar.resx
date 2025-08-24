@@ -192,4 +192,16 @@
   <data name="Notfoundlives" xml:space="preserve">
     <value>لاتوجد جلسات لهذا الكورس</value>
   </data>
+  <data name="CommunityAlreadyExists" xml:space="preserve">
+    <value>المجتمع موجود بالفعل.</value>
+  </data>
+  <data name="CourseNotFound" xml:space="preserve">
+    <value>لم يتم العثور على الكورس.</value>
+  </data>
+  <data name="CommunityCreated" xml:space="preserve">
+    <value>تم إنشاء المجتمع بنجاح وتمت إضافة الأعضاء بنجاح</value>
+  </data>
+  <data name="NotFountCommunity" xml:space="preserve">
+    <value />
+  </data>
 </root>

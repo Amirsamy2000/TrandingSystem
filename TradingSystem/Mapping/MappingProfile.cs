@@ -47,6 +47,9 @@ namespace TrandingSystem.Mapping
             context.Items["culture"].ToString() == "ar" ? src.TitleAR : src.TitleEN))
         .ForMember(dest => dest.Description, opt => opt.MapFrom((src, _, _, context) =>
             context.Items["culture"].ToString() == "ar" ? src.DescriptionAR : src.DescriptionEN));
-         }
+
+            CreateMap<Community, CommunitiesDto>().ReverseMap();
+
+        }
     }
 }

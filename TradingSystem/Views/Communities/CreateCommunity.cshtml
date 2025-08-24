@@ -1,0 +1,30 @@
+﻿@using Microsoft.Extensions.Localization
+@using TrandingSystem.Controllers
+@inject IStringLocalizer<CommunitiesController> Localizer
+@{
+    ViewData["Title"] = "CreateCommunity";
+    Layout = "~/Views/Shared/_LayoutDasbord.cshtml";
+}
+
+<h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">@Localizer["Title"] / </span>@Localizer["TitleCreateComm"] </h4>
+
+<div class="row" id="CreateCommBody">
+
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                url: '@Url.Action("PartialCreateNewCommunity", "Communities")',
+                type: 'GET',
+                success: function (data) {
+                    $('#CreateCommBody').html(data);
+                },
+                error: function (xhr, status, error) {
+                    console.error('Error loading create community form:', error);
+                }
+            });
+        });
+    </script>
+}

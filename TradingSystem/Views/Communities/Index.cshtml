@@ -1,0 +1,139 @@
+﻿@using Microsoft.Extensions.Localization
+@using TrandingSystem.Application.Dtos
+@using TrandingSystem.Controllers
+@inject IStringLocalizer<CommunitiesController> Localizer
+@model IEnumerable<CourseDto>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_LayoutDasbord.cshtml";
+}
+
+<h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">@Localizer["Title"] / </span>@Localizer["Title2"] </h4>
+<div class="d-flex align-items-center mb-3 justify-content-around">
+
+    <div>
+        <button class="btn btn-primary me-2" onclick="DisplayPartialAddNewComm()">
+            <i class='menu-icon tf-icons bx bx-plus'></i> @Localizer["Add"]
+        </button>
+        @* 
+        <button class="btn btn-danger" onclick="DeleteAllVideos(@ViewBag.CourseId??0)">
+            <i class='menu-icon bx bx-trash tf-icons bx bx-plus'></i> @Localizer["DeleteAll"]
+        </button> 
+        *@
+    </div>
+
+
+
+    <div class="d-flex align-items-center">
+        <label>@Localizer["FilterActionCommunities"]</label>
+        <select class="form-control" id="Course" onchange="LoadingCommunities($(this).val())">
+            <option value="0">@Localizer["AllCommunities"]</option>
+            <option value="-1">@Localizer["PublicCommunities"]</option>
+            @if (Model is not null && Model.Any())
+            {
+                foreach (var course in Model)
+                {
+                    <option value="@course.CourseId">@course.TitleEN</option>
+                }
+            }
+        </select>
+    </div>
+
+</div>
+
+<div class="row bg-white p-4">
+    <div class="col-12"></div>
+    <div class="col-12" id="BodyCommunities">
+
+    </div>
+</div>
+
+
+<div class="modal fade" id="SmallModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" id="SmallModalbody">
+         
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script>
+   
+        // Add New Comm
+             function DisplayPartialAddNewComm() {
+            $.ajax({
+                url: '/Communities/PartialCreateNewCommunity',
+               type:"Get",
+                
+                success: function (res) {
+                    // add data in modal
+                    $("#SmallModalbody").html(res);
+
+                    // Show Modal
+                    var myModal = new bootstrap.Modal(document.getElementById('SmallModal'), {
+                          // يمنع الإغلاق بزر Esc
+                    });
+
+                    myModal.show();
+                },
+                error: function () {
+                    Swal.fire({
+                        icon: 'error',
+                        title: '@Localizer["Error"]',
+                    });
+                }
+            });
+        }
+       
+
+        // Run after DOM is fully loaded
+            document.addEventListener("DOMContentLoaded", function () {
+                let Courseid=$("#Course").val();
+                LoadingCommunities(Courseid);
+            });
+
+        //     function LoadingCommunities(Courseid){
+                 
+        //       let setting={title:"@Localizer["loading"]"}
+        //        SweatAlterProcessing(setting)
+        //         $.ajax({
+        //             url: '/Communities/PartialDisplayCommunities',
+        //             type: 'GET',
+        //                     contentType: "application/json",
+        // data: JSON.stringify({ CourseId: parseInt(Courseid) }),
+        //             success: function (data) {
+        //              Swal.close();
+
+        //                 $('#BodyCommunities').html(data);
+                       
+        //             },
+                  
+        //         });
+
+            
+        
+       
+               
+        //     }
+
+        function LoadingCommunities(Courseid) {
+            let setting = { title: "@Localizer["loading"]" }
+            SweatAlterProcessing(setting);
+
+            $.ajax({
+                url: '/Communities/PartialDisplayCommunities',
+                type: 'GET',
+                data: { CourseId: Courseid }, // خليها كده من غير JSON.stringify
+                success: function (data) {
+                    Swal.close();
+                    $('#BodyCommunities').html(data);
+                },
+                error:function(){
+                    Swal.close();
+                }
+            });
+        }
+
+    </script>
+
+}

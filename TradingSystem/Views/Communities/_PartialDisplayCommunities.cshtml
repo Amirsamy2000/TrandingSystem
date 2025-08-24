@@ -1,0 +1,302 @@
+﻿@using Microsoft.Extensions.Localization
+@using TrandingSystem.Application.Dtos
+@using TrandingSystem.Controllers
+@inject IStringLocalizer<CommunitiesController> Localizer
+@model IEnumerable<CommunitiesDto>
+
+@if (Model.Count() <= 0 || Model is null)
+{
+    <div class="col-12">
+        <div class="alert alert-primary" role="alert">
+            <h4 class="alert-heading text-center">@Localizer["NoCommunityFound"]</h4>
+            <br />
+            <p class="text-center">@Localizer["NoCommunityMessage1"]</p>
+        </div>
+    </div>
+
+}
+else
+{
+    <style>
+
+        #CommunityTable thead th {
+            text-align: center;
+            vertical-align: middle; /* يخلي النص في وسط العمود رأسياً */
+        }
+
+        .dataTables_filter input {
+            padding: 6px 10px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            width: 250px;
+            font-size: 14px;
+        }
+
+        .dt-button, .custom-btn {
+            background-color: #007bff !important;
+            color: white !important;
+            padding: 6px 12px;
+            border-radius: 6px;
+            border: none;
+            font-size: 14px;
+            margin-left: 5px;
+            cursor: pointer;
+        }
+
+            .dt-button:hover, .custom-btn:hover {
+                background-color: #0056b3 !important;
+            }
+
+        .dataTables_filter input {
+            class: "form-control"
+        }
+
+        .dataTables_length select {
+            padding: 8px !important;
+            background-color: #007bff !important;
+            color: white !important;
+        }
+
+        #OrdersTable_filter label::before {
+            content: "" !important
+        }
+
+        #OrdersTable_filter label {
+            font-size: 0 !important; /* Hide text */
+        }
+
+        #OrdersTable_filter input {
+            font-size: 14px !important; /* Restore input font size */
+        }
+    </style>
+    <table class="table table-hover table-bordered text-center" id="CommunityTable">
+        <thead>
+            <tr class=" table-info">
+
+                <th scope="col">@Localizer["communityName"]</th>
+                <th scope="col">@Localizer["Typecommunity"]</th>
+                <th scope="col">@Localizer["CourseName"]</th>
+                <th scope="col">@Localizer["CountSubscrition"]</th>
+                <th scope="col">@Localizer["Action"]</th>
+                <th scope="col">@Localizer["Closecommunity"]</th>
+                <th scope="col">@Localizer["DeleteCommunityA"]</th>
+
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var comm in Model)
+            {
+                <tr>
+                    <td>@comm.Title</td>
+                    @if ((bool)comm.IsDefault)
+                    {
+                        <td>@Localizer["DefualtCommunity"]</td>
+                        <td class="text-success">@Localizer["ForAll"]</td>
+                    }
+                    else
+                    {
+                        <td>@Localizer["PrivateCommunity"]</td>
+                        <td>@comm.CourseTitle</td>
+                    }
+                    <td>@comm.CountSubucribtor</td>
+                    <td>
+                        <button class="btn btn-info" onclick="UpdateCommunity(@comm.CommunityId,'@comm.Title')">@Localizer["Action"]</button>
+
+                    </td>
+
+                    @if ((bool)comm.IsClosed)
+                    {
+                        <td>
+                            <button class="btn btn-success" onclick="CloseOrOpenCommunity(@comm.CommunityId,false)">@Localizer["OpenCommunity"]</button>
+                        </td>
+
+                    }
+                    else
+                    {
+                        <td>
+                            <button class="btn btn-danger" onclick="CloseOrOpenCommunity(@comm.CommunityId,true)">@Localizer["CloseCommunityA"]</button>
+                        </td>
+                    }
+
+                    <td>
+                        <button class="btn btn-danger" onclick="deleteCommunity(@comm.CommunityId)">@Localizer["DeleteCommunityA"]</button>
+                    </td>
+
+                </tr>
+            }
+
+
+        </tbody>
+    </table>
+}
+
+
+
+
+<script>
+           $('#CommunityTable').each(function () {
+        if ($.fn.DataTable.isDataTable(this)) {
+            $(this).DataTable().destroy();
+        }
+        $(this).DataTable({
+            pageLength: 5,
+            lengthMenu: [[5, 10, 25, -1], [5, 10, 25, "All"]],
+            language: { lengthMenu: "_MENU_" },
+            ordering: true,
+            order: [[0, 'asc']],
+
+            responsive: true,
+            dom: 'Blfrtip',
+            buttons: ['copy', 'excel', 'print']
+        });
+    });
+
+
+    function CloseOrOpenCommunity(id ,status){
+         let message=  status===0?'@Localizer["MessageOpenComm"]':'@Localizer["MessageCloseComm"]';
+        Swal.fire({
+      title: message,
+      showCancelButton: true,
+      confirmButtonText: '@Localizer["OkBtn"]',
+      cancelButtonText:'@Localizer["CancleBtn"]'
+     }).then((result) => {
+          if(result.isConfirmed){
+                  SubmitCloseOrOpenCommunity(id,status)
+
+          }
+    });
+    }
+
+    function SubmitCloseOrOpenCommunity(id,status){
+        $.ajax({
+            url:"/Communities/SubmitCloseOrOpenCommunity",
+            type:"Post",
+            data:{
+                CommunityId:id,
+                IsClose:status
+            },
+            success:function(res){
+                $('#SmallModal').modal('hide');
+                if(res.success){
+
+                  let Courseid=$("#Course").val();
+                LoadingCommunities(Courseid);
+                }
+                else{
+
+                    Swal.fire({
+                        icon: 'error',
+                        title: res.message });
+
+                }
+
+            },
+            error:function(res){
+                $('#SmallModal').modal('hide');
+                 Swal.fire({
+                        icon: 'error',
+                        title: res.message });
+            }
+        })
+
+    }
+
+    function UpdateCommunity(id,title){
+        let html=`<div class="card shadow-lg rounded-3">
+        <div class="card-header  text-white text-center">
+            <h4>@Localizer["Update"]</h4>
+        </div>
+        <div class="card-body">
+            <div class="form-group mb-3">
+                <label class="form-label">@Localizer["CommName"]</label>
+                <input asp-for="Title" id="inputTitle" class="form-control" placeholder="@Localizer["EnterTitle"]"  value="${title}" oninput="GeneralRequiredFiled('inputTitle', '@Localizer["Required"]', 'Title')" />
+                <span asp-validation-for="Title" id="Title" class="text-danger"></span>
+            </div>
+           <button type="button" class="btn btn-success px-4" onclick="SubmitUpdateCommunity(${id})">@Localizer["SaveUpdate"]</button>
+        </div>
+    </div>
+    `
+      $("#SmallModalbody").html(html);
+
+                    // Show Modal
+                    var myModal = new bootstrap.Modal(document.getElementById('SmallModal'), {
+                          // يمنع الإغلاق بزر Esc
+                    });
+
+                    myModal.show();
+    }
+
+    function SubmitUpdateCommunity(id){
+        if( GeneralRequiredFiled('inputTitle', '@Html.Raw(@Localizer["Required"])', 'Title')){
+            $.ajax({
+                url:"/Communities/SubmitUpdateCommunity",
+                type:"Post",
+                data:{
+                    CommunityId:id,
+                    Title:$("#inputTitle").val()
+                },
+                success:function(res){
+                  $('#SmallModal').modal('hide');
+                    if(res.success){
+                  let Courseid=$("#Course").val();
+                LoadingCommunities(Courseid);
+                    }
+                    else{
+
+                          Swal.fire({
+                        icon: 'error',
+                        title: res.message });
+                    }
+
+                },
+                error:function(res){
+                  $('#SmallModal').modal('hide');
+                     Swal.fire({
+                        icon: 'error',
+                        title: res.message });
+                }
+            })
+        }
+
+    }
+
+    function deleteCommunity(id){
+        Swal.fire({
+      title: '@Localizer["MessagedeleteComm"]',
+      showCancelButton: true,
+      confirmButtonText: '@Localizer["OkBtn"]',
+      cancelButtonText:'@Localizer["CancleBtn"]'
+     }).then((result) => {
+         if(result.isConfirmed){
+                 submitDeleteCommunity(id)
+
+         }
+    });
+    }
+
+    function submitDeleteCommunity(id){
+        $.ajax({
+            url:"/Communities/SubmitDeleteCommunity",
+            type:"POST",
+            data:{communityId:id},
+            success:function(res){
+                       if(res.success){
+                    let Courseid=$("#Course").val();
+                  LoadingCommunities(Courseid);
+                      }
+                      else{
+
+                            Swal.fire({
+                          icon: 'error',
+                          title: res.message });
+                      }
+            },
+            error:function(res){
+                 Swal.fire({
+                        icon: 'error',
+                        title: res.message });
+            }
+        })
+    }
+</script>

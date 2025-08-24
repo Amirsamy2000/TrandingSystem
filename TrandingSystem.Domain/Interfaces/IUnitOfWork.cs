@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 
 namespace TrandingSystem.Domain.Interfaces
 {
@@ -14,6 +10,8 @@ namespace TrandingSystem.Domain.Interfaces
         IUserRepository Users { get; }
         IOrdersEnorllment ordersEnorllment { get; }
         ILiveSessionRepositry LiveSessionRepositry { get; }
+        ICommunityRepository Communities { get; }
+        ICommunityMemberRepository CommunityMember  { get; }
 
         Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
     }
