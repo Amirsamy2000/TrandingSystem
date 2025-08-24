@@ -169,12 +169,36 @@
 <!-- Modal to show course details or edit form -->
 <div class="modal fade" id="courseModal" tabindex="-1" aria-labelledby="courseModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
-        <div class="modal-content" id="courseModalContent">
+        <div class="modal-content m-0" id="courseModalContent">
             <!-- Content will be loaded here -->
         </div>
     </div>
 </div>
 
+
+<!-- المودال نفسه -->
+<div class="modal fade" id="assignTeacherModal" tabindex="-1" aria-labelledby="assignTeacherModalLabel" aria-hidden="true">
+
+    <!-- حجم المودال (modal-lg = كبير) -->
+    <div class="modal-dialog modal-lg">
+
+        <!-- المحتوى بتاع المودال -->
+        <div class="modal-content">
+
+            <!-- الهيدر -->
+            <div class="modal-header">
+                <h5 class="modal-title" id="assignTeacherModalLabel">Assign Teacher</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <!-- البودي (هنا هيتحط الـ Partial View) -->
+            <div class="modal-body" id="assignTeacherModalBody">
+                <!-- Partial View will be loaded here -->
+            </div>
+
+        </div>
+    </div>
+</div>
 
 
 
@@ -328,13 +352,18 @@
                                     ${course.isFullyFree ? 'FREE' : '$' + (course.cost || 0).toFixed(2)}
                                 </div>
                                 <div class="btn-group" role="group">
-                                    <button type="button" class="btn btn-sm btn-outline-primary btn-action" onclick="editCourse(${course.courseId})">
-                                        <i class="bx bx-edit-alt"></i> Edit
+                                    <button type="button" class="btn btn-outline-primary p-3" onclick="editCourse(${course.courseId})" title="Edit">
+                                        <i class="bx bx-edit-alt fs-4 me-1"></i>
                                     </button>
-                                    <button type="button" class="btn btn-sm btn-outline-danger btn-action" onclick="deleteCourse(${course.courseId}, '${course.titleEN}')">
-                                        <i class="bx bx-trash"></i> Delete
+                                    <button type="button" class="btn btn-outline-danger p-3" onclick="deleteCourse(${course.courseId}, '${course.titleEN}')" title="Delete">
+                                        <i class="bx bx-trash fs-4 me-1"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-outline-success p-3" onclick="openAssignTeacherModal(${course.courseId})" title="Assign Teacher">
+                                        <i class="bx bx-user-plus fs-4 me-1"></i>
                                     </button>
                                 </div>
+
+
                             </div>
                         </div>
                     </div>
@@ -490,4 +519,18 @@
                 }
             });
         }
+
+        function openAssignTeacherModal(courseId) {
+            $.get("/Course/AssignTeacherForCourse", { CourseId: courseId })
+                .done(function (response) {
+                    $("#assignTeacherModalBody").html(response); // نزّل الـ partial جوا body
+                    $("#assignTeacherModal").modal("show");      // افتح المودال
+                })
+                .fail(function () {
+                    $("#assignTeacherModalBody").html("<p class='text-danger'>Failed to load teachers.</p>");
+                    $("#assignTeacherModal").modal("show");
+                });
+        }
+
+
     </script>

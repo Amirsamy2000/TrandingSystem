@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TrandingSystem.Infrastructure.Data;
 
@@ -11,9 +12,11 @@ using TrandingSystem.Infrastructure.Data;
 namespace TrandingSystem.Infrastructure.Migrations
 {
     [DbContext(typeof(db23617Context))]
-    partial class db23617ContextModelSnapshot : ModelSnapshot
+    [Migration("20250819214031_RemoveHasNoKeyFromConfigCourseLecturer")]
+    partial class RemoveHasNoKeyFromConfigCourseLecturer
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -412,10 +415,9 @@ namespace TrandingSystem.Infrastructure.Migrations
 
                     b.HasKey("CourseLecturerId");
 
-                    b.HasIndex("LecturerId");
+                    b.HasIndex("CourseId");
 
-                    b.HasIndex("CourseId", "LecturerId")
-                        .IsUnique();
+                    b.HasIndex("LecturerId");
 
                     b.ToTable("CourseLecturers");
                 });

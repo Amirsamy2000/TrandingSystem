@@ -13,6 +13,10 @@ namespace TrandingSystem.Mapping
             // Maps Presentation → Application
             CreateMap<CourseVM, AddCourseCommand>().ReverseMap();
             CreateMap<Course, AddCourseCommand>().ReverseMap();
+
+            CreateMap<CourseVM, UpdateCourseCommand>().ReverseMap();
+            CreateMap<Course, UpdateCourseCommand>().ReverseMap();
+
             CreateMap<Course, CourseVM>().ReverseMap();
             // Course mapping with CategoryName
             CreateMap<Course, CourseDto>()

@@ -28,6 +28,13 @@ namespace TrandingSystem.Infrastructure.Repositories
             throw new NotImplementedException();
         }
 
+        public List<User> ReadAllTeacher()
+        {
+            return _context.Users
+                .Where(u => u.RoleId == 3)
+                .ToList();
+        }
+
         public List<User> Read()
         {
             return _context.Users.ToList();

@@ -51,7 +51,9 @@ namespace TrandingSystem.Infrastructure.Repositories
 
         public Course Update(Course Element)
         {
-            throw new NotImplementedException();
+            _context.Courses.Update(Element);
+            _context.SaveChanges();
+            return Element;
         }
         public Course Delete(int Id)
         {
@@ -78,7 +80,7 @@ namespace TrandingSystem.Infrastructure.Repositories
                 CreatedAt = DateTime.Now,
                 IsConfirmed = false,
                 ReceiptImagePath = RecieptUrl,
-                OrderStatus = (byte?)(ReadById(courseId).Cost<= 0 ? 1 : 2), // Assuming OrderStatus is nullable is bendding
+                OrderStatus = 2 // (byte?)(ReadById(courseId).Cost<= 0 ? 1 : 2), // Assuming OrderStatus is nullable is bendding
             };
 
 
@@ -102,6 +104,20 @@ namespace TrandingSystem.Infrastructure.Repositories
                 .Where(cl => cl.CourseId == CourseId)
                 .Select(cl => cl.Lecturer)
                 .ToList();
+        }
+
+        public List<User> AssignTeacherToCourse(int courseId, List<int> TeachersId)
+        {
+            foreach(var teacherId in TeachersId)
+            {
+                _context.CourseLecturers.Add(new CourseLecturer
+                {
+                    CourseId = courseId,
+                    LecturerId = teacherId,                    
+                });
+            }
+            _context.SaveChanges();
+            return _context.Users.Where(u => TeachersId.Contains(u.Id)).ToList();
         }
     }
 }

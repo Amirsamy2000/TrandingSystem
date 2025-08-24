@@ -16,13 +16,13 @@
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>Saif Al Qadi Community</title>
+    <title>Index - Mentor Bootstrap Template</title>
     <meta name="description" content="">
     <meta name="keywords" content="">
 
     <!-- Favicons -->
-    <link href="~/assets/img/logo.png" rel="icon">
-    <link href="~/assets/img/logo.png" rel="apple-touch-icon">
+    <link href="~/assets/img/favicon.png" rel="icon">
+    <link href="~/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com" rel="preconnect"> 
@@ -47,27 +47,6 @@
         <!-- باقي اللغات تحمل ملف LTR -->
         <link href="~/assets/css/main.css" rel="stylesheet" />
     }
-
-    <style>
-        .scroll-buttons {
-            z-index: 9999; /* تأكد من أن الأزرار فوق كل شيء آخر */
-            position: fixed;
-            bottom: 20px;
-            right: 72px;
-            gap: 10px; /* مسافة بين الزرين */
-        }
-
-            .scroll-buttons a {
-                width: 45px;
-                height: 45px;
-                border-radius: 50%;
-                background: #0d6efd; /* اللون الأزرق */
-                color: #fff;
-                font-size: 22px;
-                text-decoration: none;
-            }
-
-    </style>
     <!-- =======================================================
     * Template Name: Mentor
     * Template URL: https://bootstrapmade.com/mentor-free-education-bootstrap-theme/
@@ -75,6 +54,62 @@
     * Author: BootstrapMade.com
     * License: https://bootstrapmade.com/license/
     ======================================================== -->
+
+    <style>
+        @@media (max-width: 768px) {
+            .logo-img
+
+        {
+            max-height: 45px;
+        }
+
+        }
+
+        .logo-img {
+            max-height: 69px !important;
+            margin-right: 10px;
+            object-fit: contain;
+        }
+
+        .logo {
+            align-items: center; /* keeps text aligned with logo */
+        }
+
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+            .logo:hover {
+                color: gold; /* highlight on hover */
+            }
+
+        .logo-img {
+            max-height: 95px !important;
+            margin-right: 10px;
+            object-fit: contain;
+            /* توهج دهبي */
+            /* الهالة الذهبية */
+            /* هالة دهبية شفااافة */
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.35) 30%, rgba(255, 215, 0, 0) 70%);
+            border-radius: 50%;
+            padding: 8px;
+        }
+
+        html[dir="rtl"] .logo-img {
+            margin-right: 0;
+            margin-left: 8px; /* spacing in RTL */
+        }
+
+        .sitename {
+            text-transform: capitalize;
+            font-family: 'Poppins', sans-serif;
+        }
+
+    </style>
 </head>
 
 <body class="index-page">
@@ -83,35 +118,31 @@
         <div class="container-fluid container-xl position-relative d-flex align-items-center">
 
             <a asp-action="Index" asp-controller="Home"
-               class="logo d-flex align-items-center gap-2 @(currentCulture == "ar" ? "ms-auto" : "me-auto")">
-
-                <!-- اللوجو -->
-                <img src="~/assets/img/logo2.jpg" alt="Logo"
-                     style="width: 60px; height: 60px; object-fit: contain;" />
-
-                <!-- اسم الموقع -->
-                <h1 class="sitename m-0" style="font-size: 22px; font-weight: bold;  text-transform: capitalize;">
-                    @Localizer["SiteName"]
-                </h1>
+               class="logo d-flex align-items-center @(currentCulture == "ar" ? "ms-auto" : "me-auto")">
+                <img src="~/assets/img/SaifLogo/logo-removebg-preview.png"
+                     srcset="~/assets/img/SaifLogo/logo-removebg-preview.png 1x, ~/assets/img/SaifLogo/logo-removebg-preview.png 2x"
+                     alt="@Localizer["SiteName"] Logo"
+                     class="logo-img">
+                <span class="sitename d-none d-sm-inline">@Localizer["SiteName"]</span>
             </a>
 
 
             <nav id="navmenu" class="navmenu">
                 <ul>
                   @* Change Language *@
-                    <li><a asp-controller="Home" asp-action="Dashboard" class="active">@Localizer["dasbord"]<br></a></li>
-                    <li><a asp-controller="Home" asp-action="Index" class="">@Localizer["Home"]<br></a></li>
+                    <li><a asp-controller="Home" asp-action="Dashboard">@Localizer["dasbord"]<br></a></li>
+                    <li><a asp-controller="Home" asp-action="Index" class="active">@Localizer["Home"]<br></a></li>
                     <li><a asp-controller="Home" asp-action="About">@Localizer["About"]</a></li>
                     <li><a asp-controller="Home" asp-action="Courses">@Localizer["Courses"]</a></li>
-                    @* <li><a asp-controller="Home" asp-action="Trainers">@Localizer["Trainers"]</a></li> *@
+                    <li><a asp-controller="Home" asp-action="Trainers">@Localizer["Trainers"]</a></li>
                     <li><a asp-controller="Home" asp-action="Events">@Localizer["Events"]</a></li>
-                    @* <li><a asp-controller="Home" asp-action="Pricing">@Localizer["Pricing"]</a></li> *@
+                    <li><a asp-controller="Home" asp-action="Pricing">@Localizer["Pricing"]</a></li>
                     <li><a asp-controller="Home" asp-action="Contact">@Localizer["Contact"]</a></li>
                     @if (User.Identity.IsAuthenticated)
                     {
                         <li>
                             <form id="logoutForm" asp-area="Identity" asp-page="/Account/Logout" method="post" class="d-inline">
-                                <button type="submit" class="btn btn-getstarted ">@Localizer["Logout"]</button>
+                                <button type="submit" class="btn btn-link nav-link" style="display:inline; padding:0;">Logout</button>
                             </form>
                         </li>
                     }
@@ -119,7 +150,7 @@
                 <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
             </nav>
 
-            @* <a class=" btn btn-getstarted " asp-controller="Home" asp-action="Courses">@Localizer["GetStarted"]</a> *@
+            <a class=" btn btn-getstarted " asp-controller="Home" asp-action="Courses">@Localizer["GetStarted"]</a>
             @* <partial name="_SelectLanguagePartial" class="btn-getstarted" /> *@
             @await Html.PartialAsync("_SelectLanguagePartial")
 
@@ -213,25 +244,9 @@
 
     </footer>
 
-    <div class="scroll-buttons d-flex flex-column align-items-center">
-        <!-- Chat button -->
-        <a href="https://wa.me/201040140415" id="chat-btn" class="chat-btn d-flex align-items-center justify-content-center">
-            <i class="bi bi-chat-dots"></i>
-        </a>
-        <!-- Scroll to top -->
-        <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center mb-2">
-            <i class="bi bi-arrow-up-short"></i>
-        </a>
-
-        
-    </div>
-
     <!-- Scroll Top -->
-    @* <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a> *@
-   
-    @* <a href="#" id="chat-btn" class="chat-btn d-flex align-items-center justify-content-center"> *@
-    @*     <i class="bi bi-chat-dots"></i> *@
-    @* </a> *@
+    <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
     <!-- Preloader -->
     <div id="preloader"></div>
     @* <script>  *@

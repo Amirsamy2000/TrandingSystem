@@ -11,35 +11,36 @@
 # Help: https://bootstrapmade.com/color-system/
 --------------------------------------------------------------*/
 /* Fonts */
-/*:root {
+:root {
   --default-font: "Open Sans",  system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --heading-font: "Raleway",  sans-serif;
   --nav-font: "Poppins",  sans-serif;
-}*/
+}
 
 /* Global Colors - The following color variables are used throughout the website. Updating them here will change the color scheme of the entire website */
-/*:root { 
-  --background-color: #ffffff;*/ /* Background color for the entire website, including individual sections */
-  /*--default-color: #444444;*/ /* Default color used for the majority of the text content across the entire website */
-  /*--heading-color: #37423b;*/ /* Color for headings, subheadings and title throughout the website */
-  /*--accent-color: #5fcf80;*/ /* Accent color that represents your brand on the website. It's used for buttons, links, and other elements that need to stand out */
-  /*--surface-color: #ffffff;*/ /* The surface color is used as a background of boxed elements within sections, such as cards, icon boxes, or other elements that require a visual separation from the global background. */
-  /*--contrast-color: #ffffff;*/ /* Contrast color for text, ensuring readability against backgrounds of accent, heading, or default colors. */
-/*}*/
+:root { 
+  --background-color: #ffffff; /* Background color for the entire website, including individual sections */
+  --default-color: #444444; /* Default color used for the majority of the text content across the entire website */
+  --heading-color: #37423b; /* Color for headings, subheadings and title throughout the website */
+  --accent-color: #c3972e; /* Accent color that represents your brand on the website. It's used for buttons, links, and other elements that need to stand out */
+  --surface-color: #ffffff; /* The surface color is used as a background of boxed elements within sections, such as cards, icon boxes, or other elements that require a visual separation from the global background. */
+  --contrast-color: #ffffff; /* Contrast color for text, ensuring readability against backgrounds of accent, heading, or default colors. */
+}
 
 /* Nav Menu Colors - The following color variables are used specifically for the navigation menu. They are separate from the global colors to allow for more customization options */
-/*:root {
-  --nav-color: #272828;*/  /* The default color of the main navmenu links */
-  /*--nav-hover-color: #5fcf80;*/ /* Applied to main navmenu links when they are hovered over or active */
-  /*--nav-mobile-background-color: #ffffff;*/ /* Used as the background color for mobile navigation menu */
-  /*--nav-dropdown-background-color: #ffffff;*/ /* Used as the background color for dropdown items that appear when hovering over primary navigation items */
-  /*--nav-dropdown-color: #272828;*/ /* Used for navigation links of the dropdown items in the navigation menu. */
-  /*--nav-dropdown-hover-color: #5fcf80;*/ /* Similar to --nav-hover-color, this color is applied to dropdown navigation links when they are hovered over. */
-/*}*/
+:root {
+    --nav-color: white; /* The default color of the main navmenu links */
+    --nav-hover-color: gold; /* Applied to main navmenu links when they are hovered over or active */
+    --nav-mobile-background-color: #ffffff; /* Used as the background color for mobile navigation menu */
+    --nav-dropdown-background-color: #ffffff; /* Used as the background color for dropdown items that appear when hovering over primary navigation items */
+    --nav-dropdown-color: #272828; /* Used for navigation links of the dropdown items in the navigation menu. */
+    --nav-dropdown-hover-color: #c3972e; /* Similar to --nav-hover-color, this color is applied to dropdown navigation links when they are hovered over. */
+    --navbar-background-color: #141921;
+}
 
 /* Color Presets - These classes override global colors when applied to any section or element, providing reuse of the sam color scheme. */
 
-/*.light-background {
+.light-background {
   --background-color: #f9f9f9;
   --surface-color: #ffffff;
 }
@@ -50,104 +51,12 @@
   --heading-color: #ffffff;
   --surface-color: #252525;
   --contrast-color: #ffffff;
-}*/
+}
 
 /* Smooth scroll */
-/*:root {
+:root {
   scroll-behavior: smooth;
-}*/
-/* Fonts */
-/*:root {
-    --default-font: "Open Sans", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-    --heading-font: "Raleway", sans-serif;
-    --nav-font: "Poppins", sans-serif;
-}*/
-
-/* Global Colors */
-/*:root {
-    --background-color: #F8F8F8;*/ /* Light background color */
-    /*--default-color: #2A2A2A;*/ /* Default text color */
-    /*--heading-color: #111111;*/ /* Headings in deep black */
-    /*--accent-color: #E5B84C;*/ /* Gold brand accent */
-    /*--surface-color: #ffffff;*/ /* Surfaces like cards */
-    /*--contrast-color: #ffffff;*/ /* Contrast text on accent */
-/*}*/
-
-/* Nav Menu Colors */
-/*:root {
-    --nav-color: #111111;*/ /* Default nav link color (black) */
-    /*--nav-hover-color: #C9963A;*/ /* Hover state in darker gold */
-    /*--nav-mobile-background-color: #ffffff;
-    --nav-dropdown-background-color: #ffffff;
-    --nav-dropdown-color: #2A2A2A;*/ /* Dropdown text (dark gray) */
-    /*--nav-dropdown-hover-color: #E5B84C;*/ /* Hover dropdown in gold */
-/*}*/
-
-/* Color Presets */
-/*.light-background {
-    --background-color: #F8F8F8;
-    --surface-color: #ffffff;
 }
-
-.dark-background {
-    --background-color: #111111;
-    --default-color: #ffffff;
-    --heading-color: #ffffff;
-    --surface-color: #2A2A2A;
-    --contrast-color: #ffffff;
-}*/
-
-/* Smooth scroll */
-/*:root {
-    scroll-behavior: smooth;
-}*/
-
-/* Fonts */
-:root {
-    --default-font: "Open Sans", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-    --heading-font: "Raleway", sans-serif;
-    --nav-font: "Poppins", sans-serif;
-}
-
-/* Global Colors */
-:root {
-    --background-color: #e9e6e4; /* Ebb - light background */
-    --default-color: #211e21; /* Thunder - default text color */
-    --heading-color: #211e21; /* Thunder - headings */
-    --accent-color: #c3972e; /* Marigold - brand accent */
-    --surface-color: #ffffff; /* Surfaces like cards */
-    --contrast-color: #ffffff; /* Contrast text on accent */
-}
-
-/* Nav Menu Colors */
-:root {
-    --nav-color: #211e21; /* Thunder - default nav link color */
-    --nav-hover-color: #8f560e; /* Korma - hover state */
-    --nav-mobile-background-color: #ffffff;
-    --nav-dropdown-background-color: #ffffff;
-    --nav-dropdown-color: #211e21; /* Thunder - dropdown text */
-    --nav-dropdown-hover-color: #c3972e; /* Marigold - hover dropdown */
-}
-
-/* Color Presets */
-.light-background {
-    --background-color: #e9e6e4; /* Ebb */
-    --surface-color: #ffffff;
-}
-
-.dark-background {
-    --background-color: #211e21; /* Thunder */
-    --default-color: #ffffff;
-    --heading-color: #ffffff;
-    --surface-color: #2A2A2A;
-    --contrast-color: #ffffff;
-}
-
-/* Smooth scroll */
-:root {
-    scroll-behavior: smooth;
-}
-
 
 /*--------------------------------------------------------------
 # General Styling & Shared Classes
@@ -314,11 +223,11 @@ h6 {
 # Global Header
 --------------------------------------------------------------*/
 .header {
-  color: var(--default-color);
-  background-color: var(--background-color);
-  padding: 15px 0;
-  transition: all 0.5s;
-  z-index: 997;
+    color: var(--default-color);
+    background-color: var(--navbar-background-color);
+    padding: 15px 0;
+    transition: all 0.5s;
+    z-index: 997;
 }
 
 .header .logo {
