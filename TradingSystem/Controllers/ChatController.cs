@@ -32,6 +32,7 @@ namespace TradingSystem.Controllers
                 return NotFound();
 
             ViewBag.CommunityId = id;
+            ViewBag.UserId = userId;
             return View();
         }
 
