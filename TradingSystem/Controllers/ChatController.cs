@@ -22,8 +22,8 @@ namespace TradingSystem.Controllers
         public async Task<IActionResult> Room(int id)
         {
             var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
-
-            if (!await _communityRepo.IsUserInCommunityAsync(id, int.Parse(userIdClaim.Value)))
+            var userId = userIdClaim != null ? int.Parse(userIdClaim.Value) : 0;
+            if (!await _communityRepo.IsUserInCommunityAsync(id, userId) || _communityRepo.IsUserBlocked(id, userId))
                 throw new HubException("Not a member of this community.");
 
             

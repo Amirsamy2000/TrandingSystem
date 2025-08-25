@@ -11,6 +11,7 @@ namespace TrandingSystem.Domain.Interfaces
         Task<List<Community>> GetForUserAsync(int userId);
         Task AddMemberAsync(int communityId, int userId);
         Task RemoveMemberAsync(int communityId, int userId);
+        bool IsUserBlocked(int communityId, int userId);
         // Add other CRUD as needed
     }
 }

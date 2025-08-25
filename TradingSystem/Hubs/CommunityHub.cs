@@ -25,7 +25,7 @@ namespace TradingSystem.Hubs
         public async Task JoinCommunity(int communityId)
         {
             var userId = int.Parse(Context.User.FindFirstValue(ClaimTypes.NameIdentifier));
-            if (!await _communityRepo.IsUserInCommunityAsync(communityId, userId))
+            if (!await _communityRepo.IsUserInCommunityAsync(communityId, userId) || _communityRepo.IsUserBlocked(communityId,userId))
                 throw new HubException("Not a member of this community.");
 
             await Groups.AddToGroupAsync(Context.ConnectionId, $"community:{communityId}");
