@@ -238,7 +238,7 @@
                                 <!-- Enhanced Action Buttons -->
                                 <div class="d-flex gap-3 mt-3 mb-3">
                                     <!-- Go To Course Button -->
-                                    @if (course.CourseEnrollments.FirstOrDefault(ce => ce.UserId == userId)?.OrderStatus == 1)
+                                    @if (course.CourseEnrollments.Any(ce => ce.UserId == userId && ce.OrderStatus == 1))
                                     {
                                         <button class="btn flex-fill fw-semibold py-2"
                                                 onclick="location.href='/Home/GoToCourse?CourseId=@course.CourseId'"
@@ -266,7 +266,7 @@
                                         </button>
                                     }
 
-                                    else if (course.CourseEnrollments.FirstOrDefault(ce => ce.UserId == userId)?.OrderStatus == 2)
+                                    else if (course.CourseEnrollments.Any(ce => ce.UserId == userId && ce.OrderStatus ==2))
                                     {
                                         <!--Pending button-->
                                         <a href="javascript:void(0);"

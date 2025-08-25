@@ -2,14 +2,21 @@
 #nullable disable
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace TrandingSystem.Domain.Entities;
+
+[Index(nameof(NationalId), IsUnique = true)]
 public partial class User : IdentityUser<int>
 {
     public string FullName { get; set; }
     public string Mobile { get; set; }
     public DateTime? RegisteredAt { get; set; }
+
+    [MaxLength(14)]
+    public string NationalId { get; set; }
     public bool IsBlocked { get; set; }
     public int RoleId { get; set; } // Changed from byte to int
     public string Address { get; set; }

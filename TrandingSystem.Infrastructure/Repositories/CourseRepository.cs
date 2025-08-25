@@ -66,7 +66,7 @@ namespace TrandingSystem.Infrastructure.Repositories
         public bool IsCourseEnrolled(int courseId, int userId)
         {
             return _context.CourseEnrollments
-                .Any(ce => ce.CourseId == courseId && ce.UserId == userId);
+                .Any(ce => ce.CourseId == courseId && ce.UserId == userId&& ce.OrderStatus == 1);
         }
 
         public bool EnrollCourse(int courseId, int userId, string RecieptUrl)
@@ -118,6 +118,16 @@ namespace TrandingSystem.Infrastructure.Repositories
             }
             _context.SaveChanges();
             return _context.Users.Where(u => TeachersId.Contains(u.Id)).ToList();
+        }
+
+        public bool RemoveTeacherFromCourse(int courseId, int teacherId)
+        {
+            _context.CourseLecturers.RemoveRange(
+                _context.CourseLecturers
+                .Where(cl => cl.CourseId == courseId && cl.LecturerId == teacherId)
+            );
+            _context.SaveChanges();
+            return true;
         }
     }
 }

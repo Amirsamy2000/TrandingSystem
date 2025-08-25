@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TrandingSystem.Domain.Abstractions;
+using Microsoft.EntityFrameworkCore;
 using TrandingSystem.Domain.Entities;
 using TrandingSystem.Domain.Interfaces;
 using TrandingSystem.Infrastructure.Data;
@@ -40,16 +41,16 @@ namespace TrandingSystem.Infrastructure.Repositories
             if (courseId == 0)
             {
                 return _context.Communities;
-            }
+        }
             else if (courseId == -1)
-            {
+        {
                 return _context.Communities.Where(c => c.IsDefault == true);
             }
             else
             {
                 return _context.Communities.Where(c => c.CourseId == courseId);
             }
-        }
+            }
 
         public bool GetByTitle(string title)
         {
@@ -62,9 +63,9 @@ namespace TrandingSystem.Infrastructure.Repositories
         }
 
         public Community ReadById(int Id)
-        {
+            {
            return _context.Communities.Find(Id);
-        }
+            }
 
         public Community Update(Community Element)
         {
@@ -72,6 +73,43 @@ namespace TrandingSystem.Infrastructure.Repositories
             return Element;
         }
 
-      
+
+
+        public async Task<bool> IsUserInCommunityAsync(int communityId, int userId)
+        {
+            return await _context.CommunityMembers.AnyAsync(cm => cm.CommunityId == communityId && cm.UserId == userId);
+        }
+
+        public async Task<Community> GetByIdAsync(int communityId)
+        {
+            return await _context.Communities.Include(c => c.CommunityMembers).FirstOrDefaultAsync(c => c.CommunityId == communityId);
+        }
+
+        public async Task<List<Community>> GetForUserAsync(int userId)
+        {
+            return await _context.CommunityMembers
+                .Where(cm => cm.UserId == userId)
+                .Select(cm => cm.Community)
+                .ToListAsync();
+        }
+
+        public async Task AddMemberAsync(int communityId, int userId)
+        {
+            if (!await IsUserInCommunityAsync(communityId, userId))
+            {
+                _context.CommunityMembers.Add(new CommunityMember { CommunityId = communityId, UserId = userId, JoinedAt = DateTime.UtcNow });
+                await _context.SaveChangesAsync();
+            }
+        }
+
+        public async Task RemoveMemberAsync(int communityId, int userId)
+        {
+            var member = await _context.CommunityMembers.FirstOrDefaultAsync(cm => cm.CommunityId == communityId && cm.UserId == userId);
+            if (member != null)
+            {
+                _context.CommunityMembers.Remove(member);
+                await _context.SaveChangesAsync();
+            }
+        }
     }
 }
