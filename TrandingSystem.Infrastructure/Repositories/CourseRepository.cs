@@ -66,7 +66,7 @@ namespace TrandingSystem.Infrastructure.Repositories
         public bool IsCourseEnrolled(int courseId, int userId)
         {
             return _context.CourseEnrollments
-                .Any(ce => ce.CourseId == courseId && ce.UserId == userId && ce.OrderStatus == 1);
+                .Any(ce => ce.CourseId == courseId && ce.UserId == userId);
         }
 
         public bool EnrollCourse(int courseId, int userId, string RecieptUrl)

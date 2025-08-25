@@ -565,23 +565,6 @@
         }
     
 
-        function submitEnrol(){
-            document.getElementById("enrollForm").addEventListener("submit", function(e) {
-            e.preventDefault();
-            let formData = new FormData(this);
-            debugger
-            fetch('/Course/EnrollCourse', {
-                method: 'POST',
-                body: formData
-            })
-            .then(r => r.json())
-            .then(data => {
-                document.getElementById("responseMsg").innerText = data.message ||
-                    (data.success ? "Enrolled!" : "Error");
-            });
-        });
-        }
-        
 
 
     </script>
