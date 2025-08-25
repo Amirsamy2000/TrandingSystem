@@ -249,4 +249,16 @@
   <data name="ForAdmin" xml:space="preserve">
     <value> خاصة بالمشرفين فقط</value>
   </data>
+  <data name="Comms" xml:space="preserve">
+    <value>المجتمعات</value>
+  </data>
+  <data name="CommsBodey" xml:space="preserve">
+    <value>    مرحبًا بك في منظومة سيف القاضي للتداول، منصتك الآمنة للتعلم والتواصل والمشاركة مع مجتمع من المتداولين الذين يشاركونك نفس الأهداف، حيث يمكنك تبادل الخبرات، طرح الأسئلة، ومتابعة أحدث النقاشات  و الاخبار بسهولة </value>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>الرئيسية</value>
+  </data>
+  <data name="CommunityIsClose" xml:space="preserve">
+    <value>عذرًا، تم إغلاق هذا المجتمع من قبل المسؤول</value>
+  </data>
 </root>

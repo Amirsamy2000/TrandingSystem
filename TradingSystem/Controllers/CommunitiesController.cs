@@ -101,5 +101,17 @@ namespace TrandingSystem.Controllers
             var res = _mediator.Send(new DeleteCommunityCommand(CommunityId)).Result;
             return Json(res);
         }
+
+        public IActionResult ShowCommunitiesForUser()
+        {
+            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
+            if (userIdClaim == null)
+            {
+                return Unauthorized(); // بدل RedirectToAction
+            }
+            int userId = int.Parse(userIdClaim.Value);
+            var response = _mediator.Send(new GetAllCommunityByUserQuery(userId)).Result;
+            return View(response.Data);
+        }
     }
 }

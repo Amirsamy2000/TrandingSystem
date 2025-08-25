@@ -249,4 +249,16 @@
   <data name="ForAdmin" xml:space="preserve">
     <value>For administrators only</value>
   </data>
+  <data name="Comms" xml:space="preserve">
+    <value>Communities</value>
+  </data>
+  <data name="CommsBodey" xml:space="preserve">
+    <value>Welcome to the Saif Al-Qadi Trading Platform, your secure platform for learning, communicating, and engaging with a community of like-minded traders. You can easily exchange experiences, ask questions, and follow the latest discussions and news.</value>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>Home </value>
+  </data>
+  <data name="CommunityIsClose" xml:space="preserve">
+    <value>Sorry, this community has been closed by the administrator.</value>
+  </data>
 </root>

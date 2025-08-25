@@ -180,4 +180,7 @@
   <data name="Logout" xml:space="preserve">
     <value>خروج</value>
   </data>
+  <data name="Communities" xml:space="preserve">
+    <value>المجتمعات</value>
+  </data>
 </root>

@@ -20,6 +20,8 @@ namespace TrandingSystem.Domain.Interfaces
         Task<List<Community>> GetForUserAsync(int userId);
         Task AddMemberAsync(int communityId, int userId);
         Task RemoveMemberAsync(int communityId, int userId);
+
+       List<Community> GetAllCommunitiesByUserId(int UserId);
         // Add other CRUD as needed
     }
 }

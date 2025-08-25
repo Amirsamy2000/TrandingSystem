@@ -25,5 +25,9 @@ namespace TrandingSystem.Application.Dtos
         public string ?CourseTitle { get; set; }
         public int CountSubucribtor { set; get; }
 
+        public string? LastMessage { set; get; }
+        public string? Sender { set; get; }
+        public DateTime? LastMessageTime { set; get; }
+
     }
 }

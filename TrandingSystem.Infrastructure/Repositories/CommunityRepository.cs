@@ -102,6 +102,14 @@ namespace TrandingSystem.Infrastructure.Repositories
             }
         }
 
+        public List<Community> GetAllCommunitiesByUserId(int UserId)
+        {
+            var CommunitiesForUser = _context.CommunityMembers
+                .Where(cm => cm.UserId == UserId)
+                .Select(cm => cm.Community)
+                .ToList();
+            return CommunitiesForUser;
+        }
         public async Task RemoveMemberAsync(int communityId, int userId)
         {
             var member = await _context.CommunityMembers.FirstOrDefaultAsync(cm => cm.CommunityId == communityId && cm.UserId == userId);
