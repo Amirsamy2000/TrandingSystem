@@ -119,5 +119,10 @@ namespace TrandingSystem.Infrastructure.Repositories
                 await _context.SaveChangesAsync();
             }
         }
+
+        public bool IsUserBlocked(int communityId, int userId)
+        {
+            return _context.CommunityMembers.Any(cm => cm.CommunityId == communityId && cm.UserId == userId && cm.IsBlocked == true);
+        }
     }
 }

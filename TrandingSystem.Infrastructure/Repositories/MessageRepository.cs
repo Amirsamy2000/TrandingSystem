@@ -31,7 +31,7 @@ namespace TrandingSystem.Infrastructure.Repositories
                 .Include(m => m.User)
                 .Where(m => m.CommunityId == communityId)
                 .OrderByDescending(m => m.SentAt)
-                .Take(count)
+                //.Take(count)
                 .OrderBy(m => m.SentAt)
                 .ToListAsync();
         }
