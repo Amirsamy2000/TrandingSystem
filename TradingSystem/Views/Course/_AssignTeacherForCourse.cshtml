@@ -18,18 +18,16 @@
         <tbody>
             @foreach (var lecturer in AssignedLectures)
             {
-                <tr>
+                <tr id="row-@lecturer.Id">
                     <td>@lecturer.FullName</td>
                     <td>
-                        <form method="post"
-                              action="@Url.Action("RemoveTeacherFromCourse", "Course", new { TeacherId = lecturer.Id, CourseId = courseId })"
-                              style="display:inline">
-                            <button type="submit" class="btn btn-sm btn-danger"
-                                    onclick="return confirm('Are you sure you want to remove this teacher from the course?');">
-                                Remove
-                            </button>
-                        </form>
+                        <button type="button"
+                                class="btn btn-sm btn-danger"
+                                onclick="removeTeacher(@lecturer.Id, @courseId)">
+                            Remove
+                        </button>
                     </td>
+
                 </tr>
             }
         </tbody>
@@ -111,3 +109,30 @@
     }
 
 </script>
+
+
+
+<script>
+    function removeTeacher(teacherId, courseId) {
+        if (!confirm('Are you sure you want to remove this teacher from the course?')) {
+            return;
+        }
+
+        fetch(`/Course/RemoveTeacherFromCourse?TeacherId=${teacherId}&CourseId=${courseId}`, {
+            method: 'DELETE'
+        })
+        .then(response => {
+            if (response.ok) {
+                // Remove the row directly from the table (no reload)
+                openAssignTeacherModal(courseId)
+            } else {
+                alert("Failed to remove teacher.");
+            }
+        })
+        .catch(error => {
+            console.error(error);
+            alert("An error occurred while removing the teacher.");
+        });
+    }
+</script>
+

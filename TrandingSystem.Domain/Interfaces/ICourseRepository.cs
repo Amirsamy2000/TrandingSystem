@@ -15,7 +15,7 @@ namespace TrandingSystem.Domain.Interfaces
         List<int> CourseEnrolledUsers(int courseId);
         List<User> GetLecturesByCourseId (int CourseId);
         List<User> AssignTeacherToCourse(int courseId, List<int> TeachersId);
-
+        bool RemoveTeacherFromCourse(int courseId, int teacherId);
 
     }
 }
