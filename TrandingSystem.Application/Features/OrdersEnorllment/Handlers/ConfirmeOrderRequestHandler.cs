@@ -32,12 +32,13 @@ namespace TrandingSystem.Application.Features.OrdersEnorllment.Handlers
                 }
 
                 order.ConfirmedBy = request.ConfirmedBy;
-                order.EnrollmentDate = request.CreatedAt;
-                order.OrderStatus = request.Status ? (byte)1 : (byte)0;
+                order.OrderStatus = (byte)request.Status;
                 order.IsConfirmed = true;
-                _unitOfWork.ordersEnorllment.Update(order);
-                if (!request.Status)
+               
+                if (request.Status==1)
                 {
+                   
+                    order.EnrollmentDate = request.CreatedAt;
                     var communities = _unitOfWork.Courses.ReadById(order.CourseId).Communities;
                     if (communities is not null)
                     {
@@ -55,8 +56,9 @@ namespace TrandingSystem.Application.Features.OrdersEnorllment.Handlers
                         }
 
                     }
-                } 
-              
+                }
+                _unitOfWork.ordersEnorllment.Update(order);
+
                 await _unitOfWork.SaveChangesAsync();
                 return Response<bool>.SuccessResponse(true, _localizer["GeneralOperationDone"]);
 

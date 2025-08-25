@@ -53,9 +53,10 @@ namespace TrandingSystem.Application.Features.Community.Handlers
                 // Is IsDefualt Is True This Meaning the Community For All User In sysytem
                 if (request.Community.IsDefault)
                 {
-                  
+                    var AllActiveUser = _unitofwork.Users.GetActiveAndConfirmUser();
+
                     // Add CommunityMember For All User In System
-                    foreach(var user in _unitofwork.Users.Read())
+                    foreach (var user in AllActiveUser)
                     {
                         var communityMember = new CommunityMember()
                         {

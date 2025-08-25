@@ -51,5 +51,10 @@ namespace TrandingSystem.Infrastructure.Repositories
         {
             throw new NotImplementedException();
         }
+
+        public List<User> GetActiveAndConfirmUser()
+        {
+            return _context.Users.Where(x => x.EmailConfirmed == true ).ToList();
+        }
     }
 }

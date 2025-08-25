@@ -53,7 +53,7 @@ namespace TrandingSystem.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> ChangeOrderStatus(int orderId,bool newStatus)
+        public async Task<IActionResult> ChangeOrderStatus(int orderId,int newStatus)
         {
             // This gets the user object from the Identity system
             var user = await _userManager.GetUserAsync(User);

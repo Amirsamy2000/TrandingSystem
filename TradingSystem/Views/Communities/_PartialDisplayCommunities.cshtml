@@ -77,10 +77,12 @@ else
                 <th scope="col">@Localizer["Typecommunity"]</th>
                 <th scope="col">@Localizer["CourseName"]</th>
                 <th scope="col">@Localizer["CountSubscrition"]</th>
+                <th scope="col">@Localizer["IsAdminOnly"]</th>
+                <th scope="col">@Localizer["Date"]</th>
                 <th scope="col">@Localizer["Action"]</th>
                 <th scope="col">@Localizer["Closecommunity"]</th>
                 <th scope="col">@Localizer["DeleteCommunityA"]</th>
-
+                
             </tr>
         </thead>
         <tbody>
@@ -100,6 +102,8 @@ else
                         <td>@comm.CourseTitle</td>
                     }
                     <td>@comm.CountSubucribtor</td>
+                    <td>@((bool)comm.IsAdminOnly ? Localizer["ForAdmin"] : Localizer["ForAllUser"])</td>
+                    <td>@(comm.CreatedAt?.ToString("d"))</td>
                     <td>
                         <button class="btn btn-info" onclick="UpdateCommunity(@comm.CommunityId,'@comm.Title')">@Localizer["Action"]</button>
 

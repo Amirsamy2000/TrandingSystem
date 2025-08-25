@@ -160,13 +160,13 @@
     <value>اغلاق / فتح</value>
   </data>
   <data name="DefualtCommunity" xml:space="preserve">
-    <value>مجتمع افتراضي</value>
+    <value>مجتمع عام</value>
   </data>
   <data name="PrivateCommunity" xml:space="preserve">
     <value>مجتمع خاص</value>
   </data>
   <data name="ForAll" xml:space="preserve">
-    <value>للجميع</value>
+    <value>لجميع مستخدمين الموقع </value>
   </data>
   <data name="CloseCommunityA" xml:space="preserve">
     <value>اغلاق</value>
@@ -236,5 +236,17 @@
   </data>
   <data name="TitleCreateComm" xml:space="preserve">
     <value>انشاء مجتمع</value>
+  </data>
+  <data name="Date" xml:space="preserve">
+    <value>التاريخ</value>
+  </data>
+  <data name="IsAdminOnly" xml:space="preserve">
+    <value>الارسال</value>
+  </data>
+  <data name="ForAllUser" xml:space="preserve">
+    <value>متاح لكل المستخدمين</value>
+  </data>
+  <data name="ForAdmin" xml:space="preserve">
+    <value> خاصة بالمشرفين فقط</value>
   </data>
 </root>

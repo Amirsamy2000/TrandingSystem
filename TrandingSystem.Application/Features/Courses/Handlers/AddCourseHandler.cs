@@ -52,6 +52,26 @@ namespace TrandingSystem.Application.Features.Courses.Handlers
                 {
                     return Response<Course>.ErrorResponse("Failed to create course");
                 }
+
+                // Add Community if CommunityAutoCreate is true
+                bool autoCreate = request.CommunityAutoCreate ?? false;
+                if (autoCreate)
+                {
+                    var community = new TrandingSystem.Domain.Entities.Community()
+                    {
+                        CreatedAt = DateTime.Now,
+                        CourseId = result.CourseId,
+                        Title = $"{request.TitleEN} Community",
+                        IsAdminOnly = false,
+                        IsClosed = false,
+                        IsDefault = false,
+
+
+                    };
+                  
+                    _unitOfWork.Communities.Create(community);
+                   await _unitOfWork.SaveChangesAsync();
+                }
                 return Response<Course>.SuccessResponse(result, "Course created successfully");
             }
             catch (Exception ex)

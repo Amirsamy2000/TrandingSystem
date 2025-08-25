@@ -12,12 +12,12 @@ namespace TrandingSystem.Application.Features.OrdersEnorllment.Commands
     public class ConfirmedOrderRequestCommand : IRequest<Response<bool>>
     {
         public int OrderId { get; set; }
-        public bool Status { get; set; }
+        public int Status { get; set; }
         public DateTime CreatedAt { get; set; }
         public int  ConfirmedBy{set;get;}
 
 
-        public ConfirmedOrderRequestCommand(int orderid, DateTime createdAt, int confirmedBy, bool status)
+        public ConfirmedOrderRequestCommand(int orderid, DateTime createdAt, int confirmedBy, int status)
         {
             OrderId = orderid;
             CreatedAt = createdAt;

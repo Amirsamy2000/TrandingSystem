@@ -160,13 +160,13 @@
     <value>Close / Open</value>
   </data>
   <data name="DefualtCommunity" xml:space="preserve">
-    <value>Default Community</value>
+    <value>Public Community</value>
   </data>
   <data name="PrivateCommunity" xml:space="preserve">
     <value>Private Community</value>
   </data>
   <data name="ForAll" xml:space="preserve">
-    <value>For All</value>
+    <value>For all site users</value>
   </data>
   <data name="CloseCommunityA" xml:space="preserve">
     <value>Close </value>
@@ -236,5 +236,17 @@
   </data>
   <data name="TitleCreateComm" xml:space="preserve">
     <value>Create Community</value>
+  </data>
+  <data name="Date" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="IsAdminOnly" xml:space="preserve">
+    <value>Send</value>
+  </data>
+  <data name="ForAllUser" xml:space="preserve">
+    <value>Available to all users</value>
+  </data>
+  <data name="ForAdmin" xml:space="preserve">
+    <value>For administrators only</value>
   </data>
 </root>
