@@ -23,6 +23,7 @@ namespace TrandingSystem.Infrastructure.Repositories
             return message;
         }
 
+        //TODO : remove count limit or make it configurable
         public async Task<List<Message>> GetRecentAsync(int communityId, int count = 30)
         {
             // Eager load User for each message
