@@ -23,8 +23,12 @@ async function start() {
 async function sendMessage(text) {
     if (!text.trim()) return;
 
-    // Render locally before sending
+    // Create a tempId to track this message
+    const tempId = "temp-" + Date.now();
+
+    // Render locally with tempId
     renderMessage({
+        id: tempId,
         userId: currentUserId,
         senderName: "You",
         text: text,
@@ -42,6 +46,7 @@ async function sendMessage(text) {
         alert(errorMsg);
     }
 }
+
 
 
 document.addEventListener('DOMContentLoaded', start);

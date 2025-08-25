@@ -46,9 +46,16 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/7.0.5/signalr.min.js"></script>
 <script src="/js/chat.js"></script>
 <script>
-        function renderMessage(msg) {
+    function renderMessage(msg) {
         const container = document.getElementById('chat-messages');
+
+        // ·Ê «·—”«·… „ÊÃÊœ… ﬁ»· ﬂœÂ (»«·‹ id √Ê tempId) „ ÷›Â«‘  «‰Ì
+        if (msg.id && document.getElementById("msg-" + msg.id)) {
+            return;
+        }
+
         const div = document.createElement('div');
+        div.id = "msg-" + msg.id; // «” Œœ„ id ··—”«·…
 
         let time = '[Invalid Date]';
         if (msg.sentAt) {
@@ -61,8 +68,7 @@
 
         div.textContent = `[${time}] ${sender}: ${text}`;
 
-        // Align messages
-        if (msg.userId == currentUserId) {
+        if ((msg.userId ?? msg.senderId) == currentUserId) {
             div.classList.add("my-message");
         } else {
             div.classList.add("other-message");
@@ -71,6 +77,7 @@
         container.appendChild(div);
         container.scrollTop = container.scrollHeight;
     }
+
 
 
     document.addEventListener('DOMContentLoaded', async function() {
