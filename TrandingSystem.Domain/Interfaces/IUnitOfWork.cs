@@ -7,6 +7,7 @@ namespace TrandingSystem.Domain.Interfaces
         IVideoRepository Videos { get; }
         ICategoryRepository Categories { get; }
         ICourseRepository Courses { get; }
+        IRoleRepository Roles { get; }
         IUserRepository Users { get; }
         IOrdersEnorllment ordersEnorllment { get; }
         ILiveSessionRepositry LiveSessionRepositry { get; }

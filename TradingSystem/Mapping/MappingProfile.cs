@@ -31,6 +31,9 @@ namespace TrandingSystem.Mapping
 
             CreateMap<User, UserDto>()
            .ReverseMap();
+            
+            CreateMap<Role, RoleDto>()
+           .ReverseMap();
 
 
 

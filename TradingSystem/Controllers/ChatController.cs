@@ -36,15 +36,14 @@ namespace TradingSystem.Controllers
             ViewBag.UserId = userId;
             ViewBag.Name = community.Title;
 
-            var roleClaim = User.FindFirst(ClaimTypes.Role);
+            var roleClaim = User.FindAll(ClaimTypes.Role).ToList();
 
-            var role = "";
             if (roleClaim != null)
             {
-                role = roleClaim.Value; // e.g., "Admin", "User", etc.
+                ViewBag.adminOnly = community.IsAdminOnly == true && !roleClaim.Any(r => r.Value.ToLower() == "admin");
+                // e.g., "Admin", "User", etc.
             }
 
-            ViewBag.adminOnly = community.IsAdminOnly == true && role.ToLower() == "admin";
 
             return View();
         }

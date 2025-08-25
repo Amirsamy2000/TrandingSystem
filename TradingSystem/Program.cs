@@ -38,6 +38,7 @@ builder.Services.AddScoped<ICommunityRepository, CommunityRepository>();
 builder.Services.AddScoped<IMessageRepository, MessageRepository>();
 builder.Services.AddSignalR();
 
+
 //builder.Services.AddScoped<IWasabiUploader, WasabiUploader>();
 // Identity مع Roles و EF Store
 builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true)
