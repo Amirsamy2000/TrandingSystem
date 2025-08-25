@@ -4,41 +4,124 @@
 }
 
 <style>
+    body {
+        background-color: #141921;
+        color: #f9f9f9;
+        margin: 0;
+        padding: 0;
+        font-family: 'Segoe UI', sans-serif;
+    }
+
+    header {
+        background-color: #141921;
+        border-bottom: 3px solid #c3972e;
+        padding: 15px;
+        text-align: center;
+        font-size: 1.4rem;
+        font-weight: bold;
+        color: #f9f9f9;
+    }
 
     #chat-messages {
         display: flex;
         flex-direction: column;
-        padding: 10px;
+        padding: 15px;
+        height: 85vh; /* increased height */
+        overflow-y: auto;
+        border-radius: 12px;
+        margin-bottom: 10px;
+        background-color: #f8f9fa;
+        width: 100%; /* full width */
     }
 
     .my-message {
         align-self: flex-end;
-        background-color: #DCF8C6; /* WhatsApp-like */
-        padding: 8px 12px;
-        border-radius: 15px;
-        margin: 4px 0;
-        max-width: 70%;
+        background-color: #c3972e;
+        color: #f9f9f9;
+        padding: 10px 14px;
+        border-radius: 18px 18px 4px 18px;
+        margin: 8px 0;
+        max-width: 65%;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+        word-wrap: break-word;
+        display: flex;
+        flex-direction: column;
     }
 
     .other-message {
         align-self: flex-start;
-        background-color: #ECECEC;
-        padding: 8px 12px;
-        border-radius: 15px;
-        margin: 4px 0;
-        max-width: 70%;
+        background-color: #f9f9f9;
+        color: #141921;
+        padding: 10px 14px;
+        border-radius: 18px 18px 18px 4px;
+        margin: 8px 0;
+        max-width: 65%;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+        word-wrap: break-word;
+        display: flex;
+        flex-direction: column;
     }
 
+    /* sender name (top) */
+    .message-sender {
+        font-weight: bold;
+        font-size: 0.85rem;
+        margin-bottom: 6px;
+        opacity: 0.9;
+    }
 
+    /* message text (center) */
+    .message-text {
+        font-size: 1rem;
+        text-align: left;
+        line-height: 1.4;
+    }
 
+    /* datetime (bottom) */
+    .message-time {
+        font-size: 0.75rem;
+        opacity: 0.7;
+        margin-top: 6px;
+        align-self: flex-end;
+    }
+
+    .input-group {
+        position: sticky;
+        bottom: 0;
+        background: #141921;
+        padding: 10px;
+        border-top: 1px solid #c3972e;
+    }
+
+    #chat-input {
+        border-radius: 20px;
+        padding: 10px 15px;
+    }
+
+    .btn-primary {
+        background-color: #c3972e;
+        border: none;
+        border-radius: 20px;
+        padding: 10px 20px;
+        margin-left: 8px;
+    }
+
+        .btn-primary:hover {
+            background-color: #a17c24;
+        }
 </style>
 
+<header>
+    Community Chat
+</header>
 
-<div id="chat-messages" style="height:400px; overflow-y:auto; border:1px solid #ccc; margin-bottom:10px;"></div>
-<div class="input-group mb-3">
+<div id="chat-messages"></div>
+
+<div class="input-group">
     <input type="text" id="chat-input" class="form-control" placeholder="Type a message..." />
     <button class="btn btn-primary" onclick="sendMessage(document.getElementById('chat-input').value)">Send</button>
 </div>
+
 <script>
     const communityId = @communityId;
     const currentUserId = @ViewBag.UserId;
@@ -49,13 +132,12 @@
     function renderMessage(msg) {
         const container = document.getElementById('chat-messages');
 
-        // ·Ê «·—”«·… „ÊÃÊœ… ﬁ»· ﬂœÂ (»«·‹ id √Ê tempId) „ ÷›Â«‘  «‰Ì
         if (msg.id && document.getElementById("msg-" + msg.id)) {
             return;
         }
 
         const div = document.createElement('div');
-        div.id = "msg-" + msg.id; // «” Œœ„ id ··—”«·…
+        div.id = "msg-" + msg.id;
 
         let time = '[Invalid Date]';
         if (msg.sentAt) {
@@ -66,7 +148,13 @@
         const sender = msg.senderName || msg.userId || 'Unknown';
         const text = msg.text || '';
 
-        div.textContent = `[${time}] ${sender}: ${text}`;
+            div.innerHTML = `
+                <div class="message-sender">${sender}</div>
+                <div class="message-text">${text}</div>
+                <div class="message-time">${time}</div>
+            `;
+
+
 
         if ((msg.userId ?? msg.senderId) == currentUserId) {
             div.classList.add("my-message");
@@ -78,11 +166,8 @@
         container.scrollTop = container.scrollHeight;
     }
 
-
-
     document.addEventListener('DOMContentLoaded', async function() {
         await start();
-        // Load history
         fetch(`/Chat/History?communityId=${communityId}`)
             .then(res => res.json())
             .then(messages => {
