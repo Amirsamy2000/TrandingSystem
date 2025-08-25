@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
+using System.Data;
 using System.Security.Claims;
 using TrandingSystem.Domain.Entities;
 using TrandingSystem.Domain.Interfaces;
@@ -24,7 +25,7 @@ namespace TradingSystem.Controllers
             var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
             var userId = userIdClaim != null ? int.Parse(userIdClaim.Value) : 0;
             if (!await _communityRepo.IsUserInCommunityAsync(id, userId) || _communityRepo.IsUserBlocked(id, userId))
-                throw new HubException("Not a member of this community.");
+                throw new HubException("Not a member of this community || or is blocked.");
 
             
             var community = await _communityRepo.GetByIdAsync(id);
@@ -33,6 +34,18 @@ namespace TradingSystem.Controllers
 
             ViewBag.CommunityId = id;
             ViewBag.UserId = userId;
+            ViewBag.Name = community.Title;
+
+            var roleClaim = User.FindFirst(ClaimTypes.Role);
+
+            var role = "";
+            if (roleClaim != null)
+            {
+                role = roleClaim.Value; // e.g., "Admin", "User", etc.
+            }
+
+            ViewBag.adminOnly = community.IsAdminOnly == true && role.ToLower() == "admin";
+
             return View();
         }
 
