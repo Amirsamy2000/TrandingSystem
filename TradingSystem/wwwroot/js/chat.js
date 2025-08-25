@@ -22,18 +22,27 @@ async function start() {
 
 async function sendMessage(text) {
     if (!text.trim()) return;
+
+    // Render locally before sending
+    renderMessage({
+        userId: currentUserId,
+        senderName: "You",
+        text: text,
+        sentAt: new Date().toISOString()
+    });
+
     try {
         await connection.invoke("SendMessage", communityId, text);
         document.getElementById('chat-input').value = '';
     } catch (err) {
-        // Handle HubException (e.g., not a member)
         let errorMsg = "An error occurred while sending the message.";
-        if (err && err.message && err.message.includes("Not a member of this community")) {
+        if (err?.message?.includes("Not a member")) {
             errorMsg = "You are not a member of this community and cannot send messages.";
         }
         alert(errorMsg);
     }
 }
+
 
 document.addEventListener('DOMContentLoaded', start);
 
