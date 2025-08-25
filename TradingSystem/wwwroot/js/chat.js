@@ -27,13 +27,13 @@ async function sendMessage(text) {
     const tempId = "temp-" + Date.now();
 
     // Render locally with tempId
-    renderMessage({
-        id: tempId,
-        userId: currentUserId,
-        senderName: "You",
-        text: text,
-        sentAt: new Date().toISOString()
-    });
+    //renderMessage({
+    //    id: tempId,
+    //    userId: currentUserId,
+    //    senderName: "You",
+    //    text: text,
+    //    sentAt: new Date().toISOString()
+    //});
 
     try {
         await connection.invoke("SendMessage", communityId, text);
