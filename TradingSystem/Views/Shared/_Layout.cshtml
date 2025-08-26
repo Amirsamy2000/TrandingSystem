@@ -120,7 +120,7 @@
             <a asp-action="Index" asp-controller="Home"
                class="logo d-flex align-items-center @(currentCulture == "ar" ? "ms-auto" : "me-auto")">
                 <img src="~/assets/img/SaifLogo/logo-removebg-preview.png"
-                     srcset="~/assets/img/SaifLogo/logo-removebg-preview.png 1x, ~/assets/img/SaifLogo/logo-removebg-preview.png 2x"
+                     srcset="~/assets/img/SaifLogo/logo-removebg-preview.png"
                      alt="@Localizer["SiteName"] Logo"
                      class="logo-img">
                 <span class="sitename d-none d-sm-inline">@Localizer["SiteName"]</span>
@@ -143,6 +143,14 @@
                         <li>
                             <form id="logoutForm" asp-area="Identity" asp-page="/Account/Logout" method="post" class="d-inline">
                                 <button type="submit" class="btn btn-link nav-link" style="display:inline; padding:0;">Logout</button>
+                            </form>
+                        </li>
+                    }
+                    else
+                    {
+                        <li>
+                            <form class="d-inline">
+                                <a href="Identity/Account/Login" class="btn btn-link nav-link" style="display:inline; padding:0;">LogIn</a>
                             </form>
                         </li>
                     }
