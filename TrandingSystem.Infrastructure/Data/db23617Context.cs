@@ -29,7 +29,7 @@ namespace TrandingSystem.Infrastructure.Data
 
         public virtual DbSet<Course> Courses { get; set; }
 
-        public virtual DbSet<CourseEnrollment> CourseEnrollments { get; set; }
+        public virtual DbSet<Video_CourseEnrollment> CourseEnrollments { get; set; }
 
         public virtual DbSet<CourseLecturer> CourseLecturers { get; set; }
 
@@ -61,7 +61,7 @@ namespace TrandingSystem.Infrastructure.Data
             modelBuilder.ApplyConfiguration(new Configurations.CommunityMemberConfiguration());
             modelBuilder.ApplyConfiguration(new Configurations.ContactInfoConfiguration());
             modelBuilder.ApplyConfiguration(new Configurations.CourseConfiguration());
-            modelBuilder.ApplyConfiguration(new Configurations.CourseEnrollmentConfiguration());
+            modelBuilder.ApplyConfiguration(new Configurations.Video_CourseEnrollmentConfiguration());
             modelBuilder.ApplyConfiguration(new Configurations.CourseLecturerConfiguration());
             modelBuilder.ApplyConfiguration(new Configurations.CourseRatingConfiguration());
             modelBuilder.ApplyConfiguration(new Configurations.LandingPageContentConfiguration());

@@ -8,10 +8,13 @@ using TrandingSystem.Infrastructure.Data;
 
 namespace TrandingSystem.Infrastructure.Data.Configurations
 {
-    public   class CourseEnrollmentConfiguration : IEntityTypeConfiguration<CourseEnrollment>
+    public   class Video_CourseEnrollmentConfiguration : IEntityTypeConfiguration<Video_CourseEnrollment>
     {
-        public void Configure(EntityTypeBuilder<CourseEnrollment> entity)
+        public void Configure(EntityTypeBuilder<Video_CourseEnrollment> entity)
         {
+
+            entity.ToTable("VideoCourseEnrollments");
+
             entity.HasKey(e => e.EnrollmentId).HasName("PK__CourseEn__7F68771BB07A50C4");
 
             entity.Property(e => e.EnrollmentDate).HasColumnType("datetime");

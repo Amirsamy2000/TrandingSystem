@@ -8,7 +8,7 @@ using TrandingSystem.Domain.Entities;
 
 namespace TrandingSystem.Domain.Interfaces
 {
-    public interface IOrdersEnorllment:IDomainInterface<CourseEnrollment>
+    public interface IOrdersEnorllment:IDomainInterface<Video_CourseEnrollment>
     {
 
     }

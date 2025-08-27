@@ -40,7 +40,7 @@ namespace TrandingSystem.Domain.Entities
 
         public virtual ICollection<Community> Communities { get; set; } = new List<Community>();
 
-        public virtual ICollection<CourseEnrollment> CourseEnrollments { get; set; } = new List<CourseEnrollment>();
+        public virtual ICollection<Video_CourseEnrollment> CourseEnrollments { get; set; } = new List<Video_CourseEnrollment>();
 
         public virtual ICollection<CourseRating> CourseRatings { get; set; } = new List<CourseRating>();
 

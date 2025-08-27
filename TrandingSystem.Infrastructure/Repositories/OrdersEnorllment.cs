@@ -16,27 +16,27 @@ namespace TrandingSystem.Infrastructure.Repositories
         {
             _db = context;
         }
-        public CourseEnrollment Create(CourseEnrollment Object)
+        public Video_CourseEnrollment Create(Video_CourseEnrollment Object)
         {
             throw new NotImplementedException();
         }
 
-        public CourseEnrollment Delete(int Id)
+        public Video_CourseEnrollment Delete(int Id)
         {
             throw new NotImplementedException();
         }
 
-        public List<CourseEnrollment> Read()
+        public List<Video_CourseEnrollment> Read()
         {
            return _db.CourseEnrollments.ToList();
         }
 
-        public CourseEnrollment ReadById(int Id)
+        public Video_CourseEnrollment ReadById(int Id)
         {
             return _db.CourseEnrollments.Where(x=>x.EnrollmentId==Id).FirstOrDefault();
         }
 
-        public CourseEnrollment Update(CourseEnrollment Element)
+        public Video_CourseEnrollment Update(Video_CourseEnrollment Element)
         {
             _db.CourseEnrollments.Update(Element);
             return Element;
