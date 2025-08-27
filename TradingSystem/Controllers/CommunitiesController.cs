@@ -5,6 +5,8 @@ using TrandingSystem.Application.Dtos;
 using TrandingSystem.Application.Features.Community.Commands;
 using TrandingSystem.Application.Features.Community.Queries;
 using TrandingSystem.Application.Features.Courses.Queries;
+using TrandingSystem.Application.Features.Users.Queries;
+using TrandingSystem.Domain.Entities;
 
 namespace TrandingSystem.Controllers
 {
@@ -88,9 +90,9 @@ namespace TrandingSystem.Controllers
         }
 
         [HttpPost]
-        public IActionResult SubmitUpdateCommunity(int CommunityId, string Title,CancellationToken cancellation)
+        public IActionResult SubmitUpdateCommunity(int CommunityId, string Title,bool IsAdminOnly,CancellationToken cancellation)
         {
-            var res = _mediator.Send(new UpdateCommunityCommand(Title, CommunityId), cancellation).Result;
+            var res = _mediator.Send(new UpdateCommunityCommand(Title, CommunityId, IsAdminOnly), cancellation).Result;
             return Json(res);
 
         }
@@ -113,5 +115,37 @@ namespace TrandingSystem.Controllers
             var response = _mediator.Send(new GetAllCommunityByUserQuery(userId)).Result;
             return View(response.Data);
         }
+
+        public IActionResult PartialAssginUserIntoCommunity()
+        {
+           
+             //Get Communities
+            var AllCommunities = _mediator.Send(new GellAllCommunityByCourseQuery(0)).Result;
+            return PartialView("_PartialAssginUserIntoCommunity",AllCommunities.Data);
+        }
+
+        public IActionResult GetUsersOutCommunity(int communityId)
+        {
+            var response = _mediator.Send(new GetAllUsersByStatusQuery(4,communityId)).Result;
+            
+            return Json(response.Data);
+        }
+
+        public IActionResult SubmitAssginUserIntoCommunity(List<int> usersId, int communityId)
+        {
+            var res = _mediator.Send(new AssginUserIntoCommunityCommand( communityId, usersId)).Result;
+            return Json(res);
+        }
+
+        public IActionResult PartialDisplayUsersCommunity(int communityId,string CommunityName)
+        {
+            ViewBag.CommunityName = CommunityName;
+            ViewBag.Communityid = communityId;
+            var response = _mediator.Send(new GetAllUsersByStatusQuery(5, communityId)).Result;
+
+            return PartialView("_PartialDisplayUsersCoomunity", response.Data);
+
+        }
+
     }
 }

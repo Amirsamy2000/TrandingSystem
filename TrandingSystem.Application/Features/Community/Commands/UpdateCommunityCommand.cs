@@ -7,10 +7,12 @@ namespace TrandingSystem.Application.Features.Community.Commands
     {
         public int CommunityId { set; get; }
         public string Title { set; get; }
-        public UpdateCommunityCommand(string title, int communityId)
+        public bool IsAdminOnly { set; get; }
+        public UpdateCommunityCommand(string title, int communityId,bool isAdmin )
         {
             Title = title;
             CommunityId = communityId;
+            IsAdminOnly = isAdmin;
         }
     }
 }

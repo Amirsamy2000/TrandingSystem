@@ -225,7 +225,8 @@ function handleIsPaidChangeInAddNewVideo(idpaid, idcost) {
 
 // Show Pop To Choice Cousre then Dispaly  videos
 function ChoiceCourse(text,text2,numUrl) {
-    debugger
+    var myModal = new bootstrap.Modal(document.getElementById('modalCenter'))
+    myModal.hide()
     $.ajax({
         url: '/Course/ReadAll',
         type: 'GET',

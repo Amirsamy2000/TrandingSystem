@@ -1,0 +1,54 @@
+﻿@using Microsoft.Extensions.Localization
+@using TrandingSystem.Application.Dtos
+@using TrandingSystem.Controllers
+@inject IStringLocalizer<CommunitiesController> Localizer
+@model IEnumerable<CommunitiesDto>
+
+<div class="card shadow-lg rounded-3">
+    <div class="card-header  text-white text-center">
+        <h4>@Localizer["AssginUserIntoCommunity"]</h4>
+    </div>
+    <div class="card-body">
+
+        <div class="form-group mb-3" >
+            <span id="errors" class="text-danger"></span>
+
+            </div>
+
+         
+
+            <div class="form-group mb-3">
+                <label class="form-label">@Localizer["ChoiseComm"]</label>
+
+                <select class="form-control" id="SelectCoomunity" onchange="GetUsersOutCommunity()">
+                <option value="0">--Select--</option>
+
+                    @if (Model!= null)
+                    {
+
+                        foreach (var comm in Model)
+                        {
+                            <option value="@comm.CommunityId" onclick="GetUserData">@comm.Title</option>
+                        }
+                    }
+                </select>
+            </div>
+
+            <div class="form-group mb-3">
+            <label class="form-label">@Localizer["ChoiseUser"]</label>
+
+            <select class="form-control" id="SelectUser" onchange="SelectUsersAssginIntoCommunity()">
+            </select>
+        </div>
+          <div class="form-group mb-3">
+           <div class="row d-flex justify-content-center" id="AssginUsers">
+              
+           </div>
+          </div>
+
+        <button type="button" class="btn btn-success px-4" id="AssginUserIntoComm" onclick="SubmitAssginUserIntoCommunity()"> @Localizer["Assgin"]</button>
+       
+    </div>
+</div>
+ 
+ 

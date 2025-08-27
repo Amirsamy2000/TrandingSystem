@@ -38,7 +38,8 @@ namespace TrandingSystem.Application.Features.Community.Handlers
                     IsAdminOnly=request.Community.IsAdminOnly,
                     Title=request.Community.Title,
                     CourseId= request.Community.IsDefault?null:request.Community.CourseId,
-                    IsClosed=request.Community.IsClosed
+                    IsClosed=request.Community.IsClosed,
+                    CreatedAt=DateTime.UtcNow
                 };
                 // Add community to DbContext
                 _unitofwork.Communities.Create(Community);
@@ -84,7 +85,7 @@ namespace TrandingSystem.Application.Features.Community.Handlers
                     {
                         return Response<bool>.ErrorResponse(_localizer["CourseNotFound"]);
                     }
-                    foreach (var user in course.CourseEnrollments)
+                    foreach (var user in course.CourseEnrollments.Where(x=>x.OrderStatus==1))
                     {
                         var communityMember = new CommunityMember()
                         {

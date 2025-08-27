@@ -15,6 +15,10 @@
         <button class="btn btn-primary me-2" onclick="DisplayPartialAddNewComm()">
             <i class='menu-icon tf-icons bx bx-plus'></i> @Localizer["Add"]
         </button>
+        <button class="btn btn-primary me-2" onclick="DisplayPartialAssginUserIntoComm()">
+            <i class='menu-icon tf-icons bx bx-plus'></i> @Localizer["Assgin"]
+        </button>
+
         @* 
         <button class="btn btn-danger" onclick="DeleteAllVideos(@ViewBag.CourseId??0)">
             <i class='menu-icon bx bx-trash tf-icons bx bx-plus'></i> @Localizer["DeleteAll"]
@@ -46,6 +50,11 @@
     <div class="col-12" id="BodyCommunities">
 
     </div>
+</div>
+
+<div class="row bg-white p-4" id="UsersCommunity">
+   
+   
 </div>
 
 
@@ -134,6 +143,164 @@
             });
         }
 
+        function DisplayPartialAssginUserIntoComm(){
+            $.ajax({
+                url:"/Communities/PartialAssginUserIntoCommunity",
+                type:"GET",
+                success:function(res){
+                       // add data in modal
+                    $("#SmallModalbody").html(res);
+
+                    // Show Modal
+                    var myModal = new bootstrap.Modal(document.getElementById('SmallModal'), {
+                          // يمنع الإغلاق بزر Esc
+                    });
+
+                    myModal.show();
+                }
+                ,error:function(){
+                      Swal.fire({
+                        icon: 'error',
+                        title: '@Localizer["Error"]',
+                    });
+                }
+            })
+        }
+
+
+             function GetUsersOutCommunity(){
+                 selectedsers=[];
+                 $("#AssginUsers").html("");
+            debugger
+            let communityId=$("#SelectCoomunity").val();
+            $.ajax({
+                type: "GET",
+                url: '/Communities/GetUsersOutCommunity?communityId=' + communityId,
+
+                success: function (data) {
+                    $("#SelectUser").empty();
+                  $("#SelectUser").append('<option value="" disabled selected>--Select--</option>');
+                        $.each(data, function (index, row) {
+                        $("#SelectUser").append('<option value="' + row.id + '">' + row.fullName + '</option>');
+                    });
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            });
+        }
+
+        function VaildData(textUser,textComm){
+           
+            let community=$("#SelectCoomunity").val();
+            if(selectedsers.length==0){
+                $("#errors").text(textUser)
+                return false;
+            }
+            if(community==0||community===undefined){
+                 $("#errors").text(textComm)
+                   return false;
+            }
+            else{
+                 return true;
+            }
+        }
+
+        function SubmitAssginUserIntoCommunity(){
+
+            let community=$("#SelectCoomunity").val();
+
+           if( VaildData('@Localizer["textUser"]','@Localizer["textComm"]')){
+                   $.ajax({
+            type: "POST",
+            url: '/Communities/SubmitAssginUserIntoCommunity',
+            data: { usersId: selectedsers, communityId: community },
+            success: function (data) {
+                if(data.success){
+                                bootstrap.Modal.getInstance(document.getElementById('SmallModal')).hide();
+
+                 let Courseid=$("#Course").val();
+                LoadingCommunities(Courseid);
+                }
+                else{
+            bootstrap.Modal.getInstance(document.getElementById('SmallModal')).hide();
+                    Swal.fire({
+            icon: "error",
+            title: res.message,
+
+        });
+
+
+                }
+            },
+            error: function (err) {
+        Swal.fire({
+                  icon: "error",
+                  title: res.message,
+
+              });            }
+        });
+           }
+
+
+        }
+        let selectedsers=[];
+        function SelectUsersAssginIntoCommunity(){
+            $("#errors").text("")
+        let value = $("#SelectUser").val();
+        let text = $("#SelectUser option:selected").text();
+        if(value===0) return;
+        if(!selectedsers.includes(value)){
+            
+            selectedsers.push(value)
+            let html=`<div class="col-3 p-2 m-1 text-white bg-primary" style="border-radius: 30px;text-align: center;" onclick="removeSelectedUser(${value},this)">${text}</div>`
+            $("#AssginUsers").append(html);
+        }
+        }
+
+        function removeSelectedUser(userid,e){
+        $(e).remove();
+        selectedsers = selectedsers.filter(item => item != userid);
+
+        }
+
+        function ShowAllUsersInCommunity(communityid,coutusers,title){
+            if(coutusers==0){
+                Swal.fire({
+                    icon: 'info',
+                    title: '@Localizer["NoUserFound"]',
+                });
+                
+            }
+            else{
+                 let setting = { title: "@Localizer["loading"]" }
+            SweatAlterProcessing(setting);
+            $.ajax({
+                url:"/Communities/PartialDisplayUsersCommunity",
+                type:"GET",
+                data:{communityId:communityid,CommunityName:title},
+                success:function(res){
+                    Swal.close();
+                   
+      
+                    $("#UsersCommunity").html(res);
+                     // يعمل Scroll لآخر عنصر ظهر
+                      $('html, body').animate({
+                          scrollTop: $("#UsersCommunity").offset().top + $("#UsersCommunity").outerHeight()
+                      }, 800);
+                },
+                error:function(){
+                    Swal.close();
+                        Swal.fire({
+                            icon: 'error',
+                            title: '@Localizer["Error"]',
+                        });
+                }
+            })
+            }
+           
+        }
+        
     </script>
 
 }

@@ -21,7 +21,7 @@
 
         // Submit New Video
        function SubmitAddNewVideo() {
-        debugger;
+        debugger
         var form = $('#AddNewVideoForm')[0];
         var data = new FormData(form);
         var token = $('input[name="__RequestVerificationToken"]').val();
@@ -100,7 +100,7 @@
             isValid = false;
         }
 
-        if (!validateVideoFile('inputVideoUrl', 'VideoUrl', '@Html.Raw(Localizer["AllowVideoExtensiion"])')) {
+        if (!GeneralRequiredFiled('inputVideoUrl', '@Html.Raw(@Localizer["Required"])', 'VideoUrl')) {
             isValid = false;
         }
 

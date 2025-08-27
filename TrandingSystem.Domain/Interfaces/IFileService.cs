@@ -11,6 +11,7 @@ namespace TrandingSystem.Domain.Interfaces
         Task<string> SaveVideoAsync(IFormFile videoFile);
         Task<bool> DeleteVideoAsync(string videoFileName);
         string GenerateBunnyToken(string libraryId, string videoId, string signingKey);
+        Task<string>  GetVideoUrlAsync(string videoId);
 
 
 

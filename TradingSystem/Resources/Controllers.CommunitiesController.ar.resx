@@ -261,4 +261,64 @@
   <data name="CommunityIsClose" xml:space="preserve">
     <value>عذرًا، تم إغلاق هذا المجتمع من قبل المسؤول</value>
   </data>
+  <data name="Add User to Community" xml:space="preserve">
+    <value>إضافة مستخدم إلى المجتمع</value>
+  </data>
+  <data name="ChoiseComm" xml:space="preserve">
+    <value>Select Community</value>
+  </data>
+  <data name="ChoiseUser" xml:space="preserve">
+    <value>اختر المستخدم</value>
+  </data>
+  <data name="Assgin" xml:space="preserve">
+    <value>تعيين المستخدم</value>
+  </data>
+  <data name="textComm" xml:space="preserve">
+    <value>من فضلك اختر المجتمع</value>
+  </data>
+  <data name="textUser" xml:space="preserve">
+    <value>من فضلك اختار المستخدم</value>
+  </data>
+  <data name="NoUserMessage1" xml:space="preserve">
+    <value>اضافة المستخدمين في اي مجتمع</value>
+  </data>
+  <data name="NoUserFound" xml:space="preserve">
+    <value>لايوجود اي مستخدمين في هذا المجتمع</value>
+  </data>
+  <data name="UserName" xml:space="preserve">
+    <value>المستخدم</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>الايميل</value>
+  </data>
+  <data name="Mobile" xml:space="preserve">
+    <value>التلفون</value>
+  </data>
+  <data name="NationalId" xml:space="preserve">
+    <value>الرقم القومي</value>
+  </data>
+  <data name="RegisterDate" xml:space="preserve">
+    <value>تاريخ التسجيل</value>
+  </data>
+  <data name="IsBlockedUser" xml:space="preserve">
+    <value>الحالة</value>
+  </data>
+  <data name="Blocked" xml:space="preserve">
+    <value>محظور</value>
+  </data>
+  <data name="Active" xml:space="preserve">
+    <value>نشط</value>
+  </data>
+  <data name="BlockUser" xml:space="preserve">
+    <value>حظر المستخدمين المحددين</value>
+  </data>
+  <data name="RemoveUser" xml:space="preserve">
+    <value>ازاله المستخدمين المحددين</value>
+  </data>
+  <data name="members" xml:space="preserve">
+    <value>اعظاء</value>
+  </data>
+  <data name="UnBlockUser" xml:space="preserve">
+    <value>تنشيط المستخدمين المحددين</value>
+  </data>
 </root>

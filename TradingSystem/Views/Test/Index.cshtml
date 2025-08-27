@@ -2,8 +2,24 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_LayoutDasbord.cshtml";
 }
+@{
+    ViewData["Title"] = "رفع فيديو";
+}
 
-<form asp-action="upload" asp-controller="Test" method="post" enctype="multipart/form-data">
-    <input name="Video" type="file" class="form-control" />
-    <button type="submit" class="btn btn-outline-info">Save</button>
+<h2>رفع فيديو إلى VdoCipher</h2>
+
+<form asp-action="Upload" asp-controller="test" enctype="multipart/form-data" method="post">
+    <input type="file" name="video" />
+    <button type="submit">رفع</button>
 </form>
+<br />
+<br />
+@* @{ *@
+@*     var otpJson = (string)ViewBag.OtpResponse; *@
+@*     var otpObj = System.Text.Json.JsonDocument.Parse(otpJson).RootElement; *@
+@*     var otp = otpObj.GetProperty("otp").GetString(); *@
+@*     var playbackInfo = otpObj.GetProperty("playbackInfo").GetString(); *@
+@* } *@
+
+
+<iframe src="@ViewBag.IframeUrl" style="border:0;height:360px;width:640px;max-width:100%" allowFullScreen="true" allow="encrypted-media"></iframe>

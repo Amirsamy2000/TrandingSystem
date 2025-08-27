@@ -73,15 +73,15 @@ else
         <thead>
             <tr class=" table-info">
 
-                <th scope="col">@Localizer["communityName"]</th>
-                <th scope="col">@Localizer["Typecommunity"]</th>
-                <th scope="col">@Localizer["CourseName"]</th>
-                <th scope="col">@Localizer["CountSubscrition"]</th>
-                <th scope="col">@Localizer["IsAdminOnly"]</th>
-                <th scope="col">@Localizer["Date"]</th>
-                <th scope="col">@Localizer["Action"]</th>
-                <th scope="col">@Localizer["Closecommunity"]</th>
-                <th scope="col">@Localizer["DeleteCommunityA"]</th>
+                <th scope="col" class="text-center">@Localizer["communityName"]</th>
+                <th scope="col" class="text-center">@Localizer["Typecommunity"]</th>
+                <th scope="col" class="text-center">@Localizer["CourseName"]</th>
+                <th scope="col" class="text-center">@Localizer["CountSubscrition"]</th>
+                <th scope="col" class="text-center">@Localizer["IsAdminOnly"]</th>
+                <th scope="col" class="text-center">@Localizer["Date"]</th>
+                <th scope="col" class="text-center">@Localizer["Action"]</th>
+                <th scope="col" class="text-center">@Localizer["Closecommunity"]</th>
+                <th scope="col" class="text-center">@Localizer["DeleteCommunityA"]</th>
                 
             </tr>
         </thead>
@@ -89,7 +89,7 @@ else
 
             @foreach (var comm in Model)
             {
-                <tr>
+                <tr class="text-center">
                     <td>@comm.Title</td>
                     @if ((bool)comm.IsDefault)
                     {
@@ -101,11 +101,13 @@ else
                         <td>@Localizer["PrivateCommunity"]</td>
                         <td>@comm.CourseTitle</td>
                     }
-                    <td>@comm.CountSubucribtor</td>
+                    <td>
+                        <button class="btn btn-gray text-black" onclick="ShowAllUsersInCommunity(@comm.CommunityId,@comm.CountSubucribtor,'@comm.Title')">@comm.CountSubucribtor</button>
+                    </td>
                     <td>@((bool)comm.IsAdminOnly ? Localizer["ForAdmin"] : Localizer["ForAllUser"])</td>
                     <td>@(comm.CreatedAt?.ToString("d"))</td>
                     <td>
-                        <button class="btn btn-info" onclick="UpdateCommunity(@comm.CommunityId,'@comm.Title')">@Localizer["Action"]</button>
+                        <button class="btn btn-info" onclick="UpdateCommunity(@comm.CommunityId,'@comm.Title', @(comm.IsAdminOnly.ToString().ToLower()))">@Localizer["Action"]</button>
 
                     </td>
 
@@ -206,7 +208,8 @@ else
 
     }
 
-    function UpdateCommunity(id,title){
+    function UpdateCommunity(id,title,isAdmin){
+        let check=isAdmin?'checked':'';
         let html=`<div class="card shadow-lg rounded-3">
         <div class="card-header  text-white text-center">
             <h4>@Localizer["Update"]</h4>
@@ -217,6 +220,10 @@ else
                 <input asp-for="Title" id="inputTitle" class="form-control" placeholder="@Localizer["EnterTitle"]"  value="${title}" oninput="GeneralRequiredFiled('inputTitle', '@Localizer["Required"]', 'Title')" />
                 <span asp-validation-for="Title" id="Title" class="text-danger"></span>
             </div>
+             <div class="form-check mb-3">
+                    <label class="form-check-label">@Localizer["OnlyAdmin"]</label>
+                    <input asp-for="IsAdminOnly" class="form-check-input" id='IsAdminOnly' type="checkbox" ${check} />
+                </div>
            <button type="button" class="btn btn-success px-4" onclick="SubmitUpdateCommunity(${id})">@Localizer["SaveUpdate"]</button>
         </div>
     </div>
@@ -238,7 +245,8 @@ else
                 type:"Post",
                 data:{
                     CommunityId:id,
-                    Title:$("#inputTitle").val()
+                    Title:$("#inputTitle").val(),
+                    IsAdminOnly:$("#IsAdminOnly").prop("checked")
                 },
                 success:function(res){
                   $('#SmallModal').modal('hide');

@@ -39,16 +39,16 @@ namespace TrandingSystem.Application.Features.Video.Handlers
                     return Response<bool>.ErrorResponse(_localizer["AddImageFail"]);
                 }
                 // Upload Video to Bunnay Server
-                string videoUrl = await _imageService.SaveVideoAsync(request.VideoAddedDto.VideoUrl);
-                if (string.IsNullOrEmpty(videoUrl))
-                {
-                    return Response<bool>.ErrorResponse(_localizer["AddVideofaild"]);
+                //string videoUrl = await _imageService.SaveVideoAsync(request.VideoAddedDto.VideoUrl);
+                //if (string.IsNullOrEmpty(videoUrl))
+                //{
+                //    return Response<bool>.ErrorResponse(_localizer["AddVideofaild"]);
 
-                }
-               
-                var newVideo= new TrandingSystem.Domain.Entities.Video
+                //}
+
+                var newVideo = new TrandingSystem.Domain.Entities.Video
                 {
-                    TitleAR=request.VideoAddedDto.TitleAR,
+                    TitleAR =request.VideoAddedDto.TitleAR,
                     TitleEN = request.VideoAddedDto.TitleEN,
                     DescriptionAR = request.VideoAddedDto.DescriptionAR,
                     DescriptionEN = request.VideoAddedDto.DescriptionEN,
@@ -57,7 +57,7 @@ namespace TrandingSystem.Application.Features.Video.Handlers
                     IsActive = request.VideoAddedDto.IsActive,
                     IsPaid = request.VideoAddedDto.IsPaid,
                     ImageVideoUrl = imageUrl,
-                    VideoUrl = videoUrl,
+                    VideoUrl = request.VideoAddedDto.VideoUrl,
                     CreadteBy =request.UserId,
                     CreatedAt=DateTime.Now,
                 };

@@ -27,7 +27,7 @@
 
                     @* Title *@
                     <div class="row mb-3">
-                        <label class="col-sm-4 col-form-label"   >@Localizer["TitleAR"]</label>
+                        <label class="col-sm-4 col-form-label">@Localizer["TitleEN"]</label>
                         <div class="col-sm-8">
 
                             <input asp-for="TitleAR" id="InputTitleAR" class="form-control" oninput="GeneralRequiredFiled('InputTitleAR', '@Localizer["Required"]', 'TitleAR')" />
@@ -44,10 +44,10 @@
 
 
                     <div class="row mb-3">
-                        <label class="col-sm-4 col-form-label" for="basic-icon-default-fullname">@Localizer["TitleEN"]</label>
+                        <label class="col-sm-4 col-form-label" for="basic-icon-default-fullname">@Localizer["TitleAR"]</label>
                         <div class="col-sm-8">
                             <input asp-for="TitleEN" id="InputTitleEN" class="form-control" oninput="GeneralRequiredFiled('InputTitleEN', '@Localizer["Required"]', 'TitleEN')" />
-                                <span      name="TitleEN" id="TitleEN" class="text-danger"></span>
+                                <span  name="TitleEN" id="TitleEN" class="text-danger"></span>
                          </div>
                     </div>
                     @* end *@
@@ -107,8 +107,8 @@
                     <div class="row mb-3">
                         <label class="col-sm-4 col-form-label" for="basic-icon-default-company">@Localizer["VideoUrl"]</label>
                         <div class="col-sm-8">
-                            <input asp-for="VideoUrl" type="file" id="inputVideoUrl" class="form-control" onchange="validateVideoFile('inputVideoUrl', 'VideoUrl','@Localizer["AllowVideoExtensiion"]')" />
-                                <span      id="VideoUrl" class="text-danger"></span>
+                            <input asp-for="VideoUrl" type="text" id="inputVideoUrl" class="form-control" oninput="GeneralRequiredFiled('inputVideoUrl', '@Localizer["Required"]', 'VideoUrl')" />
+                                <span id="VideoUrl" class="text-danger"></span>
                          </div>
                     </div>
                     @* end *@
@@ -121,7 +121,6 @@
                                 <label class="col-sm-6 col-form-label " for="basic-icon-default-company">@Localizer["IsActive"]</label>
                                 <div class="col-sm-6">
                                     <div class="input-group input-group-merge mt-1">
-
                                         <input asp-for="IsActive" class="form-check-input" type="checkbox" />
                                     </div>
                                 </div>

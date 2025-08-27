@@ -54,7 +54,7 @@ namespace TrandingSystem.Infrastructure.Repositories
 
         public List<User> GetActiveAndConfirmUser()
         {
-            return _context.Users.Where(x => x.EmailConfirmed == true ).ToList();
+            return _context.Users.Where(x => x.EmailConfirmed == true).ToList();
         }
     }
 }

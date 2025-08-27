@@ -25,7 +25,7 @@ namespace TrandingSystem.Application.Dtos
         public bool IsActive { get; set; }
         public IFormFile ImageVideoUrl { get; set; }
 
-        public IFormFile VideoUrl { get; set; }
+        public string VideoUrl { get; set; }
         public bool notfiy { set; get; }
     }
 }

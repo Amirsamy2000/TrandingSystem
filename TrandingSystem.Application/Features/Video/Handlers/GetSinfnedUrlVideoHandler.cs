@@ -38,7 +38,7 @@ namespace TrandingSystem.Application.Features.Video.Handlers
                        
                     );
                 }
-                var url = _fileService.GenerateBunnyToken(BunnaySetting.libraryId, video.VideoUrl, BunnaySetting.signingKey);
+                var url =await _fileService.GetVideoUrlAsync(video.VideoUrl);
                 return Response<string>.SuccessResponse(url);
             }
             catch(Exception e)

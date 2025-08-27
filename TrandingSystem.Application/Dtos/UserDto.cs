@@ -16,6 +16,8 @@ namespace TrandingSystem.Application.Dtos
         public bool IsBlocked { get; set; }
         public int RoleId { get; set; } // Changed from byte to int
         public string Address { get; set; }
+        public string? Email { get; set; }
+        public string? NationalId { get; set; }
 
 
     }
