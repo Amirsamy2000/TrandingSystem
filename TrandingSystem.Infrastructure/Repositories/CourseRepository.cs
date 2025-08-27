@@ -73,7 +73,7 @@ namespace TrandingSystem.Infrastructure.Repositories
         {
             
 
-            var courseEnrol = new CourseEnrollment
+            var courseEnrol = new Video_CourseEnrollment
             {
                 CourseId = courseId,
                 UserId = userId,

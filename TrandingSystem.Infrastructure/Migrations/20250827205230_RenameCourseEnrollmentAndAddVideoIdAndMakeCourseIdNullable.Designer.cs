@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TrandingSystem.Infrastructure.Data;
 
@@ -11,9 +12,11 @@ using TrandingSystem.Infrastructure.Data;
 namespace TrandingSystem.Infrastructure.Migrations
 {
     [DbContext(typeof(db23617Context))]
-    partial class db23617ContextModelSnapshot : ModelSnapshot
+    [Migration("20250827205230_RenameCourseEnrollmentAndAddVideoIdAndMakeCourseIdNullable")]
+    partial class RenameCourseEnrollmentAndAddVideoIdAndMakeCourseIdNullable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -977,13 +980,11 @@ namespace TrandingSystem.Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.HasIndex("VideoId");
-
                     b.HasIndex("CourseId", "UserId", "VideoId", "OrderStatus")
                         .IsUnique()
                         .HasFilter("[CourseId] IS NOT NULL AND [VideoId] IS NOT NULL AND [OrderStatus] IS NOT NULL");
 
-                    b.ToTable("VideoCourseEnrollments", (string)null);
+                    b.ToTable("CourseEnrollments");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
@@ -1267,15 +1268,9 @@ namespace TrandingSystem.Infrastructure.Migrations
                         .IsRequired()
                         .HasConstraintName("FK__CourseEnr__UserI__662B2B3B");
 
-                    b.HasOne("TrandingSystem.Domain.Entities.Video", "Video")
-                        .WithMany("CourseEnrollments")
-                        .HasForeignKey("VideoId");
-
                     b.Navigation("Course");
 
                     b.Navigation("User");
-
-                    b.Navigation("Video");
                 });
 
             modelBuilder.Entity("TrandingSystem.Domain.Entities.Category", b =>
@@ -1335,11 +1330,6 @@ namespace TrandingSystem.Infrastructure.Migrations
                     b.Navigation("UsersConnections");
 
                     b.Navigation("Videos");
-                });
-
-            modelBuilder.Entity("TrandingSystem.Domain.Entities.Video", b =>
-                {
-                    b.Navigation("CourseEnrollments");
                 });
 #pragma warning restore 612, 618
         }
