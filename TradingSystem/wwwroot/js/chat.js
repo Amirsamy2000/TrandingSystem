@@ -20,30 +20,35 @@ async function start() {
     }
 }
 
-async function sendMessage(text) {
-    if (!text.trim()) return;
+async function sendMessage(text, IsAdmin = false) {
 
-    // Create a tempId to track this message
-    const tempId = "temp-" + Date.now();
+    if (!IsAdmin) {
 
-    // Render locally with tempId
-    //renderMessage({
-    //    id: tempId,
-    //    userId: currentUserId,
-    //    senderName: "You",
-    //    text: text,
-    //    sentAt: new Date().toISOString()
-    //});
 
-    try {
-        await connection.invoke("SendMessage", communityId, text);
-        document.getElementById('chat-input').value = '';
-    } catch (err) {
-        let errorMsg = "An error occurred while sending the message.";
-        if (err?.message?.includes("Not a member")) {
-            errorMsg = "You are not a member of this community and cannot send messages.";
+        if (!text.trim()) return;
+
+        // Create a tempId to track this message
+        const tempId = "temp-" + Date.now();
+
+        // Render locally with tempId
+        //renderMessage({
+        //    id: tempId,
+        //    userId: currentUserId,
+        //    senderName: "You",
+        //    text: text,
+        //    sentAt: new Date().toISOString()
+        //});
+
+        try {
+            await connection.invoke("SendMessage", communityId, text);
+            document.getElementById('chat-input').value = '';
+        } catch (err) {
+            let errorMsg = "An error occurred while sending the message.";
+            if (err?.message?.includes("Not a member")) {
+                errorMsg = "You are not a member of this community and cannot send messages.";
+            }
+            alert(errorMsg);
         }
-        alert(errorMsg);
     }
 }
 

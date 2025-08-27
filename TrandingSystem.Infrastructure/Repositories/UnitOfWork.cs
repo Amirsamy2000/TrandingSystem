@@ -19,6 +19,9 @@ namespace TrandingSystem.Infrastructure.Repositories
         private ICourseRepository _courses;
         public ICourseRepository Courses => _courses ??= new CourseRepository(_context);
 
+        private IRoleRepository _Roles;
+        public IRoleRepository Roles => _Roles ??= new RoleRepository(_context);
+
         private IUserRepository _Users;
         public IUserRepository Users => _Users ??= new UserRepository(_context);
 

@@ -8,8 +8,8 @@ using TrandingSystem.Domain.Entities;
 
 namespace TrandingSystem.Domain.Interfaces
 {
-    public interface IOrdersEnorllment:IDomainInterface<Video_CourseEnrollment>
+    public interface IRoleRepository : IDomainInterface<Role>
     {
-
+        public List<Role> getUserRole(int UserId);
     }
 }

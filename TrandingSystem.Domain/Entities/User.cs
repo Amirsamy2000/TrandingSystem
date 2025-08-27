@@ -27,7 +27,7 @@ public partial class User : IdentityUser<int>
 
     public virtual ICollection<ContactInfo> ContactInfos { get; set; } = new List<ContactInfo>();
 
-    public virtual ICollection<CourseEnrollment> CourseEnrollments { get; set; } = new List<CourseEnrollment>();
+    public virtual ICollection<Video_CourseEnrollment> CourseEnrollments { get; set; } = new List<Video_CourseEnrollment>();
 
     public virtual ICollection<CourseRating> CourseRatings { get; set; } = new List<CourseRating>();
 

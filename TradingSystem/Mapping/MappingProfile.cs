@@ -25,11 +25,14 @@ namespace TrandingSystem.Mapping
             .ForMember(dest => dest.Category, opt => opt.Ignore()); // prevent reverse confusion
 
 
-            CreateMap<CourseEnrollment, CourseEnrollmentDto>()
+            CreateMap<Video_CourseEnrollment, CourseEnrollmentDto>()
             .ReverseMap();
 
 
             CreateMap<User, UserDto>()
+           .ReverseMap();
+            
+            CreateMap<Role, RoleDto>()
            .ReverseMap();
 
 
