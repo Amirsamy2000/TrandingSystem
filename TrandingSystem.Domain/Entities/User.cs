@@ -18,7 +18,7 @@ public partial class User : IdentityUser<int>
     [MaxLength(14)]
     public string NationalId { get; set; }
     public bool IsBlocked { get; set; }
-    public int RoleId { get; set; } // Changed from byte to int
+
     public string Address { get; set; }
 
     public virtual ICollection<Category> Categories { get; set; } = new List<Category>();
@@ -40,8 +40,6 @@ public partial class User : IdentityUser<int>
     public virtual ICollection<Message> Messages { get; set; } = new List<Message>();
 
     public virtual ICollection<NotificationsQueue> NotificationsQueues { get; set; } = new List<NotificationsQueue>();
-
-    public virtual Role Role { get; set; }
 
     public virtual ICollection<UserSession> UserSessions { get; set; } = new List<UserSession>();
 

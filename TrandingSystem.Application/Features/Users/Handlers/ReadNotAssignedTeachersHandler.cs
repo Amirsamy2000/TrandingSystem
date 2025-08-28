@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,19 +19,21 @@ namespace TrandingSystem.Application.Features.Users.Handlers
     {
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly UserManager<User> _userManager;
 
 
-        public ReadNotAssignedTeachersHandler(IUnitOfWork unitOfWork, IUserRepository userRepository, IMapper mapper)
+        public ReadNotAssignedTeachersHandler(IUnitOfWork unitOfWork, IUserRepository userRepository, IMapper mapper, UserManager<User> userManager)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
+            _userManager = userManager;
         }
 
         public Task<Response<List<UserDto>>> Handle(ReadNotAssignedTeachersQuery request, CancellationToken cancellationToken)
         {
             try
             {
-                var users = _unitOfWork.Users.ReadAllTeacher();
+                var users = _userManager.GetUsersInRoleAsync("Lecturer").Result;
 
                 List<UserDto> lectureresDto = new List<UserDto>(); ;
                 if (request.CourseId > 0)
