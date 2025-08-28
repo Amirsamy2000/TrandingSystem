@@ -2,24 +2,29 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_LayoutDasbord.cshtml";
 }
-@{
-    ViewData["Title"] = "رفع فيديو";
-}
+<div id="vdoPlayer" style="width:100%; max-width:720px; height:400px;"></div>
 
-<h2>رفع فيديو إلى VdoCipher</h2>
+<script src="https://player.vdocipher.com/playerAssets/1.6.10/vdo.js"></script>
+<script>
+    async function loadVideo(videoId) {
+        try {
+            // نطلب OTP من السيرفر
+            const res = await fetch(`/Test/GetOtp?videoId=${videoId}`);
+            const data = await res.json();
 
-<form asp-action="Upload" asp-controller="test" enctype="multipart/form-data" method="post">
-    <input type="file" name="video" />
-    <button type="submit">رفع</button>
-</form>
-<br />
-<br />
-@* @{ *@
-@*     var otpJson = (string)ViewBag.OtpResponse; *@
-@*     var otpObj = System.Text.Json.JsonDocument.Parse(otpJson).RootElement; *@
-@*     var otp = otpObj.GetProperty("otp").GetString(); *@
-@*     var playbackInfo = otpObj.GetProperty("playbackInfo").GetString(); *@
-@* } *@
+            // نشغل vdo.js player
+            new VdoPlayer({
+                otp: data.otp,
+                playbackInfo: data.playbackInfo,
+                container: document.querySelector("#vdoPlayer"),
+            });
+        } catch (err) {
+            console.error("Error loading video:", err);
+        }
+    }
+
+    // 👇 جرب تعرض فيديو (حط VideoId الصحيح بتاعك من VdoCipher)
+    loadVideo("YOUR_VIDEO_ID");
+</script>
 
 
-<iframe src="@ViewBag.IframeUrl" style="border:0;height:360px;width:640px;max-width:100%" allowFullScreen="true" allow="encrypted-media"></iframe>

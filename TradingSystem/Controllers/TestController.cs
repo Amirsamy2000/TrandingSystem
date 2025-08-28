@@ -61,6 +61,22 @@ namespace TrandingSystem.Controllers
            
         }
 
+        [HttpGet]
+        public async Task<IActionResult> GetOtp(string videoId)
+        {
+            string videoIdc = "9a327e1d3b924bcc9d0f86378566ce37";
+            var apiKey = "F9lLNuRtnsl8Oju9LHuybHxPge4b76zhuYp5yK0DJpvfwaYoaYqmO0A8eF1dr6DE";
+            using var httpClient = new HttpClient();
+            httpClient.DefaultRequestHeaders.Authorization =
+                new AuthenticationHeaderValue("Apisecret", apiKey); // 🔑 حط الـ API Secret هنا
+
+            var response = await httpClient.PostAsync(
+                $"https://dev.vdocipher.com/api/videos/{videoIdc}/otp", null);
+
+            response.EnsureSuccessStatusCode();
+            var json = await response.Content.ReadAsStringAsync();
+            return Content(json, "application/json");
+        }
         public async Task<IActionResult> Index()
         {
             string videoId = "9a327e1d3b924bcc9d0f86378566ce37";

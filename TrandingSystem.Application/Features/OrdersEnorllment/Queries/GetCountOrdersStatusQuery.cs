@@ -11,6 +11,12 @@ using TrandingSystem.Application.Dtos;
 namespace TrandingSystem.Application.Features.OrdersEnorllment.Queries
 {
     public class GetCountOrdersStatusQuery:IRequest<Response<CountOrdersEnorllmentStatus>>
-    { 
+    {
+        public int Type { get; set; } = 0; // 0 for course , 1 for video
+      public  GetCountOrdersStatusQuery(int type) {
+            Type = type;
+        }
+
+
     }
 }

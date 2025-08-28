@@ -33,6 +33,8 @@ namespace TrandingSystem.Application.Dtos
       public string CourseName { get; set; }
       public  decimal CostCourse { get; set; }
       public bool? IsPaid {  get; set; }
+        public string? VideoName { set; get; }
+        public decimal VideoCost { set; get; } = 0;
 
 
 
