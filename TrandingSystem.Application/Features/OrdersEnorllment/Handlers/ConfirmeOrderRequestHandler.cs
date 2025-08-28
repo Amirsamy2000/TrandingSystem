@@ -39,7 +39,7 @@ namespace TrandingSystem.Application.Features.OrdersEnorllment.Handlers
                 {
                    
                     order.EnrollmentDate = request.CreatedAt;
-                    var communities = _unitOfWork.Courses.ReadById(order.CourseId).Communities;
+                    var communities = _unitOfWork.Courses.ReadById(order.CourseId??0).Communities;
                     if (communities is not null)
                     {
                         foreach (var comm in communities)
