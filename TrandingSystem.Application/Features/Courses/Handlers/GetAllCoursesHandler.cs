@@ -36,7 +36,7 @@ internal class GetAllCoursesHandler : IRequestHandler<GetAllCoursesQuery, Respon
 
             List<Course> courses;
 
-            var test = await _userManager.IsInRoleAsync(user, "Admin");
+            //var UserRoles = await _userManager.IsInRoleAsync(user,"Admin");
 
             if (request.UserId == 0 || await _userManager.IsInRoleAsync(user, "Admin"))
             {
