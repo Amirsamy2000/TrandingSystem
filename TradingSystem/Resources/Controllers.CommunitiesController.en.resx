@@ -324,4 +324,10 @@
   <data name="NoCommunitiesAvailable" xml:space="preserve">
     <value>No communities are available yet.</value>
   </data>
+  <data name="YouAreBlockedContactSupport" xml:space="preserve">
+    <value>You Are Blocked Contact Support team</value>
+  </data>
+  <data name="CommunityClosedByAdmin" xml:space="preserve">
+    <value>Community Closed By Admin</value>
+  </data>
 </root>

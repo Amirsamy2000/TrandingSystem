@@ -109,6 +109,29 @@
             font-family: 'Poppins', sans-serif;
         }
 
+        .scroll-buttons {
+            z-index: 9999; /* تأكد من أن الأزرار فوق كل شيء آخر */
+            position: fixed;
+            bottom: 20px;
+            right: 72px;
+            gap: 10px; /* مسافة بين الزرين */
+        }
+
+            .scroll-buttons a {
+                width: 45px;
+                height: 45px;
+                border-radius: 50%;
+                 font-size: 22px;
+                text-decoration: none;
+            }
+
+        #chatWhats-btn {
+                color:white;
+            background-color: #25D366;
+            }
+      
+
+
     </style>
 </head>
 
@@ -252,7 +275,21 @@
     </footer>
 
     <!-- Scroll Top -->
-    <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+    @* <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a> *@
+    <div class="scroll-buttons d-flex flex-column align-items-center">
+
+        <!-- WhatsApp button -->
+        <a href="https://wa.me/201040140415" id="chatWhats-btn"
+           class="chat-btn d-flex align-items-center justify-content-center">
+            <i class="bi bi-whatsapp"></i>
+        </a>
+        <!-- Scroll to top -->
+        <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center mb-2">
+            <i class="bi bi-arrow-up-short"></i>
+        </a>
+     
+    </div>
+
 
     <!-- Preloader -->
     <div id="preloader"></div>

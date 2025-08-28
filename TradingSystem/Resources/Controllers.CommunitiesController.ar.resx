@@ -324,4 +324,10 @@
   <data name="NoCommunitiesAvailable" xml:space="preserve">
     <value>No communities are available yet.</value>
   </data>
+  <data name="YouAreBlockedContactSupport" xml:space="preserve">
+    <value>لقد تم حظرك اتصل بفريق الدعم</value>
+  </data>
+  <data name="CommunityClosedByAdmin" xml:space="preserve">
+    <value>تم إغلاق المجتمع بواسطة الادمن</value>
+  </data>
 </root>

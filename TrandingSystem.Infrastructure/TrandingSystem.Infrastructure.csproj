@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <PackageReference Include="AWSSDK.S3" Version="4.0.6.2" />
+    <PackageReference Include="MailKit" Version="4.13.0" />
     <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="5.0.17" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="9.0.7" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.7" />
@@ -27,6 +28,7 @@
     </PackageReference>
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="9.0.7" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="9.0.7" />
+    <PackageReference Include="MimeKit" Version="4.13.0" />
     <PackageReference Include="RestSharp" Version="112.1.0" />
   </ItemGroup>
 
