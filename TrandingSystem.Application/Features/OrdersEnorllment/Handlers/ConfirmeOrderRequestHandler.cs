@@ -13,11 +13,14 @@ namespace TrandingSystem.Application.Features.OrdersEnorllment.Handlers
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IStringLocalizer<ValidationMessages> _localizer;
+        private readonly IFileService _fileService;
 
-        public ConfirmeOrderRequestHandler(IUnitOfWork unitOfWork, IStringLocalizer<ValidationMessages> localizer)
+
+        public ConfirmeOrderRequestHandler(IUnitOfWork unitOfWork, IStringLocalizer<ValidationMessages> localizer, IFileService fileService)
         {
             _unitOfWork = unitOfWork;
             _localizer = localizer;
+            _fileService = fileService;
         }
 
         public async Task<Response<bool>> Handle(ConfirmedOrderRequestCommand request, CancellationToken cancellationToken)
@@ -39,8 +42,8 @@ namespace TrandingSystem.Application.Features.OrdersEnorllment.Handlers
                 {
                    
                     order.EnrollmentDate = request.CreatedAt;
-                    var communities = _unitOfWork.Courses.ReadById(order.CourseId).Communities;
-                    if (communities is not null)
+                    var communities = _unitOfWork.Courses.ReadById((int)order.OrderStatus).Communities;
+                    if (communities is not null && request.Type==0 )
                     {
                         foreach (var comm in communities)
                         {
@@ -56,6 +59,10 @@ namespace TrandingSystem.Application.Features.OrdersEnorllment.Handlers
                         }
 
                     }
+                }
+                else
+                {
+                    await _fileService.DeleteImageAsync(order.ReceiptImagePath);
                 }
                 _unitOfWork.ordersEnorllment.Update(order);
 

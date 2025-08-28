@@ -165,9 +165,6 @@
   <data name="btnShowAllSession" xml:space="preserve">
     <value>Show Sessions</value>
   </data>
-  <data name="AllOrder" xml:space="preserve">
-    <value>Enrollment Requests</value>
-  </data>
   <data name="Orders" xml:space="preserve">
     <value>Orders</value>
   </data>
@@ -179,5 +176,11 @@
   </data>
   <data name="AddNewasession" xml:space="preserve">
     <value>Add Live</value>
+  </data>
+  <data name="Ordercours" xml:space="preserve">
+    <value>Courses Requests</value>
+  </data>
+  <data name="Ordervideo" xml:space="preserve">
+    <value>Videos Requests</value>
   </data>
 </root>

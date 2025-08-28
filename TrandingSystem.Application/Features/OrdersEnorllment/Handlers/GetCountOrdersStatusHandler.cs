@@ -28,12 +28,28 @@ namespace TrandingSystem.Application.Features.OrdersEnorllment.Handlers
             try
             {
                 var AllOrders = _unitOfWork.ordersEnorllment.Read();
-                
+
+                var countOrdersPending = 0;
+                var countOrdersAccepted = 0;
+                var countOrdersCanceled = 0;
+                if (request.Type == 1)
+                {
+                    countOrdersPending = AllOrders.Count(x => x.OrderStatus == 2 && x.VideoId  != null);
+                    countOrdersAccepted = AllOrders.Count(x => x.OrderStatus == 1 && x.VideoId != null);
+                    countOrdersCanceled = AllOrders.Count(x => x.OrderStatus == 0 && x.VideoId != null);
+                }   
+                else
+                {
+                    countOrdersPending = AllOrders.Count(x => x.OrderStatus == 2 && x.VideoId == null);
+                    countOrdersAccepted = AllOrders.Count(x => x.OrderStatus == 1 && x.VideoId== null);
+                    countOrdersCanceled = AllOrders.Count(x => x.OrderStatus == 0 && x.VideoId == null);
+                }
+                  
                 CountOrdersEnorllmentStatus CountOrders = new CountOrdersEnorllmentStatus()
                 {
-                    CountOrdersPending = AllOrders.Count(x => x.OrderStatus == 2),
-                    CountOrdersAccepted = AllOrders.Count(x => x.OrderStatus == 1),
-                    CountOrdersCanceled = AllOrders.Count(x => x.OrderStatus == 0),
+                    CountOrdersPending =  countOrdersPending ,
+                    CountOrdersAccepted = countOrdersAccepted,
+                    CountOrdersCanceled = countOrdersCanceled,
                 };
 
                 return Response<CountOrdersEnorllmentStatus>.SuccessResponse(CountOrders, "");

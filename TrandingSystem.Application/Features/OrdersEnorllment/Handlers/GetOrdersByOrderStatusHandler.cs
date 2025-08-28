@@ -23,13 +23,23 @@ namespace TrandingSystem.Application.Features.OrdersEnorllment.Handlers
         {
             try
             {
-                var Orders = _unitOfWork.ordersEnorllment.Read().Where(x=>x.OrderStatus==request.OrderStatus).ToList();
+                var Orders = _unitOfWork.ordersEnorllment.Read();
+               
+                if (request.Type==1){
+                    Orders= Orders.Where(x => x.OrderStatus == request.OrderStatus & x.CourseId!= null & x.VideoId!=null).ToList();
+                }
+                else
+                {
+                    Orders = Orders.Where(x => x.OrderStatus == request.OrderStatus & x.VideoId == null).ToList();
+                }
+               
+                
                 if (Orders.Count()<0) return Response< IEnumerable <OrdersDto>>.ErrorResponse( _localizer["NoDataFound"], (IEnumerable<OrdersDto>) Orders );
 
                 IEnumerable<OrdersDto> ordersDtos = Orders.Select(order => new OrdersDto
                 {
                     EnrollmentId = order.EnrollmentId,
-                    EnrollmentDate = order.EnrollmentDate,
+                    EnrollmentDate = order?.EnrollmentDate,
                     IsConfirmed = order.IsConfirmed,
                     ReceiptImagePath = order.ReceiptImagePath,
                     OrderStatus = order.OrderStatus,
@@ -41,7 +51,12 @@ namespace TrandingSystem.Application.Features.OrdersEnorllment.Handlers
                     CourseName = order.Course.TitleEN,
                     CostCourse = order.Course.Cost,
                     IsPaid = order.Course.IsFullyFree,
-                    CashPhoneNum=order.CashPhoneNum
+                    CashPhoneNum=order.CashPhoneNum,
+                    VideoName=order.Video?.TitleEN??"Un",
+                    VideoCost=order.Video?.Cost??0
+
+                    
+
                 });
 
 

@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,12 +29,6 @@ namespace TrandingSystem.Infrastructure.Repositories
             throw new NotImplementedException();
         }
 
-        public List<User> ReadAllTeacher()
-        {
-            return _context.Users
-                .Where(u => u.RoleId == 3)
-                .ToList();
-        }
 
         public List<User> Read()
         {
@@ -43,7 +38,6 @@ namespace TrandingSystem.Infrastructure.Repositories
         public User ReadById(int Id)
         {
             return _context.Users
-            .Include(u => u.Role)
             .FirstOrDefault(u => u.Id == Id);
         }
 

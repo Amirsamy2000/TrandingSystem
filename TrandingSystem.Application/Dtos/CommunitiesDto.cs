@@ -28,6 +28,7 @@ namespace TrandingSystem.Application.Dtos
         public string? LastMessage { set; get; }
         public string? Sender { set; get; }
         public DateTime? LastMessageTime { set; get; }
+        public bool UserIsBlock { get; set; }
 
     }
 }

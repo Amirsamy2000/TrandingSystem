@@ -12,9 +12,12 @@ namespace TrandingSystem.Application.Features.OrdersEnorllment.Queries
     public class GetOrdersByOrderStatusQuery:IRequest<Response<IEnumerable<OrdersDto>>>
     {
         public int OrderStatus { get; set; } // 0: Canceled, 1: Accepted, 2: Pending
-        public GetOrdersByOrderStatusQuery(int orderStatus)
+
+        public int Type { set; get; } // 0 For Courses and is defualt, 1 for order video
+        public GetOrdersByOrderStatusQuery(int orderStatus, int type)
         {
             OrderStatus = orderStatus;
+            Type = type;
         }
     }
 }

@@ -133,16 +133,19 @@ namespace TrandingSystem.Areas.Identity.Pages.Account
         {
             returnUrl ??= Url.Content("~/");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+
             if (ModelState.IsValid)
             {
                 var user = CreateUser();
-                user.FullName = Input.FullName; // Set required property
-                user.Mobile = Input.Mobile; // Set required property
-                user.NationalId = Input.NationalId; // ✅ Add this line
+                user.FullName = Input.FullName;
+                user.Mobile = Input.Mobile;
+                user.NationalId = Input.NationalId;
 
-                // Assign default role by name (e.g., "User")
-                var dbContext = HttpContext.RequestServices.GetService(typeof(TrandingSystem.Infrastructure.Data.db23617Context)) as TrandingSystem.Infrastructure.Data.db23617Context;
-                // ✅ Check if NationalId already exists
+                var dbContext = HttpContext.RequestServices
+                    .GetService(typeof(TrandingSystem.Infrastructure.Data.db23617Context))
+                    as TrandingSystem.Infrastructure.Data.db23617Context;
+
+                // ✅ Check duplicate NationalId
                 var existingUser = await dbContext.Users.FirstOrDefaultAsync(u => u.NationalId == Input.NationalId);
                 if (existingUser != null)
                 {
@@ -150,24 +153,21 @@ namespace TrandingSystem.Areas.Identity.Pages.Account
                     return Page();
                 }
 
-                var defaultRole = await dbContext.Roles.FirstOrDefaultAsync(r => r.Name == "User");
-                if (defaultRole != null)
-                {
-                    user.RoleId = defaultRole.Id;
-                }
-                else
-                {
-                    ModelState.AddModelError(string.Empty, "Default role 'User' does not exist. Please contact administrator.");
-                    return Page();
-                }
-
+                // ✅ Create user
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
+
                 var result = await _userManager.CreateAsync(user, Input.Password);
 
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
+
+                    // Assign default role
+                    if (!await _userManager.IsInRoleAsync(user, "User"))
+                    {
+                        await _userManager.AddToRoleAsync(user, "User");
+                    }
 
                     var userId = await _userManager.GetUserIdAsync(user);
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
@@ -191,6 +191,7 @@ namespace TrandingSystem.Areas.Identity.Pages.Account
                         return LocalRedirect(returnUrl);
                     }
                 }
+
                 foreach (var error in result.Errors)
                 {
                     ModelState.AddModelError(string.Empty, error.Description);

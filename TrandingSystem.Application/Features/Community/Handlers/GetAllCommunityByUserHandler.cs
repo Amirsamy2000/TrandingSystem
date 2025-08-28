@@ -51,7 +51,9 @@ public class GetAllCommunityByUserHandler
                     CreatedAt = x.CreatedAt,
                     Sender = lastMessage?.User?.FullName,
                     LastMessage = lastMessage?.MessageText,
-                    LastMessageTime = lastMessage?.SentAt
+                    LastMessageTime = lastMessage?.SentAt,
+                    UserIsBlock = x.CommunityMembers.Where(x => x.UserId == request.UserId).FirstOrDefault().IsBlocked??false,
+
                 };
             }).ToList();
 

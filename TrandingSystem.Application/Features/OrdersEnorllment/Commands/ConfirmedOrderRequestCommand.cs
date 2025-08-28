@@ -15,14 +15,16 @@ namespace TrandingSystem.Application.Features.OrdersEnorllment.Commands
         public int Status { get; set; }
         public DateTime CreatedAt { get; set; }
         public int  ConfirmedBy{set;get;}
+        public int Type { set; get; } = 0;
 
 
-        public ConfirmedOrderRequestCommand(int orderid, DateTime createdAt, int confirmedBy, int status)
+        public ConfirmedOrderRequestCommand(int orderid, DateTime createdAt, int confirmedBy, int status, int type)
         {
             OrderId = orderid;
             CreatedAt = createdAt;
             ConfirmedBy = confirmedBy;
             Status = status;
+            Type = type;
         }
 
     }

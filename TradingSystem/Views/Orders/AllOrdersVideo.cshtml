@@ -3,12 +3,13 @@
 @using TrandingSystem.Controllers
 @inject IStringLocalizer<OrdersController> Localizer
 @model CountOrdersEnorllmentStatus
+
 @{
-    ViewData["Title"] = "AllOrders";
+    ViewData["Title"] = "AllOrdersVideo";
     Layout = "~/Views/Shared/_LayoutDasbord.cshtml";
 }
 
-<h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">@Localizer["Orders"] /</span> @Localizer["OrdersRequest"] </h4>
+<h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">@Localizer["Orders"] /</span> @Localizer["OrdersRequestVideo"] </h4>
 
 <div class="row">
     <!-- Yellow -->
@@ -47,13 +48,13 @@
             <h5 class="mb-2">@Localizer["Total"]</h5>
             <i class="bx bx-list-ul text-secondary fs-2"></i>
             <h3>@Model.CountOrdersTotal </h3>
-             <button class="btn btn-outline-secondary">View</button> 
+            <button class="btn btn-outline-secondary">View</button>
         </div>
     </div>
 
     @* //// *@
     <div class="col-md mb-4 mb-md-0">
-        
+
         <div class="accordion mt-3 " id="accordionExample">
             @* Pendding *@
             <div class="card accordion-item d-none" id="pendingOrders">
@@ -71,7 +72,7 @@
                 </div>
             </div>
             @* end *@
-           
+
             @* accpted *@
             <div class="card accordion-item d-none" id="acceptedOrders">
                 <h2 class="accordion-header" id="headingTwo">
@@ -81,11 +82,10 @@
                 </h2>
                 <div id="accordionTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample" style="">
                     <div class="accordion-body table-responsive" id="acceptedOrdersbody">
-                      
                     </div>
                 </div>
             </div>
-               @* end *@
+            @* end *@
 
             @* cancel *@
             <div class="card accordion-item d-none" id="cancelOrders">
@@ -96,17 +96,16 @@
                 </h2>
                 <div id="accordionThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample" style="">
                     <div class="accordion-body table-responsive" id="cancelOrdersbody">
-                       
                     </div>
                 </div>
             </div>
-              @* end  *@
+            @* end  *@
         </div>
     </div>
 </div>
 
-@section Scripts{
-                    @* SweatAlterDanger(@Localizer["loading"]) *@
+@section Scripts {
+    @* SweatAlterDanger(@Localizer["loading"]) *@
 
     <script>
 
@@ -124,11 +123,11 @@
             //     responsive: true,
             //     dom: 'Bfrtip', لعرض أزرار التصدير
             //     buttons: [
-            //         'copy', 'excel', 'pdf', 
+            //         'copy', 'excel', 'pdf',
             //     ]
             // });
-             
-       
+
+
         function ShowOrdersByOrderStatus(status, idDiv) {
 
                 // إظهار الكارد المخفي
@@ -139,11 +138,11 @@
         };
         SweatAlterProcessing(setting);
             $.ajax({
-                url: '@Url.Action("GetOrderByOrderStatus", "Orders")',
+                url: '@Url.Action("GetOrderVideoByOrderStatus", "Orders")',
                 type: 'GET',
-                data: { OrderStatus: status,Type:0 },
+                data: { OrderStatus: status,Type:1 },
                 success: function (data) {
-   
+
                     Swal.close();
                     $('#' + idDiv + 'body').html(data);
                     $('#' + idDiv).reomveClass("d-none")
