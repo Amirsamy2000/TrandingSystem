@@ -7,6 +7,6 @@ using Microsoft.AspNetCore.Identity;
 namespace TrandingSystem.Domain.Entities;
 public partial class Role : IdentityRole<int>
 {
-    public string RoleName { get; set; }
-    public virtual ICollection<User> Users { get; set; } = new List<User>();
+    //public string RoleName { get; set; }
+
 }

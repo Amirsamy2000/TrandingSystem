@@ -24,12 +24,14 @@ namespace TrandingSystem.Infrastructure.Data.Configurations
             entity.Property(e => e.RegisteredAt).HasColumnType("datetime");
             entity.Property(e => e.Address).HasMaxLength(250);
 
-            entity.HasOne(d => d.Role).WithMany(p => p.Users)
-                .HasForeignKey(d => d.RoleId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Users__RoleId__74794A92");
+            
 
- 
+            //entity.HasOne(d => d.Role).WithMany(p => p.Users)
+            //    .HasForeignKey(d => d.RoleId)
+            //    .OnDelete(DeleteBehavior.ClientSetNull)
+            //    .HasConstraintName("FK__Users__RoleId__74794A92");
+
+
         }
 
      }

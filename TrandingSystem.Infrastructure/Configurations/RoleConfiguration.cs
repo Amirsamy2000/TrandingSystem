@@ -15,9 +15,8 @@ namespace TrandingSystem.Infrastructure.Data.Configurations
             entity.HasKey(e => e.Id).HasName("PK__Roles__8AFACE1A02996A08");
 
             entity.Property(e => e.Id).ValueGeneratedOnAdd();
-            entity.Property(e => e.RoleName).HasMaxLength(100);
+            //entity.Property(e => e.RoleName).HasMaxLength(100);
 
- 
         }
 
      }

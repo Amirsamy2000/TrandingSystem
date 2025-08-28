@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using Microsoft.AspNetCore.Identity;
 using System.Net;
 using TradingSystem.Application.Common.Response;
 using TrandingSystem.Application.Dtos;
@@ -12,11 +13,14 @@ internal class GetAllCoursesHandler : IRequestHandler<GetAllCoursesQuery, Respon
     private readonly IMapper _mapper;
     private readonly IUnitOfWork _unitOfWork;
 
+    private readonly UserManager<User> _userManager;
+    //private readonly RoleManager<Role> _roleManager;
 
-    public GetAllCoursesHandler(IUnitOfWork unitOfWork, IUserRepository userRepository, IMapper mapper)
+    public GetAllCoursesHandler(IUnitOfWork unitOfWork, IUserRepository userRepository, IMapper mapper,UserManager<User> userManager)
     {
         _unitOfWork = unitOfWork;
         _mapper = mapper;
+        _userManager = userManager;
     }
 
     public async Task<Response<List<CourseDto>>> Handle(GetAllCoursesQuery request, CancellationToken cancellationToken)
@@ -32,11 +36,13 @@ internal class GetAllCoursesHandler : IRequestHandler<GetAllCoursesQuery, Respon
 
             List<Course> courses;
 
-            if (request.UserId == 0 || user.Role?.RoleName.ToLower() == "admin")
+            var test = await _userManager.IsInRoleAsync(user, "Admin");
+
+            if (request.UserId == 0 || await _userManager.IsInRoleAsync(user, "Admin"))
             {
                 courses = _unitOfWork.Courses.Read();
             }
-            else if (user.Role?.RoleName.ToLower() == "lecturer")
+            else if (await _userManager.IsInRoleAsync(user, "Lecturer"))
             {
                 courses = _unitOfWork.Courses.GetCoursesByLecturerId(request.UserId);
             }
