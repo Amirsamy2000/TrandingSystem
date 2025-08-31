@@ -41,6 +41,8 @@ namespace WebApplication1.Controllers
 
            
         }
+
+        [Authorize]
         public IActionResult About()
         {
             var result = _mediator.Send(new GetCountStds_Courses_Videos_lecQuery()).Result;
@@ -68,18 +70,21 @@ namespace WebApplication1.Controllers
             return View();
         }
 
+        [Authorize]
         public async Task<IActionResult> Courses()
         {
             var result = await _mediator.Send(new GetAllCoursesQuery());
             return View(result.Data);
         }
 
+        [Authorize]
         public IActionResult GoToCourse(int CourseId, CancellationToken cancellationToken)
         {
             var course  = _mediator.Send(new GetCourseByIdQuery{CourseId = CourseId}, cancellationToken).Result;
             return View(course.Data);
         }
 
+        [Authorize]
         public IActionResult CourseDetails(int CourseId, CancellationToken cancellationToken)
         {
             var course  = _mediator.Send(new GetCourseByIdQuery{CourseId = CourseId}, cancellationToken).Result;
