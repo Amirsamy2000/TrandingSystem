@@ -1,6 +1,7 @@
 ﻿using FluentValidation;
 using Humanizer;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System.Security.Claims;
@@ -18,6 +19,7 @@ using TrandingSystem.Domain.Entities;
 
 namespace TrandingSystem.Controllers
 {
+    [Authorize]
     public class VideosController : Controller
     {
         private readonly IMediator _mediator;
@@ -32,6 +34,7 @@ namespace TrandingSystem.Controllers
             
         }
         // this View For Display All Videos For Course Use CourseId
+        [Authorize(Roles = "Lecturer,Admin")]
         public IActionResult Videos(CancellationToken cancellationToken, int CourseId = 1)
         {
             var culture = Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName;
@@ -65,6 +68,7 @@ namespace TrandingSystem.Controllers
 
 
         // this Partial View For Display Add New Video Form
+        [Authorize(Roles = "Lecturer,Admin")]
         public IActionResult PartialViewAddNewVideo()
         {
             var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
@@ -83,6 +87,7 @@ namespace TrandingSystem.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Lecturer,Admin")]
         public IActionResult PartialViewUpdateNewVideo(int VideId ,int CourseId=0)
         {
             var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
@@ -106,7 +111,8 @@ namespace TrandingSystem.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public  async Task<IActionResult> SubmitUpdateVideo([FromForm] ViedoUpdateDto UpdateedVideo)
+        [Authorize(Roles = "Lecturer,Admin")]
+        public async Task<IActionResult> SubmitUpdateVideo([FromForm] ViedoUpdateDto UpdateedVideo)
         {
             //var validationResult = await _validator.ValidateAsync(UpdateedVideo);
             //if (!validationResult.IsValid)
@@ -123,6 +129,7 @@ namespace TrandingSystem.Controllers
 
         // this View For Dispaly Partial View Add NEW Video
 
+        [Authorize(Roles = "Lecturer,Admin")]
         public IActionResult AddNewVideo(int CourseId = 0)
         {
             var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
@@ -143,6 +150,7 @@ namespace TrandingSystem.Controllers
         // Submit Add New Video
         [ValidateAntiForgeryToken]
         [HttpPost]
+        [Authorize(Roles = "Lecturer,Admin")]
         public async Task<IActionResult> SubmitAddNewVideo(  VideoAddedDto newVideo)
         {
             var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
@@ -160,6 +168,7 @@ namespace TrandingSystem.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Lecturer,Admin")]
         public IActionResult BlockVideo(int VideoId,bool Status)
         {
 
@@ -169,6 +178,7 @@ namespace TrandingSystem.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public IActionResult DeleteAllVideos(int CourseId)
         {
 
@@ -178,12 +188,14 @@ namespace TrandingSystem.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Lecturer,Admin")]
         public IActionResult DeleteVideo(int VideoId,CancellationToken cancellationToken)
         {
             var reponse = _mediator.Send(new DeleteVideoByIdCommand(VideoId, Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName), cancellationToken).Result;
 
             return Json(reponse);
         }
+        [Authorize(Roles = "Admin")]
         public IActionResult DeleteAllVideos(int VideoId, int Status)
         {
 

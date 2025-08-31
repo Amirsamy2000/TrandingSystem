@@ -20,6 +20,8 @@ namespace TrandingSystem.Controllers
         {
             _mediator = mediator;
         }
+        [Authorize(Roles = "Admin")]
+
         public async Task<IActionResult> Index()
         {
             // Display Courses
@@ -43,11 +45,15 @@ namespace TrandingSystem.Controllers
             return View(courses.Data);
         }
 
+        [Authorize(Roles = "Admin")]
 
         public IActionResult CreateCommunity()
         {
             return View();
         }
+
+        [Authorize(Roles = "Admin")]
+
         [HttpGet]
         public IActionResult PartialDisplayCommunities(int CourseId)
         {
@@ -55,6 +61,8 @@ namespace TrandingSystem.Controllers
             var resonse = _mediator.Send(new GellAllCommunityByCourseQuery(CourseId)).Result;
             return PartialView("_PartialDisplayCommunities", resonse.Data);
         }
+
+        [Authorize(Roles = "Admin")]
 
         public async Task<IActionResult> PartialCreateNewCommunity()
         {
@@ -77,7 +85,7 @@ namespace TrandingSystem.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-
+        [Authorize(Roles = "Admin")]
         public IActionResult SubmitAddCommunity(CommunityCreateDto communityCreate)
         {
             var res = _mediator.Send(new AddNewCommunityCommand(communityCreate)).Result;
@@ -85,6 +93,7 @@ namespace TrandingSystem.Controllers
             return Json(res);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public IActionResult SubmitCloseOrOpenCommunity(int CommunityId,bool IsClose)
         {
@@ -93,6 +102,7 @@ namespace TrandingSystem.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public IActionResult SubmitUpdateCommunity(int CommunityId, string Title,bool IsAdminOnly,CancellationToken cancellation)
         {
             var res = _mediator.Send(new UpdateCommunityCommand(Title, CommunityId, IsAdminOnly), cancellation).Result;
@@ -100,6 +110,7 @@ namespace TrandingSystem.Controllers
 
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public IActionResult SubmitDeleteCommunity(int CommunityId)
         {
@@ -119,6 +130,7 @@ namespace TrandingSystem.Controllers
             return View(response.Data);
         }
 
+        [Authorize(Roles = "Admin")]
         public IActionResult PartialAssginUserIntoCommunity()
         {
            
@@ -127,6 +139,7 @@ namespace TrandingSystem.Controllers
             return PartialView("_PartialAssginUserIntoCommunity",AllCommunities.Data);
         }
 
+        [Authorize(Roles = "Admin")]
         public IActionResult GetUsersOutCommunity(int communityId)
         {
             var response = _mediator.Send(new GetAllUsersByStatusQuery(4,communityId)).Result;
@@ -134,12 +147,14 @@ namespace TrandingSystem.Controllers
             return Json(response.Data);
         }
 
+        [Authorize(Roles = "Admin")]
         public IActionResult SubmitAssginUserIntoCommunity(List<int> usersId, int communityId)
         {
             var res = _mediator.Send(new AssginUserIntoCommunityCommand( communityId, usersId)).Result;
             return Json(res);
         }
 
+        [Authorize(Roles = "Admin")]
         public IActionResult PartialDisplayUsersCommunity(int communityId,string CommunityName)
         {
             ViewBag.CommunityName = CommunityName;
@@ -152,6 +167,7 @@ namespace TrandingSystem.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public IActionResult SubmitDeleteUserFormCommunity(List<int> UserIds, int CommunityId)
         {
             var res = _mediator.Send( new DeleteUsersFormCommuntiyCommand(UserIds, CommunityId)).Result;
@@ -159,6 +175,7 @@ namespace TrandingSystem.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public IActionResult SubmitBlockOrActiveUserFormCommunity(List<int> UserIds, int CommunityId,bool IsBlock)
         {
             var res = _mediator.Send(new BlockOrActiveUserCommand(UserIds, IsBlock, CommunityId)).Result;

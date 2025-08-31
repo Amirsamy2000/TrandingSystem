@@ -38,7 +38,7 @@ namespace TrandingSystem.Application.Features.Users.Handlers
                         FullName = x.FullName,
                         Mobile = x.Mobile,
                         IsBlockedSite = x.IsBlocked,
-                        IsBlockedCommunity=x.CommunityMembers.Where(x=>x.CommunityId==request.Id).FirstOrDefault().IsBlocked ?? false,
+                        //IsBlockedCommunity=x.CommunityMembers.Where(x=>x.CommunityId==request.Id).FirstOrDefault().IsBlocked ?? false,
                         Email =x.Email,
                         RegisteredAt = x.RegisteredAt,
                         NationalId = x.NationalId,
