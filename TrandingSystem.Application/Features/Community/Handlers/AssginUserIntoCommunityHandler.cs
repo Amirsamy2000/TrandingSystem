@@ -9,6 +9,7 @@ using TradingSystem.Application.Common.Response;
 using TrandingSystem.Application.Features.Community.Commands;
 using TrandingSystem.Application.Resources;
 using TrandingSystem.Domain.Interfaces;
+using TrandingSystem.Infrastructure.Services;
 
 namespace TrandingSystem.Application.Features.Community.Handlers
 {
@@ -17,11 +18,14 @@ namespace TrandingSystem.Application.Features.Community.Handlers
         private readonly IUnitOfWork _unitOfWork;
         public readonly IStringLocalizer<ValidationMessages> _localizer;
 
+        private readonly INotificationService _notificationService;
 
-        public AssginUserIntoCommunityHandler(IStringLocalizer<ValidationMessages> localizer, IUnitOfWork unitOfWork)
+        public AssginUserIntoCommunityHandler(IStringLocalizer<ValidationMessages> localizer, IUnitOfWork unitOfWork, INotificationService notificationService)
         {
             _localizer = localizer;
             _unitOfWork = unitOfWork;
+            _notificationService = notificationService;
+
         }
         public async Task<Response<bool>> Handle(AssginUserIntoCommunityCommand request, CancellationToken cancellationToken)
         {
@@ -33,17 +37,41 @@ namespace TrandingSystem.Application.Features.Community.Handlers
                 {
                     return Response<bool>.ErrorResponse(_localizer["NotFountCommunity"]);
                 }
-                foreach(var user in request.UserId)
+                var EmailTemp = new Domain.Helper.EmailBody()
                 {
+                    dir = _localizer["dir"],
+                    Subject = _localizer["stieName"],
+                    StieName = _localizer["stieName"],
+                    Hi = _localizer["hi"],
+                    info1 = _localizer["infocomm1"],
+                    info2 = _localizer["infocomm2"] + ": " + community.Title,
+                    info3 = "",
+                    contact = _localizer["contact"],
+                    namebtn = "Show Community",
+                    ActionUrl = $"https://penalin897-001-site1.stempurl.com/Communities/ShowCommunitiesForUser"
+
+                };
+
+                var Users = _unitOfWork.Users.Read().Where(x => request.UserId.Contains(x.Id)).ToList();
+                foreach (var user in Users)
+                {
+                    EmailTemp.UserName = user.FullName;
+                  
+
                     var member= new Domain.Entities.CommunityMember()
                     {
                         CommunityId = request.CommunityId,
-                        UserId = user,
+                        UserId = user.Id,
                         IsBlocked = false,
                         JoinedAt = DateTime.Now
                     };
+
                     _unitOfWork.CommunityMember.Create(member);
+                    _notificationService.SendMailForUserAfterCreateBodey(user.Email, _localizer["FormalSub"], EmailTemp);
+
                 }
+
+
                 await _unitOfWork.SaveChangesAsync();
                 return Response<bool>.SuccessResponse(true, _localizer["GeneralOperationDone"]);
 

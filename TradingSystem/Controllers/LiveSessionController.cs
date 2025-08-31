@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using TrandingSystem.Application.Dtos;
@@ -8,7 +9,7 @@ using TrandingSystem.Application.Features.LiveSessions.Queries;
 
 namespace TrandingSystem.Controllers
 {
-    public class LiveSessionController : Controller
+     public class LiveSessionController : Controller
     {
         private readonly IMediator _mediator;
         public LiveSessionController(IMediator mediator)

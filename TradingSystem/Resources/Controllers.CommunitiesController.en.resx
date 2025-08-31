@@ -330,4 +330,16 @@
   <data name="CommunityClosedByAdmin" xml:space="preserve">
     <value>Community Closed By Admin</value>
   </data>
+  <data name="NotSelectdUser" xml:space="preserve">
+    <value>Not Found Selected Users</value>
+  </data>
+  <data name="RemoveMessage" xml:space="preserve">
+    <value>Are you sure you want to remove the selected users from the community?</value>
+  </data>
+  <data name="BlockMessage" xml:space="preserve">
+    <value>Are you sure you want to block Selected users from the community?</value>
+  </data>
+  <data name="ActiveMessage" xml:space="preserve">
+    <value>Are you sure you want to Activate The selected community users?</value>
+  </data>
 </root>

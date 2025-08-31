@@ -20,10 +20,13 @@ namespace TrandingSystem.Application.Features.Community.Handlers
     {
         private readonly IUnitOfWork _unitofwork;
         private readonly IStringLocalizer<ValidationMessages> _localizer;
-        public AddNewCommunityHandler(IUnitOfWork unitofwork, IStringLocalizer<ValidationMessages> localizer)
+        private readonly INotificationService _notificationService;
+
+        public AddNewCommunityHandler(IUnitOfWork unitofwork, IStringLocalizer<ValidationMessages> localizer, INotificationService notificationService)
         {
             _unitofwork = unitofwork;
             _localizer = localizer;
+            _notificationService = notificationService;
         }
         public async Task<Response<bool>> Handle(AddNewCommunityCommand request, CancellationToken cancellationToken)
         {
@@ -52,7 +55,23 @@ namespace TrandingSystem.Application.Features.Community.Handlers
 
                 // Check Community is defualt or not 
                 // Is IsDefualt Is True This Meaning the Community For All User In sysytem
-                if (request.Community.IsDefault)
+
+                // Notfiy 
+                var EmailTemp = new Domain.Helper.EmailBody()
+                {
+                    dir = _localizer["dir"],
+                    Subject = _localizer["stieName"],
+                    StieName= _localizer["stieName"],
+                    Hi = _localizer["hi"],
+                    info1 = _localizer["infocomm1"],
+                    info2 = _localizer["infocomm2"] + ": " + request.Community.Title,
+                    info3 = "",
+                    contact = _localizer["contact"],
+                    namebtn = "Show Community",
+                    ActionUrl = $"https://penalin897-001-site1.stempurl.com/Communities/ShowCommunitiesForUser"
+
+                };
+                 if (request.Community.IsDefault)
                 {
                     var AllActiveUser = _unitofwork.Users.GetActiveAndConfirmUser();
 
@@ -71,7 +90,11 @@ namespace TrandingSystem.Application.Features.Community.Handlers
 
                     }
 
+
                     await _unitofwork.SaveChangesAsync();
+                  
+                    _notificationService.SendMailForGroupUserAfterCreateBodey(AllActiveUser, _localizer["FormalSub"], EmailTemp);
+
                     return Response<bool>.SuccessResponse(true, _localizer["CommunityCreated"]);
 
 
@@ -85,7 +108,8 @@ namespace TrandingSystem.Application.Features.Community.Handlers
                     {
                         return Response<bool>.ErrorResponse(_localizer["CourseNotFound"]);
                     }
-                    foreach (var user in course.CourseEnrollments.Where(x=>x.OrderStatus==1))
+                    var userincourse = course.CourseEnrollments.Where(x => x.OrderStatus == 1).Select(x=>x.User).ToList();
+                    foreach (var user in course.CourseEnrollments.Where(x => x.OrderStatus == 1))
                     {
                         var communityMember = new CommunityMember()
                         {
@@ -97,6 +121,8 @@ namespace TrandingSystem.Application.Features.Community.Handlers
                         _unitofwork.CommunityMember.Create(communityMember);
                     }
                     await _unitofwork.SaveChangesAsync();
+                    _notificationService.SendMailForGroupUserAfterCreateBodey(userincourse, _localizer["FormalSub"], EmailTemp);
+
                     return Response<bool>.SuccessResponse(true, _localizer["CommunityCreated"]);
 
 

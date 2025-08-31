@@ -4,7 +4,7 @@
 @inject IStringLocalizer<CommunitiesController> Localizer
 @model IEnumerable<UserDto>
 
-@if (Model.Count() <= 0 || Model is null)
+@if (Model == null || !Model.Any())
 {
     <div class="col-12">
         <div class="alert alert-primary" role="alert">
@@ -13,180 +13,251 @@
             <p class="text-center">@Localizer["NoUserMessage1"]</p>
         </div>
     </div>
-
 }
-
 else
 {
     <style>
-
         #CommunityTable thead th {
-        text-align: center;
-        vertical-align: middle; /* يخلي النص في وسط العمود رأسياً */
+            text-align: center;
+            vertical-align: middle;
         }
 
         .dataTables_filter input {
-        padding: 6px 10px;
-        border-radius: 8px;
-        border: 1px solid #ccc;
-        width: 250px;
-        font-size: 14px;
+            padding: 6px 10px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            width: 250px;
+            font-size: 14px;
         }
 
         .dt-button, .custom-btn {
-        background-color: #007bff !important;
-        color: white !important;
-        padding: 6px 12px;
-        border-radius: 6px;
-        border: none;
-        font-size: 14px;
-        margin-left: 5px;
-        cursor: pointer;
+            background-color: #007bff !important;
+            color: white !important;
+            padding: 6px 12px;
+            border-radius: 6px;
+            border: none;
+            font-size: 14px;
+            margin-left: 5px;
+            cursor: pointer;
         }
 
-        .dt-button:hover, .custom-btn:hover {
-        background-color: #0056b3 !important;
-        }
-
-        .dataTables_filter input {
-        class: "form-control"
-        }
+            .dt-button:hover, .custom-btn:hover {
+                background-color: #0056b3 !important;
+            }
 
         .dataTables_length select {
-        padding: 8px !important;
-        background-color: #007bff !important;
-        color: white !important;
+            padding: 8px !important;
+            background-color: #007bff !important;
+            color: white !important;
         }
 
         #OrdersTable_filter label::before {
-        content: "" !important
+            content: "" !important;
         }
 
         #OrdersTable_filter label {
-        font-size: 0 !important; /* Hide text */
+            font-size: 0 !important;
         }
 
         #OrdersTable_filter input {
-        font-size: 14px !important; /* Restore input font size */
+            font-size: 14px !important;
         }
     </style>
 
-    <div class="col-12 text-center mb-2 text-primary" id="headerUsrCommunity" style="font-size:22px;font-weight:600">@Localizer["members"] @ViewBag.CommunityName </div>
+    <div class="col-12 text-center mb-2 text-primary" id="headerUsrCommunity"
+         style="font-size:22px;font-weight:600">
+        @Localizer["members"] @ViewBag.CommunityName
+    </div>
 
     <div class="col-12 mb-3 mt-1">
-        <button class="btn btn-outline-danger me-2" onclick="DisplayPartialAddNewComm()">
+        <button class="btn btn-outline-danger me-2"
+                onclick="CheckConfirmAction('@Localizer["RemoveMessage"]', DeleteSelectedUsers)">
             <i class='menu-icon tf-icons bx bx-trash'></i>
             @Localizer["RemoveUser"]
         </button>
-        <button class="btn btn-outline-warning me-2" onclick="DisplayPartialAssginUserIntoComm()">
+
+        <button class="btn btn-outline-warning me-2"
+                onclick="CheckConfirmAction('@Localizer["BlockMessage"]', BlockOrActiveSelectedUsers, true)">
             <i class='menu-icon tf-icons bx bx-block'></i>
             @Localizer["BlockUser"]
         </button>
 
-        <button class="btn btn-outline-success me-2" onclick="DisplayPartialAssginUserIntoComm()">
+        <button class="btn btn-outline-success me-2"
+                onclick="CheckConfirmAction('@Localizer["ActiveMessage"]', BlockOrActiveSelectedUsers, false)">
             <i class='menu-icon tf-icons bx bx-refresh'></i>
             @Localizer["UnBlockUser"]
         </button>
     </div>
-    <div class="col-12">
 
+    <div class="col-12">
         <table class="table table-hover table-bordered text-center" id="UsersCommunityTable">
             <thead>
-                <tr class=" table-info">
-
-                    <th scope="col" class="text-center"><input type="checkbox" id="selectAll" /></th>
-                    <th scope="col" class="text-center">@Localizer["UserName"]</th>
-                    <th scope="col" class="text-center">@Localizer["Email"]</th>
-                    <th scope="col" class="text-center">@Localizer["Mobile"]</th>
-                    <th scope="col" class="text-center">@Localizer["NationalId"]</th>
-                    <th scope="col" class="text-center">@Localizer["IsBlockedUser"]</th>
+                <tr class="table-info">
+                    <th><input type="checkbox" id="selectAll" onchange="toggleSelection(this)" /></th>
+                    <th>@Localizer["UserName"]</th>
+                    <th>@Localizer["Email"]</th>
+                    <th>@Localizer["Mobile"]</th>
+                    <th>@Localizer["NationalId"]</th>
+                    <th>@Localizer["IsBlockedUser"]</th>
                 </tr>
             </thead>
             <tbody>
-
                 @foreach (var user in Model)
                 {
                     <tr>
-                        <td class="text-center "><input type="checkbox" class="userCheck" data-id="@user.Id" /></td>
-                        <td class="text-center">@user.FullName</td>
-                        <td class="text-center">@user.Email</td>
-                        <td class="text-center">@user.Mobile</td>
-                        <td class="text-center">@(user.NationalId??"UN")</td>
-                         @if (user.IsBlocked)
-                        {
-                            <td class="text-danger">@Localizer["Blocked"]</td>
+                        <td><input type="checkbox" class="userCheck" value="@user.Id" onchange="toggleSelection(this)" /></td>
+                        <td>@user.FullName</td>
+                        <td>@user.Email</td>
+                        <td>@user.Mobile</td>
+                        <td>@(user.NationalId ?? "UN")</td>
+                        @if (user.IsBlockedCommunity??false){
+                              <td class="text-danger">
+                            @Localizer["Blocked"]  
+                        </td>
                         }
-                        else
-                        {
-                            <td class="text-success">@Localizer["Active"]</td>
+                        else{
+                            <td class="text-success">
+                                  @Localizer["Active"] 
+                            </td>
                         }
-
-
+                      
                     </tr>
-
                 }
-
-
             </tbody>
         </table>
     </div>
-    
-
 }
 
 <script>
-       let selectedCommunityUsers = [];
+    var selectedCommunityUsers = [];
 
-    var table = $('#UsersCommunityTable').DataTable({
+    // init DataTable
+    $('#UsersCommunityTable').DataTable({
         pageLength: 5,
         lengthMenu: [[5, 10, 25, -1], [5, 10, 25, "All"]],
         language: { lengthMenu: "_MENU_" },
         ordering: true,
-        order: [[0, 'asc']],
+        order: [[1, 'asc']],
         responsive: true,
         dom: 'Blfrtip',
         buttons: ['copy', 'excel', 'print']
     });
 
-    // ✅ Select All هيأثر على كل الصفحات
-    $("#selectAll").on("change", function () {
-        let checked = $(this).is(":checked");
+    // checkbox selection
+    function toggleSelection(checkbox) {
+        const allCheckboxes = document.querySelectorAll(".userCheck");
+        const selectAll = document.getElementById("selectAll");
 
-        // هنا بنجيب كل الـ checkboxes من كل الصفحات
-        table.$(".userCheck").prop("checked", checked).trigger("change");
-    });
-
-    // لما يتغير أي checkbox
-    $(document).on("change", ".userCheck", function () {
-        let userId = $(this).data("id");
-
-        if ($(this).is(":checked")) {
-            if (!selectedCommunityUsers.includes(userId)) {
-                selectedCommunityUsers.push(userId);
-            }
+        if (checkbox.id === "selectAll") {
+            selectedCommunityUsers = [];
+            allCheckboxes.forEach(cb => {
+                cb.checked = checkbox.checked;
+                if (checkbox.checked) {
+                    selectedCommunityUsers.push(parseInt(cb.value));
+                }
+            });
         } else {
-            selectedCommunityUsers = selectedCommunityUsers.filter(id => id !== userId);
+            const value = parseInt(checkbox.value);
+            if (checkbox.checked) {
+                if (!selectedCommunityUsers.includes(value)) {
+                    selectedCommunityUsers.push(value);
+                }
+            } else {
+                selectedCommunityUsers = selectedCommunityUsers.filter(v => v !== value);
+            }
+            selectAll.checked = Array.from(allCheckboxes).every(cb => cb.checked);
         }
 
         console.log("Selected Users:", selectedCommunityUsers);
-    });
+    }
 
-    // بعد إعادة رسم الجدول (pagination, search, filter)
-    table.on('draw', function () {
-        table.$(".userCheck").each(function () {
-            let userId = $(this).data("id");
-            if (selectedCommunityUsers.includes(userId)) {
-                $(this).prop("checked", true);
+    // validation
+    function VaildBeforeMakeAction() {
+        Swal.fire({
+            icon: 'error',
+            title: '@Localizer["NotSelectdUser"]'
+        });
+    }
+
+    // sweetalert wrapper
+    function CheckConfirmAction(title, callback, ...params) {
+        if (selectedCommunityUsers.length <= 0) {
+            VaildBeforeMakeAction();
+            return;
+        }
+
+        Swal.fire({
+            title: title,
+             confirmButtonText: '@Localizer["OkBtn"]',
+            cancalButtonText: '@Localizer["CancleBtn"]'
+        }).then((result) => {
+            if (result.isConfirmed && typeof callback === "function") {
+                callback(...params);
             }
         });
+    }
 
-        // تحديث selectAll حسب كل الجدول (مش بس الصفحة)
-        let total = table.$(".userCheck").length;
-        let checkedCount = table.$(".userCheck:checked").length;
-        $("#selectAll").prop("checked", total > 0 && total === checkedCount);
-    });
+    // delete
+    function DeleteSelectedUsers() {
+        $.ajax({
+            url: "/Communities/SubmitDeleteUserFormCommunity",
+            type: "POST",
+            data: {
+                UserIds: selectedCommunityUsers,
+                CommunityId: "@ViewBag.Communityid"
+            },
+            success: function (res) {
+                debugger
+                Swal.fire({
+                    icon: res.success ? 'success' : 'error',
+                    title: res.message,
+                    draggable: true
+                });
+                if (res.success) {
 
+                    let Courseid = $("#Course").val();
+                    LoadingCommunities(Courseid);
+                    $("#UsersCommunity").html('')
+                }
+            },
+            error: function (res) {
+                Swal.fire({
+                    icon: 'error',
+                    title: res.message
+                });
+            }
+        });
+    }
 
-
+    // block / unblock
+    function BlockOrActiveSelectedUsers(IsBlock) {
+        $.ajax({
+            url: "/Communities/SubmitBlockOrActiveUserFormCommunity",
+            type: "POST",
+            data: {
+                UserIds: selectedCommunityUsers,
+                CommunityId: "@ViewBag.Communityid",
+                IsBlock: IsBlock
+            },
+            success: function (res) {
+                 Swal.close();
+                Swal.fire({
+                    icon: res.success ? 'success' : 'error',
+                    title: res.message,
+                    draggable: true
+                });
+                if (res.success) {
+                    let Courseid = $("#Course").val();
+                    LoadingCommunities(Courseid);
+                      $("#UsersCommunity").html("")
+                }
+            },
+            error: function (res) {
+                Swal.fire({
+                    icon: 'error',
+                    title: res.message
+                });
+            }
+        });
+    }
 </script>
-

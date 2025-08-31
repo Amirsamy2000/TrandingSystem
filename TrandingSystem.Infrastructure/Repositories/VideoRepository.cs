@@ -49,7 +49,7 @@ namespace TrandingSystem.Infrastructure.Repositories
 
         public List<Video> Read()
         {
-            throw new NotImplementedException();
+            return _db.Videos.ToList();
         }
 
         public Video ReadById(int Id)

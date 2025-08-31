@@ -79,9 +79,6 @@ namespace TrandingSystem.Controllers
             var Rescourses = _mediator.Send(new GetAllCoursesQuery { UserId = userId }).Result;
 
             TempData["Course"] = Rescourses.Data;
-
-
-
             return PartialView("_PartialAddVideo");
         }
 

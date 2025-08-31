@@ -34,6 +34,10 @@ namespace TrandingSystem.Infrastructure.Repositories
             throw new NotImplementedException();
         }
 
+        public List<CommunityMember> GetMembersByUserids(List<int> ids,int communityid)
+        {
+            return _context.CommunityMembers.Where(x => x.CommunityId == communityid && ids.Contains(x.UserId)).ToList();
+        }
         public CommunityMember ReadById(int Id)
         {
             throw new NotImplementedException();
@@ -41,7 +45,12 @@ namespace TrandingSystem.Infrastructure.Repositories
 
         public CommunityMember Update(CommunityMember Element)
         {
-            throw new NotImplementedException();
+            _context.CommunityMembers.Update(Element);
+            return Element;
         }
+        public void DeleteRange(List<CommunityMember> members)
+        {
+            _context.CommunityMembers.RemoveRange(members);
+         }
     }
 }

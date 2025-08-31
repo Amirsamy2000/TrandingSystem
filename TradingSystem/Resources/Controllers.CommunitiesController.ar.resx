@@ -330,4 +330,16 @@
   <data name="CommunityClosedByAdmin" xml:space="preserve">
     <value>تم إغلاق المجتمع بواسطة الادمن</value>
   </data>
+  <data name="NotSelectdUser" xml:space="preserve">
+    <value>لم يتم العثور على المستخدمين المحددين</value>
+  </data>
+  <data name="RemoveMessage" xml:space="preserve">
+    <value>هل انت متاكد من ازالة المستخدمين المحددين من المجتمع؟</value>
+  </data>
+  <data name="BlockMessage" xml:space="preserve">
+    <value>هل انت متاكد من حظر المستخدمين المحددين من المجتمع؟</value>
+  </data>
+  <data name="ActiveMessage" xml:space="preserve">
+    <value>هل أنت متأكد أنك تريد تفعيل مستخدمي المجتمع المحددين؟</value>
+  </data>
 </root>

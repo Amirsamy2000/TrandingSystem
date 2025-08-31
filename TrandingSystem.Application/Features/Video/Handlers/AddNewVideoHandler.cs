@@ -9,6 +9,8 @@ using TrandingSystem.Domain.Interfaces;
 using TrandingSystem.Domain.Entities;
 using AutoMapper;
 using TrandingSystem.Infrastructure.Constants;
+using TrandingSystem.Infrastructure.Services;
+using TrandingSystem.Domain.Helper;
 
 
 namespace TrandingSystem.Application.Features.Video.Handlers
@@ -18,14 +20,14 @@ namespace TrandingSystem.Application.Features.Video.Handlers
       private readonly IUnitOfWork _unitOfWork;
       private readonly IFileService _imageService;
      private readonly IStringLocalizer<ValidationMessages> _localizer;
-     private readonly IMapper _mapper;
+        private readonly INotificationService _notificationService;
 
-        public AddNewVideoHandler(IUnitOfWork unitOfWork, IFileService imageService ,IStringLocalizer<ValidationMessages>localizer,IMapper mapper)
+        public AddNewVideoHandler(IUnitOfWork unitOfWork, IFileService imageService ,IStringLocalizer<ValidationMessages>localizer, INotificationService notificationService)
         {
             _unitOfWork = unitOfWork;
             _imageService = imageService;
            _localizer = localizer;
-            _mapper = mapper;
+         _notificationService = notificationService;
 
         }
         public async Task<Response<bool>> Handle(AddNewVideoCommand request, CancellationToken cancellationToken)
@@ -65,6 +67,30 @@ namespace TrandingSystem.Application.Features.Video.Handlers
                 // Add Video to Database
                 _unitOfWork.Videos.Create(newVideo);
                 await _unitOfWork.SaveChangesAsync();
+                
+                if (request.VideoAddedDto.notfiy)
+                {
+                    
+                    // notify
+                    var EmailTemp =new Domain.Helper.EmailBody()
+                    {
+                        dir = _localizer["dir"],
+                        Subject = _localizer["stieName"],
+                        Hi = _localizer["hi"],
+                        info1 = _localizer["infoVido1"],
+                        info2 = _localizer["infoVido2"] + " " + newVideo.TitleEN,
+                        info3 = _localizer["infoVido3"] + " " + newVideo.Course.TitleEN,
+                        contact = _localizer["contact"],
+                        namebtn= _localizer["btnAddVideo"],
+                        ActionUrl = $"https://penalin897-001-site1.stempurl.com/Home/GoToCourse?CourseId={newVideo.CourseId}"
+
+                    };
+                    var Users = _unitOfWork.Users.GetUserEnrollInCourse(newVideo.CourseId);
+                    _notificationService.SendMailForGroupUserAfterCreateBodey(Users, _localizer["FormalSub"], EmailTemp);
+                   
+                }
+
+
                 return Response<bool>.SuccessResponse(true, _localizer["AddVideoSuccess"]);
                 // bre
 

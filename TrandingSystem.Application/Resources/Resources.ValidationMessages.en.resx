@@ -204,4 +204,65 @@
   <data name="NotFountCommunity" xml:space="preserve">
     <value />
   </data>
+  <data name="dir" xml:space="preserve">
+    <value>rtl</value>
+  </data>
+  <data name="stieName" xml:space="preserve">
+    <value>Saif Al-Qadi platform</value>
+  </data>
+  <data name="hi" xml:space="preserve">
+    <value>HI</value>
+  </data>
+  <data name="infoVido1" xml:space="preserve">
+    <value>We are pleased to inform you that a new video has been added to your training course on the Saif Al-Qadi platform today, and you can now watch it through your account.</value>
+  </data>
+  <data name="infoVido3" xml:space="preserve">
+    <value>Training course:</value>
+  </data>
+  <data name="contact" xml:space="preserve">
+    <value>Contact the support team</value>
+  </data>
+  <data name="infolive1" xml:space="preserve">
+    <value>We are pleased to inform you that a new live session has been added to your training course on the Saif Al-Qadi platform. You can follow up on the details (date and time) through the email you received.</value>
+  </data>
+  <data name="btnAddVideo" xml:space="preserve">
+    <value>Show Video</value>
+  </data>
+  <data name="infoLive2" xml:space="preserve">
+    <value> Date Of Live</value>
+  </data>
+  <data name="infoLivetime2" xml:space="preserve">
+    <value>Time Of Live </value>
+  </data>
+  <data name="FormalSub" xml:space="preserve">
+    <value>إشعار جديد من منصة سيف القاضي</value>
+  </data>
+  <data name="infoorder1" xml:space="preserve">
+    <value>We are pleased to inform you that your course registration application has been accepted and you have been added to the course community. You can watch course videos and chat with other participants.</value>
+  </data>
+  <data name="infoorder2" xml:space="preserve">
+    <value>We regret to inform you that your application for this course has not been accepted.
+We thank you for your interest and willingness to participate, and we look forward to your participation in other upcoming courses on the Saif Al-Qadi platform.</value>
+  </data>
+  <data name="infocours1" xml:space="preserve">
+    <value>We are pleased to inform you that a new training course has been added to the Saif Al-Qadi platform. You can view course details and register through the platform.</value>
+  </data>
+  <data name="infocomm2" xml:space="preserve">
+    <value>Community Title:</value>
+  </data>
+  <data name="infocomm1" xml:space="preserve">
+    <value>We are pleased to inform you that you have been added to a new community on the Saif Al-Qadi platform. You can now participate in discussions, exchange experiences, and communicate with other community members.</value>
+  </data>
+  <data name="infoVido4" xml:space="preserve">
+    <value>Video title: </value>
+  </data>
+  <data name="infoVido2" xml:space="preserve">
+    <value>Video title: </value>
+  </data>
+  <data name="infoVido5" xml:space="preserve">
+    <value>Video title: </value>
+  </data>
+  <data name="infoco2" xml:space="preserve">
+    <value>Course Title</value>
+  </data>
 </root>

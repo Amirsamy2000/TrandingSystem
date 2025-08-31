@@ -1,30 +1,39 @@
 ﻿@{
     ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_LayoutDasbord.cshtml";
+    // Layout = "~/Views/Shared/_LayoutDasbord.cshtml";
+    Layout = null;
+
 }
-<div id="vdoPlayer" style="width:100%; max-width:720px; height:400px;"></div>
-
-<script src="https://player.vdocipher.com/playerAssets/1.6.10/vdo.js"></script>
-<script>
-    async function loadVideo(videoId) {
-        try {
-            // نطلب OTP من السيرفر
-            const res = await fetch(`/Test/GetOtp?videoId=${videoId}`);
-            const data = await res.json();
-
-            // نشغل vdo.js player
-            new VdoPlayer({
-                otp: data.otp,
-                playbackInfo: data.playbackInfo,
-                container: document.querySelector("#vdoPlayer"),
-            });
-        } catch (err) {
-            console.error("Error loading video:", err);
-        }
-    }
-
-    // 👇 جرب تعرض فيديو (حط VideoId الصحيح بتاعك من VdoCipher)
-    loadVideo("YOUR_VIDEO_ID");
-</script>
-
-
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <title>{{Subject}}</title>
+</head>
+<body style="margin:0;padding:0;font-family:Tahoma,Arial,sans-serif;background:#f6f9fc;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="padding:24px 0;">
+    <tr>
+      <td align="center">
+        <table width="600" cellpadding="0" cellspacing="0" style="background:#fff;border-radius:12px;border:1px solid #e9eef5;">
+          <tr>
+                        <td style="background:#0f172a;color:#c3972e;padding:18px;font-weight:700;">{{Subject}}</td>
+          </tr>
+          <tr>
+            <td style="padding:20px;color:#0f172a;">
+              مرحباً <b>{{UserName}}</b>,<br/><br/>
+              تم إضافة جلسة جديدة بعنوان <b>{{SessionTitle}}</b> في الكورس <b>{{CourseTitle}}</b>.<br/><br/>
+              تاريخ الجلسة :12/5/2025 <br /><br />
+              وقت الجلسة : 12:5     <br /><br />
+               <br /><br />
+               <a href="{{ActionUrl}}" style="display:inline-block;padding:12px 18px;background:#141921;color:#fff;border-radius:8px;text-decoration:none;">
+                الذهاب إلى الجلسة
+              </a>
+              <p style="color:#64748b;font-size:12px;margin-top:18px;">© {{Year}} منصّة التعلم</p>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>

@@ -204,4 +204,67 @@
   <data name="NotFountCommunity" xml:space="preserve">
     <value />
   </data>
+  <data name="dir" xml:space="preserve">
+    <value>ltr</value>
+  </data>
+  <data name="stieName" xml:space="preserve">
+    <value>منصة سيف القاضي</value>
+  </data>
+  <data name="hi" xml:space="preserve">
+    <value>مرحبا</value>
+  </data>
+  <data name="infoVido1" xml:space="preserve">
+    <value>يسعدنا إبلاغك بأنه قد تم اليوم إضافة فيديو جديد إلى دورتك التدريبية على منصة سيف القاضي، ويمكنك مشاهدته الآن من خلال حسابك</value>
+  </data>
+  <data name="infoVido3" xml:space="preserve">
+    <value>الدورة التدريبية:</value>
+  </data>
+  <data name="contact" xml:space="preserve">
+    <value>التواصل مع فريق الدعم</value>
+  </data>
+  <data name="infolive1" xml:space="preserve">
+    <value>يسعدنا إبلاغكم بأنه قد تمت إضافة جلسة مباشرة جديدة إلى دورتكم التدريبية على منصة سيف القاضي. يمكنكم متابعة تفاصيل الموعد (التاريخ والوقت) من خلال البريد الإلكتروني المرسل إليكم.</value>
+  </data>
+  <data name="btnAddVideo" xml:space="preserve">
+    <value>رؤية الفديو</value>
+  </data>
+  <data name="infoLive2" xml:space="preserve">
+    <value>تاريخ  البث</value>
+  </data>
+  <data name="infoLivetime2" xml:space="preserve">
+    <value>وقت البث</value>
+  </data>
+  <data name="FormalSub" xml:space="preserve">
+    <value>New notification from Saif Al-Qadi platform </value>
+  </data>
+  <data name="infoorder1" xml:space="preserve">
+    <value>يسرنا ابلاغك بانه تم قبول طلب التسجيل في الدورة التدريبية، واضافتك إلى مجتمع الدورة. يمكنكم مشاهدة فيديوهات الدورة والدردشة مع المشاركين الآخرين.</value>
+  </data>
+  <data name="infoorder2" xml:space="preserve">
+    <value>نأسف لإبلاغكم بعدم قبول طلب تسجيلكم في هذه الدورة.
+نشكركم على اهتمامكم ورغبتكم في الانضمام، ونتطلع إلى مشاركتكم في دورات أخرى قادمة على منصة سيف القاضي.</value>
+  </data>
+  <data name="infocours1" xml:space="preserve">
+    <value>يسرنا إبلاغكم بأنه قد تمت إضافة دورة تدريبية جديدة على منصة سيف القاضي.
+يمكنكم الاطلاع على تفاصيل الدورة والتسجيل من خلال المنصة.</value>
+  </data>
+  <data name="infocomm2" xml:space="preserve">
+    <value>اسم المجتمع :</value>
+  </data>
+  <data name="infocomm1" xml:space="preserve">
+    <value>يسرنا إبلاغكم بأنه قد تم إضافتكم إلى مجتمع جديد على منصة سيف القاضي.
+يمكنكم الآن المشاركة في النقاشات، تبادل الخبرات، والتواصل مع باقي أعضاء المجتمع.</value>
+  </data>
+  <data name="infoVido4" xml:space="preserve">
+    <value>عنوان الفديو :</value>
+  </data>
+  <data name="infoVido2" xml:space="preserve">
+    <value>عنوان الفديو :</value>
+  </data>
+  <data name="infoVido5" xml:space="preserve">
+    <value>عنوان الفديو :</value>
+  </data>
+  <data name="infoco2" xml:space="preserve">
+    <value>الدورة التدربية</value>
+  </data>
 </root>

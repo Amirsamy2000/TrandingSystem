@@ -1,9 +1,12 @@
 ﻿using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
+using TrandingSystem.Application.Features.analysis.Queriers;
 using TrandingSystem.Application.Features.Courses.Queries;
+using TrandingSystem.Domain.Entities;
 using TrandingSystem.Infrastructure.Data;
 using TrandingSystem.Models;
 
@@ -15,39 +18,51 @@ namespace WebApplication1.Controllers
         private readonly db23617Context _db;
         private readonly IMediator _mediator;
         private readonly IMapper _mapper;
+        private readonly UserManager<User> _userManager;
 
-        public HomeController(ILogger<HomeController> logger,     db23617Context options, IMediator mediator, IMapper mapper)
+        public HomeController(ILogger<HomeController> logger,     db23617Context options, IMediator mediator, IMapper mapper, UserManager<User> userManager)
         {
             _logger = logger;
             _db = options;
             _mediator = mediator;
             _mapper = mapper;
+            _userManager = userManager;
         }
 
         public IActionResult Index()
         {
 
-         //   var t = _db.Roles.ToList();
+            //   var t = _db.Roles.ToList();
+            // Get Anal of Count Course and stds ,video ,lec
 
-            return View();
+            var result =  _mediator.Send(new GetCountStds_Courses_Videos_lecQuery()).Result;
+
+            return View(result);
 
            
         }
         public IActionResult About()
         {
-            return View();
+            var result = _mediator.Send(new GetCountStds_Courses_Videos_lecQuery()).Result;
+
+            return View(result);
         }
 
+        [Authorize(Roles ="Admin")]
         public IActionResult Pricing()
         {
             return View();
         }
 
+
+        [Authorize(Roles = "Admin")]
         public IActionResult Events()
         {
             return View();
         }
 
+
+        [Authorize(Roles = "Admin")]
         public IActionResult Trainers()
         {
             return View();
@@ -71,8 +86,12 @@ namespace WebApplication1.Controllers
             return View(course.Data);
         }
 
+        [Authorize]
         public IActionResult Contact()
         {
+            var user =  _userManager.GetUserAsync(User).Result;
+            var email =  _userManager.GetEmailAsync(user).Result;
+            ViewBag.Email = email??"";
             return View();
         }
 

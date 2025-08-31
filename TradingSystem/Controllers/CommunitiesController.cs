@@ -1,6 +1,8 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
+using TradingSystem.Application.Common.Response;
 using TrandingSystem.Application.Dtos;
 using TrandingSystem.Application.Features.Community.Commands;
 using TrandingSystem.Application.Features.Community.Queries;
@@ -10,6 +12,7 @@ using TrandingSystem.Domain.Entities;
 
 namespace TrandingSystem.Controllers
 {
+    [Authorize]
     public class CommunitiesController : Controller
     {
         private readonly IMediator _mediator;
@@ -141,11 +144,26 @@ namespace TrandingSystem.Controllers
         {
             ViewBag.CommunityName = CommunityName;
             ViewBag.Communityid = communityId;
+
             var response = _mediator.Send(new GetAllUsersByStatusQuery(5, communityId)).Result;
 
             return PartialView("_PartialDisplayUsersCoomunity", response.Data);
 
         }
 
+        [HttpPost]
+        public IActionResult SubmitDeleteUserFormCommunity(List<int> UserIds, int CommunityId)
+        {
+            var res = _mediator.Send( new DeleteUsersFormCommuntiyCommand(UserIds, CommunityId)).Result;
+            return Json(res);
+        }
+
+        [HttpPost]
+        public IActionResult SubmitBlockOrActiveUserFormCommunity(List<int> UserIds, int CommunityId,bool IsBlock)
+        {
+            var res = _mediator.Send(new BlockOrActiveUserCommand(UserIds, IsBlock, CommunityId)).Result;
+            
+            return Json(res);
+        }
     }
 }

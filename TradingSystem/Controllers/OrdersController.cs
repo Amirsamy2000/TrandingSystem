@@ -10,6 +10,7 @@ using TrandingSystem.Models;
 
 namespace TrandingSystem.Controllers
 {
+
     public class OrdersController : Controller
     {
         private readonly IMediator _mediator;

@@ -13,7 +13,8 @@ namespace TrandingSystem.Application.Dtos
         public string FullName { get; set; }
         public string Mobile { get; set; }
         public DateTime? RegisteredAt { get; set; }
-        public bool IsBlocked { get; set; }
+        public bool IsBlockedSite { get; set; }
+        public bool ?IsBlockedCommunity { get; set; }
         public int RoleId { get; set; } // Changed from byte to int
         public string Address { get; set; }
         public string? Email { get; set; }

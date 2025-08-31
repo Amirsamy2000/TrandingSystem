@@ -50,5 +50,12 @@ namespace TrandingSystem.Infrastructure.Repositories
         {
             return _context.Users.Where(x => x.EmailConfirmed == true).ToList();
         }
+
+        public List<User> GetUserEnrollInCourse(int CourseId)
+        {
+            return _context.CourseEnrollments.Where(x => x.CourseId == CourseId && x.OrderStatus == 1).Select(x=>x.User).ToList();
+        }
+
+        
     }
 }

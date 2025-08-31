@@ -36,6 +36,7 @@ builder.Services.AddScoped<IFileService, FileService>();
 builder.Services.AddTransient<IEmailSender, SmtpEmailSender>();
 builder.Services.AddScoped<ICommunityRepository, CommunityRepository>();
 builder.Services.AddScoped<IMessageRepository, MessageRepository>();
+builder.Services.AddScoped<INotificationService, NotificationService>();
 builder.Services.AddSignalR();
 
 
