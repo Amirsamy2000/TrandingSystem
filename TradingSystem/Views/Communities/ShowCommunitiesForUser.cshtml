@@ -8,6 +8,10 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@{
+
+}
+
 <div class="page-title aos-init aos-animate" data-aos="fade">
     <div class="heading">
         <div class="container">
@@ -32,44 +36,46 @@
 </div>
 @if (Model.Count() == 0 || Model is null)
 {
-
+    <div class="alert alert-warning text-center p-3">
+        @Localizer["NoCommunitiesAvailable"]
+    </div>
 }
 else
 {
-       
+
 
     <style>
-             .custom-card {
-                 transition: all 0.3s ease-in-out;
-                 box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-                 border-radius: 12px;
-             }
+        .custom-card {
+        transition: all 0.3s ease-in-out;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        border-radius: 12px;
+        }
 
-                 .custom-card:hover {
-                     background: #141921;
-                     color: #ffffff;
-                     transform: translateY(-5px);
-                     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-                 }
+        .custom-card:hover {
+        background: #141921;
+        color: #ffffff;
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
 
-                     .custom-card:hover .card-title,
-                     .custom-card:hover .card-text,
-                     .custom-card:hover small {
-                         color: #ffffff !important;
-                     }
+        .custom-card:hover .card-title,
+        .custom-card:hover .card-text,
+        .custom-card:hover small {
+        color: #ffffff !important;
+        }
 
-                     .custom-card:hover b {
-                         color: #ffffff !important;
-                     }
+        .custom-card:hover b {
+        color: #ffffff !important;
+        }
 
-             .card-border-c {
-                 border-bottom-color: #c3972e;
-                 border-bottom-style: solid;
-                 border-bottom-width: 5px;
-             }
+        .card-border-c {
+        border-bottom-color: #c3972e;
+        border-bottom-style: solid;
+        border-bottom-width: 5px;
+        }
     </style>
 
-   
+
     <section id="features" class="features section" style="min-height:400px">
 
         <div class="container p-4">
@@ -77,57 +83,62 @@ else
             <div class="row gy-4">
                 @foreach (var comm in Model)
                 {
-                    if (!(bool)comm.IsClosed)
-                    {
-                        <div class="col-lg-4 col-md-6 mb-4 aos-init aos-animate" data-aos="fade-up" data-aos-delay="100">
+                    <div class="col-lg-4 col-md-6 mb-4 aos-init aos-animate"
+                         data-aos="fade-up" data-aos-delay="100">
+
+                        @if (comm.IsClosed == true || comm.UserIsBlock)
+                        {
+                            <!-- لو المجتمع مقفول أو المستخدم محظور → كارت عادي من غير لينك -->
+                            <div class="card custom-card h-100 border-0">
+                                <div class="card-body d-flex flex-column card-border-c">
+                                    <!-- Title -->
+                                    <div class="d-flex align-items-center mb-3">
+                                        <i class="bi bi-chat-dots-fill fs-3 me-2" style="color:red;"></i>
+                                        <h5 class="card-title mb-0 title-truncate">@comm.Title</h5>
+                                    </div>
+
+                                    <!-- الرسالة -->
+                                    @if (comm.IsClosed == true)
+                                    {
+                                        <p class="card-text text-muted mb-1 message-truncate alert alert-danger">
+                                            @Localizer["CommunityClosedByAdmin"]
+                                        </p>
+                                    }
+                                    else if (comm.UserIsBlock)
+                                    {
+                                        <p class="card-text text-muted mb-1 message-truncate alert alert-danger">
+                                            @Localizer["YouAreBlockedContactSupport"]
+                                        </p>
+                                    }
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <!-- لو مفتوح ومش بلوك → الرابط شغال -->
                             <a href="/Chat/Room/@comm.CommunityId" class="text-decoration-none">
                                 <div class="card custom-card h-100 border-0">
                                     <div class="card-body d-flex flex-column card-border-c">
-                                        <!-- Icon + Title -->
+                                        <!-- Title -->
                                         <div class="d-flex align-items-center mb-3">
-                                            <i class="bi bi-chat-dots-fill fs-3 me-2" style="color: #ffbb2c;"></i>
-                                            <h5 class="card-title mb-0 title-truncate hover-card-h">@comm.Title</h5>
+                                            <i class="bi bi-chat-dots-fill fs-3 me-2" style="color:#ffbb2c;"></i>
+                                            <h5 class="card-title mb-0 title-truncate">@comm.Title</h5>
                                         </div>
 
-                                        <!-- Last message -->
+                                        <!-- آخر رسالة -->
                                         <p class="card-text text-muted mb-1 message-truncate">
                                             <b>@comm.Sender:</b> @comm.LastMessage
                                         </p>
 
-                                        <!-- Date -->
+                                        <!-- التاريخ -->
                                         <small class="text-muted mt-auto">
                                             @comm.LastMessageTime?.ToString("dd/MM/yyyy HH:mm")
                                         </small>
                                     </div>
                                 </div>
                             </a>
-                        </div>
-                    }
-                    else
-                    {
-                        <div class="col-lg-4 col-md-6 mb-4 aos-init aos-animate" data-aos="fade-up" data-aos-delay="100">
-                            <a class="text-decoration-none">
-                                <div class="card custom-card h-100 border-0">
-                                    <div class="card-body d-flex flex-column card-border-c">
-                                        <!-- Icon + Title -->
-                                        <div class="d-flex align-items-center mb-3">
-                                            <i class="bi bi-chat-dots-fill fs-3 me-2" style="color: red;"></i>
-                                            <h5 class="card-title mb-0 title-truncate">@comm.Title</h5>
-                                        </div>
-
-                                        <!-- Last message -->
-                                        <p class="card-text text-muted mb-1 message-truncate alert alert-danger">
-                                            @Localizer["CommunityIsClose"]
-                                        </p>
-
-                                        <!-- Date -->
-                                        
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    }
-
+                        }
+                    </div>
                 }
 
             </div>

@@ -181,7 +181,10 @@
     <value>طلبات</value>
   </data>
   <data name="OrdersRequest" xml:space="preserve">
-    <value>طلبات تسجيل الطلاب</value>
+    <value>طلبات التسجيل في الدورات</value>
+  </data>
+  <data name="OrdersRequestVideo" xml:space="preserve">
+    <value>طلبات تسجيل الفيديوهات</value>
   </data>
   <data name="PendingEnrollmentRequests" xml:space="preserve">
     <value>طلبات التسجيل المعلقة</value>
@@ -218,6 +221,9 @@
   </data>
   <data name="Total" xml:space="preserve">
     <value>الاجمالي</value>
+  </data>
+  <data name="VideoCol" xml:space="preserve">
+    <value>الفديو</value>
   </data>
   <data name="View" xml:space="preserve">
     <value>عرض     </value>

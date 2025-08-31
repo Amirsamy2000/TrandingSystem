@@ -321,4 +321,7 @@
   <data name="UnBlockUser" xml:space="preserve">
     <value>Active Selected Users</value>
   </data>
+  <data name="NoCommunitiesAvailable" xml:space="preserve">
+    <value>No communities are available yet.</value>
+  </data>
 </root>

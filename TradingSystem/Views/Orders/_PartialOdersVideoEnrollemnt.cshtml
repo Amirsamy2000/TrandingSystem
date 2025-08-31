@@ -58,8 +58,8 @@
 
                 <th scope="col">@Localizer["StudentCol"]</th>
                 <th scope="col">@Localizer["StudenMailCol"]</th>
-                <th scope="col">@Localizer["StudentPhoneCol"]</th>
-                <th scope="col">@Localizer["CousreCol"]</th>
+                 <th scope="col">@Localizer["CousreCol"]</th>
+                <th scope="col">@Localizer["VideoCol"]</th>
                 @* <th scope="col">@Localizer["CousreStatus"]</th> *@
                 <th scope="col">@Localizer["CourseCostCol"]</th>
                 <th scope="col">@Localizer["orderdate"]</th>
@@ -76,9 +76,9 @@
                 <tr>
                     <td>@order.UserName</td>
                     <td>@order.UserEmail</td>
-                    <td>@order.UserMobile</td>
-                    <td>@order.CourseName</td>
-                    <td>@order.CostCourse</td>
+                     <td>@order.CourseName</td>
+                    <td>@order.VideoName</td>
+                    <td>@order.VideoCost</td>
                     <td>@(order.CreatedAt?.ToString("d"))  </td>
                    @*  <td>
                         <img src="@order.ReceiptImagePath" alt="Not Found" width="50" height="50" />
@@ -179,7 +179,7 @@ else
            cancelButtonText: '@Localizer["canclesweet"]',
        }).then((result) => {
            if (result.isConfirmed) {
-               fetch(`/Orders/ChangeOrderStatus?orderId=${orderid}&newStatus=${status}&type=0`, { method: "Post" })
+               fetch(`/Orders/ChangeOrderStatus?orderId=${orderid}&newStatus=${status}&type=1`, { method: "Post" })
                    .then(response => {
                        if (!response.ok) throw new Error("HTTP error " + response.status);
                        return response.json(); // توقعنا Response<T>
