@@ -14,15 +14,27 @@
       dir="@(currentCulture  == "ar" ? "rtl" : "ltr")">
 
 <head>
+    <title>@Localizer["SiteName"]</title>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>Index - Mentor Bootstrap Template</title>
-    <meta name="description" content="">
-    <meta name="keywords" content="">
+    <meta  name="author" content="Company AgSoft"/>
+
+    @* SEO *@
+    <meta name="description" content="@Localizer["MetaDescription"]">
+    <meta name="keywords" content="@Localizer["MetaKeywords"]">
+
+    <!-- Open Graph (Facebook, WhatsApp, LinkedIn) -->
+    <meta property="og:title" content="@Localizer["SiteName"]">
+    <meta property="og:description" content="@Localizer["MetaSocialDesc"]">
+    <meta property="og:image" content="~/assets/img/saiflogo/logo-removebg-preview.png">
+    <meta property="og:url" content="http://saifalqadi.runasp.net/">
+    <meta property="og:type" content="website">
+
+
 
     <!-- Favicons -->
-    <link href="~/assets/img/favicon.png" rel="icon">
-    <link href="~/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+    <link href="~/assets/img/saiflogo/logo-removebg-preview.png" rel="icon">
+    <link href="~/assets/img/SaifLogo/logo-removebg-preview.png" rel="apple-touch-icon">
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com" rel="preconnect"> 
