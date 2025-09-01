@@ -294,6 +294,7 @@
      
     </div>
 
+   
 
     <!-- Preloader -->
     <div id="preloader"></div>
@@ -306,6 +307,22 @@
     @*      }  *@
     @*  </script> *@
     <!-- Vendor JS Files -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let currentPath = window.location.pathname.toLowerCase();
+            let links = document.querySelectorAll("#navmenu a");
+
+            links.forEach(link => {
+                let linkPath = new URL(link.href).pathname.toLowerCase();
+                if (linkPath === currentPath) {
+                    links.forEach(l => l.classList.remove("active")); // يشيل active من الكل
+                    link.classList.add("active"); // يضيف active على اللينك الحالي
+                }
+            });
+        });
+    </script>
+
+
     <script src="~/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="~/assets/vendor/php-email-form/validate.js"></script>
     <script src="~/assets/vendor/aos/aos.js"></script>
