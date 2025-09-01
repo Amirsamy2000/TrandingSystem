@@ -13,83 +13,702 @@
     <link href="~/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
     <link href="~/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet" />
     <link href="~/assets/css/main.css" rel="stylesheet" />
+    <style>
+        :root {
+            --primary-color: #141921;
+            --secondary-color: #c3972e;
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #1a1f2e 50%, var(--primary-color) 100%);
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+            body::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: radial-gradient(circle at 20% 20%, rgba(195, 151, 46, 0.15) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(195, 151, 46, 0.1) 0%, transparent 50%), radial-gradient(circle at 40% 60%, rgba(195, 151, 46, 0.05) 0%, transparent 50%);
+                z-index: 0;
+                animation: bgShift 20s ease-in-out infinite;
+            }
+
+        @@keyframes bgShift {
+            0%, 100%
+
+        {
+            opacity: 1;
+        }
+
+        50% {
+            opacity: 0.7;
+        }
+
+        }
+
+        .main {
+            position: relative;
+            z-index: 1;
+        }
+
+        .register-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            animation: fadeInUp 0.8s ease-out;
+            position: relative;
+            overflow: hidden;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+            .register-card::-webkit-scrollbar {
+                width: 6px;
+            }
+
+            .register-card::-webkit-scrollbar-track {
+                background: rgba(255, 255, 255, 0.1);
+                border-radius: 10px;
+            }
+
+            .register-card::-webkit-scrollbar-thumb {
+                background: var(--secondary-color);
+                border-radius: 10px;
+            }
+
+            .register-card::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: -100%;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+                animation: shimmer 3s ease-in-out infinite;
+            }
+
+        @@keyframes shimmer {
+            0%
+
+        {
+            left: -100%;
+        }
+
+        100% {
+            left: 100%;
+        }
+
+        }
+
+        @@keyframes fadeInUp {
+            from
+
+        {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        }
+
+        .register-icon {
+            color: var(--secondary-color);
+            background: linear-gradient(135deg, var(--secondary-color), #e6b341);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: drop-shadow(0 4px 8px rgba(195, 151, 46, 0.3));
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @@keyframes pulse {
+            0%, 100%
+
+        {
+            transform: scale(1);
+        }
+
+        50% {
+            transform: scale(1.05);
+        }
+
+        }
+
+        .form-floating {
+            position: relative;
+            margin-bottom: 1rem;
+        }
+
+            .form-floating .form-control {
+                background: rgba(255, 255, 255, 0.05);
+                border: 2px solid rgba(255, 255, 255, 0.1);
+                border-radius: 16px;
+                color: white;
+                transition: all 0.3s ease;
+                backdrop-filter: blur(10px);
+                padding: 1rem 0.75rem;
+            }
+
+                .form-floating .form-control:focus {
+                    background: rgba(255, 255, 255, 0.08);
+                    border-color: var(--secondary-color);
+                    box-shadow: 0 0 20px rgba(195, 151, 46, 0.2);
+                    transform: translateY(-2px);
+                }
+
+                .form-floating .form-control::placeholder {
+                    color: rgba(255, 255, 255, 0.5);
+                }
+
+            .form-floating label {
+                color: rgba(255, 255, 255, 0.7);
+                transition: all 0.3s ease;
+            }
+
+            .form-floating .form-control:focus ~ label,
+            .form-floating .form-control:not(:placeholder-shown) ~ label {
+                color: var(--secondary-color);
+                transform: scale(0.85) translateY(-0.5rem) translateX(0.15rem);
+            }
+
+        .enhanced-btn {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border: none;
+            border-radius: 16px;
+            color: white;
+            font-weight: 600;
+            padding: 14px 28px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 8px 25px rgba(195, 151, 46, 0.3);
+        }
+
+            .enhanced-btn::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: -100%;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+                transition: left 0.6s ease;
+            }
+
+            .enhanced-btn:hover::before {
+                left: 100%;
+            }
+
+            .enhanced-btn:hover {
+                transform: translateY(-3px) scale(1.02);
+                box-shadow: 0 15px 35px rgba(195, 151, 46, 0.4);
+                background: linear-gradient(135deg, #1a1f2e, #d4a332);
+            }
+
+            .enhanced-btn:active {
+                transform: translateY(-1px) scale(0.98);
+                box-shadow: 0 5px 15px rgba(195, 151, 46, 0.3);
+            }
+
+        .social-btn {
+            width: 50px;
+            height: 50px;
+            border: 2px solid rgba(255, 255, 255, 0.15);
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.05);
+            color: rgba(255, 255, 255, 0.7);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+            .social-btn:hover {
+                border-color: var(--secondary-color);
+                background: rgba(195, 151, 46, 0.1);
+                color: var(--secondary-color);
+                transform: translateY(-2px) scale(1.05);
+            }
+
+        .validation-summary-errors {
+            background: rgba(220, 53, 69, 0.15);
+            border: 1px solid rgba(220, 53, 69, 0.3);
+            border-radius: 12px;
+            padding: 12px;
+            color: #ff6b6b;
+            backdrop-filter: blur(10px);
+        }
+
+        .text-danger {
+            color: #ff6b6b !important;
+        }
+
+        .text-muted {
+            color: rgba(255, 255, 255, 0.6) !important;
+        }
+
+        .small a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+            .small a::after {
+                content: '';
+                position: absolute;
+                bottom: -2px;
+                left: 0;
+                width: 0;
+                height: 2px;
+                background: var(--secondary-color);
+                transition: width 0.3s ease;
+            }
+
+            .small a:hover {
+                color: var(--secondary-color);
+            }
+
+                .small a:hover::after {
+                    width: 100%;
+                }
+
+        /* Form validation styling */
+        .form-floating .form-control.is-valid {
+            border-color: #28a745;
+            box-shadow: 0 0 10px rgba(40, 167, 69, 0.2);
+        }
+
+        .form-floating .form-control.is-invalid {
+            border-color: #dc3545;
+            box-shadow: 0 0 10px rgba(220, 53, 69, 0.2);
+        }
+
+        /* Progress indicator */
+        .form-progress {
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--secondary-color), #e6b341);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        /* Step indicators */
+        .step-indicator {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+        }
+
+        .step {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+            .step.active {
+                background: var(--secondary-color);
+                box-shadow: 0 0 10px rgba(195, 151, 46, 0.5);
+            }
+
+            .step.completed {
+                background: #28a745;
+            }
+
+        /* Loading animation for buttons */
+        .btn-loading {
+            position: relative;
+            color: transparent !important;
+        }
+
+            .btn-loading::after {
+                content: '';
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                width: 20px;
+                height: 20px;
+                margin: -10px 0 0 -10px;
+                border: 2px solid rgba(255, 255, 255, 0.3);
+                border-top-color: white;
+                border-radius: 50%;
+                animation: spin 0.8s linear infinite;
+            }
+
+        @@keyframes spin {
+            to
+
+        {
+            transform: rotate(360deg);
+        }
+
+        }
+
+        /* Responsive improvements */
+        @@media (max-width: 768px) {
+            .register-card
+
+        {
+            margin: 10px;
+            border-radius: 20px;
+            max-height: 95vh;
+        }
+
+        .enhanced-btn {
+            padding: 12px 20px;
+        }
+
+        .form-floating {
+            margin-bottom: 0.75rem;
+        }
+
+        }
+
+        @@media (max-width: 576px) {
+            .register-card
+
+        {
+            margin: 5px;
+        }
+
+        .card-body {
+            padding: 1.5rem !important;
+        }
+
+        }
+    </style>
 </head>
 <body>
-<main class="main d-flex align-items-center justify-content-center min-vh-100" style="background: var(--bs-body-bg);">
-    <div class="container d-flex justify-content-center align-items-center" style="min-height: 80vh;">
-        <div class="card shadow border-0 w-100" style="max-width:400px;">
-            <div class="card-body p-4">
-                <div class="text-center mb-4">
-                    <i class="bi bi-person-plus display-3 text-primary"></i>
-                    <h2 class="fw-bold mb-2">@ViewData["Title"]</h2>
+    <main class="main d-flex align-items-center justify-content-center min-vh-100 py-3">
+        <div class="container d-flex justify-content-center align-items-center">
+            <div class="register-card shadow border-0 w-100" style="max-width:450px;">
+                <div class="card-body p-4">
+                    <div class="text-center mb-4">
+                        <i class="register-icon bi bi-person-plus display-2 mb-3"></i>
+                        <h2 class="fw-bold mb-2 text-white">Create Account</h2>
+                        <p class="text-muted">Join us today and get started</p>
+                    </div>
+
+                    <!-- Progress Indicator -->
+                    <div class="form-progress">
+                        <div class="form-progress-bar" id="progressBar"></div>
+                    </div>
+
+                    <!-- Step Indicators -->
+                    <div class="step-indicator">
+                        <div class="step active" data-step="1"></div>
+                        <div class="step" data-step="2"></div>
+                        <div class="step" data-step="3"></div>
+                        <div class="step" data-step="4"></div>
+                        <div class="step" data-step="5"></div>
+                        <div class="step" data-step="6"></div>
+                    </div>
+
+                    <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post" autocomplete="off">
+                        <div asp-validation-summary="ModelOnly" class="validation-summary-errors mb-3" role="alert"></div>
+
+                        <div class="form-floating mb-3">
+                            <input asp-for="Input.FullName" class="form-control" aria-required="true" placeholder="                                " />
+                            <label asp-for="Input.FullName">
+                                <i class="bi bi-person me-2"></i>Full Name
+                            </label>
+                            <span asp-validation-for="Input.FullName" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input asp-for="Input.Mobile" class="form-control" aria-required="true" placeholder="                                " />
+                            <label asp-for="Input.Mobile">
+                                <i class="bi bi-phone me-2"></i>Mobile
+                            </label>
+                            <span asp-validation-for="Input.Mobile" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="                                " />
+                            <label asp-for="Input.Email">
+                                <i class="bi bi-envelope me-2"></i>Email
+                            </label>
+                            <span asp-validation-for="Input.Email" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input asp-for="Input.NationalId" class="form-control" aria-required="true" placeholder="                                " />
+                            <label asp-for="Input.NationalId">
+                                <i class="bi bi-card-text me-2"></i>National ID
+                            </label>
+                            <span asp-validation-for="Input.NationalId" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="                                " />
+                            <label asp-for="Input.Password">
+                                <i class="bi bi-lock me-2"></i>Password
+                            </label>
+                            <span asp-validation-for="Input.Password" class="text-danger"></span>
+                            <div class="password-strength mt-2">
+                                <div class="d-flex gap-1">
+                                    <div class="strength-bar flex-fill"></div>
+                                    <div class="strength-bar flex-fill"></div>
+                                    <div class="strength-bar flex-fill"></div>
+                                    <div class="strength-bar flex-fill"></div>
+                                </div>
+                                <small class="strength-text text-muted">Password strength</small>
+                            </div>
+                        </div>
+
+                        <div class="form-floating mb-4">
+                            <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="                                " />
+                            <label asp-for="Input.ConfirmPassword">
+                                <i class="bi bi-lock-fill me-2"></i>Confirm Password
+                            </label>
+                            <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                        </div>
+
+                        <button id="registerSubmit" type="submit" class="enhanced-btn w-100 mb-3 d-flex align-items-center justify-content-center gap-2">
+                            <i class="bi bi-person-plus fs-5"></i>
+                            <span class="fw-semibold">Create Account</span>
+                        </button>
+
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <a asp-page="./Login" asp-route-returnUrl="@Model.ReturnUrl" class="small">
+                                <i class="bi bi-arrow-left me-1"></i>Already have an account?
+                            </a>
+                            <a asp-page="./ForgotPassword" class="small">
+                                <i class="bi bi-key me-1"></i>Forgot password?
+                            </a>
+                        </div>
+
+                        <div class="text-center mb-3">
+                            <div class="position-relative">
+                                <hr style="border-color: rgba(255, 255, 255, 0.2);">
+                                <span class="position-absolute top-50 start-50 translate-middle bg-body px-3 text-muted small" style="background: transparent !important;">
+                                    Or register with
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-center gap-3 mb-2">
+                            <button type="button" class="social-btn d-flex align-items-center justify-content-center" title="Google">
+                                <i class="bi bi-google"></i>
+                            </button>
+                            <button type="button" class="social-btn d-flex align-items-center justify-content-center" title="Facebook">
+                                <i class="bi bi-facebook"></i>
+                            </button>
+                            <button type="button" class="social-btn d-flex align-items-center justify-content-center" title="Twitter">
+                                <i class="bi bi-twitter-x"></i>
+                            </button>
+                        </div>
+                    </form>
                 </div>
-                <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post" autocomplete="off">
-                    <div asp-validation-summary="ModelOnly" class="text-danger mb-2" role="alert"></div>
-                    <div class="form-floating mb-3">
-                        <input asp-for="Input.FullName" class="form-control" aria-required="true" placeholder="Full Name" />
-                        <label asp-for="Input.FullName">Full Name</label>
-                        <span asp-validation-for="Input.FullName" class="text-danger"></span>
-                    </div>
-                    <div class="form-floating mb-3">
-                        <input asp-for="Input.Mobile" class="form-control" aria-required="true" placeholder="Mobile" />
-                        <label asp-for="Input.Mobile">Mobile</label>
-                        <span asp-validation-for="Input.Mobile" class="text-danger"></span>
-                    </div>
-                    <div class="form-floating mb-3">
-                        <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
-                        <label asp-for="Input.Email">Email</label>
-                        <span asp-validation-for="Input.Email" class="text-danger"></span>
-                    </div>
-
-                    <div class="form-floating mb-3">
-                        <input asp-for="Input.NationalId" class="form-control" class="form-control" aria-required="true" placeholder="enter your National ID" />
-                        <label asp-for="Input.NationalId">National Id</label>
-                        <span asp-validation-for="Input.NationalId" class="text-danger"></span>
-                    </div>
-
-                    <div class="form-floating mb-3">
-                        <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
-                        <label asp-for="Input.Password">Password</label>
-                        <span asp-validation-for="Input.Password" class="text-danger"></span>
-                    </div>
-                    <div class="form-floating mb-3">
-                        <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
-                        <label asp-for="Input.ConfirmPassword">Confirm Password</label>
-                        <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
-                    </div>
-                    <button id="registerSubmit" type="submit" class="w-100 btn btn-lg mb-3 text-white d-flex align-items-center justify-content-center gap-2" style="background: linear-gradient(135deg, #4154f1, #5969f3); border: none; transition: all 0.3s ease;">
-                        <i class="bi bi-person-plus fs-5"></i>
-                        <span class="fw-semibold">Register</span>
-                    </button>
-                    <div class="d-flex justify-content-between align-items-center mb-3">
-                        <a asp-page="./Login" asp-route-returnUrl="@Model.ReturnUrl" class="small">Already have an account?</a>
-                        <a asp-page="./ForgotPassword" class="small">Forgot password?</a>
-                    </div>
-                    <div class="text-center mb-2">
-                        <span class="text-muted small">Or register with</span>
-                    </div>
-                    <div class="d-flex justify-content-center gap-2 mb-2">
-                        <button type="button" class="btn btn-outline-secondary rounded-circle" title="Google"><i class="bi bi-google"></i></button>
-                        <button type="button" class="btn btn-outline-secondary rounded-circle" title="Facebook"><i class="bi bi-facebook"></i></button>
-                        <button type="button" class="btn btn-outline-secondary rounded-circle" title="Twitter"><i class="bi bi-twitter-x"></i></button>
-                    </div>
-                </form>
             </div>
         </div>
-    </div>
-</main>
-@section Scripts {
-    <partial name="_ValidationScriptsPartial" />
-    <script>
-        document.getElementById('registerSubmit')?.addEventListener('mouseover', function() {
-            this.style.transform = 'translateY(-2px)';
-            this.style.boxShadow = '0 6px 12px rgba(65, 84, 241, 0.25)';
-        });
-        document.getElementById('registerSubmit')?.addEventListener('mouseout', function() {
-            this.style.transform = '';
-            this.style.boxShadow = '';
-        });
-    </script>
-}
+    </main>
+
+    @section Scripts {
+        <partial name="_ValidationScriptsPartial" />
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const form = document.getElementById('registerForm');
+                const submitBtn = document.getElementById('registerSubmit');
+                const progressBar = document.getElementById('progressBar');
+                const inputs = document.querySelectorAll('.form-control');
+                const steps = document.querySelectorAll('.step');
+
+                // Password strength indicator
+                const passwordInput = document.querySelector('input[name="Input.Password"]');
+                const strengthBars = document.querySelectorAll('.strength-bar');
+                const strengthText = document.querySelector('.strength-text');
+
+                // Add password strength styling
+                const style = document.createElement('style');
+                style.textContent = `
+                    .strength-bar {
+                        height: 4px;
+                        background: rgba(255, 255, 255, 0.2);
+                        border-radius: 2px;
+                        transition: all 0.3s ease;
+                    }
+                    .strength-bar.weak { background: #dc3545; }
+                    .strength-bar.fair { background: #ffc107; }
+                    .strength-bar.good { background: #28a745; }
+                    .strength-bar.strong { background: #20c997; }
+                `;
+                document.head.appendChild(style);
+
+                // Form submission with loading state
+                form?.addEventListener('submit', function() {
+                    submitBtn?.classList.add('btn-loading');
+                    setTimeout(() => {
+                        submitBtn?.classList.remove('btn-loading');
+                    }, 3000);
+                });
+
+                // Progress tracking
+                function updateProgress() {
+                    let filledInputs = 0;
+                    inputs.forEach(input => {
+                        if (input.value.trim() !== '') {
+                            filledInputs++;
+                        }
+                    });
+
+                    const progress = (filledInputs / inputs.length) * 100;
+                    progressBar.style.width = progress + '%';
+
+                    // Update step indicators
+                    steps.forEach((step, index) => {
+                        step.classList.remove('active', 'completed');
+                        if (index < filledInputs) {
+                            step.classList.add('completed');
+                        } else if (index === filledInputs) {
+                            step.classList.add('active');
+                        }
+                    });
+                }
+
+                // Password strength checker
+                function checkPasswordStrength(password) {
+                    let strength = 0;
+                    const checks = [
+                        password.length >= 8,
+                        /[a-z]/.test(password),
+                        /[A-Z]/.test(password),
+                        /[0-9]/.test(password),
+                        /[^A-Za-z0-9]/.test(password)
+                    ];
+
+                    strength = checks.filter(check => check).length;
+
+                    strengthBars.forEach((bar, index) => {
+                        bar.classList.remove('weak', 'fair', 'good', 'strong');
+                        if (index < strength) {
+                            if (strength <= 2) bar.classList.add('weak');
+                            else if (strength === 3) bar.classList.add('fair');
+                            else if (strength === 4) bar.classList.add('good');
+                            else bar.classList.add('strong');
+                        }
+                    });
+
+                    const strengthTexts = ['Very Weak', 'Weak', 'Fair', 'Good', 'Strong'];
+                    strengthText.textContent = password ? strengthTexts[Math.min(strength, 4)] : 'Password strength';
+                    strengthText.style.color = password ? (
+                        strength <= 2 ? '#dc3545' :
+                        strength === 3 ? '#ffc107' :
+                        strength === 4 ? '#28a745' : '#20c997'
+                    ) : 'rgba(255, 255, 255, 0.6)';
+                }
+
+                // Enhanced input interactions
+                inputs.forEach(input => {
+                    input.addEventListener('input', updateProgress);
+
+                    input.addEventListener('focus', function() {
+                        this.parentElement.style.transform = 'scale(1.02)';
+                    });
+
+                    input.addEventListener('blur', function() {
+                        this.parentElement.style.transform = 'scale(1)';
+
+                        // Simple validation feedback
+                        if (this.value.trim() !== '') {
+                            this.classList.add('is-valid');
+                            this.classList.remove('is-invalid');
+                        } else if (this.hasAttribute('aria-required')) {
+                            this.classList.add('is-invalid');
+                            this.classList.remove('is-valid');
+                        }
+                    });
+                });
+
+                // Password strength monitoring
+                passwordInput?.addEventListener('input', function() {
+                    checkPasswordStrength(this.value);
+                });
+
+                // Confirm password matching
+                const confirmPasswordInput = document.querySelector('input[name="Input.ConfirmPassword"]');
+                confirmPasswordInput?.addEventListener('input', function() {
+                    if (passwordInput.value && this.value) {
+                        if (passwordInput.value === this.value) {
+                            this.classList.add('is-valid');
+                            this.classList.remove('is-invalid');
+                        } else {
+                            this.classList.add('is-invalid');
+                            this.classList.remove('is-valid');
+                        }
+                    }
+                });
+
+                // Social button ripple effect
+                const socialBtns = document.querySelectorAll('.social-btn');
+                socialBtns.forEach(btn => {
+                    btn.addEventListener('click', function(e) {
+                        const ripple = document.createElement('span');
+                        const rect = this.getBoundingClientRect();
+                        const size = Math.max(rect.width, rect.height);
+                        const x = e.clientX - rect.left - size / 2;
+                        const y = e.clientY - rect.top - size / 2;
+
+                        ripple.style.cssText = `
+                            position: absolute;
+                            width: ${size}px;
+                            height: ${size}px;
+                            left: ${x}px;
+                            top: ${y}px;
+                            background: rgba(195, 151, 46, 0.3);
+                            border-radius: 50%;
+                            transform: scale(0);
+                            animation: ripple 0.6s linear;
+                            pointer-events: none;
+                        `;
+
+                        this.style.position = 'relative';
+                        this.appendChild(ripple);
+
+                        setTimeout(() => ripple.remove(), 600);
+                    });
+                });
+
+                // Add keyframe for ripple animation
+                if (!document.querySelector('#ripple-style')) {
+                    const rippleStyle = document.createElement('style');
+                    rippleStyle.id = 'ripple-style';
+                    rippleStyle.textContent = `
+                        @@keyframes ripple {
+                            to {
+                                transform: scale(4);
+                                opacity: 0;
+                            }
+                        }
+                    `;
+                    document.head.appendChild(rippleStyle);
+                }
+
+                // Initialize progress
+                updateProgress();
+            });
+        </script>
+    }
 </body>
 </html>
