@@ -70,7 +70,8 @@ namespace TrandingSystem.Application.Features.LiveSessions.Handles
                         + "<br><br>"+ _localizer["infoLivetime2"] +": " + newLiveSession.ScheduledTime,
                         info3 = _localizer["infoVido3"] + " " + newLiveSession.Course.TitleEN,
                         contact = _localizer["contact"],
-                        ActionUrl = $"https://penalin897-001-site1.stempurl.com/Home/GoToCourse?CourseId={newLiveSession.CourseId}"
+                        namebtn = "Go Live",
+                        ActionUrl = request.LiveSessionAdd.YoutubeLink,
 
                     };
 

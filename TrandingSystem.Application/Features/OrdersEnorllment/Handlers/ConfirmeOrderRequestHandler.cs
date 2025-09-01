@@ -52,7 +52,7 @@ namespace TrandingSystem.Application.Features.OrdersEnorllment.Handlers
                     contact = _localizer["contact"],
                     namebtn="Show Course",
                     UserName = order.User.FullName,
-                    ActionUrl = $"https://penalin897-001-site1.stempurl.com/Home/Courses"
+                    ActionUrl = $"http://saifalqadi.runasp.net/Home/Courses"
 
                 };
                 if (request.Status==1)
