@@ -9,6 +9,7 @@ using TrandingSystem.Application.Features.LiveSessions.Queries;
 
 namespace TrandingSystem.Controllers
 {
+    [Authorize]
      public class LiveSessionController : Controller
     {
         private readonly IMediator _mediator;
@@ -16,6 +17,8 @@ namespace TrandingSystem.Controllers
         {
             _mediator = mediator;
         }
+
+        [Authorize(Roles = "Lecturer,Admin")]
         public IActionResult LiveSessions(CancellationToken cancellationToken, int CourseId = 1)
         {
             var culture = Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName;
@@ -26,6 +29,7 @@ namespace TrandingSystem.Controllers
             return View(response.Data);
         }
 
+        [Authorize(Roles = "Lecturer,Admin")]
         public IActionResult AddNewLiveSession(int CourseId = 0)
         {
             var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
@@ -45,6 +49,7 @@ namespace TrandingSystem.Controllers
         }
 
         // this Partial View For Display Add New Video Form
+        [Authorize(Roles = "Lecturer,Admin")]
         public IActionResult PartialViewAddNewLiveSession()
         {
             var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
@@ -67,6 +72,7 @@ namespace TrandingSystem.Controllers
 
         [ValidateAntiForgeryToken]
         [HttpPost]
+        [Authorize(Roles = "Lecturer,Admin")]
         public async Task<IActionResult> SubmitAddNewLiveSession(LiveSessionAddDto newSession, CancellationToken cancellationToken)
         {
             int UserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
@@ -76,6 +82,7 @@ namespace TrandingSystem.Controllers
         }
 
         // Dsiplay Partial Update Live Session
+        [Authorize(Roles = "Lecturer,Admin")]
         public IActionResult PartialUpdateLiveSession(int SesstionId)
         {
 
@@ -100,6 +107,7 @@ namespace TrandingSystem.Controllers
             return PartialView("_PartiaUpdateLiveSession", resp.Data);
         }
         [HttpPost]
+        [Authorize(Roles = "Lecturer,Admin")]
         public IActionResult SubmitUpdateLiveSession(LiveSessionAddDto liveSessionUpdateDto)
         {
             var res = _mediator.Send(new UpdateLiveSessionCommand(liveSessionUpdateDto)).Result;
@@ -107,6 +115,7 @@ namespace TrandingSystem.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public IActionResult DeleteLiveSession(int sessionId)
         {
             var res = _mediator.Send(new DeleteLiveSessionCommand(sessionId)).Result;
@@ -114,6 +123,7 @@ namespace TrandingSystem.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Lecturer,Admin")]
         public IActionResult BlockLiveSession(int SessionId,bool Status)
         {
             var res = _mediator.Send(new BlockLiveCommand(SessionId, Status)).Result;
@@ -122,6 +132,7 @@ namespace TrandingSystem.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public IActionResult DeleteAllLiveSessions(int CourseId)
         {
             var res = _mediator.Send(new DeleteAllLivesCommand(CourseId)).Result;

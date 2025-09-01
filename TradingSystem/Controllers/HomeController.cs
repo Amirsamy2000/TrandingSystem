@@ -42,7 +42,6 @@ namespace WebApplication1.Controllers
            
         }
 
-        [Authorize]
         public IActionResult About()
         {
             var result = _mediator.Send(new GetCountStds_Courses_Videos_lecQuery()).Result;
@@ -114,7 +113,7 @@ namespace WebApplication1.Controllers
             return LocalRedirect(returnUrl);
         }
 
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         public IActionResult Dashboard() { return View(); }
 
         public IActionResult Error(CustomeErrorModel error)

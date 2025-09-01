@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -10,6 +11,7 @@ using TrandingSystem.Models;
 
 namespace TrandingSystem.Controllers
 {
+    [Authorize(Roles = "Admin")]
 
     public class OrdersController : Controller
     {

@@ -146,71 +146,101 @@
 
                     </li>
 
+                    @if (User.IsInRole("Admin"))
+                    {
                     <!-- courses -->
-                    <li class="menu-item">
-                        <a href="javascript:void(0);" class="menu-link menu-toggle">
-                            <i class="menu-icon tf-icons bx bx-layout"></i>
-                            <div data-i18n="Layouts">@Localizer["course"]</div>
-                        </a>
+                        <li class="menu-item">
+                            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                                <i class="menu-icon tf-icons bx bx-layout"></i>
+                                <div data-i18n="Layouts">@Localizer["course"]</div>
+                            </a>
 
-                        <ul class="menu-sub">
-                            <li class="menu-item">
-                                <a href="/course/Create" class="menu-link">
-                                    <div data-i18n="Without menu">@Localizer["Add"]</div>
-                                </a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="/course/index" class="menu-link">
-                                    <div data-i18n="Without navbar">@Localizer["dispaly"]</div>
-                                </a>
-                            </li>
+                            <ul class="menu-sub">
+                                <li class="menu-item">
+                                    <a href="/course/Create" class="menu-link">
+                                        <div data-i18n="Without menu">@Localizer["Add"]</div>
+                                    </a>
+                                </li>
+                                <li class="menu-item">
+                                    <a href="/course/index" class="menu-link">
+                                        <div data-i18n="Without navbar">@Localizer["dispaly"]</div>
+                                    </a>
+                                </li>
                          
-                        </ul>
-                    </li>
-
+                            </ul>
+                        </li>
+                        
                     <!-- Users -->
-                    <li class="menu-item">
-                        <a href="javascript:void(0);" class="menu-link menu-toggle">
-                            <i class="menu-icon tf-icons bx bx-layout"></i>
-                            <div data-i18n="Layouts">@Localizer["user"]</div>
-                        </a>
+                        <li class="menu-item">
+                            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                                <i class="menu-icon tf-icons bx bx-layout"></i>
+                                <div data-i18n="Layouts">@Localizer["user"]</div>
+                            </a>
 
-                        <ul class="menu-sub">
-                            <li class="menu-item">
-                                <a href="layouts-without-menu.html" class="menu-link">
-                                    <div data-i18n="Without menu">@Localizer["Adduser"]</div>
-                                </a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="layouts-without-navbar.html" class="menu-link">
-                                    <div data-i18n="Without navbar">@Localizer["dispalyuser"]</div>
-                                </a>
-                            </li>
+                            <ul class="menu-sub">
+                                <li class="menu-item">
+                                    <a href="layouts-without-menu.html" class="menu-link">
+                                        <div data-i18n="Without menu">@Localizer["Adduser"]</div>
+                                    </a>
+                                </li>
+                                <li class="menu-item">
+                                    <a href="layouts-without-navbar.html" class="menu-link">
+                                        <div data-i18n="Without navbar">@Localizer["dispalyuser"]</div>
+                                    </a>
+                                </li>
 
-                        </ul>
-                    </li>
+                            </ul>
+                        </li>
 
                     <!-- Communities -->
-                    <li class="menu-item">
-                        <a href="javascript:void(0);" class="menu-link menu-toggle">
-                            <i class="menu-icon tf-icons bx bx-layout"></i>
-                            <div data-i18n="Layouts">@Localizer["communty"]</div>
-                        </a>
+                        <li class="menu-item">
+                            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                                <i class="menu-icon tf-icons bx bx-layout"></i>
+                                <div data-i18n="Layouts">@Localizer["communty"]</div>
+                            </a>
 
-                        <ul class="menu-sub">
-                            @* <li class="menu-item"> *@
-                            @*     <a asp-action="CreateCommunity" asp-controller="Communities" class="menu-link"> *@
-                            @*         <div data-i18n="Without menu">@Localizer["Addcommunty"]</div> *@
-                            @*     </a> *@
-                            @* </li> *@
-                            <li class="menu-item">
-                                <a asp-action="Index" asp-controller="Communities" class="menu-link">
-                                    <div data-i18n="Without navbar" >@Localizer["dispalycommunty"]</div>
-                                </a>
-                            </li>
+                            <ul class="menu-sub">
+                                @* <li class="menu-item"> *@
+                                @*     <a asp-action="CreateCommunity" asp-controller="Communities" class="menu-link"> *@
+                                @*         <div data-i18n="Without menu">@Localizer["Addcommunty"]</div> *@
+                                @*     </a> *@
+                                @* </li> *@
+                                <li class="menu-item">
+                                    <a asp-action="Index" asp-controller="Communities" class="menu-link">
+                                        <div data-i18n="Without navbar">@Localizer["dispalycommunty"]</div>
+                                    </a>
+                                </li>
 
-                        </ul>
-                    </li>
+                            </ul>
+                        </li>
+
+                    <!-- Orders -->
+                        <li class="menu-item">
+                            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                                <i class="menu-icon tf-icons bx bx-layout"></i>
+                                <div data-i18n="Layouts">@Localizer["Orders"]</div>
+                            </a>
+
+                            <ul class="menu-sub">
+                                <li class="menu-item" >
+                                    <a asp-action="AllOrders" asp-controller="Orders" class="menu-link">
+                                        <div data-i18n="Without menu">@Localizer["Ordercours"]</div>
+                                    </a>
+                                </li>
+                                <li class="menu-item">
+                                    <a asp-action="AllOrdersVideo" asp-controller="Orders" class="menu-link">
+                                        <div data-i18n="Without menu">@Localizer["Ordervideo"]</div>
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </li>
+
+
+                    }
+
+
+                    
                      
                     <!-- Videos -->
                     <li class="menu-item">
@@ -228,28 +258,6 @@
                             <li class="menu-item" >
                                 <a class="menu-link" onclick="ChoiceCourse('@Localizer["btnShowAllVideo"]','@Localizer["ChoiceCourse"]',0)">
                                     <div data-i18n="Without navbar" onclick="ChoiceCourse('@Localizer["btnShowAllVideo"]','@Localizer["ChoiceCourse"]',0)">@Localizer["DisplatVideo"]</div>
-                                </a>
-                            </li>
-
-                        </ul>
-                    </li>
-
-                    <!-- Orders -->
-                    <li class="menu-item">
-                        <a href="javascript:void(0);" class="menu-link menu-toggle">
-                            <i class="menu-icon tf-icons bx bx-layout"></i>
-                            <div data-i18n="Layouts">@Localizer["Orders"]</div>
-                        </a>
-
-                        <ul class="menu-sub">
-                            <li class="menu-item" >
-                                <a asp-action="AllOrders" asp-controller="Orders" class="menu-link">
-                                    <div data-i18n="Without menu">@Localizer["Ordercours"]</div>
-                                </a>
-                            </li>
-                            <li class="menu-item">
-                                <a asp-action="AllOrdersVideo" asp-controller="Orders" class="menu-link">
-                                    <div data-i18n="Without menu">@Localizer["Ordervideo"]</div>
                                 </a>
                             </li>
 
@@ -277,7 +285,8 @@
                             </li>
                         </ul>
                     </li>
-                    <!-- Test -->
+
+                   @*  <!-- Test -->
                     <li class="menu-item">
                         <a href="" class="menu-link menu-toggle">
                             <i class="menu-icon tf-icons bx bx-layout"></i>
@@ -298,7 +307,7 @@
 
                         </ul>
                     </li>
-
+ *@
 
                 </ul>
             </aside>
@@ -332,7 +341,7 @@
                         <div class="navbar-nav align-items-center">
                             <div class="nav-item d-flex align-items-center">
                                 <i class="bx bx-home-alt fs-4 lh-0"></i>
-                                <a href="https://localhost:7091/" class="form-control border-0 shadow-none" placeholder="landing page" aria-label="Search...">landing page</a>
+                                <a asp-action= "Index" asp-controller="Home" class="form-control border-0 shadow-none" placeholder="landing page" aria-label="Search...">landing page</a>
                             </div>
                         </div>
                         <!-- /landing page icon -->
@@ -358,7 +367,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="flex-grow-1">
-                                                    <span class="fw-semibold d-block">Amir</span>
+                                                    <span class="fw-semibold d-block">Comming Soon</span>
                                                     <small class="text-muted">Admin</small>
                                                 </div>
                                             </div>

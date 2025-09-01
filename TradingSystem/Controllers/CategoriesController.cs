@@ -1,11 +1,14 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using TrandingSystem.Application.Features.Courses.Commands;
-using AutoMapper;
+﻿using AutoMapper;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using TrandingSystem.Application.Features.Category.Queries;
+using TrandingSystem.Application.Features.Courses.Commands;
 
 namespace TrandingSystem.Controllers
 {
+    [Authorize(Roles = "Admin")]
+
     public class CategoriesController : Controller
     {
         private readonly IMediator _mediator;

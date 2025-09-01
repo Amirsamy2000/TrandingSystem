@@ -65,6 +65,7 @@ namespace TrandingSystem.Controllers
         }
 
 
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<IActionResult> _ReadByIdPartialView(int CourseId)
         {
@@ -80,6 +81,8 @@ namespace TrandingSystem.Controllers
             return PartialView("_ReadByIdPartialView");
         }
 
+
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<IActionResult> AssignTeacherForCourse(int CourseId)
         {
@@ -110,6 +113,7 @@ namespace TrandingSystem.Controllers
             }
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpDelete]
         public async Task<IActionResult> RemoveTeacherFromCourse(int TeacherId,int CourseId)
         {
@@ -137,6 +141,7 @@ namespace TrandingSystem.Controllers
             }
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> AssignTeacherToCourse(int CourseId, List<int> TeachersId)
         {
@@ -214,17 +219,21 @@ namespace TrandingSystem.Controllers
             }
         }
 
+        [Authorize(Roles = "Admin")]
+
         public async Task<IActionResult> Index()
         {
             return View();
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public IActionResult Create()
         {
             return View();
         }
            
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> Create(CourseVM model)
         {
@@ -248,6 +257,7 @@ namespace TrandingSystem.Controllers
         }
 
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> update(CourseVM model)
         {
@@ -302,6 +312,7 @@ namespace TrandingSystem.Controllers
         }
 
 
+        [Authorize(Roles = "Admin")]
         [HttpDelete]
         public async Task<IActionResult> Delete(int CourseId)
         {
