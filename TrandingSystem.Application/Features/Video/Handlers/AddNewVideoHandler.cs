@@ -82,7 +82,7 @@ namespace TrandingSystem.Application.Features.Video.Handlers
                         info3 = _localizer["infoVido3"] + " " + newVideo.Course.TitleEN,
                         contact = _localizer["contact"],
                         namebtn= _localizer["btnAddVideo"],
-                        ActionUrl = $"https://penalin897-001-site1.stempurl.com/Home/GoToCourse?CourseId={newVideo.CourseId}"
+                        ActionUrl = $"http://saifalqadi.runasp.net/Home/GoToCourse?CourseId={newVideo.CourseId}"
 
                     };
                     var Users = _unitOfWork.Users.GetUserEnrollInCourse(newVideo.CourseId);

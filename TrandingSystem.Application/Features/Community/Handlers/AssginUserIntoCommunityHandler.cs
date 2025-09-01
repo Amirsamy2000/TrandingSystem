@@ -48,7 +48,7 @@ namespace TrandingSystem.Application.Features.Community.Handlers
                     info3 = "",
                     contact = _localizer["contact"],
                     namebtn = "Show Community",
-                    ActionUrl = $"https://penalin897-001-site1.stempurl.com/Communities/ShowCommunitiesForUser"
+                    ActionUrl = $"http://saifalqadi.runasp.net/Communities/ShowCommunitiesForUser"
 
                 };
 

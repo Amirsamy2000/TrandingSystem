@@ -92,7 +92,7 @@ namespace TrandingSystem.Application.Features.Courses.Handlers
                     info3 = "",
                     contact = _localizer["contact"],
                     namebtn = "Show Course",
-                    ActionUrl = $"https://penalin897-001-site1.stempurl.com/Home/Courses"
+                    ActionUrl = $"http://saifalqadi.runasp.net/Home/Courses"
 
                 };
 
