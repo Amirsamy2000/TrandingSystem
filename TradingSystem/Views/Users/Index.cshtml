@@ -1,0 +1,95 @@
+﻿@model IEnumerable<TrandingSystem.Application.Dtos.UserDto>
+
+@{
+    ViewData["Title"] = "Users";
+}
+
+<div class="container mt-4">
+    <h2 class="mb-3">Users</h2>
+
+    <table class="table table-bordered table-striped">
+        <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>User Name</th>
+                <th>Email</th>
+                <th>Is Blocked</th>
+                <th>Email Confirmed</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in Model)
+            {
+                <tr id="user-row-@user.Id">
+                    <td>@user.Id</td>
+                    <td>@user.UserName</td>
+                    <td>@user.Email</td>
+                    <td>
+                        <span class="badge @(user.IsBlocked ? "bg-danger" : "bg-success")" id="blocked-status-@user.Id">
+                            @(user.IsBlocked ? "Blocked" : "Active")
+                        </span>
+                    </td>
+                    <td>
+                        <span class="badge @(user.EmailConfirmed ? "bg-primary" : "bg-secondary")" id="email-status-@user.Id">
+                            @(user.EmailConfirmed ? "Confirmed" : "Not Confirmed")
+                        </span>
+                    </td>
+                    <td>
+                        <button class="btn btn-sm btn-warning me-2"
+                                onclick="toggleColumn(@user.Id, 1, 0)">
+                            Toggle Blocked
+                        </button>
+                        <button class="btn btn-sm btn-info"
+                                onclick="toggleColumn(@user.Id, 0, 1)">
+                            Toggle Email
+                        </button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        function toggleColumn(userId, switchIsBlocked, switchEmailConfirmed) {
+            $.ajax({
+                url: '@Url.Action("SwitchColumn", "Users")',
+                type: 'POST',
+                data: {
+                    userId: userId,
+                    SwitchIsBlockedColumn: switchIsBlocked,
+                    SwitchEmailConfirmedColumn: switchEmailConfirmed
+                },
+                success: function (response) {
+                    if (response.success) {
+                        // update UI
+                        if (switchIsBlocked === 1) {
+                            let badge = $("#blocked-status-" + userId);
+                            if (badge.text().trim() === "Active") {
+                                badge.text("Blocked").removeClass("bg-success").addClass("bg-danger");
+                            } else {
+                                badge.text("Active").removeClass("bg-danger").addClass("bg-success");
+                            }
+                        }
+                        if (switchEmailConfirmed === 1) {
+                            let badge = $("#email-status-" + userId);
+                            if (badge.text().trim() === "Confirmed") {
+                                badge.text("Not Confirmed").removeClass("bg-primary").addClass("bg-secondary");
+                            } else {
+                                badge.text("Confirmed").removeClass("bg-secondary").addClass("bg-primary");
+                            }
+                        }
+                    } else {
+                        alert("Error: " + response.message);
+                    }
+                },
+                error: function () {
+                    alert("An error occurred while switching column.");
+                }
+            });
+        }
+    </script>
+}
