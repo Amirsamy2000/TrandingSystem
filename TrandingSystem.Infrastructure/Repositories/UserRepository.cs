@@ -21,7 +21,9 @@ namespace TrandingSystem.Infrastructure.Repositories
         }
         public User Create(User Object)
         {
-            throw new NotImplementedException();
+            _context.Users.Add(Object);
+            _context.SaveChanges();
+            return Object;
         }
 
         public User Delete(int Id)
