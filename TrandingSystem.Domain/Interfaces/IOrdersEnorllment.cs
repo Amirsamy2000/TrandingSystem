@@ -10,6 +10,8 @@ namespace TrandingSystem.Domain.Interfaces
 {
     public interface IOrdersEnorllment:IDomainInterface<Video_CourseEnrollment>
     {
+        IEnumerable<Video_CourseEnrollment> GetEnrollmentsByVideoId(int VideoId);
+        bool DeleteRange(IEnumerable<Video_CourseEnrollment> enrollments);
 
     }
 }

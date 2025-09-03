@@ -6,6 +6,7 @@ using TrandingSystem.Application.Features.OrdersEnorllment.Commands;
 using TrandingSystem.Application.Resources;
 using TrandingSystem.Domain.Entities;
 using TrandingSystem.Domain.Interfaces;
+using TrandingSystem.Infrastructure.Constants;
 
 namespace TrandingSystem.Application.Features.OrdersEnorllment.Handlers
 {
@@ -52,7 +53,7 @@ namespace TrandingSystem.Application.Features.OrdersEnorllment.Handlers
                     contact = _localizer["contact"],
                     namebtn="Show Course",
                     UserName = order.User.FullName,
-                    ActionUrl = $"http://saifalqadi.runasp.net/Home/Courses"
+                    ActionUrl = $"{ConstantPath.MainUrlSite}/Home/Courses"
 
                 };
                 if (request.Status==1)
@@ -60,12 +61,17 @@ namespace TrandingSystem.Application.Features.OrdersEnorllment.Handlers
                     EmailTemp.info1 = _localizer["infoorder2"];
                     order.EnrollmentDate = request.CreatedAt;
                    // var communities = _unitOfWork.Courses.ReadById((int)order.OrderStatus).Communities;
-                    var communities = _unitOfWork.Courses.ReadById(order.CourseId??0).Communities;
+                    var communities = _unitOfWork.Courses.ReadById(order.CourseId??0 ).Communities;
 
                     if (communities is not null && request.Type==0 )
                     {
+                        
                         foreach (var comm in communities)
                         {
+
+                            if(comm.CommunityMembers.Any(x=>x.UserId== order.UserId))
+                                continue;
+                            
                             var member = new CommunityMember()
                             {
                                 CommunityId=comm.CommunityId,
@@ -73,6 +79,7 @@ namespace TrandingSystem.Application.Features.OrdersEnorllment.Handlers
                                 IsBlocked = false,
                                 JoinedAt = DateTime.UtcNow,
                             };
+
                             _unitOfWork.CommunityMember.Create(member);
                             await _unitOfWork.SaveChangesAsync();
 

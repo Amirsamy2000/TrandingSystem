@@ -62,7 +62,7 @@ namespace TrandingSystem.Infrastructure.Services
             {
                 // سجل الخطأ أو ارميه حسب السيناريو
                 Console.WriteLine($"Email send failed: {ex.Message}");
-                throw;
+                
             }
             finally
             {

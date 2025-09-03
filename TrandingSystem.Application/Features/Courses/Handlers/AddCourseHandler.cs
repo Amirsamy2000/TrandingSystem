@@ -86,13 +86,15 @@ namespace TrandingSystem.Application.Features.Courses.Handlers
                 {
                     dir = _localizer["dir"],
                     Subject = _localizer["stieName"],
+                    StieName = _localizer["stieName"],
+
                     Hi = _localizer["hi"],
                     info1 = _localizer["infocours1"],
-                    info2 = _localizer["infoco2"] + " " + result.TitleEN,
+                    info2 = _localizer["infoco2"] + ": " + result.TitleEN,
                     info3 = "",
                     contact = _localizer["contact"],
                     namebtn = "Show Course",
-                    ActionUrl = $"http://saifalqadi.runasp.net/Home/Courses"
+                    ActionUrl = $"{ConstantPath.MainUrlSite}/Home/Courses"
 
                 };
 

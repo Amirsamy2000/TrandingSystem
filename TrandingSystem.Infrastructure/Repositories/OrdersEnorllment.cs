@@ -41,5 +41,17 @@ namespace TrandingSystem.Infrastructure.Repositories
             _db.CourseEnrollments.Update(Element);
             return Element;
         }
+
+        public IEnumerable<Video_CourseEnrollment> GetEnrollmentsByVideoId(int VideoId)
+        {
+            return _db.CourseEnrollments.Where(e => e.VideoId == VideoId).ToList();
+        }
+        public bool DeleteRange(IEnumerable<Video_CourseEnrollment> enrollments)
+        {
+            _db.CourseEnrollments.RemoveRange(enrollments);
+            return true;
+        }
+
+
     }
 }
