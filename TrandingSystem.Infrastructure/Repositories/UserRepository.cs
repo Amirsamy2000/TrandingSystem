@@ -21,7 +21,9 @@ namespace TrandingSystem.Infrastructure.Repositories
         }
         public User Create(User Object)
         {
-            throw new NotImplementedException();
+            _context.Users.Add(Object);
+            _context.SaveChanges();
+            return Object;
         }
 
         public User Delete(int Id)
@@ -43,7 +45,19 @@ namespace TrandingSystem.Infrastructure.Repositories
 
         public User Update(User Element)
         {
-            throw new NotImplementedException();
+            if (Element == null)
+                throw new ArgumentNullException(nameof(Element));
+
+            // Check if entity exists
+            var existingUser = _context.Users.Find(Element.Id);
+            if (existingUser == null)
+                throw new InvalidOperationException($"User with Id={Element.Id} not found.");
+
+            // Update the entity
+            _context.Entry(existingUser).CurrentValues.SetValues(Element);
+            _context.SaveChanges();
+            
+            return existingUser;
         }
 
         public List<User> GetActiveAndConfirmUser()
@@ -56,6 +70,5 @@ namespace TrandingSystem.Infrastructure.Repositories
             return _context.CourseEnrollments.Where(x => x.CourseId == CourseId && x.OrderStatus == 1).Select(x=>x.User).ToList();
         }
 
-        
     }
 }

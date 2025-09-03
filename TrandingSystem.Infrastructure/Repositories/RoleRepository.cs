@@ -38,7 +38,7 @@ namespace TrandingSystem.Infrastructure.Repositories
 
         public List<Role> Read()
         {
-            throw new NotImplementedException();
+            return _context.Roles.ToList();
         }
 
         public Role ReadById(int Id)
