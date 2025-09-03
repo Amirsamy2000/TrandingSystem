@@ -183,4 +183,7 @@
   <data name="Ordervideo" xml:space="preserve">
     <value>Videos Requests</value>
   </data>
+  <data name="UsersManagement" xml:space="preserve">
+    <value>Users Management</value>
+  </data>
 </root>

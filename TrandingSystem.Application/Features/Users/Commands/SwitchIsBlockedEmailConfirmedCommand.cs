@@ -32,7 +32,7 @@ namespace TrandingSystem.Application.Features.Users.Commands
             UserId = userId;
             SwitchEmailConfirmed = switchEmailConfirmed;
             SwitchIsBlockedColumn = switchIsBlockedColumn;
-            ColumnName = switchIsBlockedColumn == 1? "IsBlocked": switchEmailConfirmed == 2? "EmailConfirmed":null;
+            ColumnName = switchIsBlockedColumn == 1? "IsBlocked": switchEmailConfirmed == 1? "EmailConfirmed":null;
         }
     }
 }

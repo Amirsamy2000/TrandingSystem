@@ -8,15 +8,16 @@ using System.Threading.Tasks;
 using TradingSystem.Application.Common.Response;
 using TrandingSystem.Application.Dtos;
 using TrandingSystem.Application.Features.Users.Commands;
+using TrandingSystem.Domain.Interfaces;
 using TrandingSystem.Infrastructure.Repositories;
 
 namespace TrandingSystem.Application.Features.Users.Handlers
 {
     public class SwitchIsBlockedEmailConfirmedHandler : IRequestHandler<SwitchIsBlockedEmailConfirmedCommand, Response<UserDto>>
     {
-        private readonly UnitOfWork _unitOfWork;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
-        public SwitchIsBlockedEmailConfirmedHandler(UnitOfWork unitOfWork,IMapper mapper)
+        public SwitchIsBlockedEmailConfirmedHandler(IUnitOfWork unitOfWork,IMapper mapper)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;

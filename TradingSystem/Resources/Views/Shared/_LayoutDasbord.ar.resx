@@ -183,4 +183,7 @@
   <data name="Ordervideo" xml:space="preserve">
     <value>طلبات الفديوهات</value>
   </data>
+  <data name="UsersManagement" xml:space="preserve">
+    <value>ادارة المستخدمين</value>
+  </data>
 </root>
