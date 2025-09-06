@@ -124,7 +124,7 @@
     <value>Courses</value>
   </data>
   <data name="Events" xml:space="preserve">
-    <value>Events</value>
+    <value>EventsVideos</value>
   </data>
   <data name="Trainers" xml:space="preserve">
     <value>Trainers</value>
@@ -273,5 +273,8 @@ Alternatively, feel free to email us directly or contact us instantly through th
   </data>
   <data name="Contact" xml:space="preserve">
     <value>Contact Us</value>
+  </data>
+  <data name="Videos" xml:space="preserve">
+    <value>Videos</value>
   </data>
 </root>

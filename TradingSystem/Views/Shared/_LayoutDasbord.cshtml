@@ -123,10 +123,10 @@
                                 </g>
                             </svg>
                         </span>
-                        <span class="app-brand-text demo menu-text fw-bolder ms-2">Sneat</span>
-                    </a>
+                        <span class="app-brand-text demo menu-text fw-bolder ms-2" style="text-transform: capitalize">@Localizer["Dashboard"]</span>
+                     </a>
 
-                    <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
+                    <a href=" " class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
                         <i class="bx bx-chevron-left bx-sm align-middle"></i>
                     </a>
                 </div>
@@ -311,29 +311,30 @@
             <div class="layout-page">
                 <!-- Navbar -->
 
-                <nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
+                <nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme 
+                             "
                      id="layout-navbar">
                     <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
-                        <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
+                        <a class="nav-item nav-link px-0 me-xl-4" href=" ">
                             <i class="bx bx-menu bx-sm"></i>
                         </a>
                     </div>
 
-                    <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
+                    <div class="navbar-nav-right d-flex align-items-center d-flex justify-content-between" id="navbar-collapse">
                         <!-- Search -->
-                        <div class="navbar-nav align-items-center">
-                            <div class="nav-item d-flex align-items-center">
-                                <i class="bx bx-search fs-4 lh-0"></i>
-                                <input type="text"
-                                       class="form-control border-0 shadow-none"
-                                       placeholder="Search..."
-                                       aria-label="Search..." />
-                            </div>
-                        </div>
+                        @* <div class="navbar-nav align-items-center"> *@
+                        @*     <div class="nav-item d-flex align-items-center"> *@
+                        @*         <i class="bx bx-search fs-4 lh-0"></i> *@
+                        @*         <input type="text" *@
+                        @*                class="form-control border-0 shadow-none" *@
+                        @*                placeholder="Search..." *@
+                        @*                aria-label="Search..." /> *@
+                        @*     </div> *@
+                        @* </div> *@
                         <!-- /Search -->
 
                         <!--landing page icon-->
-                        <div class="navbar-nav align-items-center">
+                        <div class="navbar-nav align-items-center ">
                             <div class="nav-item d-flex align-items-center">
                                 <i class="bx bx-home-alt fs-4 lh-0"></i>
                                 <a asp-action= "Index" asp-controller="Home" class="form-control border-0 shadow-none" placeholder="landing page" aria-label="Search...">landing page</a>
@@ -347,7 +348,7 @@
 
                             <!-- User -->
                             <li class="nav-item navbar-dropdown dropdown-user dropdown">
-                                <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
+                                <a class="nav-link dropdown-toggle hide-arrow" href=" " data-bs-toggle="dropdown">
                                     <div class="avatar avatar-online">
                                         <img src="~/LayoutDasbord/assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
                                     </div>

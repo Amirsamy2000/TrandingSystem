@@ -186,4 +186,10 @@
   <data name="UsersManagement" xml:space="preserve">
     <value>Users Management</value>
   </data>
+  <data name="SiteName" xml:space="preserve">
+    <value> سيف القاضي</value>
+  </data>
+  <data name="dasbord" xml:space="preserve">
+    <value>Dashboard</value>
+  </data>
 </root>
