@@ -1,76 +1,130 @@
 ﻿@using Microsoft.Extensions.Localization
 @using TrandingSystem.Application.Dtos
-@model IEnumerable<VideoDto>
+@model LivesAndVideosDto
 @using Microsoft.AspNetCore.Mvc.Localization
 @using TrandingSystem.Controllers
 @inject IViewLocalizer Localizer
 @inject IStringLocalizer<VideosController> Localizer2
+@{
+    var culture = new System.Globalization.CultureInfo(ViewBag.Culture ?? "en-US");
+
+}
 <style>
     .description-clamp {
-        max-height: 3.6em;
-        overflow: hidden;
-        position: relative;
-        transition: max-height 0.3s ease-in-out;
-        cursor: pointer;
+    max-height: 3.6em;
+    overflow: hidden;
+    position: relative;
+    transition: max-height 0.3s ease-in-out;
+    cursor: pointer;
     }
 
-        .description-clamp::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 1.5em;
-            background: linear-gradient(to bottom, rgba(255, 255, 255, 0), #fff);
-        }
+    .description-clamp::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1.5em;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0), #fff);
+    }
 
-        .description-clamp:hover {
-            max-height: 500px;
-        }
+    .description-clamp:hover {
+    max-height: 500px;
+    }
 
     .Add-infoCard {
-        background-color: #f8f9fa;
-        border-radius: 8px;
-        padding: 8px 12px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    padding: 8px 12px;
     }
 
     .card {
-        border: none;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border: none;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
 
-        .card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 6px 20px rgba(0,0,0,0.12);
-        }
+    .card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+    }
 
     .card-img-top {
-        object-fit: cover;
-        height: 180px;
-        border-top-left-radius: 8px;
-        border-top-right-radius: 8px;
+    object-fit: cover;
+    height: 180px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
     }
 
     @@media (max-width: 576px) {
-        .card-img-top
+    .card-img-top
 
     {
-        height: 150px;
+    height: 150px;
     }
 
     }
+
+    .dis-course-data{
+    padding:10px;
+    background-color:#eee;
+    border-left-color: #c3972e;
+    border-right-color: #c3972e;
+    border-left-style:solid;
+    border-right-style:solid;
+    border-left-width:6px;
+    border-right-width:6px
+    }
+
+    .btn-bgcolor{
+    background-color: #444444 !important;
+    color:azure;
+    border:none
+    }
+
+    .btn-bgcolor:hover{
+    background-color: #c3972e !important;
+    }
+
+   
 </style>
 
-<h4 class="fw-bold py-3 mb-4">
-    <span class="text-muted fw-light">@Localizer["Title"] /</span>
-    @(ViewBag.CourseName ?? "Un")
-</h4>
+<div class="row dis-course-data">
+    <div class="col d-flex justify-content-between align-items-center">
+        <!-- زرار على الشمال -->
+        <a class="btn btn-primary btn-bgcolor" href="#videoList">@Localizer2["goVideos"]</a>
 
-<div class="row g-4">
-    @if (Model.Any())
+        <!-- النص في النص -->
+        <p class="m-0 text-center"  style="font-size:20px; flex:1;">
+            <b>@ViewBag.CourseName</b>
+        </p>
+
+        <!-- زرار على اليمين -->
+        <a class="btn btn-primary btn-bgcolor" href="#LivesList">@Localizer2["goLives"]</a>
+    </div>
+</div>
+
+
+
+<div class="row mb-2" id="videoList">
+    <div class="col-12 m-3"></div>
+    <div class="col-12 d-flex align-items-center mt-4">
+        @if (System.Threading.Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName == "ar")
+        {
+            <i class="bi bi-arrow-left" style="font-size: 2.5rem; color: #c3972e"></i>
+            <span class="me-2" style="font-size:20px; font-weight:bold;">@Localizer2["Videos"]</span>
+
+        }
+        else
+        {
+            <!-- في الإنجليزي: السهم يكون على الشمال -->
+            <i class="bi bi-arrow-right" style="font-size: 2.5rem; color: #c3972e;"></i>
+            <span class="ms-2" style="font-size:20px; font-weight:bold;">@Localizer2["Videos"]</span>
+        }
+    </div>
+    @if (Model.Videos.Any())
     {
-        @foreach (var video in Model)
+        @foreach (var video in Model.Videos)
         {
             <div class="col-sm-6 col-md-4 col-lg-3">
                 <div class="card h-100">
@@ -82,22 +136,22 @@
                         </p>
 
                         <div class="mt-auto">
-                            <a onclick="DisplayVideo(@video.VideoId)" class="btn btn-sm btn-outline-info me-1">@Localizer["Display"]</a>
+                            <a onclick="DisplayVideo(@video.VideoId)" class="btn btn-sm  btn-block btn-outline-info me-1  w-100">@Localizer2["WatchVdo"]</a>
                             @* Other action buttons can go here *@
                         </div>
 
                         <hr class="my-3" />
 
                         <div class="Add-infoCard mb-2 d-flex justify-content-between">
-                            <strong>@Localizer["Date"]</strong>
+                            <strong>@Localizer2["Date"]</strong>
                             <span>@video.CreatedAt</span>
                         </div>
                         <div class="Add-infoCard mb-2 d-flex justify-content-between">
-                            <strong>@Localizer["Status"]</strong>
-                            <span>@(video.IsPaid? Localizer["Paid"] : Localizer["Unpaid"])</span>
+                            <strong>@Localizer2["Status"]</strong>
+                            <span>@(video.IsPaid? Localizer2["Paid"] : Localizer2["Unpaid"])</span>
                         </div>
                         <div class="Add-infoCard d-flex justify-content-between">
-                            <strong>@Localizer["Cost"]</strong>
+                            <strong>@Localizer2["Cost"]</strong>
                             <span>@video.Cost $</span>
                         </div>
                     </div>
@@ -117,6 +171,95 @@
         </div>
     }
 </div>
+<hr class=" "  />
+
+<div class="row  mt-2" id="LivesList">
+    <div class="col-12 m-3"></div>
+    <div class="col-12 d-flex align-items-center mt-4">
+        @if (System.Threading.Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName == "ar")
+        {
+            <i class="bi bi-arrow-left" style="font-size: 2.5rem; color: #c3972e"></i>
+            <span class="me-2" style="font-size:20px; font-weight:bold;">@Localizer2["Lives"]</span>
+
+        }
+        else
+        {
+            <i class="bi bi-arrow-right" style="font-size: 2.5rem; color: #c3972e;"></i>
+            <span class="ms-2" style="font-size:20px; font-weight:bold;">@Localizer2["Lives"]</span>
+        }
+    </div>
+    @if (Model.Lives.Count() > 0)
+    {
+        @foreach (var session in Model.Lives)
+        {
+            @* card one *@
+            <div class="col-sm-6 col-md-4 col-lg-3">
+                <div class="card h-100">
+                    <img class="card-img-top" src="~/@session.ImageSessionUrl" alt="Card image cap" width="200" height="300" />
+                    <div class="card-body p-2">
+                        <h5 class="card-title">@session.Title</h5>
+                        <p class="card-text description-clamp">
+                            @session.Description
+                        </p>
+                        @if (session.ScheduledAt > DateTime.Now)
+                        {
+                            <a onclick="DispalPatialUppdateLive(@session.SessionId)" class="btn btn-sm  btn-block btn-outline-info me-1 w-100">@Localizer2["DisplayLive"]</a>
+
+
+                        }
+                        else
+                        {
+                            <a onclick="DispalPatialUppdateLive(@session.SessionId)" class="btn btn-sm  btn-block btn-danger-info me-1  w-100">@Localizer2["ExpiresLive"]</a>
+
+                        }
+                        <hr />
+                        <div class="row p-2">
+                            <div class="col-12 d-flex justify-content-between align-items-center Add-infoCard">
+                                <h5>@Localizer2["Date"]</h5>
+                                <p>
+                                    @session.ScheduledAt.ToString("dd/MM/yyyy", culture)  || @(session.ScheduledTime.HasValue
+                            ? DateTime.Today.Add(session.ScheduledTime.Value).ToString("hh:mm tt")
+                            : "No time")
+                                </p>
+                            </div>
+                            <div class="col-12 d-flex justify-content-between align-items-center mt-2 Add-infoCard">
+                                <h5 class=" ">@Localizer2["Status"]</h5>
+                                @if (session.IsLocked ?? false)
+                                {
+                                    <p class="">@Localizer2["Paid"]</p>
+                                }
+                                else
+                                {
+                                    <p class="text-success">@Localizer2["Unpaid"]</p>
+                                }
+                            </div>
+                            <div class="col-12 d-flex justify-content-between align-items-center mt-2 Add-infoCard">
+                                <h5>@Localizer2["Cost"]</h5>
+                                <p>@session.Cost $</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+        }
+
+    }
+
+    else
+    {
+        <div class="col-12">
+            <div class="alert alert-primary   " role="alert">
+                <h4 class="alert-heading text-center">@Localizer2["NoLiveMessage"]</h4>
+                <br />
+            </div>
+        </div>
+
+    }
+</div>
+
 
 <div class="modal fade" id="youTubeModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">

@@ -265,4 +265,7 @@ We thank you for your interest and willingness to participate, and we look forwa
   <data name="infoco2" xml:space="preserve">
     <value>Course  </value>
   </data>
+  <data name="NotEnrollinthiscourse" xml:space="preserve">
+    <value>You are not registered for this course. Please return the registration request.</value>
+  </data>
 </root>

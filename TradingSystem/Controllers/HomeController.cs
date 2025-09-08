@@ -77,8 +77,12 @@ namespace WebApplication1.Controllers
         }
 
         [Authorize]
-        public IActionResult GoToCourse(int CourseId, CancellationToken cancellationToken)
+        public IActionResult GoToCourse( CancellationToken cancellationToken, int CourseId = 0)
         {
+            if (CourseId == 0)
+            {
+                return RedirectToAction("Courses", "Home");
+            }
             var course  = _mediator.Send(new GetCourseByIdQuery{CourseId = CourseId}, cancellationToken).Result;
             return View(course.Data);
         }

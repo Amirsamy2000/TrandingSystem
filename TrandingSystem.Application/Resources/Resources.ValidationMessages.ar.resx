@@ -267,4 +267,7 @@
   <data name="infoco2" xml:space="preserve">
     <value>الدورة التدربية</value>
   </data>
+  <data name="NotEnrollinthiscourse" xml:space="preserve">
+    <value>انت غير مسجل في هذة الدورة يرجع طلب التسجيل </value>
+  </data>
 </root>

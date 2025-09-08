@@ -50,9 +50,18 @@ namespace TrandingSystem.Controllers
         [HttpGet]
         public IActionResult PartialVideos(CancellationToken cancellationToken, int CourseId = 1)
         {
+            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
+
+            if (userIdClaim == null)
+            {
+                return Unauthorized("User ID not found in token.");
+            }
+            int userId = int.Parse(userIdClaim.Value);
             var culture = Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName;
+
+
             //@ViewData["Master"] = @locaizer[""]
-            var response = _mediator.Send(new GetVideosByCourseIdQuery(CourseId, culture), cancellationToken).Result;
+            var response = _mediator.Send(new GetLivesAndVideosByUserEnrollmentQuery(userId, culture, CourseId), cancellationToken).Result;
             if (!response.Success)
             {
                 // return to Erro Page
@@ -62,6 +71,7 @@ namespace TrandingSystem.Controllers
 
             ViewBag.CourseId = CourseId;
             ViewBag.CourseName = response.Message;
+
             return PartialView("_VideosPartialView", response.Data);
         }
 

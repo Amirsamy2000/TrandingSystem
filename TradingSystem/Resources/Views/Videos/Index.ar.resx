@@ -1,0 +1,279 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Students" xml:space="preserve">
+    <value>طلاب</value>
+  </data>
+  <data name="Courses" xml:space="preserve">
+    <value>دورات</value>
+  </data>
+  <data name="Events" xml:space="preserve">
+    <value>فعاليات</value>
+  </data>
+  <data name="Trainers" xml:space="preserve">
+    <value>محاضرين</value>
+  </data>
+  <data name="SecAbout1" xml:space="preserve">
+    <value>منصة احترافية لتعلّم التداول من الصفر حتى الاحتراف</value>
+  </data>
+  <data name="Why Choose Our Platform?" xml:space="preserve">
+    <value>لماذا تختار سيف القاضي؟</value>
+  </data>
+  <data name="Learings3" xml:space="preserve">
+    <value>نجمع بين التعليم والتكنولوجيا وخبرة السوق في الوقت الفعلي لتقديم نظام بيئي تجاري كامل مصمم لنجاحك</value>
+  </data>
+  <data name="Learings2" xml:space="preserve">
+    <value>قيادة الغد</value>
+  </data>
+  <data name="Learings1" xml:space="preserve">
+    <value>مركز سيف القاضي التجاري</value>
+  </data>
+  <data name="SecAbout2" xml:space="preserve">
+    <value>التداول مع سيف القاضي مختلف. لا نكتفي بتعليمك كيفية التداول، بل نوفر لك كل الأدوات والإشارات والرؤى التي تحتاجها لتصبح متداولًا واثقًا وناجحًا.</value>
+  </data>
+  <data name="SecAbout3" xml:space="preserve">
+    <value> دورات تداول شاملة – من المبتدئ حتى المتقدم.</value>
+  </data>
+  <data name="SecAbout4" xml:space="preserve">
+    <value>تحليلات يومية دقيقة – للفوركس، الذهب، المؤشرات، والعملات الرقمية</value>
+  </data>
+  <data name="SecAbout5" xml:space="preserve">
+    <value>مؤشرات وأدوات حصرية – قرارات واثقة ومربحة</value>
+  </data>
+  <data name="SecAbout6" xml:space="preserve">
+    <value>اعرف المزيد</value>
+  </data>
+  <data name="Our trading education" xml:space="preserve">
+    <value>التداول ليس مجرد أرقام ورسوم بيانية – بل معرفة وأدوات وقرارات ذكية. لذلك نوفر لك في منصة سيف القاضي كل ما تحتاجه لتداول أكثر أمانًا وربحية</value>
+  </data>
+  <data name="Real Market Strategies" xml:space="preserve">
+    <value>استراتيجيات حقيقية من السوق
+</value>
+  </data>
+  <data name="Learn proven strategies" xml:space="preserve">
+    <value>دورات تدريبية خطوة بخطوة وتحليلات يومية للفوركس، الذهب، المؤشرات، والعملات الرقمية.</value>
+  </data>
+  <data name="Expert Mentors" xml:space="preserve">
+    <value>مدربون محترفون
+</value>
+  </data>
+  <data name="Our instructors" xml:space="preserve">
+    <value>إرشاد من متداولين محترفين بخبرة سنوات، مع دعم مباشر وتوجيه شخصي.</value>
+  </data>
+  <data name="Community &amp; Suppor" xml:space="preserve">
+    <value>مجتمع ودعم متكامل
+</value>
+  </data>
+  <data name="Join a growing community of traders" xml:space="preserve">
+    <value>مجتمع تداول عالمي، وسطاء موثوقون، ومكافآت حصرية – لتتداول بثقة ودون أن تكون وحدك.</value>
+  </data>
+  <data name="Feature1" xml:space="preserve">
+    <value>مجتمع عالمي</value>
+  </data>
+  <data name="Feature2" xml:space="preserve">
+    <value>رحلة احتراف</value>
+  </data>
+  <data name="Feature3" xml:space="preserve">
+    <value>كورسات شاملة</value>
+  </data>
+  <data name="Feature4" xml:space="preserve">
+    <value>أدوات ذكية</value>
+  </data>
+  <data name="Feature5" xml:space="preserve">
+    <value>مكافآت حصرية</value>
+  </data>
+  <data name="Feature6" xml:space="preserve">
+    <value>فرص حقيقية</value>
+  </data>
+  <data name="Feature7" xml:space="preserve">
+    <value>تحليلات يومية</value>
+  </data>
+  <data name="Feature8" xml:space="preserve">
+    <value>جلسات بث مباشر</value>
+  </data>
+  <data name="Feature9" xml:space="preserve">
+    <value>تقنيات متقدمة</value>
+  </data>
+  <data name="Feature10" xml:space="preserve">
+    <value>وسطاء موثوقون</value>
+  </data>
+  <data name="Feature11" xml:space="preserve">
+    <value>تداول آمن</value>
+  </data>
+  <data name="Feature12" xml:space="preserve">
+    <value>دعم مباشر</value>
+  </data>
+  <data name="SecAbout7" xml:space="preserve">
+    <value>حلول مدعومة بالذكاء الاصطناعي – تحليل أسرع وأكثر دقة</value>
+  </data>
+  <data name="SecAbout8" xml:space="preserve">
+    <value>توجيه ودعم مباشر – لن تكون وحدك في رحلتك</value>
+  </data>
+  <data name="SecAbout9" xml:space="preserve">
+    <value>توجيه ودعم مباشر – لن تكون وحدك في رحلتك</value>
+  </data>
+  <data name="SecAbout10" xml:space="preserve">
+    <value>توجيه ودعم مباشر – لن تكون وحدك في رحلتك</value>
+  </data>
+  <data name="OurServer" xml:space="preserve">
+    <value>خدمتنا</value>
+  </data>
+  <data name="OurServerSubject" xml:space="preserve">
+    <value>ماذا ستحصل معنا؟</value>
+  </data>
+  <data name="Education" xml:space="preserve">
+    <value>تعليم</value>
+  </data>
+  <data name="EducationSubject" xml:space="preserve">
+    <value>دورات التداول الشاملة</value>
+  </data>
+  <data name="EducationBody" xml:space="preserve">
+    <value>من البداية للاحتراف، استراتيجيات عملية واضحة تخليك تداول بثقة</value>
+  </data>
+  <data name="Marketing" xml:space="preserve">
+    <value>تحليل السوق</value>
+  </data>
+  <data name="Marketingtitle" xml:space="preserve">
+    <value>رؤى السوق اليومية والدقيقة</value>
+  </data>
+  <data name="MarketingSubject" xml:space="preserve">
+    <value>تقارير يومية دقيقة على الفوركس، الذهب، المؤشرات والعملات الرقمية.</value>
+  </data>
+  <data name="Content" xml:space="preserve">
+    <value>أدوات الذكاء الاصطناعي</value>
+  </data>
+  <data name="ContentTitle" xml:space="preserve">
+    <value>مؤشرات ذكية مدعومة بالذكاء الاصطناعي</value>
+  </data>
+  <data name="Contentbody" xml:space="preserve">
+    <value>أدوات ذكية تقرأ السوق بدقة وسرعة عشان تديك ميزة تنافسية</value>
+  </data>
+  <data name="contactbody" xml:space="preserve">
+    <value>يسعدنا دائمًا التواصل معكم!
+سواءً كانت لديكم أسئلة حول دوراتنا، أو ترغبون بالانضمام إلى إحدى مجتمعاتنا، أو تحتاجون إلى مساعدة في رحلة التعلم، فإن فريقنا جاهز لمساعدتكم.
+يمكنكم التواصل معنا عبر النموذج أدناه، وسنتواصل معكم في أقرب وقت ممكن.
+أو يمكنكم مراسلتنا مباشرةً عبر البريد الإلكتروني أو التواصل معنا مباشرةً عبر أيقونة واتساب أسفل الصفحة.</value>
+  </data>
+  <data name="Contact" xml:space="preserve">
+    <value>تواصل معنا</value>
+  </data>
+  <data name="Videos" xml:space="preserve">
+    <value>فديوهات</value>
+  </data>
+</root>

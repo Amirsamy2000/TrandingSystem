@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
 using MediatR;
+using Microsoft.Extensions.Localization;
 using System.Net;
 using TradingSystem.Application.Common.Response;
 using TrandingSystem.Application.Dtos;
 using TrandingSystem.Application.Features.Video.Queries;
+using TrandingSystem.Application.Resources;
 using TrandingSystem.Domain.Entities;
 using TrandingSystem.Domain.Interfaces;
  
@@ -14,11 +16,12 @@ namespace TrandingSystem.Application.Features.Video.Handlers
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
+ 
         public GetVideosByCourseIdHandler(IUnitOfWork unitOfWork, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
-        }
+         }
 
         public async  Task<Response<IEnumerable<VideoDto>>> Handle(GetVideosByCourseIdQuery request, CancellationToken cancellationToken)
         {

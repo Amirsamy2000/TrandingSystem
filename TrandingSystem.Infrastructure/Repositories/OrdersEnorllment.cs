@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -52,6 +53,12 @@ namespace TrandingSystem.Infrastructure.Repositories
             return true;
         }
 
+        public Video_CourseEnrollment? CheckUserEnrollment(int userId, int courseId)
+        {
+            return _db.CourseEnrollments
+                      .AsNoTracking() // تحسين الأداء لأنه مجرد قراءة
+                      .FirstOrDefault(x => x.UserId == userId && x.CourseId == courseId);
+        }
 
     }
 }

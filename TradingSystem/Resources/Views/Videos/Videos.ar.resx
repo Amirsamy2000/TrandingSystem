@@ -195,4 +195,16 @@
   <data name="loading" xml:space="preserve">
     <value>جارٍ التحميل.....</value>
   </data>
+  <data name="goLives" xml:space="preserve">
+    <value>عرض الجلسات</value>
+  </data>
+  <data name="goVideos" xml:space="preserve">
+    <value>عرض الفديوهات</value>
+  </data>
+  <data name="Videos" xml:space="preserve">
+    <value>الفديوهات</value>
+  </data>
+  <data name="Lives" xml:space="preserve">
+    <value>جلسات البث المباشر</value>
+  </data>
 </root>

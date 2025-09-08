@@ -13,5 +13,7 @@ namespace TrandingSystem.Domain.Interfaces
         IEnumerable<Video_CourseEnrollment> GetEnrollmentsByVideoId(int VideoId);
         bool DeleteRange(IEnumerable<Video_CourseEnrollment> enrollments);
 
+        Video_CourseEnrollment? CheckUserEnrollment(int userId, int courseId);
+
     }
 }
