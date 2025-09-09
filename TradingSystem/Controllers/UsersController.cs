@@ -33,7 +33,7 @@ namespace TrandingSystem.Controllers
         {
             var UpdatedUserResponse = await _mediator.Send(new SwitchIsBlockedEmailConfirmedCommand(userId, SwitchIsBlockedColumn, SwitchEmailConfirmedColumn));
 
-            return View(UpdatedUserResponse);
+            return Ok(UpdatedUserResponse);
         }
 
         [HttpGet]

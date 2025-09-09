@@ -10,9 +10,11 @@
     <table id="usersTable" class="table table-bordered table-striped">
         <thead class="table-dark">
             <tr>
-                <th>ID</th>
                 <th>User Name</th>
+                <th>Phone</th>
                 <th>Email</th>
+                @* <th>Address</th> *@
+                @* <th>Registered At</th> *@
                 <th>Is Blocked</th>
                 <th>Email Confirmed</th>
                 <th>Role</th>
@@ -22,9 +24,12 @@
             @foreach (var user in Model.Data)
             {
                 <tr id="user-row-@user.Id">
-                    <td>@user.Id</td>
                     <td>@user.UserName</td>
+                    <td>@user.Mobile</td>
                     <td>@user.Email</td>
+                    @* <td>@user.Address</td> *@
+                    @* <td>@user.RegisteredAt</td> *@
+                    
                     <td>
                         <button class="btn btn-sm toggle-blocked @(user.IsBlocked ? "btn-danger" : "btn-success")"
                                 data-user-id="@user.Id"
@@ -162,11 +167,14 @@
 
         // Handle toggle blocked button click
         $(document).on('click', '.toggle-blocked', function() {
+                    debugger
+
             const button = $(this);
             const userId = button.data('user-id');
             const currentStatus = button.data('is-blocked');
 
             button.prop('disabled', true).text('Processing...');
+                    debugger
 
             $.ajax({
                 url: '@Url.Action("SwitchColumn", "Users")',
@@ -177,7 +185,11 @@
                     SwitchEmailConfirmedColumn: 0
                 },
                 success: function(response) {
+                    debugger
+
                     if (response.success) {
+                    debugger
+
                         // Toggle the status
                         const newStatus = !currentStatus;
                         button.data('is-blocked', newStatus);
@@ -195,6 +207,8 @@
                     }
                 },
                 error: function() {
+                    debugger
+
                     alert("An error occurred while updating blocked status.");
                 },
                 complete: function() {
@@ -210,6 +224,7 @@
             const currentStatus = button.data('email-confirmed');
 
             button.prop('disabled', true).text('Processing...');
+                    debugger
 
             $.ajax({
                 url: '@Url.Action("SwitchColumn", "Users")',
@@ -220,6 +235,7 @@
                     SwitchEmailConfirmedColumn: 1
                 },
                 success: function(response) {
+                    debugger
                     if (response.success) {
                         // Toggle the status
                         const newStatus = !currentStatus;
