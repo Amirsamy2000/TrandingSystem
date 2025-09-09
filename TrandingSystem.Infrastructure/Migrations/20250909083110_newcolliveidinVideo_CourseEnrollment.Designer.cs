@@ -12,8 +12,8 @@ using TrandingSystem.Infrastructure.Data;
 namespace TrandingSystem.Infrastructure.Migrations
 {
     [DbContext(typeof(db23617Context))]
-    [Migration("20250909080257_addLiveIdInVideo_CourseEnrollment")]
-    partial class addLiveIdInVideo_CourseEnrollment
+    [Migration("20250909083110_newcolliveidinVideo_CourseEnrollment")]
+    partial class newcolliveidinVideo_CourseEnrollment
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

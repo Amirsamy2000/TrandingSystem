@@ -5,7 +5,7 @@
 namespace TrandingSystem.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class addLiveIdInVideo_CourseEnrollment : Migration
+    public partial class newcolliveidinVideo_CourseEnrollment : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
