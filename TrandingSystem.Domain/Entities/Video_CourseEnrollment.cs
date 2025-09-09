@@ -15,7 +15,8 @@ namespace TrandingSystem.Domain.Entities
         public int UserId { get; set; }
 
         public int? CourseId { get; set; }
-        public int? VideoId{ get; set; }
+        public int? VideoId { get; set; }
+        public int? liveId { get; set; }
 
         public DateTime? EnrollmentDate { get; set; } //confirmed At 
 
@@ -35,5 +36,7 @@ namespace TrandingSystem.Domain.Entities
         public virtual Video Video { get; set; }
 
         public virtual User User { get; set; }
+
+        public virtual LiveSession Live { get; set; }
     }
 }

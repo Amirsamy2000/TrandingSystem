@@ -270,4 +270,10 @@
   <data name="NotEnrollinthiscourse" xml:space="preserve">
     <value>انت غير مسجل في هذة الدورة يرجع طلب التسجيل </value>
   </data>
+  <data name="NotEnrollinthisvideo" xml:space="preserve">
+    <value>انت غير مسجل في هذا الفديو  يرجع طلب التسجيل </value>
+  </data>
+  <data name="NotEnrollinthisv" xml:space="preserve">
+    <value>انت غير مسجل في هذا الفديو  يرجع طلب التسجيل </value>
+  </data>
 </root>

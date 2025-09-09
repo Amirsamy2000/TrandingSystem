@@ -38,5 +38,8 @@ namespace TrandingSystem.Domain.Entities
         public virtual Course Course { get; set; }
 
         public virtual User CreadteByNavigation { get; set; }
+
+        public virtual ICollection<Video_CourseEnrollment> CourseEnrollments { get; set; } = new List<Video_CourseEnrollment>();
+
     }
 }

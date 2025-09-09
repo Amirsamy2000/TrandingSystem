@@ -29,12 +29,13 @@ namespace TrandingSystem.Application.Features.Video.Handlers
             try
             {
                 // check if user enroll in course
-                var checkEnrollmentUser = _unitOfWork.ordersEnorllment.CheckUserEnrollment(request.UserId, request.CourseId);
+                var checkEnrollmentUser = _unitOfWork.ordersEnorllment.CheckUserEnrollment(x => x.CourseId == request.CourseId && x.UserId == request.UserId);
                 var course = _unitOfWork.Courses.ReadById(request.CourseId);
                 // if found enrollment 
                 if (checkEnrollmentUser is not null)
                 {
                     var videos = _unitOfWork.Videos.GetAllVideosForCouse(request.CourseId);
+                    
                     var Lives = _unitOfWork.LiveSessionRepositry.GetAllLiveSessionsForCouse(request.CourseId);
                     var resutVideosDto = _mapper.Map<List<VideoDto>>(videos, opt =>
                     {

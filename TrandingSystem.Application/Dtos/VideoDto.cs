@@ -1,4 +1,6 @@
 ﻿
+using TrandingSystem.Domain.Entities;
+
 namespace TrandingSystem.Application.Dtos
 {
     public class VideoDto
@@ -13,5 +15,7 @@ namespace TrandingSystem.Application.Dtos
         public bool? IsActive { get; set; }
         public string CourseName { get; set; }
         public int CourseId { get; set; }
+
+       
     }
 }

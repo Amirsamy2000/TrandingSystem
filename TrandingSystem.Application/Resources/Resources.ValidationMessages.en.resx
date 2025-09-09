@@ -268,4 +268,10 @@ We thank you for your interest and willingness to participate, and we look forwa
   <data name="NotEnrollinthiscourse" xml:space="preserve">
     <value>You are not registered for this course. Please return the registration request.</value>
   </data>
+  <data name="NotEnrollinthisvideo" xml:space="preserve">
+    <value>You are not registered for this live. Please return the registration request.</value>
+  </data>
+  <data name="NotEnrollinthisv" xml:space="preserve">
+    <value>You are not registered for this Video. Please return the registration request.</value>
+  </data>
 </root>

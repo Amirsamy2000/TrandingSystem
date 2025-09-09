@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using TrandingSystem.Domain.Entities;
@@ -53,11 +54,14 @@ namespace TrandingSystem.Infrastructure.Repositories
             return true;
         }
 
-        public Video_CourseEnrollment? CheckUserEnrollment(int userId, int courseId)
+        // check if user is enrolled in a specific course
+        // check if user is enrolled in a specific video
+        // check if user is enrolled in a specific LiveSession
+        public Video_CourseEnrollment? CheckUserEnrollment(Expression<Func<Video_CourseEnrollment, bool>> condition)
         {
             return _db.CourseEnrollments
                       .AsNoTracking() // تحسين الأداء لأنه مجرد قراءة
-                      .FirstOrDefault(x => x.UserId == userId && x.CourseId == courseId);
+                      .FirstOrDefault(condition);
         }
 
     }

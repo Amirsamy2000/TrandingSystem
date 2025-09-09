@@ -35,5 +35,6 @@ namespace TrandingSystem.Application.Dtos
 
         public bool? IsActive { get; set; }
         public string CourseName { get; set; }
+
     }
 }
