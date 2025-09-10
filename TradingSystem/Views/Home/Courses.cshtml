@@ -760,6 +760,104 @@
             transform: scale(1);
             pointer-events: auto;
         }
+
+    /* Layout styles for consecutive vs grid display */
+    .consecutive-layout {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+        .consecutive-layout .course-item {
+            width: 100% !important;
+            flex: none;
+        }
+
+        .consecutive-layout .course-card {
+            display: flex;
+            flex-direction: row;
+            height: auto;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+            .consecutive-layout .course-card .position-relative {
+                flex: 0 0 300px;
+                max-width: 300px;
+            }
+
+            .consecutive-layout .course-card .card-img-top,
+            .consecutive-layout .course-card .card-img-top + div {
+                height: 200px;
+                width: 100%;
+                object-fit: cover;
+            }
+
+            .consecutive-layout .course-card .card-body {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                padding: 1.5rem;
+            }
+
+            .consecutive-layout .course-card .card-title {
+                font-size: 1.25rem;
+                margin-bottom: 1rem;
+            }
+
+            .consecutive-layout .course-card .card-text {
+                font-size: 0.95rem;
+                line-height: 1.6;
+                margin-bottom: 1rem;
+            }
+
+    .grid-layout {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1.5rem;
+    }
+
+    /* Mobile responsive for consecutive layout */
+    @@media (max-width: 768px) {
+        .consecutive-layout .course-card
+
+    {
+        flex-direction: column;
+        max-width: 100%;
+    }
+
+    .consecutive-layout .course-card .position-relative {
+        flex: none;
+        max-width: 100%;
+    }
+
+    .consecutive-layout .course-card .card-body {
+        padding: 1rem;
+    }
+
+    }
+
+    /* Enhanced consecutive layout styling */
+    .consecutive-layout .course-card {
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    }
+
+        .consecutive-layout .course-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.15);
+        }
+
+        .consecutive-layout .course-card .position-relative img {
+            transition: transform 0.3s ease;
+        }
+
+        .consecutive-layout .course-card:hover .position-relative img {
+            transform: scale(1.05);
+        }
 </style>
 
 
@@ -840,12 +938,12 @@
 
             // Add category cards
             categories.forEach(category => {
-                const categoryName = isRtl ? (category.categoryNameAr || category.categoryNameEn) : (category.categoryNameEn || category.categoryNameAr);
+                const categoryName = isRtl ? (category.CategoryNameAr || category.CategoryNameEn) : (category.CategoryNameEn || category.CategoryNameAr);
                 const iconClass = getCategoryIcon(categoryName);
 
                 html += `
                     <div class="col-6 col-md-4 col-lg-3">
-                        <div class="category-card" onclick="selectCategory('${category.categoryNameEn || category.categoryNameAr}', '${categoryName}')">
+                        <div class="category-card" onclick="selectCategory('${category.CategoryNameEn || category.CategoryNameAr}', '${categoryName}')">
                             <i class="category-icon ${iconClass}"></i>
                             <h6 class="category-name">${categoryName}</h6>
                         </div>
