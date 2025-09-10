@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
+using TradingSystem.Application.Common.Response;
 using TrandingSystem.Application.Features.Users.Commands;
 using TrandingSystem.Application.Features.Users.Queries;
 using TrandingSystem.Domain.Entities;
@@ -44,25 +45,31 @@ namespace TrandingSystem.Controllers
         }
 
         // Change a user's role (replace old roles with a new one)
-        public async Task<IdentityResult> ChangeUserRole(string userId, string newRole)
+        public async Task<IActionResult> ChangeUserRole(string userId, string newRole)
         {
             var user = await _userManager.FindByIdAsync(userId);
             if (user == null)
-                return IdentityResult.Failed(new IdentityError { Description = "User not found." });
+                return BadRequest(Response<IdentityError>.ErrorResponse("User not found", new IdentityError { Description = "User not found." }));
+
 
             // Ensure role exists
             if (!await _roleManager.RoleExistsAsync(newRole))
-                return IdentityResult.Failed(new IdentityError { Description = $"Role '{newRole}' does not exist." });
+                return BadRequest(Response<IdentityError>.ErrorResponse("does not exist", new IdentityError { Description = $"Role '{newRole}' does not exist." }));
+
 
             // Remove old roles
             var currentRoles = await _userManager.GetRolesAsync(user);
-            var removeResult = await _userManager.RemoveFromRolesAsync(user, currentRoles);
-            if (!removeResult.Succeeded)
-                return removeResult;
+            if (currentRoles.Any())
+            {
+                var removeResult = await _userManager.RemoveFromRolesAsync(user, currentRoles);
+                if (!removeResult.Succeeded)
+                    return BadRequest(Response < IdentityResult >.ErrorResponse("failed to delete old roles",removeResult));
+            }
+
 
             // Add new role
             var addResult = await _userManager.AddToRoleAsync(user, newRole);
-            return addResult;
+            return Ok(Response<IdentityResult>.SuccessResponse(addResult));
         }
 
         // Action to get the first role of a user

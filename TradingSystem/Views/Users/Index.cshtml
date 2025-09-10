@@ -275,7 +275,7 @@
 
             // Disable the select while processing
             select.prop('disabled', true);
-
+            debugger
             $.ajax({
                 url: '@Url.Action("ChangeUserRole", "Users")',
                 type: 'POST',
@@ -284,7 +284,8 @@
                     newRole: newRole
                 },
                 success: function(response) {
-                    if (response.succeeded) {
+                    debugger
+                    if (response.success) {
                         // Update the original role data attribute
                         select.data('original-role', newRole);
 
@@ -298,10 +299,10 @@
                         // Revert to original selection
                         select.val(originalRole);
 
-                        let errorMessage = "Failed to update user role.";
-                        if (response.errors && response.errors.length > 0) {
-                            errorMessage = response.errors[0].description;
-                        }
+                        let errorMessage = response.message;
+                        // if (response.message && response.errors.length > 0) {
+                        //     errorMessage = response.errors[0].description;
+                        // }
                         alert("Error: " + errorMessage);
                     }
                 },
