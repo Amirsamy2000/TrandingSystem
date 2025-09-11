@@ -183,4 +183,22 @@
   <data name="Ordervideo" xml:space="preserve">
     <value>Videos Requests</value>
   </data>
+  <data name="UsersManagement" xml:space="preserve">
+    <value>Users Management</value>
+  </data>
+  <data name="SiteName" xml:space="preserve">
+    <value> سيف القاضي</value>
+  </data>
+  <data name="dasbord" xml:space="preserve">
+    <value>Dashboard</value>
+  </data>
+  <data name="OrderLive" xml:space="preserve">
+    <value>Lives Requests</value>
+  </data>
+  <data name="Categories" xml:space="preserve">
+    <value>Categories</value>
+  </data>
+  <data name="disCategories" xml:space="preserve">
+    <value>Show Categories</value>
+  </data>
 </root>

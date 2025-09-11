@@ -1,0 +1,359 @@
+﻿@using Microsoft.Extensions.Localization
+@using System.Text.Json
+@using TrandingSystem.Application.Dtos
+@using TrandingSystem.Controllers
+@model IEnumerable<CategoryDto>
+@inject IStringLocalizer<LiveSessionController> Localizer;
+        
+
+        @{
+            ViewData["Title"] = "Index";
+            Layout = "~/Views/Shared/_LayoutDasbord.cshtml";
+        }
+
+
+        <div class="row mb-2 p-2 bg-white" id="videoList">
+            <div class="col-12 m-3"></div>
+            <div class="col-12 d-flex align-items-center mt-4">
+                @if (System.Threading.Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName == "ar")
+                {
+                    <i class="bi bi-arrow-left" style="font-size: 2.5rem; color: #007bff"></i>
+                    <span class="me-2" style="font-size:20px; font-weight:bold;">@Localizer["Cats"]</span>
+
+                }
+                else
+                {
+                    <!-- في الإنجليزي: السهم يكون على الشمال -->
+                    <i class="bi bi-arrow-right" style="font-size: 2.5rem; color: #007bff;"></i>
+                    <span class="ms-2" style="font-size:20px; font-weight:bold;">@Localizer["CatsCats"]</span>
+                }
+            </div>
+
+            <div class="col-12 m-4">
+
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addCategoryModal">
+                    <i class='menu-icon tf-icons bx bx-plus'></i> @Localizer["AddnewCte"]
+                </button>
+            </div>
+
+            @if (Model is not null || Model.Count() > 0)
+            {
+
+                <style>
+                    .dataTables_filter input {
+                        padding: 6px 10px;
+                        border-radius: 8px;
+                        border: 1px solid #ccc;
+                        width: 250px;
+                        font-size: 14px;
+                    }
+
+                    .dt-button, .custom-btn {
+                        background-color: #007bff !important;
+                        color: white !important;
+                        padding: 6px 12px;
+                        border-radius: 6px;
+                        border: none;
+                        font-size: 14px;
+                        margin-left: 5px;
+                        cursor: pointer;
+                    }
+
+                        .dt-button:hover, .custom-btn:hover {
+                            background-color: #0056b3 !important;
+                        }
+
+                    .dataTables_filter input {
+                        class: "form-control"
+                    }
+
+                    .dataTables_length select {
+                        padding: 8px !important;
+                        background-color: #007bff !important;
+                        color: white !important;
+                    }
+
+                    #OrdersTable_filter label::before {
+                        content: "" !important
+                    }
+
+                    #OrdersTable_filter label {
+                        font-size: 0 !important; /* Hide text */
+                    }
+
+                    #OrdersTable_filter input {
+                        font-size: 14px !important; /* Restore input font size */
+                    }
+                </style>
+
+                <div class="col-12 m-2">
+                    <table class="table table-hover table-bordered " id="catstable">
+                        <thead>
+                            <tr class=" table-info">
+
+                                <th scope="col">@Localizer["catename-ar"]</th>
+                                <th scope="col">@Localizer["catname-en"]</th>
+                                <th scope="col">@Localizer["Date"]</th>
+                                <th scope="col">@Localizer["IsActive"]</th>
+                                <th scope="col">@Localizer["Action"]</th>
+
+
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @foreach (var cat in Model)
+                            {
+                                <tr>
+                                    <td>@cat.CategoryNameAr</td>
+                                    <td>@cat.CategoryNameEn</td>
+                                    <td>@cat.CreateAt?.ToString("d")</td>
+                                    <td class="text-success">@Localizer["IsActive"]</td>
+                                    <td>
+                                        <button onclick="FitAndDisplaymodal(@cat.CategoryId, '@cat.CategoryNameEn', '@cat.CategoryNameAr')"
+                                                class="btn btn-info">
+                                            @Localizer["Action"]
+                                        </button>
+                                    </td>
+
+                                </tr>
+                            }
+
+
+                        </tbody>
+                    </table>
+                </div>
+
+
+
+
+            }
+
+
+
+
+            else
+            {
+                <div class="col-12">
+                    <div class="alert alert-primary   " role="alert">
+                        <h4 class="alert-heading text-center">@Localizer["NocateMessage"]</h4>
+                        <br />
+                        @* <p class="text-center">@Localizer["NoVideosMessage1"]</p> *@
+                    </div>
+                </div>
+            }
+        </div>
+
+
+
+
+        <!-- Modal add -->
+        <div class="modal fade" id="addCategoryModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+                    <div class="modal-header">
+                        <h5 class="modal-title">@Localizer["AddnewCte"]</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <form id="categoryForm" novalidate>
+                            <input hidden value="0" id="cateId" />
+
+                            <div class="mb-3">
+                                <label for="arName" class="form-label">@Localizer["catename-ar"]</label>
+                                <input type="text" class="form-control" id="arName" name="arName" required>
+                                <div class="invalid-feedback">
+                                    @Localizer["Required"]
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="enName" class="form-label">@Localizer["catname-en"]</label>
+                                <input type="text" class="form-control" id="enName" name="enName" required>
+                                <div class="invalid-feedback">
+                                    @Localizer["Required"]
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">@Localizer["close"]</button>
+                        <button type="button" class="btn btn-primary" onclick="SubmitSaveCate(1)">@Localizer["Save"]</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Modal Update -->
+        <div class="modal fade" id="addCategoryModal2" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+                    <div class="modal-header">
+                        <h5 class="modal-title">@Localizer["UpdatenewCte"]</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <form id="updateCategoryForm" novalidate>
+                            <input hidden value="0" id="cateId2" />
+
+                            <div class="mb-3">
+                                <label for="arName2" class="form-label">@Localizer["catename-ar"]</label>
+                                <input type="text" class="form-control" id="arName2" name="arName2" required>
+                                <div class="invalid-feedback">
+                                    @Localizer["Required"]
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="enName2" class="form-label">@Localizer["catname-en"]</label>
+                                <input type="text" class="form-control" id="enName2" name="enName2" required>
+                                <div class="invalid-feedback">
+                                    @Localizer["Required"]
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">@Localizer["close"]</button>
+                        <button type="button" class="btn btn-primary" onclick="SubmitUpdateCate(0)">@Localizer["Save"]</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+        <script>
+    $(document).ready(function () {
+        $('#catstable').DataTable({
+            pageLength: 5,
+            lengthMenu: [[5, 10, 25, -1], [5, 10, 25, "All"]],
+            language: { lengthMenu: "_MENU_" },
+            ordering: true,
+            order: [[0, 'asc']],
+            columnDefs: [
+                { orderable: false, targets: [4] }
+            ],
+            responsive: true,
+            dom: 'Blfrtip',
+            buttons: ['copy', 'excel', 'print']
+        });
+    });
+
+
+    function FitAndDisplaymodal(id ,ename,aname){
+        $("#cateId2").val(id);
+    $("#arName2").val(aname);
+    $("#enName2").val(ename);
+    var myModal = new bootstrap.Modal(document.getElementById('addCategoryModal2'));
+    myModal.show();
+    }
+
+    function SaveChangeCat(type){
+
+        if(type==1){
+
+            SubmitSaveCate();
+        }
+        else{
+
+            SubmitUpdateCate();
+
+        }
+    }
+
+      function SubmitSaveCate() {
+        let form = document.getElementById("categoryForm");
+
+        // شوف لو الفاليديشن فشل
+        if (!form.checkValidity()) {
+            form.classList.add("was-validated"); // يدي رسائل تحت الـ inputs
+            return; // يوقف
+        }
+
+        const modalInstance = bootstrap.Modal.getInstance(document.getElementById('addCategoryModal'));
+        if (modalInstance) modalInstance.hide();
+
+        let arName = $('#arName').val();
+        let enName = $('#enName').val();
+
+        $.ajax({
+            url: "/Categories/SubmitAddNewCat",
+            type: "POST",
+            data: {
+                catearName: arName,
+                cateenName: enName
+            },
+            success: function (res) {
+                if (res.success) {
+                    window.location.reload();
+                }
+                else{
+                     SweetAlterDanger(res.message)
+                }
+
+            },
+            error:function(res){
+                 SweetAlterDanger(res.message)
+            }
+            
+        });
+    }
+
+      function SubmitUpdateCate() {
+        let form = document.getElementById("updateCategoryForm");
+
+        // تحقق من الفاليديشن
+        if (!form.checkValidity()) {
+            form.classList.add("was-validated");
+            return;
+        }
+
+        const modalInstance = bootstrap.Modal.getInstance(document.getElementById('addCategoryModal2'));
+        if (modalInstance) modalInstance.hide();
+
+        let arName = $('#arName2').val();
+        let enName = $('#enName2').val();
+        let id = $('#cateId2').val();
+
+        $.ajax({
+            url: "/Categories/SubmitUpdateCat",
+            type: "POST",
+            data: {
+                catearName: arName,
+                cateenName: enName,
+                catid: id
+            },
+            success: function (res) {
+                if (res.success) {
+                    window.location.reload();
+                }
+                else{
+                     SweetAlterDanger(res.message)
+                }
+            },
+            error:function(res){
+                SweetAlterDanger(res.message)
+            }
+        });
+    }
+
+    function SweetAlterDanger(text){
+           Swal.fire({
+      title: text,
+      icon: "error",
+      draggable: true
+    });}
+
+
+        </script>

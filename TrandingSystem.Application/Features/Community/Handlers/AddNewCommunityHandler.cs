@@ -13,6 +13,7 @@ using TrandingSystem.Application.Features.Courses.Commands;
 using TrandingSystem.Application.Resources;
 using TrandingSystem.Domain.Entities;
 using TrandingSystem.Domain.Interfaces;
+using TrandingSystem.Infrastructure.Constants;
 
 namespace TrandingSystem.Application.Features.Community.Handlers
 {
@@ -68,7 +69,7 @@ namespace TrandingSystem.Application.Features.Community.Handlers
                     info3 = "",
                     contact = _localizer["contact"],
                     namebtn = "Show Community",
-                    ActionUrl = $"http://saifalqadi.runasp.net/Communities/ShowCommunitiesForUser"
+                    ActionUrl = $"{ConstantPath.MainUrlSite}/Communities/ShowCommunitiesForUser"
 
                 };
                  if (request.Community.IsDefault)
@@ -78,6 +79,8 @@ namespace TrandingSystem.Application.Features.Community.Handlers
                     // Add CommunityMember For All User In System
                     foreach (var user in AllActiveUser)
                     {
+                        if (user.CommunityMembers.Any(x => x.UserId == user.Id))
+                            continue;
                         var communityMember = new CommunityMember()
                         {
                             UserId = user.Id,
@@ -108,8 +111,8 @@ namespace TrandingSystem.Application.Features.Community.Handlers
                     {
                         return Response<bool>.ErrorResponse(_localizer["CourseNotFound"]);
                     }
-                    var userincourse = course.CourseEnrollments.Where(x => x.OrderStatus == 1).Select(x=>x.User).ToList();
-                    foreach (var user in course.CourseEnrollments.Where(x => x.OrderStatus == 1))
+                    var userincourse = course.CourseEnrollments.Where(x => x.OrderStatus == 1 && x.CourseId == course.CourseId).Select(x=>x.User).ToList();
+                    foreach (var user in course.CourseEnrollments.Where(x => x.OrderStatus == 1&& x.CourseId== course.CourseId))
                     {
                         var communityMember = new CommunityMember()
                         {
@@ -119,8 +122,9 @@ namespace TrandingSystem.Application.Features.Community.Handlers
                             CommunityId = newCommunityId,
                         };
                         _unitofwork.CommunityMember.Create(communityMember);
+                        await _unitofwork.SaveChangesAsync();
                     }
-                    await _unitofwork.SaveChangesAsync();
+                   
                     _notificationService.SendMailForGroupUserAfterCreateBodey(userincourse, _localizer["FormalSub"], EmailTemp);
 
                     return Response<bool>.SuccessResponse(true, _localizer["CommunityCreated"]);

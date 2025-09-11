@@ -10,5 +10,6 @@ namespace TrandingSystem.Domain.Interfaces
 {
     public interface ICategoryRepository : IDomainInterface<Category>
     {
+        Category GetCategoryByName(string ENName, string ARName);
     }
 }

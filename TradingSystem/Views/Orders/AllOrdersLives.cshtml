@@ -1,0 +1,159 @@
+﻿@using Microsoft.Extensions.Localization
+@using TrandingSystem.Application.Dtos
+@using TrandingSystem.Controllers
+@inject IStringLocalizer<OrdersController> Localizer
+@model CountOrdersEnorllmentStatus
+
+@{
+    ViewData["Title"] = "AllOrdersVideo";
+    Layout = "~/Views/Shared/_LayoutDasbord.cshtml";
+}
+
+<h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">@Localizer["Orders"] /</span> @Localizer["OrdersRequestLives"] </h4>
+
+<div class="row">
+    <!-- Yellow -->
+    <div class="col-md-3">
+        <div class="alert alert-warning text-center">
+            <h5 class="mb-2">@Localizer["Pennding"]</h5>
+            <i class="bx bx-time text-warning fs-2"></i>
+            <h3 id="CountPending">@Model.CountOrdersPending </h3>
+            <button class="btn btn-outline-warning" onclick="ShowOrdersByOrderStatus(2,'pendingOrders')">@Localizer["View"]</button>
+        </div>
+    </div>
+
+    <!-- Red -->
+    <div class="col-md-3">
+        <div class="alert alert-danger text-center">
+            <h5 class="mb-2">@Localizer["Reject"]</h5>
+            <i class="bx bx-x-circle text-danger fs-2"></i>
+            <h3 id="CountCanceled">@Model.CountOrdersCanceled </h3>
+            <button class="btn btn-outline-danger" onclick="ShowOrdersByOrderStatus(0,'cancelOrders')">View</button>
+        </div>
+    </div>
+
+    <!-- Green -->
+    <div class="col-md-3">
+        <div class="alert alert-success text-center">
+            <h5 class="mb-2">@Localizer["Acceted"]</h5>
+            <i class="bx bx-check-circle text-success fs-2"></i>
+            <h3 id="CountAccepted">@Model.CountOrdersAccepted </h3>
+            <button class="btn btn-outline-success" onclick="ShowOrdersByOrderStatus(1,'acceptedOrders')">View</button>
+        </div>
+    </div>
+
+    <!-- Gray -->
+    <div class="col-md-3">
+        <div class="alert alert-secondary text-center">
+            <h5 class="mb-2">@Localizer["Total"]</h5>
+            <i class="bx bx-list-ul text-secondary fs-2"></i>
+            <h3>@Model.CountOrdersTotal </h3>
+            <button class="btn btn-outline-secondary">View</button>
+        </div>
+    </div>
+
+    @* //// *@
+    <div class="col-md mb-4 mb-md-0">
+
+        <div class="accordion mt-3 " id="accordionExample">
+            @* Pendding *@
+            <div class="card accordion-item d-none" id="pendingOrders">
+                <h2 class="accordion-header" id="headingOne">
+                    <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#accordionOne" aria-expanded="false" aria-controls="accordionOne">
+                        @Localizer["PendingEnrollmentRequests"]
+                    </button>
+                </h2>
+
+                <div id="accordionOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample" style="">
+                    <div class="accordion-body  table-responsive" id="pendingOrdersbody">
+                        @* <partial name="_PartialOrdersStatus" /> *@
+
+                    </div>
+                </div>
+            </div>
+            @* end *@
+
+            @* accpted *@
+            <div class="card accordion-item d-none" id="acceptedOrders">
+                <h2 class="accordion-header" id="headingTwo">
+                    <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#accordionTwo" aria-expanded="false" aria-controls="accordionTwo">
+                        @Localizer["AcceptedEnrollmentRequests"]
+                    </button>
+                </h2>
+                <div id="accordionTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample" style="">
+                    <div class="accordion-body table-responsive" id="acceptedOrdersbody">
+                    </div>
+                </div>
+            </div>
+            @* end *@
+
+            @* cancel *@
+            <div class="card accordion-item d-none" id="cancelOrders">
+                <h2 class="accordion-header" id="headingThree">
+                    <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#accordionThree" aria-expanded="false" aria-controls="accordionThree">
+                        @Localizer["CancelEnrollmentRequests"]
+                    </button>
+                </h2>
+                <div id="accordionThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample" style="">
+                    <div class="accordion-body table-responsive" id="cancelOrdersbody">
+                    </div>
+                </div>
+            </div>
+            @* end  *@
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @* SweatAlterDanger(@Localizer["loading"]) *@
+
+    <script>
+
+        // DataTable
+
+            //   $('.OrdersTable').DataTable({
+
+            //     pageLength: 10, عدد الصفوف الافتراضي
+
+            //     ordering: true, تمكين الترتيب
+            //     order: [[0, 'asc']], ترتيب افتراضي حسب العمود الأول
+            //     columnDefs: [
+            //         { orderable: false, targets: [5, 6, 7] } تعطيل الترتيب في الأعمدة (الصورة + الأزرار)
+            //     ],
+            //     responsive: true,
+            //     dom: 'Bfrtip', لعرض أزرار التصدير
+            //     buttons: [
+            //         'copy', 'excel', 'pdf',
+            //     ]
+            // });
+
+
+        function ShowOrdersByOrderStatus(status, idDiv) {
+
+                // إظهار الكارد المخفي
+        $('#' + idDiv).removeClass('d-none');
+
+        let setting = {
+            title: "@Localizer["loading"]"
+        };
+        SweatAlterProcessing(setting);
+            $.ajax({
+                url: '@Url.Action("GetOrderLivesByOrderStatus", "Orders")',
+                type: 'GET',
+                data: { OrderStatus: status,Type:2 },
+                success: function (data) {
+
+                    Swal.close();
+                    $('#' + idDiv + 'body').html(data);
+                    $('#' + idDiv).reomveClass("d-none")
+                },
+                error: function () {
+                    Swal.close();
+
+                    SweatAlterDanger('@Localizer["FaildLoad"]')
+                }
+            });
+        }
+    </script>
+}
+

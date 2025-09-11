@@ -9,6 +9,7 @@ using TradingSystem.Application.Common.Response;
 using TrandingSystem.Application.Features.Community.Commands;
 using TrandingSystem.Application.Resources;
 using TrandingSystem.Domain.Interfaces;
+using TrandingSystem.Infrastructure.Constants;
 using TrandingSystem.Infrastructure.Services;
 
 namespace TrandingSystem.Application.Features.Community.Handlers
@@ -44,11 +45,11 @@ namespace TrandingSystem.Application.Features.Community.Handlers
                     StieName = _localizer["stieName"],
                     Hi = _localizer["hi"],
                     info1 = _localizer["infocomm1"],
-                    info2 = _localizer["infocomm2"] + ": " + community.Title,
-                    info3 = "",
+                    info2 = _localizer["infocomm2"] + " " + community.Title,
+                    //info3 = "",
                     contact = _localizer["contact"],
                     namebtn = "Show Community",
-                    ActionUrl = $"http://saifalqadi.runasp.net/Communities/ShowCommunitiesForUser"
+                    ActionUrl = $"{ConstantPath.MainUrlSite}/Communities/ShowCommunitiesForUser"
 
                 };
 

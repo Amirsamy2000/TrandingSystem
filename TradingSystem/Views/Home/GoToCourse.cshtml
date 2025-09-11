@@ -14,6 +14,82 @@
 	var currentCulture = requestCulture?.RequestCulture.Culture.Name;
 	var isArabic = currentCulture == "ar" ? true : false; //ViewBag.language_code == 2;
 }
+
+<style>
+	.description-clamp {
+		max-height: 3.6em;
+		overflow: hidden;
+		position: relative;
+		transition: max-height 0.3s ease-in-out;
+		cursor: pointer;
+	}
+
+		.description-clamp::after {
+			content: '';
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			height: 1.5em;
+			background: linear-gradient(to bottom, rgba(255, 255, 255, 0), #fff);
+		}
+
+		.description-clamp:hover {
+			max-height: 500px;
+		}
+
+	.Add-infoCard {
+		background-color: #f8f9fa;
+		border-radius: 8px;
+		padding: 8px 12px;
+	}
+
+	.card {
+		border: none;
+		box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+		transition: transform 0.2s ease, box-shadow 0.2s ease;
+	}
+
+		.card:hover {
+			transform: translateY(-4px);
+			box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+		}
+
+	.card-img-top {
+		object-fit: cover;
+		height: 180px;
+		border-top-left-radius: 8px;
+		border-top-right-radius: 8px;
+	}
+
+	@@media (max-width: 576px) {
+		.card-img-top {
+			height: 150px;
+		}
+	}
+
+	.dis-course-data {
+		padding: 10px;
+		background-color: #eee;
+		border-left-color: #c3972e;
+		border-right-color: #c3972e;
+		border-left-style: solid;
+		border-right-style: solid;
+		border-left-width: 6px;
+		border-right-width: 6px
+	}
+
+	.btn-bgcolor {
+		background-color: #444444 !important;
+		color: azure;
+		border: none
+	}
+
+		.btn-bgcolor:hover {
+			background-color: #c3972e !important;
+		}
+
+</style>
 <!-- Page Title -->
 <div class="page-title" data-aos="fade">
 	<div class="heading">

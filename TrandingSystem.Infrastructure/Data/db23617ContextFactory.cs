@@ -13,7 +13,7 @@ namespace TrandingSystem.Infrastructure.Data
         public db23617Context CreateDbContext(string[] args)
         {
             var optionsBuilder = new DbContextOptionsBuilder<db23617Context>();
-            optionsBuilder.UseSqlServer("Server=db23897.public.databaseasp.net;Database=db23897;User Id=db23897;Password=123456789;Encrypt=True;TrustServerCertificate=True;MultipleActiveResultSets=True;")
+            optionsBuilder.UseSqlServer("Server=db26424.public.databaseasp.net; Database=db26424; User Id=db26424; Password=Bo8@7W-wd!6J; Encrypt=True; TrustServerCertificate=True; MultipleActiveResultSets=True;")
                           .UseLazyLoadingProxies();
 
             return new db23617Context(optionsBuilder.Options);

@@ -963,16 +963,19 @@ namespace TrandingSystem.Infrastructure.Migrations
                     b.Property<int?>("VideoId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("liveId")
+                        .HasColumnType("int");
+
                     b.HasKey("EnrollmentId")
                         .HasName("PK__CourseEn__7F68771BB07A50C4");
+
+                    b.HasIndex("CourseId");
 
                     b.HasIndex("UserId");
 
                     b.HasIndex("VideoId");
 
-                    b.HasIndex("CourseId", "UserId", "VideoId", "OrderStatus")
-                        .IsUnique()
-                        .HasFilter("[CourseId] IS NOT NULL AND [VideoId] IS NOT NULL AND [OrderStatus] IS NOT NULL");
+                    b.HasIndex("liveId");
 
                     b.ToTable("VideoCourseEnrollments", (string)null);
                 });
@@ -1251,7 +1254,13 @@ namespace TrandingSystem.Infrastructure.Migrations
                         .WithMany("CourseEnrollments")
                         .HasForeignKey("VideoId");
 
+                    b.HasOne("TrandingSystem.Domain.Entities.LiveSession", "Live")
+                        .WithMany("CourseEnrollments")
+                        .HasForeignKey("liveId");
+
                     b.Navigation("Course");
+
+                    b.Navigation("Live");
 
                     b.Navigation("User");
 
@@ -1281,6 +1290,11 @@ namespace TrandingSystem.Infrastructure.Migrations
                     b.Navigation("LiveSessions");
 
                     b.Navigation("Videos");
+                });
+
+            modelBuilder.Entity("TrandingSystem.Domain.Entities.LiveSession", b =>
+                {
+                    b.Navigation("CourseEnrollments");
                 });
 
             modelBuilder.Entity("TrandingSystem.Domain.Entities.User", b =>

@@ -1,5 +1,6 @@
 ﻿ 
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,9 +37,14 @@ namespace TrandingSystem.Application.Features.Video.Handlers
                 foreach(var video in AllVideos)
                 {
                     await _fileservice.DeleteVideoAsync(video.VideoUrl);
-                    await  _fileservice.DeleteImageAsync(video.VideoUrl);
+                    await  _fileservice.DeleteImageAsync(video.ImageVideoUrl);
 
+                    // Delete enrollments that actually have this VideoId
+                    var enrollments = _unitOfWork.ordersEnorllment.GetEnrollmentsByVideoId(video.VideoId);
+                        _unitOfWork.ordersEnorllment.DeleteRange(enrollments);
+                        await _unitOfWork.SaveChangesAsync();
                 }
+
                 _unitOfWork.Videos.DeleteAllVideosByCourseId(AllVideos.ToList());
                  await _unitOfWork.SaveChangesAsync();
                 string responseMessage = request.Culture == "ar" ? "تم حذف الفيديوهات بنجاح" : "Videos deleted successfully";

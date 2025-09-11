@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System.Security.Claims;
 using System.Threading;
+using System.Threading.Tasks;
 using TradingSystem.Application.Common.Response;
 using TrandingSystem.Application.Dtos;
 using TrandingSystem.Application.Features.Courses.Commands;
@@ -50,9 +51,18 @@ namespace TrandingSystem.Controllers
         [HttpGet]
         public IActionResult PartialVideos(CancellationToken cancellationToken, int CourseId = 1)
         {
+            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
+
+            if (userIdClaim == null)
+            {
+                return Unauthorized("User ID not found in token.");
+            }
+            int userId = int.Parse(userIdClaim.Value);
             var culture = Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName;
+
+
             //@ViewData["Master"] = @locaizer[""]
-            var response = _mediator.Send(new GetVideosByCourseIdQuery(CourseId, culture), cancellationToken).Result;
+            var response = _mediator.Send(new GetLivesAndVideosByUserEnrollmentQuery(userId, culture, CourseId), cancellationToken).Result;
             if (!response.Success)
             {
                 // return to Erro Page
@@ -62,6 +72,7 @@ namespace TrandingSystem.Controllers
 
             ViewBag.CourseId = CourseId;
             ViewBag.CourseName = response.Message;
+
             return PartialView("_VideosPartialView", response.Data);
         }
 
@@ -214,6 +225,21 @@ namespace TrandingSystem.Controllers
 
         }
 
+        [HttpPost]
+        public async Task<IActionResult> EnrollVideo(int id, IFormFile RecieptImage)
+        {
+            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
+
+            if (userIdClaim == null)
+            {
+                return Unauthorized("User ID not found in token.");
+            }
+
+            int userId = int.Parse(userIdClaim.Value);
+            var response =await _mediator.Send(new EnrollmentInPaidVideoCommand(id, RecieptImage, userId));
+            return Json(response);
+
+        }
 
     }
 }

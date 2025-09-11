@@ -248,7 +248,7 @@ We thank you for your interest and willingness to participate, and we look forwa
     <value>We are pleased to inform you that a new training course has been added to the Saif Al-Qadi platform. You can view course details and register through the platform.</value>
   </data>
   <data name="infocomm2" xml:space="preserve">
-    <value>Community Title:</value>
+    <value>Community  </value>
   </data>
   <data name="infocomm1" xml:space="preserve">
     <value>We are pleased to inform you that you have been added to a new community on the Saif Al-Qadi platform. You can now participate in discussions, exchange experiences, and communicate with other community members.</value>
@@ -263,6 +263,27 @@ We thank you for your interest and willingness to participate, and we look forwa
     <value>Video title: </value>
   </data>
   <data name="infoco2" xml:space="preserve">
-    <value>Course Title</value>
+    <value>Course  </value>
+  </data>
+  <data name="NotEnrollinthiscourse" xml:space="preserve">
+    <value>You are not registered for this course. Please return the registration request.</value>
+  </data>
+  <data name="NotEnrollinthisvideo" xml:space="preserve">
+    <value>You are not registered for this live. Please return the registration request.</value>
+  </data>
+  <data name="NotEnrollinthisv" xml:space="preserve">
+    <value>You are not registered for this Video. Please return the registration request.</value>
+  </data>
+  <data name="Enrollmentalreadylive" xml:space="preserve">
+    <value>You are already registered for this live.</value>
+  </data>
+  <data name="Enrollmentalreadyvideo" xml:space="preserve">
+    <value>You are already registered for this video.</value>
+  </data>
+  <data name="CategoryAlreadyExists" xml:space="preserve">
+    <value>The Category already exists.</value>
+  </data>
+  <data name="NotFoundCategory" xml:space="preserve">
+    <value>Category not found</value>
   </data>
 </root>

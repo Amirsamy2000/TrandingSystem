@@ -43,6 +43,7 @@
         <button class="btn btn-danger" onclick="DeleteAllSessions(@ViewBag.CourseId??0)">  <i class='menu-icon bx bx-trash tf-icons bx bx-plus'></i> @Localizer["DeleteAll"]</button>
     </div>
 </div>
+
 <div class="row mb-5">
     @if (Model.Count() > 0)
     {
@@ -122,6 +123,8 @@
 
     }
 </div>
+
+
 <div class="modal fade" id="youTubeModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">

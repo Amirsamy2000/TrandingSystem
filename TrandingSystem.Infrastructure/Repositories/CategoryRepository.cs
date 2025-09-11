@@ -44,7 +44,12 @@ namespace TrandingSystem.Infrastructure.Repositories
 
         public Category Update(Category Element)
         {
-            throw new NotImplementedException();
+           return _context.Categories.Update(Element).Entity;
+        }
+
+        public Category GetCategoryByName(string ENName, string ARName)
+        {
+            return _context.Categories.FirstOrDefault(c => c.CategoryNameEn == ENName || c.CategoryNameAr == ARName);
         }
     }
 }

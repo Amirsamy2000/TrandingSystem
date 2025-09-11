@@ -480,9 +480,9 @@
                 isValid = false;
             }
 
-            if (!validateVideoFile('inputVideoUrl', 'VideoUrl', '@Localizer2["AllowVideoExtensiion"]')) {
-                isValid = false;
-            }
+            if (!GeneralRequiredFiled('inputVideoUrl', '@Html.Raw(@Localizer["Required"])', 'VideoUrl')) {
+            isValid = false;
+        }
 
             if (!handleIsPaidChangeInAddNewVideo('Ispaid', 'Costadd')) {
                 isValid = false;

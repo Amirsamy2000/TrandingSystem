@@ -183,4 +183,22 @@
   <data name="Ordervideo" xml:space="preserve">
     <value>طلبات الفديوهات</value>
   </data>
+  <data name="UsersManagement" xml:space="preserve">
+    <value>ادارة المستخدمين</value>
+  </data>
+  <data name="SiteName" xml:space="preserve">
+    <value>Saif Al Qadi  </value>
+  </data>
+  <data name="dasbord" xml:space="preserve">
+    <value>لوحة تحكم</value>
+  </data>
+  <data name="OrderLive" xml:space="preserve">
+    <value>طلبات الجلسات</value>
+  </data>
+  <data name="Categories" xml:space="preserve">
+    <value>الفئات</value>
+  </data>
+  <data name="disCategories" xml:space="preserve">
+    <value>عرض الفئات</value>
+  </data>
 </root>

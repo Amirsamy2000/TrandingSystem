@@ -55,27 +55,30 @@ namespace TrandingSystem.Application.Features.LiveSessions.Handles
                     YoutubeLink=request.LiveSessionAdd.YoutubeLink
                 };
                  _unitOfWork.LiveSessionRepositry.Create(newLiveSession);
+
                 await _unitOfWork.SaveChangesAsync(cancellationToken);
-                
+                var course = _unitOfWork.Courses.ReadById(newLiveSession.CourseId);
                 if (request.LiveSessionAdd.notfiy)
                 {
                     // notify
                     var EmailTemp = new  Domain.Helper.EmailBody()
                     {
                         dir = _localizer["dir"],
+                        StieName = _localizer["stieName"],
                         Subject = _localizer["stieName"],
                         Hi = _localizer["hi"],
                         info1 = _localizer["infolive1"] + " <br> <br>" + newLiveSession.TitleEN,
                         info2 = _localizer["infoLive2"]+": "+ newLiveSession.ScheduledAt.ToString("dd-MM-yyyy")
                         + "<br><br>"+ _localizer["infoLivetime2"] +": " + newLiveSession.ScheduledTime,
-                        info3 = _localizer["infoVido3"] + " " + newLiveSession.Course.TitleEN,
+                        info3 = _localizer["infoVido3"] + " " + course.TitleEN,
                         contact = _localizer["contact"],
                         namebtn = "Go Live",
-                        ActionUrl = request.LiveSessionAdd.YoutubeLink,
+                        ActionUrl = $"{ConstantPath.MainUrlSite}/Home/GoToCourse?CourseId={newLiveSession.CourseId}",
 
                     };
 
-                    var Users = _unitOfWork.Users.GetUserEnrollInCourse(newLiveSession.CourseId);
+                    //  var Users = _unitOfWork.Users.GetUserEnrollInCourse(newLiveSession.CourseId);
+                    var Users = _unitOfWork.Users.Read();
                     _notificationService.SendMailForGroupUserAfterCreateBodey(Users, _localizer["FormalSub"], EmailTemp);
                 }
                 

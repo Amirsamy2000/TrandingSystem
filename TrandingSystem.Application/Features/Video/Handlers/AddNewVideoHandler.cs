@@ -70,22 +70,25 @@ namespace TrandingSystem.Application.Features.Video.Handlers
                 
                 if (request.VideoAddedDto.notfiy)
                 {
-                    
+                    var course = _unitOfWork.Courses.ReadById(newVideo.CourseId);
                     // notify
                     var EmailTemp =new Domain.Helper.EmailBody()
                     {
                         dir = _localizer["dir"],
+                        StieName = _localizer["stieName"],
+
                         Subject = _localizer["stieName"],
                         Hi = _localizer["hi"],
                         info1 = _localizer["infoVido1"],
                         info2 = _localizer["infoVido2"] + " " + newVideo.TitleEN,
-                        info3 = _localizer["infoVido3"] + " " + newVideo.Course.TitleEN,
+                        info3 = _localizer["infoVido3"] + " " + course.TitleEN,
                         contact = _localizer["contact"],
                         namebtn= _localizer["btnAddVideo"],
-                        ActionUrl = $"http://saifalqadi.runasp.net/Home/GoToCourse?CourseId={newVideo.CourseId}"
+                        ActionUrl = $"{ConstantPath.MainUrlSite}/Home/GoToCourse?CourseId={newVideo.CourseId}"
 
                     };
-                    var Users = _unitOfWork.Users.GetUserEnrollInCourse(newVideo.CourseId);
+                    //var Users = _unitOfWork.Users.GetUserEnrollInCourse(newVideo.CourseId);
+                    var Users = _unitOfWork.Users.Read();
                     _notificationService.SendMailForGroupUserAfterCreateBodey(Users, _localizer["FormalSub"], EmailTemp);
                    
                 }

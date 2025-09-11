@@ -296,4 +296,49 @@ Whether you have questions about our courses, want to join one of our communitie
 You can reach out to us through the form below, and we will get back to you as soon as possible.  
 Alternatively, feel free to email us directly or contact us instantly through the WhatsApp icon at the bottom of the page.  </value>
   </data>
+  <data name="goVideos" xml:space="preserve">
+    <value>Show Videos</value>
+  </data>
+  <data name="goLives" xml:space="preserve">
+    <value>Show Lives</value>
+  </data>
+  <data name="Videos" xml:space="preserve">
+    <value>Videos</value>
+  </data>
+  <data name="WatchVdo" xml:space="preserve">
+    <value>Wactch</value>
+  </data>
+  <data name="Date" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="Unpaid" xml:space="preserve">
+    <value>Free</value>
+  </data>
+  <data name="Paid" xml:space="preserve">
+    <value>Paid</value>
+  </data>
+  <data name="Lives" xml:space="preserve">
+    <value>Lives Sessions</value>
+  </data>
+  <data name="DisplayLive" xml:space="preserve">
+    <value>Join</value>
+  </data>
+  <data name="ExpiresLive" xml:space="preserve">
+    <value>The session has ended.</value>
+  </data>
+  <data name="NoLiveMessage" xml:space="preserve">
+    <value>There are no lives for this course.</value>
+  </data>
+  <data name="NoLiveMessage1" xml:space="preserve">
+    <value>Add new videos</value>
+  </data>
+  <data name="pendingordervideo" xml:space="preserve">
+    <value>Waiting for approval</value>
+  </data>
+  <data name="paytoWatchVdo" xml:space="preserve">
+    <value>Enroll</value>
+  </data>
 </root>

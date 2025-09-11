@@ -195,4 +195,16 @@
   <data name="loading" xml:space="preserve">
     <value>Loading.....</value>
   </data>
+  <data name="goLives" xml:space="preserve">
+    <value>Show  Lives</value>
+  </data>
+  <data name="goVideos" xml:space="preserve">
+    <value>Show Videos</value>
+  </data>
+  <data name="Videos" xml:space="preserve">
+    <value>Videos </value>
+  </data>
+  <data name="Lives" xml:space="preserve">
+    <value>Lives Sessions</value>
+  </data>
 </root>

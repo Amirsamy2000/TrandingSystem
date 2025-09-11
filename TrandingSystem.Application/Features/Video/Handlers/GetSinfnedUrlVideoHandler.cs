@@ -38,6 +38,7 @@ namespace TrandingSystem.Application.Features.Video.Handlers
                        
                     );
                 }
+
                 var url =await _fileService.GetVideoUrlAsync(video.VideoUrl);
                 return Response<string>.SuccessResponse(url);
             }
