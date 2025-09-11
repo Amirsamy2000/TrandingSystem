@@ -51,7 +51,7 @@
     }
 
     .category-card {
-        background: linear-gradient(145deg, #667eea 0%, #764ba2 100%);
+        background: linear-gradient(145deg, #c3972e 0%, #c3972e 100%);
         border: none;
         border-radius: 20px;
         padding: 2rem 1.5rem;
@@ -87,12 +87,12 @@
         }
 
         .category-card.all-category {
-            background: linear-gradient(145deg, #28a745 0%, #20c997 100%);
+            background: linear-gradient(145deg, #ffc107 0%, #ffca2c 100%);
             box-shadow: 0 8px 32px rgba(40, 167, 69, 0.3);
         }
 
             .category-card.all-category:hover {
-                box-shadow: 0 20px 60px rgba(40, 167, 69, 0.4);
+                box-shadow: 0 20px 60px #ffc107;
             }
 
         .category-card .category-icon {
@@ -118,7 +118,7 @@
         right: 20px;
         transform: translateY(-50%);
         z-index: 1050;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background: linear-gradient(135deg, #c3972e 0%, #c3972e 100%);
         border: none;
         border-radius: 50px;
         padding: 15px 20px;
@@ -164,7 +164,7 @@
         top: 120px;
         left: 50%;
         transform: translateX(-50%);
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background: linear-gradient(135deg, #c3972e 0%, #c3972e 100%);
         color: white;
         padding: 10px 20px;
         border-radius: 25px;
@@ -212,7 +212,7 @@
         <!-- Page Header -->
         <div class="row mb-5">
             <div class="col-12 text-center">
-                <h1 class="display-4 fw-bold text-primary mb-3">
+                <h1 class="display-4 fw-bold mb-3" style="color:#c3972e!important">
                     @if (isRtl)
                     {
                         <span>الدورات المتاحة</span>
@@ -222,7 +222,7 @@
                         <span>Available Courses</span>
                     }
                 </h1>
-                <p class="lead text-muted">
+                <p class="lead text-muted" style="color:#c3972e!important">
                     @if (isRtl)
                     {
                         <span>اكتشف مجموعتنا الواسعة من الدورات التدريبية المتخصصة</span>
@@ -264,7 +264,7 @@
                                 @if (!string.IsNullOrEmpty(course.categoryName))
                                 {
                                     <div class="position-absolute top-0 @(isRtl ? "start-0" : "end-0") m-3">
-                                        <span class="badge bg-primary px-3 py-2 rounded-pill">
+                                        <span class="badge bg-success px-3 py-2 rounded-pill">
                                             @course.categoryName
                                         </span>
                                     </div>
@@ -401,7 +401,7 @@
                                     {
                                         <button class="btn flex-fill fw-semibold py-2"
                                                 onclick="location.href='/Home/GoToCourse?CourseId=@course.CourseId'"
-                                                style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                                                style="background: linear-gradient(135deg, #14c3972e 0%, #141921 100%);
                                                            border: none; border-radius: 12px; color: white;
                                                            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
                                                            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
