@@ -282,4 +282,10 @@
   <data name="Enrollmentalreadyvideo" xml:space="preserve">
     <value>انت بلفعل مسجل في هذا الفديو</value>
   </data>
+  <data name="CategoryAlreadyExists" xml:space="preserve">
+    <value>الفئة موجودة بلفعل</value>
+  </data>
+  <data name="NotFoundCategory" xml:space="preserve">
+    <value>لم يتم العثور علي الفئة</value>
+  </data>
 </root>

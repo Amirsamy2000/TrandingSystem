@@ -280,4 +280,10 @@ We thank you for your interest and willingness to participate, and we look forwa
   <data name="Enrollmentalreadyvideo" xml:space="preserve">
     <value>You are already registered for this video.</value>
   </data>
+  <data name="CategoryAlreadyExists" xml:space="preserve">
+    <value>The Category already exists.</value>
+  </data>
+  <data name="NotFoundCategory" xml:space="preserve">
+    <value>Category not found</value>
+  </data>
 </root>

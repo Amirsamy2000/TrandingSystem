@@ -2,7 +2,10 @@
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
+using System.Threading;
 using TradingSystem.Application.Common.Response;
+using TrandingSystem.Application.Features.Category.Commands;
 using TrandingSystem.Application.Features.Category.Queries;
 using TrandingSystem.Application.Features.Courses.Commands;
 
@@ -44,17 +47,27 @@ namespace TrandingSystem.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> SubmitAddNewCat(string cateenName,string catearName)
+        public async Task<IActionResult> SubmitAddNewCat(string cateenName,string catearName,CancellationToken cancellationToken)
         {
-            var res = Response<string>.SuccessResponse("good","good");
+            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
+
+            if (userIdClaim == null)
+            {
+                return RedirectToAction("Login", "Account", new { area = "Identity" });
+            }
+
+            int userId = int.Parse(userIdClaim.Value);
+
+            var res = await _mediator.Send(new AddNewCategoryCommand(cateenName, catearName, userId), cancellationToken);
             return Json(res);
         }
 
 
         [HttpPost]
-        public async Task<IActionResult> SubmitUpdateCat(int catid, string cateenName, string catearName)
+        public async Task<IActionResult> SubmitUpdateCat(int catid, string cateenName, string catearName,CancellationToken cancellationToken)
         {
-            var res = Response<string>.SuccessResponse("good", "good");
+        
+            var res = await _mediator.Send(new UpdateCategoryCommand(catid,cateenName, catearName), cancellationToken);
             return Json(res);
         }
     }
