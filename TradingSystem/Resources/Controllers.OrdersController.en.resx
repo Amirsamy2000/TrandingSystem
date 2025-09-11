@@ -186,6 +186,9 @@
   <data name="OrdersRequestVideo" xml:space="preserve">
     <value>Videos Enrollment Requests</value>
   </data>
+  <data name="OrdersRequestLives" xml:space="preserve">
+    <value> Lives Enrollment Requests</value>
+  </data>
   <data name="PendingEnrollmentRequests" xml:space="preserve">
     <value>Pending Enrollment Requests</value>
   </data>
@@ -227,5 +230,8 @@
   </data>
   <data name="View" xml:space="preserve">
     <value>View</value>
+  </data>
+  <data name="LiveCol" xml:space="preserve">
+    <value>Live</value>
   </data>
 </root>

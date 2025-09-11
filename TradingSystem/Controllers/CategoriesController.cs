@@ -2,6 +2,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using TradingSystem.Application.Common.Response;
 using TrandingSystem.Application.Features.Category.Queries;
 using TrandingSystem.Application.Features.Courses.Commands;
 
@@ -19,9 +20,10 @@ namespace TrandingSystem.Controllers
             _mediator = mediator;
             _mapper = mapper;
         }
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var Rescourses = await _mediator.Send(new GetAllCategoriesQuery());
+            return View(Rescourses.Data);
         }
         public async Task<IActionResult> Read()
         {
@@ -39,6 +41,21 @@ namespace TrandingSystem.Controllers
             //// Map the course entities to view models if necessary
 
             return Ok(Rescourses);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> SubmitAddNewCat(string cateenName,string catearName)
+        {
+            var res = Response<string>.SuccessResponse("good","good");
+            return Json(res);
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> SubmitUpdateCat(int catid, string cateenName, string catearName)
+        {
+            var res = Response<string>.SuccessResponse("good", "good");
+            return Json(res);
         }
     }
 }

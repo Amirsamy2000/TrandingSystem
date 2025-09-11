@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace TrandingSystem.Domain.Entities
 {
-    [Index(nameof(CourseId), nameof(UserId),nameof(VideoId),nameof(OrderStatus), IsUnique = true)]  // ✅ Unique constraint
+   // [Index(nameof(CourseId), nameof(UserId),nameof(VideoId),nameof(OrderStatus), IsUnique = true)]  // ✅ Unique constraint
 
     public partial class Video_CourseEnrollment
     {

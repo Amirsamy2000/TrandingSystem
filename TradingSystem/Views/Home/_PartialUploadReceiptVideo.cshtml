@@ -1,0 +1,34 @@
+﻿@using Microsoft.Extensions.Localization
+@using TrandingSystem.Controllers
+ @inject IStringLocalizer<LiveSessionController> Localizer
+@model int
+<div class="alert alert-info" role="alert">
+    <h5 class="mb-2">@Localizer["PaymentInstructions"]</h5>
+    <p class="mb-2">
+        @Html.Raw(Localizer["PaymentParagraph"])
+    </p>
+    <hr class="my-2">
+    <p class="mb-1">
+        @Html.Raw(Localizer["WhatsAppConfirmation"])
+        <a href="https://wa.me/201288252383" target="_blank" class="fw-bold text-decoration-none">
+            +20 128 825 2383
+        </a>
+    </p>
+    <p class="mb-0">
+        @Html.Raw(Localizer["VodafoneNumber"])
+        <span class="fw-bold text-danger">01012345678</span>
+    </p>
+</div>
+
+<form   method="post" enctype="multipart/form-data">
+    <input type="hidden" name="id" id="id" value="@Model" />
+ 
+    <div class="mb-3">
+        <label for="RecieptImage" class="form-label">@Localizer["UploadReceipt"]</label>
+        <input type="file" class="form-control" name="RecieptImage" id="RecieptImage" accept="image/*" required />
+    </div>
+
+    <button onclick="SubmitUploadRecieptVideo()" class="btn btn-primary">@Localizer["Enroll"]</button>
+</form>
+
+

@@ -105,5 +105,44 @@ namespace TrandingSystem.Controllers
             }
             return View(response.Data);
         }
+
+
+        /// For Lives Orders
+        /// 
+        public IActionResult AllOrdersLives()
+        {
+            // Get All Count Status Orders
+            var response = _mediator.Send(new GetCountOrdersStatusQuery(2)).Result;
+
+            if (!response.Success)
+            {
+                return RedirectToAction("Error", "Home", new
+                {
+                    status = (int)response.Status,
+                    message = response.Message
+                });
+            }
+            return View(response.Data);
+        }
+
+
+        [HttpGet]
+        public async Task<IActionResult> GetOrderLivesByOrderStatus(int OrderStatus, int Type = 0)
+        {
+            // Get All Order By OrderStatus
+            var Response = await _mediator.Send(new GetOrdersByOrderStatusQuery(OrderStatus, Type));
+            if (Response.Status == System.Net.HttpStatusCode.InternalServerError)
+            {
+                return RedirectToAction("Error", "Home", new
+                {
+                    status = (int)Response.Status,
+                    message = Response.Message
+                });
+
+            }
+
+
+            return PartialView("_PartialOdersLivesEnrollemnt", Response.Data);
+        }
     }
 }

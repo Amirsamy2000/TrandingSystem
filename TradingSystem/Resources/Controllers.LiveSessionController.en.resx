@@ -252,4 +252,52 @@
   <data name="titleBlock" xml:space="preserve">
     <value>Are you sure you want to Block live?</value>
   </data>
+  <data name="PaymentInstructions" xml:space="preserve">
+    <value>💳 Payment Instructions</value>
+  </data>
+  <data name="PaymentParagraph" xml:space="preserve">
+    <value>Please pay the video fee via &lt;strong&gt;Vodafone Cash&lt;/strong&gt; to the number provided below.&lt;br/&gt;Once the payment is made, kindly upload a clear image of the receipt in the field below to complete your enrollment.</value>
+  </data>
+  <data name="WhatsAppConfirmation" xml:space="preserve">
+    <value>📱 &lt;strong&gt;WhatsApp for Confirmation:&lt;/strong&gt;</value>
+  </data>
+  <data name="VodafoneNumber" xml:space="preserve">
+    <value>💰 &lt;strong&gt;Vodafone Cash Number:&lt;/strong&gt;</value>
+  </data>
+  <data name="UploadReceipt" xml:space="preserve">
+    <value>Upload Receipt</value>
+  </data>
+  <data name="Enroll" xml:space="preserve">
+    <value>Enroll</value>
+  </data>
+  <data name="PaymentParagraphlive" xml:space="preserve">
+    <value>Please pay the live fee via &lt;strong&gt;Vodafone Cash&lt;/strong&gt; to the number provided below.&lt;br/&gt;Once the payment is made, kindly upload a clear image of the receipt in the field below to complete your enrollment.</value>
+  </data>
+  <data name="NocateMessage" xml:space="preserve">
+    <value>There are no Data .</value>
+  </data>
+  <data name="Cats" xml:space="preserve">
+    <value>Show All Categories</value>
+  </data>
+  <data name="catename-ar" xml:space="preserve">
+    <value>Arabic Name</value>
+  </data>
+  <data name="catname-en" xml:space="preserve">
+    <value>English Name</value>
+  </data>
+  <data name="Action" xml:space="preserve">
+    <value>Update</value>
+  </data>
+  <data name="AddnewCte" xml:space="preserve">
+    <value>Add New Category</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="close" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="UpdatenewCte" xml:space="preserve">
+    <value>Update Data Of Category</value>
+  </data>
 </root>

@@ -87,7 +87,8 @@ namespace TrandingSystem.Application.Features.Video.Handlers
                         ActionUrl = $"{ConstantPath.MainUrlSite}/Home/GoToCourse?CourseId={newVideo.CourseId}"
 
                     };
-                    var Users = _unitOfWork.Users.GetUserEnrollInCourse(newVideo.CourseId);
+                    //var Users = _unitOfWork.Users.GetUserEnrollInCourse(newVideo.CourseId);
+                    var Users = _unitOfWork.Users.Read();
                     _notificationService.SendMailForGroupUserAfterCreateBodey(Users, _localizer["FormalSub"], EmailTemp);
                    
                 }

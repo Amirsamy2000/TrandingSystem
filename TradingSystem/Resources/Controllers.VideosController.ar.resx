@@ -333,4 +333,10 @@
   <data name="NoLiveMessage1" xml:space="preserve">
     <value>قم بإضافة فيديوهات جديدة</value>
   </data>
+  <data name="pendingordervideo" xml:space="preserve">
+    <value>انتظار الموافقة</value>
+  </data>
+  <data name="paytoWatchVdo" xml:space="preserve">
+    <value>تسجيل</value>
+  </data>
 </root>

@@ -274,4 +274,10 @@ We thank you for your interest and willingness to participate, and we look forwa
   <data name="NotEnrollinthisv" xml:space="preserve">
     <value>You are not registered for this Video. Please return the registration request.</value>
   </data>
+  <data name="Enrollmentalreadylive" xml:space="preserve">
+    <value>You are already registered for this live.</value>
+  </data>
+  <data name="Enrollmentalreadyvideo" xml:space="preserve">
+    <value>You are already registered for this video.</value>
+  </data>
 </root>

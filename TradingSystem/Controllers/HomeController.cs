@@ -77,13 +77,13 @@ namespace WebApplication1.Controllers
         }
 
         [Authorize]
-        public IActionResult GoToCourse( CancellationToken cancellationToken, int CourseId = 0)
+        public IActionResult GoToCourse(   int CourseId = 0)
         {
             if (CourseId == 0)
             {
                 return RedirectToAction("Courses", "Home");
             }
-            var course  = _mediator.Send(new GetCourseByIdQuery{CourseId = CourseId}, cancellationToken).Result;
+            var course  = _mediator.Send(new GetCourseByIdQuery{CourseId = CourseId}).Result;
             return View(course.Data);
         }
 
@@ -123,6 +123,16 @@ namespace WebApplication1.Controllers
         public IActionResult Error(CustomeErrorModel error)
         {
           return View(error);
+        }
+
+        public IActionResult PartialUploadReceiptVideo(int id)
+        {
+            return PartialView("_PartialUploadReceiptVideo",id);
+        }
+
+        public IActionResult PartialUploadReceiptSession(int id)
+        {
+            return PartialView("_PartialUploadReceiptSession", id);
         }
     }
 }

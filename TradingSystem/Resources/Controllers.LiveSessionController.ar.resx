@@ -252,4 +252,52 @@
   <data name="titleBlock" xml:space="preserve">
     <value>هل أنت متأكد من حظر البث؟ </value>
   </data>
+  <data name="PaymentInstructions" xml:space="preserve">
+    <value>💳 تعليمات الدفع</value>
+  </data>
+  <data name="PaymentParagraph" xml:space="preserve">
+    <value>يرجى دفع رسوم الفديو عن طريق &lt;strong&gt;فودافون كاش&lt;/strong&gt; على الرقم الموضح أدناه.&lt;br/&gt;بعد الدفع، برجاء رفع صورة واضحة من الإيصال في الحقل أدناه لإتمام التسجيل.</value>
+  </data>
+  <data name="WhatsAppConfirmation" xml:space="preserve">
+    <value>📱 &lt;strong&gt;واتساب للتأكيد:&lt;/strong&gt;</value>
+  </data>
+  <data name="VodafoneNumber" xml:space="preserve">
+    <value>💰 &lt;strong&gt;رقم فودافون كاش:&lt;/strong&gt;</value>
+  </data>
+  <data name="UploadReceipt" xml:space="preserve">
+    <value>رفع الإيصال</value>
+  </data>
+  <data name="Enroll" xml:space="preserve">
+    <value>تسجيل</value>
+  </data>
+  <data name="PaymentParagraphlive" xml:space="preserve">
+    <value>يرجى دفع رسوم البث عن طريق &lt;strong&gt;فودافون كاش&lt;/strong&gt; على الرقم الموضح أدناه.&lt;br/&gt;بعد الدفع، برجاء رفع صورة واضحة من الإيصال في الحقل أدناه لإتمام التسجيل.</value>
+  </data>
+  <data name="NocateMessage" xml:space="preserve">
+    <value>لا توجد بيانات  </value>
+  </data>
+  <data name="Cats" xml:space="preserve">
+    <value>عرض جميع الفئات</value>
+  </data>
+  <data name="catename-ar" xml:space="preserve">
+    <value>الاسم العربي</value>
+  </data>
+  <data name="catname-en" xml:space="preserve">
+    <value>الاسم الانجليزي</value>
+  </data>
+  <data name="Action" xml:space="preserve">
+    <value>تعديل</value>
+  </data>
+  <data name="AddnewCte" xml:space="preserve">
+    <value>اضافة فئة جديد</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>حفظ</value>
+  </data>
+  <data name="close" xml:space="preserve">
+    <value>اغلاق</value>
+  </data>
+  <data name="UpdatenewCte" xml:space="preserve">
+    <value>تعديل بيانات الفئة</value>
+  </data>
 </root>

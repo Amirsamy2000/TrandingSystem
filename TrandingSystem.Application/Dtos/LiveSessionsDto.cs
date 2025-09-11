@@ -36,5 +36,7 @@ namespace TrandingSystem.Application.Dtos
         public bool? IsActive { get; set; }
         public string CourseName { get; set; }
 
+        public bool HassAccess { get; set; }
+        public int StatusOrder { set; get; } // 0 pending ,1 accpet
     }
 }

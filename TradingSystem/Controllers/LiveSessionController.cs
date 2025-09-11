@@ -2,10 +2,12 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
+using TradingSystem.Application.Common.Response;
 using TrandingSystem.Application.Dtos;
 using TrandingSystem.Application.Features.Courses.Queries;
 using TrandingSystem.Application.Features.LiveSessions.Commands;
 using TrandingSystem.Application.Features.LiveSessions.Queries;
+using TrandingSystem.Application.Features.Video.Commands;
 
 namespace TrandingSystem.Controllers
 {
@@ -137,6 +139,23 @@ namespace TrandingSystem.Controllers
         {
             var res = _mediator.Send(new DeleteAllLivesCommand(CourseId)).Result;
             return Json(res);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EnrollSession(int id, IFormFile RecieptImage)
+        {
+
+            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
+
+            if (userIdClaim == null)
+            {
+                return Unauthorized("User ID not found in token.");
+            }
+
+            int userId = int.Parse(userIdClaim.Value);
+            var response = await _mediator.Send(new EnrollmentInPaidSessionCommand(id, RecieptImage, userId));
+            return Json(response); 
+
         }
     }
 }

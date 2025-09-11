@@ -37,11 +37,17 @@ namespace TrandingSystem.Application.Features.OrdersEnorllment.Handlers
                     countOrdersPending = AllOrders.Count(x => x.OrderStatus == 2 && x.VideoId  != null);
                     countOrdersAccepted = AllOrders.Count(x => x.OrderStatus == 1 && x.VideoId != null);
                     countOrdersCanceled = AllOrders.Count(x => x.OrderStatus == 0 && x.VideoId != null);
-                }   
+                }
+                else if (request.Type == 2)
+                {
+                    countOrdersPending = AllOrders.Count(x => x.OrderStatus == 2 && x.liveId != null);
+                    countOrdersAccepted = AllOrders.Count(x => x.OrderStatus == 1 && x.liveId != null);
+                    countOrdersCanceled = AllOrders.Count(x => x.OrderStatus == 0 && x.liveId != null);
+                }
                 else
                 {
                     countOrdersPending = AllOrders.Count(x => x.OrderStatus == 2 && x.VideoId == null);
-                    countOrdersAccepted = AllOrders.Count(x => x.OrderStatus == 1 && x.VideoId== null);
+                    countOrdersAccepted = AllOrders.Count(x => x.OrderStatus == 1 && x.VideoId == null);
                     countOrdersCanceled = AllOrders.Count(x => x.OrderStatus == 0 && x.VideoId == null);
                 }
                   

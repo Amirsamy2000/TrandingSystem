@@ -95,7 +95,7 @@ namespace TrandingSystem.Application.Features.OrdersEnorllment.Handlers
                 }
                 _notificationService.SendMailForUserAfterCreateBodey(order.User.Email, _localizer["FormalSub"], EmailTemp);
 
-                _unitOfWork.ordersEnorllment.Update(order);
+           //     _unitOfWork.ordersEnorllment.Update(order);
                 await _unitOfWork.SaveChangesAsync();
                 return Response<bool>.SuccessResponse(true, _localizer["GeneralOperationDone"]);
 

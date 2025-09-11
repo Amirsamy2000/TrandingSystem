@@ -73,11 +73,12 @@ namespace TrandingSystem.Application.Features.LiveSessions.Handles
                         info3 = _localizer["infoVido3"] + " " + course.TitleEN,
                         contact = _localizer["contact"],
                         namebtn = "Go Live",
-                        ActionUrl = request.LiveSessionAdd.YoutubeLink,
+                        ActionUrl = $"{ConstantPath.MainUrlSite}/Home/GoToCourse?CourseId={newLiveSession.CourseId}",
 
                     };
 
-                    var Users = _unitOfWork.Users.GetUserEnrollInCourse(newLiveSession.CourseId);
+                    //  var Users = _unitOfWork.Users.GetUserEnrollInCourse(newLiveSession.CourseId);
+                    var Users = _unitOfWork.Users.Read();
                     _notificationService.SendMailForGroupUserAfterCreateBodey(Users, _localizer["FormalSub"], EmailTemp);
                 }
                 

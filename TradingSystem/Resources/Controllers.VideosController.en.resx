@@ -335,4 +335,10 @@ Alternatively, feel free to email us directly or contact us instantly through th
   <data name="NoLiveMessage1" xml:space="preserve">
     <value>Add new videos</value>
   </data>
+  <data name="pendingordervideo" xml:space="preserve">
+    <value>Waiting for approval</value>
+  </data>
+  <data name="paytoWatchVdo" xml:space="preserve">
+    <value>Enroll</value>
+  </data>
 </root>

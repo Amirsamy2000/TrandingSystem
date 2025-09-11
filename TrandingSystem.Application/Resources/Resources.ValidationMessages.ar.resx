@@ -276,4 +276,10 @@
   <data name="NotEnrollinthisv" xml:space="preserve">
     <value>انت غير مسجل في هذا الفديو  يرجع طلب التسجيل </value>
   </data>
+  <data name="Enrollmentalreadylive" xml:space="preserve">
+    <value>انت بلفعل مسجل في هذا البث </value>
+  </data>
+  <data name="Enrollmentalreadyvideo" xml:space="preserve">
+    <value>انت بلفعل مسجل في هذا الفديو</value>
+  </data>
 </root>

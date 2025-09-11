@@ -192,4 +192,13 @@
   <data name="dasbord" xml:space="preserve">
     <value>Dashboard</value>
   </data>
+  <data name="OrderLive" xml:space="preserve">
+    <value>Lives Requests</value>
+  </data>
+  <data name="Categories" xml:space="preserve">
+    <value>Categories</value>
+  </data>
+  <data name="disCategories" xml:space="preserve">
+    <value>Show Categories</value>
+  </data>
 </root>

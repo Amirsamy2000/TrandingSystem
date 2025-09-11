@@ -28,6 +28,11 @@ namespace TrandingSystem.Application.Features.OrdersEnorllment.Handlers
                 if (request.Type==1){
                     Orders= Orders.Where(x => x.OrderStatus == request.OrderStatus & x.CourseId!= null & x.VideoId!=null).ToList();
                 }
+                else if(request.Type == 2)
+                {
+                    Orders = Orders.Where(x => x.OrderStatus == request.OrderStatus & x.CourseId != null & x.liveId != null).ToList();
+
+                }
                 else
                 {
                     Orders = Orders.Where(x => x.OrderStatus == request.OrderStatus & x.VideoId == null).ToList();
@@ -51,11 +56,11 @@ namespace TrandingSystem.Application.Features.OrdersEnorllment.Handlers
                     CourseName = order.Course.TitleEN,
                     CostCourse = order.Course.Cost,
                     IsPaid = order.Course.IsFullyFree,
-                    CashPhoneNum=order.CashPhoneNum,
-                    VideoName=order.Video?.TitleEN??"Un",
-                    VideoCost=order.Video?.Cost??0
-
-                    
+                    CashPhoneNum = order.CashPhoneNum,
+                    VideoName = order.Video?.TitleEN ?? "Un",
+                    VideoCost = order.Video?.Cost ?? 0,
+                    LiveCost = order.Live?.Cost ?? 0,
+                    LiveName = order.Live?.TitleEN ?? "Un",
 
                 });
 

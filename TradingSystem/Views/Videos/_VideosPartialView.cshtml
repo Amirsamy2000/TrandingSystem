@@ -3,8 +3,7 @@
 @model LivesAndVideosDto
 @using Microsoft.AspNetCore.Mvc.Localization
 @using TrandingSystem.Controllers
-@inject IViewLocalizer Localizer
-@inject IStringLocalizer<VideosController> Localizer2
+ @inject IStringLocalizer<VideosController> Localizer2
 @{
     var culture = new System.Globalization.CultureInfo(ViewBag.Culture ?? "en-US");
 
@@ -86,7 +85,7 @@
     background-color: #c3972e !important;
     }
 
-   
+
 </style>
 
 <div class="row dis-course-data">
@@ -136,8 +135,27 @@
                         </p>
 
                         <div class="mt-auto">
-                            <a onclick="DisplayVideo(@video.VideoId)" class="btn btn-sm  btn-block btn-outline-info me-1  w-100">@Localizer2["WatchVdo"]</a>
-                            @* Other action buttons can go here *@
+                            @if (video.HassAccess)
+                            {
+                                if (video.StatusOrder == 1)
+                                {
+                                    // video is un paid or user enroll in it
+                                    <a onclick="DisplayVideo(@video.VideoId)" class="btn btn-sm  btn-block btn-outline-info me-1  w-100">@Localizer2["WatchVdo"]</a>
+
+                                }
+                                else
+                                {
+                                    // video is  paid and  user enroll in it and has order is pendding
+                                    <a   class="btn btn-sm  btn-block btn-outline-warning me-1  w-100">@Localizer2["pendingordervideo"]</a>
+
+                                }
+
+                            }
+                            else
+                            {
+                                // video is  paid but  user  not enroll in it
+                                <a  onclick="DisplayUploadReceiptVideo(@video.VideoId)" class="btn btn-sm  btn-block btn-outline-success me-1  w-100">@Localizer2["paytoWatchVdo"]</a>
+                            }
                         </div>
 
                         <hr class="my-3" />
@@ -195,7 +213,7 @@
             @* card one *@
             <div class="col-sm-6 col-md-4 col-lg-3">
                 <div class="card h-100">
-                    <img class="card-img-top" src="~/@session.ImageSessionUrl" alt="Card image cap" width="200" height="300" />
+                    <img class="card-img-top" src="@session.ImageSessionUrl" alt="Card image cap" width="200" height="300" />
                     <div class="card-body p-2">
                         <h5 class="card-title">@session.Title</h5>
                         <p class="card-text description-clamp">
@@ -203,13 +221,27 @@
                         </p>
                         @if (session.ScheduledAt > DateTime.Now)
                         {
-                            <a onclick="DispalPatialUppdateLive(@session.SessionId)" class="btn btn-sm  btn-block btn-outline-info me-1 w-100">@Localizer2["DisplayLive"]</a>
+                            if(session.HassAccess && session.StatusOrder == 1)
+                            {
+                                <a href="@session.YoutubeLink" target="_blank" class="btn btn-sm  btn-block btn-outline-info me-1 w-100">@Localizer2["DisplayLive"]</a>
 
+                            }
+                            else if (session.HassAccess && session.StatusOrder == 0)
+                            {
+                                <a class="btn btn-sm  btn-block btn-outline-warning me-1 w-100">@Localizer2["pendingordervideo"]</a>
+
+                            }
+                            else
+                            {
+                                <a onclick="DisplayUploadReceiptSession(@session.SessionId)" class="btn btn-sm  btn-block btn-outline-success me-1  w-100">@Localizer2["paytoWatchVdo"]</a>
+
+                            }
 
                         }
+
                         else
                         {
-                            <a onclick="DispalPatialUppdateLive(@session.SessionId)" class="btn btn-sm  btn-block btn-danger-info me-1  w-100">@Localizer2["ExpiresLive"]</a>
+                            <a  class="btn btn-sm  btn-block btn-danger-info me-1  w-100">@Localizer2["ExpiresLive"]</a>
 
                         }
                         <hr />
@@ -260,6 +292,19 @@
     }
 </div>
 
+<div class="modal fade" id="enrollModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Upload Receipt</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="enrollModalBody">
+                <!-- Partial view will be loaded here -->
+            </div>
+        </div>
+    </div>
+</div>
 
 <div class="modal fade" id="youTubeModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
@@ -276,6 +321,7 @@
     </div>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
 
@@ -283,122 +329,30 @@
         $('#UrlVideo').attr('src', '');
     });
 
-        // For Block Video
-            function BlockVideo(id, status) {
-               let response=status==true?"@Localizer["titleBlock1"]":"@Localizer["titleBlock"]"
-            debugger;
-            let model = {
-                title: response,
-                icon: "warning",
-                confirmButtonText: "@Localizer["confirmButtonTextBlock"]",
-                cancelButtonText: "@Localizer["cancelButtonTextBlock"]",
-                url:  `/Videos/BlockVideo?VideoId=${id}&Status=${status}`,
-                method: "POST",
-
-                responseSuccess: "@Localizer["responseSuccessBlock"]",
-                responseDanger: "@Localizer["responseDangerBlock"]"
-            };
-            DrawAlter(model);
-        }
-
-        // For Delet Videos
-          function DeleteVideo(id) {
-            debugger;
-              let model = {
-                title: "@Localizer["titleDelete"]",
-                icon: "question",
-                confirmButtonText: "@Localizer["confirmButtonTextBlock"]",
-                cancelButtonText: "@Localizer["cancelButtonTextBlock"]",
-                url:  `/Videos/DeleteVideo?VideoId=${id}`,
-                method: "POST",
-
-                responseSuccess: "@Localizer["responseSuccessBlock"]",
-                responseDanger: "@Localizer["responseDangerBlock"]"
-            };
-            DrawAlter(model);
-        }
-
-         // For Delet Videos
-          function DeleteAllVideos(id) {
-            debugger;
-              let model = {
-                title: "@Localizer["titleDeleteall"]",
-                icon: "error",
-                confirmButtonText: "@Localizer["confirmButtonTextBlock"]",
-                cancelButtonText: "@Localizer["cancelButtonTextBlock"]",
-                url:  `/Videos/DeleteAllVideos?CourseId=${id}`,
-                method: "POST",
-
-                responseSuccess: "@Localizer["responseSuccessBlock"]",
-                responseDanger: "@Localizer["responseDangerBlock"]"
-            };
-            DrawAlter(model);
-        }
-
-
-
-        // Dispal Patial Add New Video
-        function DispalPatialAddNewVideo(){
-              let setting={
-
-                title:"@Localizer["loading"]"
-            }
-            SweatAlterProcessing(setting)
-            $.ajax({
-                url:"/Videos/PartialViewAddNewVideo",
-                type:"GET",
-                success:function(data){
-                     Swal.close();
-                    $("#modalbody").html(data)
-                    $("#mainPartial").removeClass('col-10')
-                     $("#mainPartial").addClass('col-12')
-                   // استخدم كود Bootstrap 5 لعرض المودال
-                    var myModal = new bootstrap.Modal(document.getElementById('largeModal'), {
-              backdrop: 'static',     // يمنع الإغلاق عند الضغط على الخلفية, // أو static لو عايز تمنع إغلاقه بالضغط على الخلفية
-                keyboard: false      // يسمح بإغلاقه بزر Esc
-        });
-            myModal.show();
-                }
-
-            })
-        }
-
-           // Dispal Patial Update New Video
-        function DispalPatialUppdateNewVideo(id){
-
-            let setting={
-
-                title:"@Localizer["loading"]"
-            }
-            SweatAlterProcessing(setting)
-
-            $.ajax({
-                url:"/Videos/PartialViewUpdateNewVideo",
-                type:"GET",
-                data:{
-                    CourseId:@(ViewBag.CourseId),
-                    VideId:id
-
-                },
-                success:function(data){
-                                         Swal.close();
-
-                    $("#modalbody").html(data)
-                    $("#mainPartial").removeClass('col-10')
-                     $("#mainPartial").addClass('col-12')
-                   // استخدم كود Bootstrap 5 لعرض المودال
-                    var myModal = new bootstrap.Modal(document.getElementById('largeModal'), {
-              backdrop: 'static',     // يمنع الإغلاق عند الضغط على الخلفية, // أو static لو عايز تمنع إغلاقه بالضغط على الخلفية
-                keyboard: false      // يسمح بإغلاقه بزر Esc
-        });
-            myModal.show();
-                },
-
-
-
-            })
-        }
-         // For Dipaly Video As Youtube
+      
+       function DisplayUploadReceiptVideo(id) {
+            document.getElementById("enrollModalBody").innerHTML = "";
+        fetch(`/Home/PartialUploadReceiptVideo?id=${id}`)
+            .then(response => response.text())
+            .then(html => {
+                document.getElementById("enrollModalBody").innerHTML = html;
+                let modal = new bootstrap.Modal(document.getElementById("enrollModal"));
+                modal.show();
+            });
+    }
+     
+      function DisplayUploadReceiptSession(id) {
+           document.getElementById("enrollModalBody").innerHTML = "";
+        fetch(`/Home/PartialUploadReceiptSession?id=${id}`)
+            .then(response => response.text())
+            .then(html => {
+                document.getElementById("enrollModalBody").innerHTML = html;
+                let modal = new bootstrap.Modal(document.getElementById("enrollModal"));
+                modal.show();
+            });
+    }
+      
+        // For Dipaly Video As Youtube
             function DisplayVideo(id) {
             $.ajax({
                 url: "/Videos/DisplayVideo",
@@ -419,228 +373,88 @@
                 }
             });
         }
-        // For Change Is Paid
-               function handleIsPaidChange(cost) {
-            if (!$("#Ispaid").is(":checked")) {
-                // لو مش مدفوع، خليه 0.00
-                $("#Cost").val("0.00");
-            } else {
-                // لو مدفوع، خليه القيمة الأصلية (مثلاً 30.00)
-                let normalizedCost = parseFloat(cost).toFixed(2).replace(",", ".");
-                $("#Cost").val(normalizedCost);
+
+
+
+            function SubmitUploadRecieptVideo() {
+        const modalInstance = bootstrap.Modal.getInstance(document.getElementById('enrollModal'));
+        if (modalInstance) modalInstance.hide();
+
+        let formData = new FormData();
+        formData.append("id", $("#id").val());
+        formData.append("RecieptImage", $("#RecieptImage")[0].files[0]); // الملف نفسه
+
+        $.ajax({
+            url: "/Videos/EnrollVideo",
+            type: "POST",
+            data: formData,
+            processData: false,  // مهم علشان ما يحولش البيانات لنص
+            contentType: false,  // مهم علشان السيرفر يفهم multipart/form-data
+            success: function (res) {
+                if (res.success) {
+                        Swal.fire({
+      title: res.message,
+      icon: "success",
+      draggable: true
+    });
+                    window.location.reload(); // ✅ reload بعد النجاح
+                } else {
+                   Swal.fire({
+      title: res.message,
+      icon: "error",
+      draggable: true
+    });               }
+            },
+            error: function (res) {
+              Swal.fire({
+      title: res.message,
+      icon: "error",
+      draggable: true
+    });
             }
-        }
-                $(function () {
-            $("#updateVideoForm").validate();
         });
+    }
 
 
+            function SubmitUploadRecieptSession() {
+        const modalInstance = bootstrap.Modal.getInstance(document.getElementById('enrollModal'));
+        if (modalInstance) modalInstance.hide();
 
+        let formData = new FormData();
+        formData.append("id", $("#id").val());
+        formData.append("RecieptImage", $("#RecieptImage")[0].files[0]); // الملف نفسه
 
-
-
-
-
-             // Submit Update  Video
-          function SubmitUpdateVideo() {
-            debugger;
-
-            var form = $('#updateVideoForm')[0];
-            var data = new FormData(form);
-            var token = $('input[name="__RequestVerificationToken"]').val();
-
-            const isValid = FinalCheckVaildtionUpdate(); // ← هنا نستخدم القيمة المرجعة
-
-
-
-            if (!isValid) return;
-
-            let setting = {
-                title: "@Localizer["loading"]"
-            };
-             bootstrap.Modal.getInstance(document.getElementById('largeModal')).hide()
-            SweatAlterProcessing(setting);
-
-            $.ajax({
-                type: "POST",
-                url: "/Videos/SubmitUpdateVideo",
-                data: data,
-                processData: false,
-                contentType: false,
-                headers: {
-                    'RequestVerificationToken': token
-                },
-                success: function (res) {
-                    Swal.close();
-
-                    if (typeof res === "string" && res.includes("updateVideoForm")) {
-                        $("#mainPartial").html(res);
-                        return;
-                    }
-
-                    if (res.status==200) {
-                        console.log("=====================================Update")
-                        console.log(res)
-                        const modalInstance = bootstrap.Modal.getInstance(document.getElementById('largeModal'));
-                        if (modalInstance) modalInstance.hide();
-
-
-                        SweatAlterSuccess(res.message);
-                    } else {
-                        SweatAlterDanger(res.message);
-                    }
-                },
-                error: function () {
-                    const modalInstance = bootstrap.Modal.getInstance(document.getElementById('largeModal'));
-                    if (modalInstance) modalInstance.hide();
-
-                    SweatAlterDanger("@Localizer2["VideoSubmitError"]");
-                }
-            });
-        }
-            // Check Vaildtion For Update
-          function FinalCheckVaildtionUpdate() {
-            let isValid = true;
-
-            if (!GeneralRequiredFiled('InputTitleAR', '@Localizer2["Required"]', 'TitleAR')) {
-                isValid = false;
+        $.ajax({
+            url: "/LiveSession/EnrollSession",
+            type: "POST",
+            data: formData,
+            processData: false,  // مهم علشان ما يحولش البيانات لنص
+            contentType: false,  // مهم علشان السيرفر يفهم multipart/form-data
+            success: function (res) {
+                if (res.success) {
+                        Swal.fire({
+      title: res.message,
+      icon: "success",
+      draggable: true
+    });
+                    window.location.reload(); // ✅ reload بعد النجاح
+                } else {
+                   Swal.fire({
+      title: res.message,
+      icon: "error",
+      draggable: true
+    });               }
+            },
+            error: function (res) {
+              Swal.fire({
+      title: res.message,
+      icon: "error",
+      draggable: true
+    });
             }
-
-            if (!GeneralRequiredFiled('InputTitleEN', '@Localizer2["Required"]', 'TitleEN')) {
-                isValid = false;
-            }
-
-            if (!GeneralRequiredFiled('inputDescriptionEN', '@Localizer2["Required"]', 'DescriptionEN')) {
-                isValid = false;
-            }
-
-            if (!GeneralRequiredFiled('IputDescriptionAR', '@Localizer2["Required"]', 'DescriptionAR')) {
-                isValid = false;
-            }
-
-            if (!GeneralRequiredFiled('SelectCourseId', '@Localizer2["Required"]', 'CourseId')) {
-                isValid = false;
-            }
-
-            if ($('#InputImageVideoUrl')[0].files.length &&!validateImageFile('InputImageVideoUrl', 'ImageVideoUrl', '@Localizer2["AllowImageExtntion"]')) {
-                isValid = false;
-            }
-
-
-
-            if (!handleIsPaidChangeInAddNewVideo('Ispaid', 'Costadd')) {
-                isValid = false;
-            }
-              if (!validateCost('@Localizer2["InvaildCost"]','Ispaid','Cost','spanCost','@Localizer2["Nagtivenumber"]','@Localizer2["CostForPaid"]')) {
-                isValid = false;
-            }
-
-            return isValid;
-        }
-
-
-
-             // Submit New Video
-           function SubmitAddNewVideo() {
-            debugger;
-
-            var form = $('#AddNewVideoForm')[0];
-            var data = new FormData(form);
-            var token = $('input[name="__RequestVerificationToken"]').val();
-
-            const isValid = FinalCheckVaildtion(); // ← هنا نستخدم القيمة المرجعة
-
-            console.log("-----------------------------------");
-            console.log(isValid);
-
-            if (!isValid) return;
-
-            let setting = {
-                title: "@Localizer["loading"]"
-            };
-            bootstrap.Modal.getInstance(document.getElementById('largeModal')).hide()
-            SweatAlterProcessing(setting);
-
-
-            $.ajax({
-                type: "POST",
-                url: "/Videos/SubmitAddNewVideo",
-                data: data,
-                processData: false,
-                contentType: false,
-                headers: {
-                    'RequestVerificationToken': token
-                },
-                success: function (res) {
-                    Swal.close();
-
-                    if (typeof res === "string" && res.includes("updateVideoForm")) {
-                        $("#mainPartial").html(res);
-                        return;
-                    }
-
-                    if (res.success) {
-                        const modalInstance = bootstrap.Modal.getInstance(document.getElementById('largeModal'));
-                        if (modalInstance) modalInstance.hide();
-
-                        SweatAlterSuccess(res.message);
-                    } else {
-                        SweatAlterDanger(res.message);
-                    }
-                },
-                error: function () {
-                    const modalInstance = bootstrap.Modal.getInstance(document.getElementById('largeModal'));
-                    if (modalInstance) modalInstance.hide();
-
-                    SweatAlterDanger("@Localizer2["VideoSubmitError"]");
-                }
-            });
-        }
-
-            function FinalCheckVaildtion() {
-            let isValid = true;
-
-            if (!GeneralRequiredFiled('InputTitleAR', '@Localizer2["Required"]', 'TitleAR')) {
-                isValid = false;
-            }
-
-            if (!GeneralRequiredFiled('InputTitleEN', '@Localizer2["Required"]', 'TitleEN')) {
-                isValid = false;
-            }
-
-            if (!GeneralRequiredFiled('inputDescriptionEN', '@Localizer2["Required"]', 'DescriptionEN')) {
-                isValid = false;
-            }
-
-            if (!GeneralRequiredFiled('IputDescriptionAR', '@Localizer2["Required"]', 'DescriptionAR')) {
-                isValid = false;
-            }
-
-            if (!GeneralRequiredFiled('SelectCourseId', '@Localizer2["Required"]', 'CourseId')) {
-                isValid = false;
-            }
-
-            if (!validateImageFile('InputImageVideoUrl', 'ImageVideoUrl', '@Localizer2["AllowImageExtntion"]')) {
-                isValid = false;
-            }
-
-            if (!validateVideoFile('inputVideoUrl', 'VideoUrl', '@Localizer2["AllowVideoExtensiion"]')) {
-                isValid = false;
-            }
-
-            if (!handleIsPaidChangeInAddNewVideo('Ispaid', 'Costadd')) {
-                isValid = false;
-            }
-
-              if (!validateCost('@Localizer["InvaildCost"]','Ispaid','Costadd','spanCost','@Localizer2["Nagtivenumber"]','@Localizer2["CostForPaid"]')) {
-                isValid = false;
-            }
-
-            return isValid;
-        }
-
-
-
+        });
+    }
+   
 
     </script>
 

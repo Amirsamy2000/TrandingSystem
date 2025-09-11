@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System.Security.Claims;
 using System.Threading;
+using System.Threading.Tasks;
 using TradingSystem.Application.Common.Response;
 using TrandingSystem.Application.Dtos;
 using TrandingSystem.Application.Features.Courses.Commands;
@@ -224,6 +225,21 @@ namespace TrandingSystem.Controllers
 
         }
 
+        [HttpPost]
+        public async Task<IActionResult> EnrollVideo(int id, IFormFile RecieptImage)
+        {
+            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
+
+            if (userIdClaim == null)
+            {
+                return Unauthorized("User ID not found in token.");
+            }
+
+            int userId = int.Parse(userIdClaim.Value);
+            var response =await _mediator.Send(new EnrollmentInPaidVideoCommand(id, RecieptImage, userId));
+            return Json(response);
+
+        }
 
     }
 }

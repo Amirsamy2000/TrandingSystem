@@ -1,0 +1,255 @@
+﻿@using Microsoft.Extensions.Localization
+@using TrandingSystem.Application.Dtos
+@using TrandingSystem.Controllers
+@inject IStringLocalizer<OrdersController> Localizer
+@model IEnumerable<OrdersDto>
+@if (Model is not null || Model.Count() > 0)
+{
+
+    <style>
+        .dataTables_filter input {
+            padding: 6px 10px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            width: 250px;
+            font-size: 14px;
+        }
+
+        .dt-button, .custom-btn {
+            background-color: #007bff !important;
+            color: white !important;
+            padding: 6px 12px;
+            border-radius: 6px;
+            border: none;
+            font-size: 14px;
+            margin-left: 5px;
+            cursor: pointer;
+        }
+
+            .dt-button:hover, .custom-btn:hover {
+                background-color: #0056b3 !important;
+            }
+
+        .dataTables_filter input {
+            class: "form-control"
+        }
+
+        .dataTables_length select {
+            padding: 8px !important;
+            background-color: #007bff !important;
+            color: white !important;
+        }
+
+        #OrdersTable_filter label::before {
+            content: "" !important
+        }
+
+        #OrdersTable_filter label {
+            font-size: 0 !important; /* Hide text */
+        }
+
+        #OrdersTable_filter input {
+            font-size: 14px !important; /* Restore input font size */
+        }
+    </style>
+    <table class="table table-hover table-bordered OrdersTable">
+        <thead>
+            <tr class=" table-info">
+
+                <th scope="col">@Localizer["StudentCol"]</th>
+                <th scope="col">@Localizer["StudenMailCol"]</th>
+                <th scope="col">@Localizer["CousreCol"]</th>
+                <th scope="col">@Localizer["LiveCol"]</th>
+                @* <th scope="col">@Localizer["CousreStatus"]</th> *@
+                <th scope="col">@Localizer["CourseCostCol"]</th>
+                <th scope="col">@Localizer["orderdate"]</th>
+                @*    <th scope="col">@Localizer["ImageReqest"]</th> *@
+                <th scope="col">@Localizer["Action"]</th>
+                <th scope="col">@Localizer["ShowImageReqest"]</th>
+
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var order in Model)
+            {
+                <tr>
+                    <td>@order.UserName</td>
+                    <td>@order.UserEmail</td>
+                    <td>@order.CourseName</td>
+                    <td>@order.LiveName</td>
+                    <td>@order.LiveCost</td>
+                    <td>@(order.CreatedAt?.ToString("d"))  </td>
+                    @*  <td>
+                        <img src="@order.ReceiptImagePath" alt="Not Found" width="50" height="50" />
+                    </td> *@
+
+                    @if (order.OrderStatus == 2)
+                    {
+                        <td>
+                            <button class="btn btn-success" onclick="ChangeRequestByStatus(@order.EnrollmentId,1,'@Localizer["AcceptedRequestMess"]','acceptedOrdersbody',this)">@Localizer["AcceptedRequest"]</button>
+                            <button class="btn btn-danger" onclick="ChangeRequestByStatus(@order.EnrollmentId,0,'@Localizer["RejectedRequestMess"]','cancelOrdersbody',this)">@Localizer["RejectedRequest"]</button>
+
+                        </td>
+
+
+                    }
+                    else
+                    {
+                        <td>
+                            -
+                            @* <button class="btn btn-warning" onclick="ChangeRequestByStatus(@order.EnrollmentId,2,'@Localizer["BackReqestMess"]','pendingOrdersbody',this)">@Localizer["BackReqest"]</button> *@
+                        </td>
+                    }
+
+                    <td>
+                        <button class="btn btn-info" onclick="ShowImageOfReceipt('@order.ReceiptImagePath','@order.CourseName',@order.CostCourse,'@order.UserName','@order.CashPhoneNum')">@Localizer["ShowImageReqest"]</button>
+
+                    </td>
+                </tr>
+            }
+
+
+        </tbody>
+    </table>
+
+
+
+}
+
+
+
+
+else
+{
+    <div class="col-12">
+        <div class="alert alert-primary   " role="alert">
+            <h4 class="alert-heading text-center">@Localizer["NoOrderMessage"]</h4>
+            <br />
+            @* <p class="text-center">@Localizer["NoVideosMessage1"]</p> *@
+        </div>
+    </div>
+}
+
+
+<script>
+        $('.OrdersTable').each(function () {
+        if ($.fn.DataTable.isDataTable(this)) {
+            $(this).DataTable().destroy();
+        }
+        $(this).DataTable({
+            pageLength: 5,
+            lengthMenu: [[5, 10, 25, -1], [5, 10, 25, "All"]],
+            language: { lengthMenu: "_MENU_" },
+            ordering: true,
+            order: [[0, 'asc']],
+            columnDefs: [
+                { orderable: false, targets: [5, 6, 7] }
+            ],
+            responsive: true,
+            dom: 'Blfrtip',
+            buttons: ['copy', 'excel', 'print']
+        });
+    });
+
+
+               function ShowImageOfReceipt(src, courseName, cost, userName,phonecash) {
+        Swal.fire({
+            title: courseName,
+            html: `<p>@Localizer["CourseCostCol"]: ${cost} | @Localizer["StudentCol"]: ${userName}</p><br><h5>${phonecash}</h5>`,
+            imageUrl: src,
+            imageWidth: 800,
+            imageHeight: 600,
+            imageAlt: '@Localizer["ImageReqest"]',
+            showCloseButton: true,
+            confirmButtonText: '@Localizer["Close"]'
+        });
+    }
+
+
+        //ChangeRequestByStatus(1, 1, 'هل متاكد من قبول طلب التسجيل؟', 'acceptedOrdersbody', this)
+
+       // this funtion Change Order Status and After success remove row form to anthor table bu status
+       function ChangeRequestByStatus(orderid,status,title,iddiv,elemnt){
+    Swal.fire({
+           title: title,
+           icon: 'question',
+           showCancelButton: true,
+           confirmButtonText:'@Localizer["confirmsweet"]',
+           cancelButtonText: '@Localizer["canclesweet"]',
+       }).then((result) => {
+           if (result.isConfirmed) {
+               fetch(`/Orders/ChangeOrderStatus?orderId=${orderid}&newStatus=${status}&type=1`, { method: "Post" })
+                   .then(response => {
+                       if (!response.ok) throw new Error("HTTP error " + response.status);
+                       return response.json(); // توقعنا Response<T>
+                   })
+                   .then(res => {
+                       if (res.success) {
+                           Swal.fire(res.message, '', 'success').then(() => {
+                               moveRow(elemnt,iddiv,status,orderid);
+                           });;
+                       } else {
+                           Swal.fire(res.message, '', 'error');
+                       }
+                   })
+                   .catch(error => {
+                       console.error("Error:", error);
+                       Swal.fire('@Localizer["ServerError"]', '', 'error');
+                   });
+           }
+       });
+
+          }
+
+          /// Function To Remove Table To Added in anther table
+              function moveRow(button, idtargt,status,orderid) {
+        let sourceTable = $('.OrdersTable').DataTable();
+        let $row = $(button).closest('tr');
+        let rowData = sourceTable.row($row).data();
+
+        // احذف الصف من الجدول المصدر
+        sourceTable.row($row).remove().draw(false);
+
+        // احذف عمود الحدث القديم (رقم العمود حسب ترتيب الجدول، هنا مفترض 6)
+        let eventCellIndex = 6;
+        rowData.splice(eventCellIndex, 1);
+
+        // حط زر جديد مع أكشن
+        let newEventCell = DragEventBtn(status,orderid);
+        // أضف الزر مكان العمود المحذوف
+        rowData.splice(eventCellIndex, 0, newEventCell);
+
+        // أضف الصف للجدول الهدف
+        let targetTable = $('#' + idtargt + ' table').DataTable();
+        targetTable.row.add(rowData).draw(false);
+    }
+
+    function DragEventBtn(status,orderid) {
+        let buttonHtml = '';
+        if (status === 1 ){
+           // buttonHtml = `<button class="btn btn-warning" onclick="ChangeRequestByStatus(${orderid}, 2, '@Localizer["BackReqestMess"]', 'pendingOrdersbody', this)">@Localizer["BackReqest"]</button>`;
+           buttonHtml='-';
+           // accepted
+        let countAccepted = parseInt($("#CountAccepted").text()) || 0;
+        let countPending = parseInt($("#CountPending").text()) || 0;
+        $("#CountAccepted").text(countAccepted + 1);
+        $("#CountPending").text(countPending - 1);
+        }
+         else if(status === 0){
+         // reject
+        let countCanceled = parseInt($("#CountCanceled").text()) || 0;
+        let countPending = parseInt($("#CountPending").text()) || 0;
+        $("#CountCanceled").text(countCanceled + 1);
+        $("#CountPending").text(countPending - 1);
+         }
+         else {
+             // pending
+           buttonHtml = `<button class="btn btn-danger" onclick="ChangeRequestByStatus(${orderid}, 0, '@Localizer["RejectedRequestMess"]', 'cancelOrdersbody', this)">@Localizer["RejectedRequest"]</button>`;
+           buttonHtml += `<button class="btn btn-success" onclick="ChangeRequestByStatus(${orderid}, 1, '@Localizer["AcceptedRequestMess"]', 'acceptedOrdersbody', this)">@Localizer["AcceptedRequest"]</button>`;
+        }
+        return buttonHtml;
+    }
+
+</script>
+

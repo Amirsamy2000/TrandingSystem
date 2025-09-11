@@ -186,6 +186,9 @@
   <data name="OrdersRequestVideo" xml:space="preserve">
     <value>طلبات تسجيل الفيديوهات</value>
   </data>
+  <data name="OrdersRequestLives" xml:space="preserve">
+    <value>طلبات تسجيل الجلسات</value>
+  </data>
   <data name="PendingEnrollmentRequests" xml:space="preserve">
     <value>طلبات التسجيل المعلقة</value>
   </data>
@@ -227,5 +230,11 @@
   </data>
   <data name="View" xml:space="preserve">
     <value>عرض     </value>
+  </data>
+  <data name="VideoC" xml:space="preserve">
+    <value>البث</value>
+  </data>
+  <data name="LiveCol" xml:space="preserve">
+    <value>البث</value>
   </data>
 </root>

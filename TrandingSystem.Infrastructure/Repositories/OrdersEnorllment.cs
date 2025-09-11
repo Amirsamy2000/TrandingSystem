@@ -20,7 +20,9 @@ namespace TrandingSystem.Infrastructure.Repositories
         }
         public Video_CourseEnrollment Create(Video_CourseEnrollment Object)
         {
-            throw new NotImplementedException();
+
+
+            return _db.CourseEnrollments.Add(Object).Entity;
         }
 
         public Video_CourseEnrollment Delete(int Id)
