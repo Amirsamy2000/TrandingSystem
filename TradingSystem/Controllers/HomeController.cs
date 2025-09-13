@@ -4,8 +4,11 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.SqlServer.Query.Internal;
+using Microsoft.Extensions.Localization;
 using TrandingSystem.Application.Features.analysis.Queriers;
 using TrandingSystem.Application.Features.Courses.Queries;
+using TrandingSystem.Controllers;
 using TrandingSystem.Domain.Entities;
 using TrandingSystem.Infrastructure.Data;
 using TrandingSystem.Models;
@@ -19,14 +22,16 @@ namespace WebApplication1.Controllers
         private readonly IMediator _mediator;
         private readonly IMapper _mapper;
         private readonly UserManager<User> _userManager;
-
-        public HomeController(ILogger<HomeController> logger,     db23617Context options, IMediator mediator, IMapper mapper, UserManager<User> userManager)
+        private readonly IStringLocalizer<CommunitiesController> _localizer;
+        public HomeController(ILogger<HomeController> logger,     db23617Context options, IMediator mediator, IMapper mapper, UserManager<User> userManager
+            , IStringLocalizer<CommunitiesController> localizer)
         {
             _logger = logger;
             _db = options;
             _mediator = mediator;
             _mapper = mapper;
             _userManager = userManager;
+            _localizer = localizer;
         }
 
         public IActionResult Index()
@@ -97,6 +102,7 @@ namespace WebApplication1.Controllers
         [Authorize]
         public IActionResult Contact()
         {
+         
             var user =  _userManager.GetUserAsync(User).Result;
             var email =  _userManager.GetEmailAsync(user).Result;
             ViewBag.Email = email??"";
@@ -120,9 +126,29 @@ namespace WebApplication1.Controllers
         [Authorize(Roles = "Admin")]
         public IActionResult Dashboard() { return View(); }
 
-        public IActionResult Error(CustomeErrorModel error)
+        public IActionResult Error(int? statusCode = null)
         {
-          return View(error);
+            var model = new CustomeErrorModel();
+
+            if (statusCode.HasValue)
+            {
+                model.Status = statusCode.Value;
+
+                model.Message = statusCode.Value switch
+                {
+                    404 => _localizer["Error404"],
+                    500 => _localizer["Error500"],
+                    403 => _localizer["Error403"],
+                    _ => _localizer["ErrorUn"]
+                };
+            }
+            else
+            {
+                model.Status = 500;
+                model.Message = _localizer["ErrorUn"];
+            }
+
+            return View(model);
         }
 
         public IActionResult PartialUploadReceiptVideo(int id)

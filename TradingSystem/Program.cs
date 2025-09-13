@@ -77,25 +77,33 @@ builder.Services.Configure<SecurityStampValidatorOptions>(options =>
     options.ValidationInterval = TimeSpan.Zero;
 });
 
-// For Expend Size For Request
-builder.Services.Configure<FormOptions>(options =>
-{
-    options.MultipartBodyLengthLimit = 500_000_000; // مثلاً 500 ميجا
-});
+//// For Expend Size For Request
+//builder.Services.Configure<FormOptions>(options =>
+//{
+//    options.MultipartBodyLengthLimit = 500_000_000; // مثلاً 500 ميجا
+//});
 
-// Kestrel
-builder.WebHost.ConfigureKestrel(serverOptions =>
-{
-    serverOptions.Limits.MaxRequestBodySize = 500_000_000; // 500 ميجا
-});
+//// Kestrel
+//builder.WebHost.ConfigureKestrel(serverOptions =>
+//{
+//    serverOptions.Limits.MaxRequestBodySize = 500_000_000; // 500 ميجا
+//});
 var app = builder.Build();
 
-// Configure Middleware
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    app.UseHsts();
+    app.UseStatusCodePagesWithReExecute("/Home/Error", "?statusCode={0}");
 }
+//else
+//{
+//    // علشان الاختبار شيل دي أو اعملها كومنت
+//    // app.UseDeveloperExceptionPage();
+
+//    // وجرب كأنك في Production
+//    app.UseExceptionHandler("/Home/Error");
+//    app.UseStatusCodePagesWithReExecute("/Home/Error", "?statusCode={0}");
+//}
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
