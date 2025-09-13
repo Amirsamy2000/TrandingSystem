@@ -54,7 +54,7 @@ namespace TrandingSystem.Infrastructure.Services
             using var smtp = new SmtpClient();
             try
             {
-                await smtp.ConnectAsync(smtpHost, smtpPort, SecureSocketOptions.StartTls);
+                await smtp.ConnectAsync(smtpHost, smtpPort, SecureSocketOptions.SslOnConnect);
                 await smtp.AuthenticateAsync(smtpUser, smtpPass);
                 await smtp.SendAsync(email);
             }
