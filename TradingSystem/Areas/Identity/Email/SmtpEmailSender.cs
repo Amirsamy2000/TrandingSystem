@@ -18,7 +18,7 @@ namespace TrandingSystem.Areas.Identity.Email
         {
             var smtpClient = new SmtpClient("smtp.gmail.com")
             {
-                Port = 587,
+                Port = 465,
                 Credentials = new NetworkCredential(
                     _configuration["Smtp:Username"],
                     _configuration["Smtp:Password"]),
