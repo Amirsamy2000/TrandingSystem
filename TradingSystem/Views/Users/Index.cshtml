@@ -11,9 +11,9 @@
     <table id="usersTable" class="table table-bordered table-striped">
         <thead class="table-dark">
             <tr>
+                <th>Full Name</th>
                 <th>User Name</th>
                 <th>Phone</th>
-                <th>Email</th>
                 @* <th>Address</th> *@
                 @* <th>Registered At</th> *@
                 <th>Is Blocked</th>
@@ -25,7 +25,7 @@
             @foreach (var user in Model.Data)
             {
                 <tr id="user-row-@user.Id">
-                    <td>@user.UserName</td>
+                    <td>@user.FullName</td>
                     <td>@user.Mobile</td>
                     <td>@user.Email</td>
                     @* <td>@user.Address</td> *@
