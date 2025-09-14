@@ -36,7 +36,7 @@
                 </button>
             </div>
 
-            @if (Model?.Any() == true)
+            @if (Model is not null || Model.Count() > 0)
             {
 
                 <style>
