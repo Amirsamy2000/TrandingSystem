@@ -18,7 +18,7 @@ namespace TrandingSystem.Areas.Identity.Email
         {
             var smtpClient = new SmtpClient(_configuration["SettingsNotifies:Email:SmtpHost"])
             {
-                Port = 587, // جرّب 587 بدل 465
+                Port = int.Parse(_configuration["SettingsNotifies:Email:SmtpPort"]) , // جرّب 587 بدل 465
                 Credentials = new NetworkCredential(
                     _configuration["SettingsNotifies:Email:SmtpUser"],
                     _configuration["SettingsNotifies:Email:SmtpPass"]),
