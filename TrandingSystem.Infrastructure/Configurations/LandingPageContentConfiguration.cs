@@ -27,7 +27,7 @@ namespace TrandingSystem.Infrastructure.Data.Configurations
 
             entity.HasOne(d => d.CreadteByNavigation).WithMany(p => p.LandingPageContents)
                 .HasForeignKey(d => d.CreadteBy)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK__LandingPa__Cread__6CD828CA");
 
  

@@ -26,7 +26,7 @@ namespace TrandingSystem.Infrastructure.Data.Configurations
 
             entity.HasOne(d => d.Course).WithMany(p => p.Communities)
                 .HasForeignKey(d => d.CourseId)
-                .HasConstraintName("FK__Communiti__Cours__6166761E");
+                .HasConstraintName("FK__Communiti__Cours__6166761E").OnDelete(DeleteBehavior.Cascade);
 
  
         }

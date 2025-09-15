@@ -23,9 +23,10 @@ namespace TrandingSystem.Infrastructure.Data.Configurations
 
             entity.HasOne(d => d.CreateByNavigation).WithMany(p => p.Categories)
                 .HasForeignKey(d => d.CreateBy)
-                .HasConstraintName("FK__Categorie__Creat__607251E5");
+                .HasConstraintName("FK__Categorie__Creat__607251E5").OnDelete(DeleteBehavior.Cascade);
+            ;
 
- 
+
         }
 
      }

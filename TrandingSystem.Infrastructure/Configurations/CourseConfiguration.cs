@@ -28,12 +28,12 @@ namespace TrandingSystem.Infrastructure.Data.Configurations
 
             entity.HasOne(d => d.Category).WithMany(p => p.Courses)
                 .HasForeignKey(d => d.CategoryId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+                .OnDelete(DeleteBehavior.Restrict)
                 .HasConstraintName("FK__Courses__Categor__6AEFE058");
 
             entity.HasOne(d => d.CreateByNavigation).WithMany(p => p.Courses)
                 .HasForeignKey(d => d.CreateBy)
-                .HasConstraintName("FK__Courses__CreateB__6BE40491");
+                .HasConstraintName("FK__Courses__CreateB__6BE40491").OnDelete(DeleteBehavior.Restrict);
 
  
         }
