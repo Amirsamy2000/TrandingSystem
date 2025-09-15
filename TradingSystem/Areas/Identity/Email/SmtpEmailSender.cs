@@ -16,18 +16,20 @@ namespace TrandingSystem.Areas.Identity.Email
 
         public async Task SendEmailAsync(string email, string subject, string htmlMessage)
         {
-            var smtpClient = new SmtpClient("smtp.gmail.com")
+            var smtpClient = new SmtpClient(_configuration["SettingsNotifies:Email:SmtpHost"])
             {
-                Port = 587,
+                Port = int.Parse(_configuration["SettingsNotifies:Email:SmtpPort"]) , // جرّب 587 بدل 465
                 Credentials = new NetworkCredential(
-                    _configuration["Smtp:Username"],
-                    _configuration["Smtp:Password"]),
+                    _configuration["SettingsNotifies:Email:SmtpUser"],
+                    _configuration["SettingsNotifies:Email:SmtpPass"]),
                 EnableSsl = true,
+                DeliveryMethod = SmtpDeliveryMethod.Network,
+                UseDefaultCredentials = false
             };
 
             var mailMessage = new MailMessage
             {
-                From = new MailAddress(_configuration["Smtp:FromEmail"]),
+                From = new MailAddress(_configuration["SettingsNotifies:Email:SmtpUser"], _configuration["SettingsNotifies:Email:FromName"]),
                 Subject = subject,
                 Body = htmlMessage,
                 IsBodyHtml = true,
