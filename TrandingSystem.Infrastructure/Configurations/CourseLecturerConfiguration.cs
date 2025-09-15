@@ -16,12 +16,12 @@ namespace TrandingSystem.Infrastructure.Data.Configurations
 
             entity.HasOne(d => d.Course).WithMany()
                 .HasForeignKey(d => d.CourseId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK__CourseLec__Cours__671F4F74");
 
             entity.HasOne(d => d.Lecturer).WithMany()
                 .HasForeignKey(d => d.LecturerId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK__CourseLec__Lectu__681373AD");
 
  

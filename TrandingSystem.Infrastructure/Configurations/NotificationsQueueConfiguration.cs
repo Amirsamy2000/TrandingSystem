@@ -27,7 +27,7 @@ namespace TrandingSystem.Infrastructure.Data.Configurations
             entity.Property(e => e.Subject).HasMaxLength(255);
 
             entity.HasOne(d => d.User).WithMany(p => p.NotificationsQueues)
-                .HasForeignKey(d => d.UserId)
+                .HasForeignKey(d => d.UserId).OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK__Notificat__UserI__719CDDE7");
 
  

@@ -28,7 +28,7 @@ namespace TrandingSystem.Infrastructure.Data.Configurations
 
             entity.HasOne(d => d.CreadteByNavigation).WithMany(p => p.ContactInfos)
                 .HasForeignKey(d => d.CreadteBy)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK__ContactIn__Cread__6442E2C9");
 
  

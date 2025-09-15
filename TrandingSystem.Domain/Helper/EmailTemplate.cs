@@ -29,8 +29,7 @@ namespace TrandingSystem.Domain.Helper
 <head>
   <meta charset='utf-8'>
   <title>{temp.Subject}</title>
-  <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css'>
-
+ 
 </head>
 <body style='margin:0;padding:0;font-family:Tahoma,Arial,sans-serif;background:#f6f9fc;'>
   <table width='100%' cellpadding='0' cellspacing='0' style='padding:24px 0;'>
@@ -38,7 +37,7 @@ namespace TrandingSystem.Domain.Helper
       <td align='center'>
         <table width='600' cellpadding='0' cellspacing='0' style='background:#fff;border-radius:12px;border:1px solid #e9eef5;'>
           <tr>
-           <td style='background:#c3972e;color:white;padding:18px;font-weight:700;'>{temp.StieName}</td>
+           <td style='background:#444444;color:white;padding:18px;font-weight:700;'>{temp.StieName}</td>
           </tr>
           <tr>
             <td style='padding:20px;color:#0f172a;'>
@@ -50,7 +49,7 @@ namespace TrandingSystem.Domain.Helper
                <a href='{temp.ActionUrl}' style='display:inline-block;padding:12px 18px;background:#c3972e;color:#fff;border-radius:8px;text-decoration:none;'>
                 {temp.namebtn}
               </a>
-                <a  href='https://wa.me/201040140415' style='display:inline-block;padding:12px 18px;background:#25D366;color:#fff;border-radius:8px;text-decoration:none;'>
+                <a  href='https://wa.me/201278313491' style='display:inline-block;padding:12px 18px;background:#25D366;color:#fff;border-radius:8px;text-decoration:none;'>
             <i class='bi bi-whatsapp'></i>
 
                 {temp.contact}
