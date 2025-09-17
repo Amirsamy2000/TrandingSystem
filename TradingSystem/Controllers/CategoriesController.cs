@@ -11,23 +11,26 @@ using TrandingSystem.Application.Features.Courses.Commands;
 
 namespace TrandingSystem.Controllers
 {
-    [Authorize(Roles = "Admin")]
 
     public class CategoriesController : Controller
     {
         private readonly IMediator _mediator;
         private readonly IMapper _mapper;
 
+
         public CategoriesController(IMediator mediator, IMapper mapper)
         {
             _mediator = mediator;
             _mapper = mapper;
         }
+
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Index()
         {
             var Rescourses = await _mediator.Send(new GetAllCategoriesQuery());
             return View(Rescourses.Data);
         }
+        [Authorize]
         public async Task<IActionResult> Read()
         {
             var Rescourses = await _mediator.Send(new GetAllCategoriesQuery());
@@ -47,6 +50,7 @@ namespace TrandingSystem.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> SubmitAddNewCat(string cateenName,string catearName,CancellationToken cancellationToken)
         {
             var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
@@ -64,6 +68,7 @@ namespace TrandingSystem.Controllers
 
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> SubmitUpdateCat(int catid, string cateenName, string catearName,CancellationToken cancellationToken)
         {
         

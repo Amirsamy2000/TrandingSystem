@@ -14,33 +14,61 @@
 	var currentCulture = requestCulture?.RequestCulture.Culture.Name;
 	var isArabic = currentCulture == "ar" ? true : false; //ViewBag.language_code == 2;
 }
+<style>
+	.course-description {
+		white-space: pre-wrap; /* يحافظ على النقط والمسافات والأسطر */
+		font-size: 1.1rem;
+		line-height: 1.7;
+		text-align: justify;
+	}
+
+</style>
+
 <!-- Page Title -->
 <div class="page-title" data-aos="fade">
-	<div class="heading">
-		<div class="container">
-			<div class="row d-flex justify-content-center text-center">
-				<div class="col-lg-8">
-					<h2>Course Details</h2>
-					<p class="mb-0">
+	<!-- Page Title -->
+	<div class="page-title" data-aos="fade">
+		<div class="heading py-4">
+			<div class="container">
+				<div class="row d-flex justify-content-center">
+					<div class="col-lg-8 text-center">
+						<h2 class="mb-4">Course Details</h2>
+
 						@if (isArabic)
 						{
-							<h4>@Model.DescriptionAR</h4>
+							<p class="lead" dir="rtl">
+								@Model.DescriptionAR
+							</p>
 						}
 						else
 						{
-
-							<h4>@Model.DescriptionEN</h4>
+							<p class="lead">
+								@Model.DescriptionEN
+							</p>
 						}
-					</p>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+
 	<nav class="breadcrumbs">
 		<div class="container">
 			<ol>
-				<li><a href="index.html">Home</a></li>
-				<li class="current">Course Details</li>
+				<li><a asp-action="Courses" asp-controller="Home">Courses</a></li>
+				<li class="current">
+					@if (isArabic)
+					{
+						@Model.TitleAR
+
+					}
+					else
+					{
+						@Model.TitleEN
+
+					}
+
+				</li>
 			</ol>
 		</div>
 	</nav>
@@ -52,20 +80,21 @@
 
 		<div class="row">
 			<div class="col-lg-8">
-				<img src="@Model.ImageCourseUrl" class="img-fluid" alt="">
+				<img src="@Model.ImageCourseUrl" class="img-fluid rounded mb-4" alt="Course Image">
+
 				<h3></h3>
+				
+
 				@if (isArabic)
 				{
-					<p>
-						@Model.DescriptionAR
-					</p>
+					<p class="course-description" dir="rtl">@Model.DescriptionAR</p>
 				}
 				else
 				{
-					<p>
-						@Model.DescriptionEN
-					</p>
+					<p class="course-description">@Model.DescriptionEN</p>
 				}
+
+
 			</div>
 			<div class="col-lg-4">
 
