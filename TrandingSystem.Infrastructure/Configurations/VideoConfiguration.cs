@@ -30,12 +30,12 @@ namespace TrandingSystem.Infrastructure.Data.Configurations
 
             entity.HasOne(d => d.Course).WithMany(p => p.Videos)
                 .HasForeignKey(d => d.CourseId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK__Videos__CourseId__7755B73D");
 
             entity.HasOne(d => d.CreadteByNavigation).WithMany(p => p.Videos)
                 .HasForeignKey(d => d.CreadteBy)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK__Videos__CreadteB__7849DB76");
 
  

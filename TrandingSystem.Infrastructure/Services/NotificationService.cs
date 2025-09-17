@@ -37,11 +37,12 @@ namespace TrandingSystem.Infrastructure.Services
         public async Task SendEmailAsync(string to, string subject, string body)
         {
             // قراءة الإعدادات من appsettings.json
-            var smtpHost = _config["SettingsNotifies:Email:SmtpHost"];
-            var smtpPort = int.Parse(_config["SettingsNotifies:Email:SmtpPort"]);
-            var smtpUser = _config["SettingsNotifies:Email:SmtpUser"];
-            var smtpPass = _config["SettingsNotifies:Email:SmtpPass"];
-            var fromName = _config["SettingsNotifies:Email:FromName"];
+            var smtpHost = "mail5011.site4now.net";          // من بيانات SmarterASP
+            var smtpPort = 465;                           // بورت TLS
+            var smtpUser = "support@saifalqadi.com";       // الإيميل اللي هتبعت منه
+            var smtpPass = "123456789@Support";                  // باسورد الإيميل
+            var fromName = "Saif Al Qadi Support";         // الاسم اللي يظهر للمرسل
+ 
 
             var email = new MimeMessage();
             email.From.Add(new MailboxAddress(fromName, smtpUser));
@@ -54,7 +55,7 @@ namespace TrandingSystem.Infrastructure.Services
             using var smtp = new SmtpClient();
             try
             {
-                await smtp.ConnectAsync(smtpHost, smtpPort, SecureSocketOptions.SslOnConnect);
+             await smtp.ConnectAsync(smtpHost, smtpPort, SecureSocketOptions.SslOnConnect);
                 await smtp.AuthenticateAsync(smtpUser, smtpPass);
                 await smtp.SendAsync(email);
             }

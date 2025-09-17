@@ -24,7 +24,7 @@ namespace TrandingSystem.Infrastructure.Data.Configurations
 
             entity.HasOne(d => d.User).WithMany(p => p.UserSessions)
                 .HasForeignKey(d => d.UserId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK__UserSessi__UserI__76619304");
 
  

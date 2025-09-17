@@ -20,12 +20,12 @@ namespace TrandingSystem.Infrastructure.Data.Configurations
 
             entity.HasOne(d => d.Community).WithMany(p => p.Messages)
                 .HasForeignKey(d => d.CommunityId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK__Messages__Commun__6FB49575");
 
             entity.HasOne(d => d.User).WithMany(p => p.Messages)
                 .HasForeignKey(d => d.UserId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK__Messages__UserId__70A8B9AE");
 
  
