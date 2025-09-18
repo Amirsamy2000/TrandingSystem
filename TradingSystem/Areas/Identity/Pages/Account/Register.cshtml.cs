@@ -402,10 +402,10 @@ namespace TrandingSystem.Areas.Identity.Pages.Account
             <div class=""welcome-text"">Almost there! Let's verify your account.</div>
             
             <div class=""description"">
-                Thank you for joining us! To complete your registration and secure your account, please click the button below to confirm your email address.
+                Thank you for joining us! To complete your registration and secure your account,the button below to confirm your email address.
             </div>
             
-            <a href=""{HtmlEncoder.Default.Encode(callbackUrl)}"" class=""confirm-button"">
+            <a href=""@{callbackUrl}"" class=""confirm-button"">
                 Confirm My Account
             </a>
             
