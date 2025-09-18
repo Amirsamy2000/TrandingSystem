@@ -67,6 +67,10 @@ namespace WebApplication1.Controllers
             return View();
         }
 
+        public IActionResult Test()
+        {
+            return View();
+        }
 
         [Authorize(Roles = "Admin")]
         public IActionResult Trainers()
