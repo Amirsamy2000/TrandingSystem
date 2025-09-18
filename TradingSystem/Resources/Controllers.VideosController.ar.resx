@@ -339,4 +339,37 @@
   <data name="paytoWatchVdo" xml:space="preserve">
     <value>تسجيل</value>
   </data>
+  <data name="SuccessCreateNewAccount" xml:space="preserve">
+    <value>تم انشاء حسابك بنجاح ✅ </value>
+  </data>
+  <data name="ConfirmMassge" xml:space="preserve">
+    <value>تم إرسال رسالة  تفعيل الحساب  إلى بريدك الإلكتروني، من فضلك قم بفتحها واضغط على "تاكيد حسابي" لتتمكن من استخدام الموقع.</value>
+  </data>
+  <data name="Account" xml:space="preserve">
+    <value>الحساب</value>
+  </data>
+  <data name="ConfirmAccount" xml:space="preserve">
+    <value>تفعيل الحساب</value>
+  </data>
+  <data name="instraction" xml:space="preserve">
+    <value>تعليمات مهمة لتفعيل الحساب الخاص بيك </value>
+  </data>
+  <data name="NotConfirmMassge" xml:space="preserve">
+    <value> 🔒 لن تتمكن من استخدام الموقع أو تسجيل الدخول قبل الضغط على رابط التفعيل.</value>
+  </data>
+  <data name="instraction1" xml:space="preserve">
+    <value>  يرجى التوجه الآن إلى بريدك الإلكتروني الذي استخدمته أثناء التسجيل.</value>
+  </data>
+  <data name="instraction2" xml:space="preserve">
+    <value> ابحث عن رسالة بعنوان: &lt;strong&gt;"Confirm your email"&lt;/strong&gt;</value>
+  </data>
+  <data name="instraction3" xml:space="preserve">
+    <value>  داخل هذه الرسالة ستجد رابط تفعيل الحساب، اضغط عليه لإكمال عملية التسجيل.</value>
+  </data>
+  <data name="instraction4" xml:space="preserve">
+    <value>📌 إذا لم تجد الرسالة في البريد الوارد، تحقق من مجلد &lt;strong&gt;Spam / Junk&lt;/strong&gt;.</value>
+  </data>
+  <data name="ExMessConfrim" xml:space="preserve">
+    <value> هذا مثال لشكل رسالة التفعيل التي ستصلك</value>
+  </data>
 </root>

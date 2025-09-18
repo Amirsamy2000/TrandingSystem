@@ -341,4 +341,37 @@ Alternatively, feel free to email us directly or contact us instantly through th
   <data name="paytoWatchVdo" xml:space="preserve">
     <value>Enroll</value>
   </data>
+  <data name="SuccessCreateNewAccount" xml:space="preserve">
+    <value>Your account has been created successfully  ✅.</value>
+  </data>
+  <data name="ConfirmMassge" xml:space="preserve">
+    <value>An account activation message has been sent to your email. Please open it and click "Confirm my account" to be able to use the site.</value>
+  </data>
+  <data name="Account" xml:space="preserve">
+    <value>Account</value>
+  </data>
+  <data name="ConfirmAccount" xml:space="preserve">
+    <value>Active Account</value>
+  </data>
+  <data name="instraction" xml:space="preserve">
+    <value>Important instructions to activate your account</value>
+  </data>
+  <data name="NotConfirmMassge" xml:space="preserve">
+    <value>🔒 You will not be able to use the site or log in before clicking the activation link.</value>
+  </data>
+  <data name="instraction1" xml:space="preserve">
+    <value>Please now go to the email address you used during registration.</value>
+  </data>
+  <data name="instraction2" xml:space="preserve">
+    <value>Look for a message titled: &lt;strong&gt;"Confirm your email"&lt;/strong&gt;</value>
+  </data>
+  <data name="instraction3" xml:space="preserve">
+    <value>Inside this message you will find an account activation link. Click on it to complete the registration process.</value>
+  </data>
+  <data name="instraction4" xml:space="preserve">
+    <value>📌 If you don't find the message in your inbox, check your Spam / Junk folder.</value>
+  </data>
+  <data name="ExMessConfrim" xml:space="preserve">
+    <value>This is an example of what the activation message you will receive will look like.</value>
+  </data>
 </root>
