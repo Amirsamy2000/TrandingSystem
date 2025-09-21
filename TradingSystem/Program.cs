@@ -42,9 +42,26 @@ builder.Services.AddSignalR();
 
 //builder.Services.AddScoped<IWasabiUploader, WasabiUploader>();
 // Identity مع Roles و EF Store
-builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true)
-    .AddRoles<Role>()
-    .AddEntityFrameworkStores<db23617Context>();
+builder.Services.AddDefaultIdentity<User>(options =>
+{
+    // Require email confirmed
+    options.SignIn.RequireConfirmedAccount = true;
+
+    // Lockout settings
+    options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5); // المدة اللي الحساب يتقفل فيها
+    options.Lockout.MaxFailedAccessAttempts = 3; // أقصى عدد محاولات غلط
+    options.Lockout.AllowedForNewUsers = true; // يطبق حتى على يوزر جديد
+
+    // Password settings (لو عايز تتحكم في قوة الباسورد)
+    options.Password.RequireDigit = true;
+    options.Password.RequiredLength = 6;
+    options.Password.RequireNonAlphanumeric = false;
+    options.Password.RequireUppercase = true;
+    options.Password.RequireLowercase = true;
+})
+.AddRoles<Role>()
+.AddEntityFrameworkStores<db23617Context>();
+
 
 // Localization - ملف الموارد داخل Resources/
 builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
