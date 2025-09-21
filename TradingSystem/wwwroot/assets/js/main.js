@@ -224,7 +224,12 @@ function handleIsPaidChangeInAddNewVideo(idpaid, idcost) {
 
 
 // Show Pop To Choice Cousre then Dispaly  videos
-function ChoiceCourse(text,text2,numUrl) {
+function ChoiceCourse(text, text2, numUrl) {
+    let setting = {
+
+        title: " "
+            }
+    SweatAlterProcessing(setting)
     var myModal = new bootstrap.Modal(document.getElementById('modalCenter'))
     myModal.hide()
     $.ajax({
@@ -232,10 +237,11 @@ function ChoiceCourse(text,text2,numUrl) {
         type: 'GET',
         dataType: 'json',
         success: function (data) {
+            Swal.close();
             if (data.success) {
-                console.log("-----------------")
-                console.log(data)
-                console.log(data.data)
+                //console.log("-----------------")
+                //console.log(data)
+                //console.log(data.data)
                 allCourses = data.data;
 
                 let html = `
@@ -277,7 +283,7 @@ function ChoiceCourse(text,text2,numUrl) {
 
         },
         error: function (xhr, status, error) {
-           
+            Swal.close();
             Swal.fire({
                 icon: 'error',
                 title: 'Error',

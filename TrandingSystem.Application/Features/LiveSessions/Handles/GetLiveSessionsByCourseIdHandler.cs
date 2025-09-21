@@ -24,7 +24,7 @@ namespace TrandingSystem.Application.Features.LiveSessions.Handles
             {
                 var course = _unitOfWork.Courses.ReadById(request.CourseId);
                 string courseName = request.Culture == "ar" ? course.TitleAR : course.TitleEN;
-               var Query=  _unitOfWork.LiveSessionRepositry.GetAllLiveSessionsForCouse(request.CourseId);
+               var Query=  _unitOfWork.LiveSessionRepositry.GetAllLiveSessionsForCouse(request.CourseId,0);
                 // هنا تستخدم AutoMapper بشكل عادي بعد ما تجيب البيانات من قاعدة البيانات
                 var result = _mapper.Map<List<LiveSessionsDto>>(Query, opt =>
                 {

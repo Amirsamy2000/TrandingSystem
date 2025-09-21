@@ -28,7 +28,7 @@ namespace TrandingSystem.Application.Features.LiveSessions.Handles
         {
             try
             {
-                var livesOfCourse = _unitOfWork.LiveSessionRepositry.GetAllLiveSessionsForCouse(request.CourselId);
+                var livesOfCourse = _unitOfWork.LiveSessionRepositry.GetAllLiveSessionsForCouse(request.CourselId,0);
                 if (livesOfCourse == null)
                 {
                     return Response<bool>.ErrorResponse(_localizer["Notfoundlives"]);

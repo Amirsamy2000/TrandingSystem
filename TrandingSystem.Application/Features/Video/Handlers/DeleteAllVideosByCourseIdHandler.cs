@@ -27,7 +27,7 @@ namespace TrandingSystem.Application.Features.Video.Handlers
         {
             try
             {
-                var AllVideos = _unitOfWork.Videos.GetAllVideosForCouse(request.CourseId);
+                var AllVideos = _unitOfWork.Videos.GetAllVideosForCouse(request.CourseId,0);
                 if (AllVideos == null || !AllVideos.Any())
                 {
                     var notFoundMsg = request.Culture == "ar" ? "لا توجد فيديوهات لحذفها" : "No videos to delete";
