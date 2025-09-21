@@ -10,7 +10,10 @@ namespace TrandingSystem.Domain.Interfaces
 {
     public interface ILiveSessionRepositry: IDomainInterface<LiveSession>
     {
-        IQueryable<LiveSession> GetAllLiveSessionsForCouse(int CourseId);
+        // 0 get all lives for this course
+        // 1 get  Just all Active Lives
+        // 2 get just all unActive Lives
+        IQueryable<LiveSession> GetAllLiveSessionsForCouse(int CourseId,int status);
 
         void DeleteAllSessionsByCourseId(List<LiveSession> liveSessions);
     }

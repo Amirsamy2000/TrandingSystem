@@ -78,10 +78,10 @@ namespace TrandingSystem.Infrastructure.Services
             throw new NotImplementedException();
         }
 
-        public Task SendSmsAsync(string phoneNumber, string message)
-        {
-            throw new NotImplementedException();
-        }
+        //public Task SendSmsAsync(string phoneNumber, string message)
+        //{
+        //    throw new NotImplementedException();
+        //}
  
 
      

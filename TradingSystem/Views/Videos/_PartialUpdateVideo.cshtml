@@ -89,7 +89,14 @@
                         </div>
                     </div>
 
-                   
+                    @* Video *@
+                    <div class="row mb-3">
+                        <label class="col-sm-4 col-form-label" for="basic-icon-default-company">@Localizer["VideoUrl"]</label>
+                        <div class="col-sm-8">
+                            <input asp-for="VideoUrl" type="text" id="inputVideoUrl" class="form-control" oninput="GeneralRequiredFiled('inputVideoUrl', '@Localizer["Required"]', 'VideoUrl')" />
+                            <span id="VideoUrl" class="text-danger"></span>
+                        </div>
+                    </div>
 
                     <!-- IsActive / IsPaid -->
                     <div class="row mb-3 d-flex justify-content-center">

@@ -30,9 +30,9 @@ namespace TrandingSystem.Application.Features.Video.Handlers
                 var course = _unitOfWork.Courses.ReadById(request.CourseId);
 
                 // 1) اجلب الـ IQueryable من الريبو
-                var query = _unitOfWork.Videos.GetAllVideosForCouse(request.CourseId);
+                var query = _unitOfWork.Videos.GetAllVideosForCouse(request.CourseId,0);
                 string courseName = request.Culture == "ar" ? course.TitleAR : course.TitleEN;
-                _unitOfWork.Videos.GetAllVideosForCouse(request.CourseId);
+                _unitOfWork.Videos.GetAllVideosForCouse(request.CourseId, 0);
                 // هنا تستخدم AutoMapper بشكل عادي بعد ما تجيب البيانات من قاعدة البيانات
                 var result = _mapper.Map<List<VideoDto>>(query, opt =>
                 {
