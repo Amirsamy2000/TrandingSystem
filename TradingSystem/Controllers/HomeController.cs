@@ -155,6 +155,11 @@ namespace WebApplication1.Controllers
             return View(model);
         }
 
+        public IActionResult LockedAccount()
+        {            
+            return View();
+        }
+
         public IActionResult PartialUploadReceiptVideo(int id)
         {
             return PartialView("_PartialUploadReceiptVideo",id);
