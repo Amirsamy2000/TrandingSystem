@@ -107,46 +107,58 @@ namespace TrandingSystem.Areas.Identity.Pages.Account
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
             returnUrl ??= Url.Content("~/");
-
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
 
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
+                return Page();
+
+            var user = await _userManager.FindByEmailAsync(Input.Email);
+            if (user == null)
             {
-                // This doesn't count login failures towards account lockout
-                // To enable password failures to trigger account lockout, set lockoutOnFailure: true
-                var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: true);
-                if (result.Succeeded)
-                {
-                    var user = await _userManager.FindByEmailAsync(Input.Email);
-
-                    // 🔐 Invalidate all other sessions
-                    await _userManager.UpdateSecurityStampAsync(user);
-
-                    // 🔐 Sign in again to use the new stamp
-                    await _signInManager.SignInAsync(user, Input.RememberMe);
-
-                    _logger.LogInformation("User logged in with single session.");
-                    return LocalRedirect(returnUrl);
-
-                }
-                if (result.RequiresTwoFactor)
-                {
-                    return RedirectToPage("./LoginWith2fa", new { ReturnUrl = returnUrl, RememberMe = Input.RememberMe });
-                }
-                if (result.IsLockedOut)
-                {
-                    _logger.LogWarning("User account locked out.");
-                    return RedirectToAction("LockedAccount", "Home");
-                }
-                else
-                {
-                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
-                    return Page();
-                }
+                ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                return Page();
             }
 
-            // If we got this far, something failed, redisplay form
+            // ✅ Check if email is confirmed
+            if (!await _userManager.IsEmailConfirmedAsync(user))
+            {
+                ModelState.AddModelError(string.Empty, "Your email is not confirmed. Please check your inbox.");
+                return Page();
+            }
+
+            // Try sign in (with lockout on failure)
+            var result = await _signInManager.PasswordSignInAsync(
+                Input.Email,
+                Input.Password,
+                Input.RememberMe,
+                lockoutOnFailure: true);
+
+            if (result.Succeeded)
+            {
+                // 🔐 Invalidate other sessions
+                await _userManager.UpdateSecurityStampAsync(user);
+
+                // 🔐 Sign in again
+                await _signInManager.SignInAsync(user, Input.RememberMe);
+
+                _logger.LogInformation("User logged in with single session.");
+                return LocalRedirect(returnUrl);
+            }
+
+            if (result.RequiresTwoFactor)
+            {
+                return RedirectToPage("./LoginWith2fa", new { ReturnUrl = returnUrl, RememberMe = Input.RememberMe });
+            }
+
+            if (result.IsLockedOut)
+            {
+                _logger.LogWarning("User account locked out.");
+                return RedirectToAction("LockedAccount", "Home");
+            }
+
+            ModelState.AddModelError(string.Empty, "Invalid login attempt.");
             return Page();
         }
+
     }
 }
