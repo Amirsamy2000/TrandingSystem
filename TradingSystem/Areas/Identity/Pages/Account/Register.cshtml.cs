@@ -173,19 +173,10 @@ namespace TrandingSystem.Areas.Identity.Pages.Account
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
                     var callbackUrl = Url.Page(
-                        "/Account/ConfirmEmail",
+                        "/Hom/Index",
                         pageHandler: null,
-                        values: new { area = "Identity", userId = userId, code = code },
-                        protocol: Request.Scheme
-                    );
-
-
-
-                    //var callbackUrl = Url.Page(
-                    //    "/Hom/Index",
-                    //    pageHandler: null,
-                    //    values:null,
-                    //    protocol: Request.Scheme);
+                        values:null,
+                        protocol: Request.Scheme);
 
                     await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
                         @$"<!DOCTYPE html>
@@ -437,8 +428,7 @@ namespace TrandingSystem.Areas.Identity.Pages.Account
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {
-                        return RedirectToPage("/Account/CheckYourEmail", new { area = "Identity" });
-                        //return RedirectToPage("ConfirmEmail", new { area = "Identity", userId = userId, code = code, returnUrl = returnUrl });
+                        return RedirectToPage("ConfirmEmail", new { area = "Identity", userId = userId, code = code, returnUrl = returnUrl });
                     }
                     else
                     {
