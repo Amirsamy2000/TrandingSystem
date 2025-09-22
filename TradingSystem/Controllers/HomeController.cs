@@ -4,8 +4,10 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.EntityFrameworkCore.SqlServer.Query.Internal;
 using Microsoft.Extensions.Localization;
+using System.Text;
 using TrandingSystem.Application.Features.analysis.Queriers;
 using TrandingSystem.Application.Features.Courses.Queries;
 using TrandingSystem.Controllers;
@@ -46,6 +48,29 @@ namespace WebApplication1.Controllers
 
            
         }
+
+        public async Task<IActionResult> ActiveUserEmail(string userId, string code)
+        {
+
+            if (userId == null || code == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user == null)
+            {
+                return NotFound($"Unable to load user with ID '{userId}'.");
+            }
+
+            code = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(code));
+            var result = await _userManager.ConfirmEmailAsync(user, code);
+            return RedirectToAction("Index");
+
+
+
+        }
+
 
         public IActionResult About()
         {
