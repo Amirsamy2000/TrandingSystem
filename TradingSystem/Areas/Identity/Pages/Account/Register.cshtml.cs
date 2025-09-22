@@ -20,7 +20,6 @@ using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using TrandingSystem.Domain.Entities;
-using TrandingSystem.Infrastructure.Constants;
 
 namespace TrandingSystem.Areas.Identity.Pages.Account
 {
@@ -173,15 +172,11 @@ namespace TrandingSystem.Areas.Identity.Pages.Account
                     var userId = await _userManager.GetUserIdAsync(user);
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
-
-                    var callbackUrl = $"{ConstantPath.MainUrlSite}/Home/ActiveUserEmail?userId={userId}&&code={code}";
-                    //Url.Page(
-                    //"/Hom/Index",
-                    //pageHandler: null,
-                    //values: new { area = "Identity", userId = userId, code = code },
-                    //protocol: Request.Scheme);
-
-
+                    var callbackUrl = Url.Page(
+                        "/Hom/Index",
+                        pageHandler: null,
+                        values:null,
+                        protocol: Request.Scheme);
 
                     await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
                         @$"<!DOCTYPE html>
