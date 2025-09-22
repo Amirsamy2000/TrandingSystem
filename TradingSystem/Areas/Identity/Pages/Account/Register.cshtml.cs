@@ -405,7 +405,7 @@ namespace TrandingSystem.Areas.Identity.Pages.Account
                 Thank you for joining us! To complete your registration and secure your account,the button below to confirm your email address.
             </div>
             
-            <a href=""@{callbackUrl}"" class=""confirm-button"">
+            <a href=""@{HtmlEncoder.Default.Encode(callbackUrl)}"" class=""confirm-button"">
                 Confirm My Account
             </a>
             
