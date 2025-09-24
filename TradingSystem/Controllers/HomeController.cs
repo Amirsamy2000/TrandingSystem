@@ -60,7 +60,10 @@ namespace WebApplication1.Controllers
             return View();
         }
 
-
+        public IActionResult RegisterConfirmation()
+        {
+            return View();
+        }
         [Authorize(Roles = "Admin")]
         public IActionResult Events()
         {

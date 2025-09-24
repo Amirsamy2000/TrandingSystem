@@ -57,9 +57,10 @@ internal class GetAllCoursesHandler : IRequestHandler<GetAllCoursesQuery, Respon
             }
 
             var courseDtos = _mapper.Map<List<CourseDto>>(courses);
-            
 
-            foreach(var courseDto in courseDtos)
+          
+
+            foreach (var courseDto in courseDtos)
             {
                 courseDto.Lectures = _mapper.Map<List<UserDto>>(_unitOfWork.Courses.GetLecturesByCourseId(courseDto.CourseId));
             }

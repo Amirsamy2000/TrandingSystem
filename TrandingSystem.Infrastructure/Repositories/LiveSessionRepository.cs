@@ -51,9 +51,18 @@ namespace TrandingSystem.Infrastructure.Repositories
             return Element;
         }
 
-        public IQueryable<LiveSession> GetAllLiveSessionsForCouse(int courseId)
+        public IQueryable<LiveSession> GetAllLiveSessionsForCouse(int courseId, int Status)
         {
-            return _db.LiveSessions.Where(x => x.CourseId == courseId);
+            if (Status == 0)
+            {
+                return _db.LiveSessions.Where(x => x.CourseId == courseId);
+            }
+            else if (Status == 1)
+            {
+                return _db.LiveSessions.Where(x => x.CourseId == courseId && x.IsActive == true);
+            }
+            else
+                return _db.LiveSessions.Where(x => x.CourseId == courseId&& x.IsActive == false);
         }
 
         public void DeleteAllSessionsByCourseId(List<LiveSession> liveSessions)

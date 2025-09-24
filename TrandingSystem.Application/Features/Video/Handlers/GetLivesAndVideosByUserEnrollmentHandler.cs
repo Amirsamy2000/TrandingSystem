@@ -36,9 +36,15 @@ namespace TrandingSystem.Application.Features.Video.Handlers
                 // if found enrollment 
                 if (checkEnrollmentUser is not null)
                 {
-                    var videos = _unitOfWork.Videos.GetAllVideosForCouse(request.CourseId);
-                    
-                    var Lives = _unitOfWork.LiveSessionRepositry.GetAllLiveSessionsForCouse(request.CourseId);
+                    // 0 get all videos and lives for this course
+                    // 1 get  Just all Active Videos
+                    // 2 get just all unActive Videos
+                    var videos = _unitOfWork.Videos.GetAllVideosForCouse(request.CourseId,1);
+
+                    // 0 get all lives for this course
+                    // 1 get  Just all Active Lives
+                    // 2 get just all unActive Lives
+                    var Lives = _unitOfWork.LiveSessionRepositry.GetAllLiveSessionsForCouse(request.CourseId,1);
                     var resutVideosDto = _mapper.Map<List<VideoDto>>(videos, opt =>
                     {
                         opt.Items["culture"] = request.Culture;
@@ -55,7 +61,7 @@ namespace TrandingSystem.Application.Features.Video.Handlers
                     // Apply business rules for access
                     foreach (var video in resutVideosDto)
                     {
-                        var checkEnrollmentVideoUser = _unitOfWork.ordersEnorllment.CheckUserEnrollment(x => x.VideoId == video.VideoId && x.UserId == request.UserId&& x.OrderStatus!=0);
+                        var checkEnrollmentVideoUser = _unitOfWork.ordersEnorllment.CheckUserEnrollment(x => x.VideoId == video.VideoId && x.UserId == request.UserId&& x.OrderStatus!=0 && x.Video.IsActive==true);
 
                         if (!video.IsPaid)
                         {  // مجاني
@@ -79,7 +85,7 @@ namespace TrandingSystem.Application.Features.Video.Handlers
 
                     foreach (var live in resultLiveSessionsDto)
                     {
-                        var checkEnrollmentLiveUser = _unitOfWork.ordersEnorllment.CheckUserEnrollment(x => x.liveId == live.SessionId && x.UserId == request.UserId && x.OrderStatus != 0);
+                        var checkEnrollmentLiveUser = _unitOfWork.ordersEnorllment.CheckUserEnrollment(x => x.liveId == live.SessionId && x.UserId == request.UserId && x.OrderStatus != 0 && x.Live.IsLocked==false);
 
 
                         if (live.IsLocked!=true)

@@ -372,4 +372,13 @@
   <data name="ExMessConfrim" xml:space="preserve">
     <value> هذا مثال لشكل رسالة التفعيل التي ستصلك</value>
   </data>
+  <data name="btnShowAllVideo" xml:space="preserve">
+    <value>فلتره الفيديوهات</value>
+  </data>
+  <data name="ChoiceCourse" xml:space="preserve">
+    <value>اختر الدورة</value>
+  </data>
+  <data name="FilterVideo" xml:space="preserve">
+    <value />
+  </data>
 </root>

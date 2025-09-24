@@ -374,4 +374,13 @@ Alternatively, feel free to email us directly or contact us instantly through th
   <data name="ExMessConfrim" xml:space="preserve">
     <value>This is an example of what the activation message you will receive will look like.</value>
   </data>
+  <data name="btnShowAllVideo" xml:space="preserve">
+    <value>Filter Videos</value>
+  </data>
+  <data name="ChoiceCourse" xml:space="preserve">
+    <value>Choice Course</value>
+  </data>
+  <data name="FilterVideo" xml:space="preserve">
+    <value />
+  </data>
 </root>

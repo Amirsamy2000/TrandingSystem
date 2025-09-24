@@ -42,7 +42,8 @@ namespace TrandingSystem.Application.Features.Video.Handlers
                 video.IsPaid = request.viedoUpdateDto.IsPaid;
                 video.Cost = request.viedoUpdateDto.Cost;
                 video.IsActive = request.viedoUpdateDto.IsActive;
-                
+                video.CourseId = request.viedoUpdateDto.CourseId;
+                video.VideoUrl = request.viedoUpdateDto.VideoUrl;
 
 
 
@@ -54,7 +55,7 @@ namespace TrandingSystem.Application.Features.Video.Handlers
                    video.ImageVideoUrl = UpdatedUrlImageOfVideo;
 
                 }
-                _unitofwork.SaveChangesAsync();
+                await _unitofwork.SaveChangesAsync();
                 return Response<bool>.SuccessResponse(true, _localizer["UpdateVideoMessage"]);
             }
             catch {

@@ -9,15 +9,15 @@ namespace TrandingSystem.Infrastructure.Repositories
     public class VideoRepository : IVideoRepository
     {
         private readonly db23617Context _db;
-        public VideoRepository (db23617Context context)
+        public VideoRepository(db23617Context context)
         {
-            _db= context;
+            _db = context;
         }
 
         // Add New Video
         public Video Create(Video newVideo)
         {
-          _db.Videos.Add(newVideo);
+            _db.Videos.Add(newVideo);
             return newVideo;
 
         }
@@ -26,7 +26,7 @@ namespace TrandingSystem.Infrastructure.Repositories
         public Video Delete(int Id)
         {
             var video = _db.Videos.Find(Id);
-            if(video is null)
+            if (video is null)
             {
                 throw new KeyNotFoundException("Not Found Video");
 
@@ -45,7 +45,26 @@ namespace TrandingSystem.Infrastructure.Repositories
         }
 
         // For Get All Videos for a specific course
-        public IQueryable<Video> GetAllVideosForCouse(int CousreId) => _db.Videos.Where(x => x.CourseId == CousreId);
+        public IQueryable<Video> GetAllVideosForCouse(int CousreId, int Status) {
+            IQueryable<Video> videos; ;
+            if (Status == 0)
+            {
+                  videos = _db.Videos.Where(x => x.CourseId == CousreId);
+                return videos;
+            }
+            else if (Status == 1)
+            {
+                  videos = _db.Videos.Where(x => x.CourseId == CousreId && x.IsActive == true);
+                return videos;
+            }
+            else 
+            {
+                  videos = _db.Videos.Where(x => x.CourseId == CousreId && x.IsActive == false);
+                return videos;
+            }
+             
+            
+            }
 
         public List<Video> Read()
         {

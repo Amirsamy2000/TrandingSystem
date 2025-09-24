@@ -20,23 +20,23 @@ namespace TrandingSystem.Application.Features.Category.Handlers
             _localizer = localizer;
 
         }
-        public   Task<Response<bool>> Handle(UpdateCategoryCommand request, CancellationToken cancellationToken)
+        public  async Task<Response<bool>> Handle(UpdateCategoryCommand request, CancellationToken cancellationToken)
         {
             try
             {
                 //  Check if the category already exists
                 var existingCategory = _unitofwork.Categories.ReadById(request.CategoryId);
                 if (existingCategory == null)
-                    return Task.FromResult(Response<bool>.ErrorResponse(_localizer["NotFoundCategory"]));
+                    return Response<bool>.ErrorResponse(_localizer["NotFoundCategory"]);
                 existingCategory.CategoryNameAr = request.ARName;
                 existingCategory.CategoryNameEn = request.ENName;
                 _unitofwork.Categories.Update(existingCategory);
-                _unitofwork.SaveChangesAsync();
-                return Task.FromResult(Response<bool>.SuccessResponse(true, _localizer["GeneralOperationDone"]));
+                await _unitofwork.SaveChangesAsync();
+                return Response<bool>.SuccessResponse(true, _localizer["GeneralOperationDone"]);
             }
             catch
             {
-                return Task.FromResult(Response<bool>.ErrorResponse(_localizer["GeneralError"]));
+                return Response<bool>.ErrorResponse(_localizer["GeneralError"]);
 
             }
 

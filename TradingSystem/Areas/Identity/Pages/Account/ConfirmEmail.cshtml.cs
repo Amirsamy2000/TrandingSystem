@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
@@ -30,11 +31,15 @@ namespace TrandingSystem.Areas.Identity.Pages.Account
         /// </summary>
         [TempData]
         public string StatusMessage { get; set; }
+        public int Status { get; set; }
         public async Task<IActionResult> OnGetAsync(string userId, string code)
         {
+            string culture = HttpContext.Features.Get<IRequestCultureFeature>()
+                        .RequestCulture.Culture.Name;
+
             if (userId == null || code == null)
             {
-                return RedirectToAction("Index","Home");
+                return RedirectToPage("/Index");
             }
 
             var user = await _userManager.FindByIdAsync(userId);
@@ -43,9 +48,27 @@ namespace TrandingSystem.Areas.Identity.Pages.Account
                 return NotFound($"Unable to load user with ID '{userId}'.");
             }
 
-            code = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(code));
-            var result = await _userManager.ConfirmEmailAsync(user, code);
-            StatusMessage = result.Succeeded ? "Thank you for confirming your email." : "Error confirming your email.";
+            try
+            {
+
+                code = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(code));
+                var result = await _userManager.ConfirmEmailAsync(user, code);
+
+                Status = 200;
+                StatusMessage = culture == "ar" ? "شكراً لتأكيد بريدك الإلكتروني." : "Thank you for confirming your email.";
+                if (!result.Succeeded)
+                {
+                    Status = 400;
+                    StatusMessage = culture == "ar" ? "حدث خطأ أثناء تأكيد بريدك الإلكتروني." : "Error confirming your email.";
+                }
+            
+            }
+            catch
+            {
+                Status = 400;
+                StatusMessage = culture == "ar" ? "حدث خطأ أثناء تأكيد بريدك الإلكتروني." : "Error confirming your email.";
+            }
+           
             return Page();
         }
     }
