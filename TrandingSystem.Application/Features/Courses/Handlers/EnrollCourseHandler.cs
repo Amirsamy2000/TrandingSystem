@@ -37,7 +37,7 @@ namespace TrandingSystem.Application.Features.Courses.Handlers
         }
         public async Task<Response<bool>> Handle(EnrollCourseCommand request, CancellationToken cancellationToken)
         {
-            if (request == null)
+            if (request == null||request.ReceiptImage == null || request.UserId <= 0 || request.CourseId <= 0)
             {
                 throw new ArgumentNullException(nameof(request));
             }
@@ -67,7 +67,7 @@ namespace TrandingSystem.Application.Features.Courses.Handlers
                     foreach (var User in _userManager.GetUsersInRoleAsync("Admin").Result.ToList())
                     {
 
-                        await _notificationService.SendEmailAsync(User.Email, "New Order", @$"
+                        _notificationService.SendEmailAsync(User.Email, "New Order", @$"
                         
                         <!DOCTYPE html>
 <html lang=""en"">
