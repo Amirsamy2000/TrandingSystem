@@ -65,7 +65,8 @@ namespace TrandingSystem.Controllers
 
             int userId = int.Parse(userIdClaim.Value);
 
-            var cacheKey = User.IsInRole("ADMIN")? $"AllCourses":$"TeacherCourses_{userId}";
+            var ff = User.IsInRole("Admin");
+            var cacheKey = User.IsInRole("Admin") ? $"AllCourses":$"TeacherCourses_{userId}";
 
             if (!_cache.TryGetValue(cacheKey, out object? cachedResult))
             {
@@ -155,6 +156,8 @@ namespace TrandingSystem.Controllers
                     return PartialView("_ErrorPartial", "Failed to remove Teacher.");
                 }
 
+                //_cache.Remove($"TeacherCourses_{TeacherId}");
+
                 return Ok(result);
             }
             catch (Exception ex)
@@ -216,6 +219,10 @@ namespace TrandingSystem.Controllers
                 // Success response
                 if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
                 {
+
+                    //foreach(int userId in TeachersId)
+                    //    _cache.Remove($"TeacherCourses_{userId}");
+
                     return Json(new
                     {
                         success = true,
@@ -305,6 +312,7 @@ namespace TrandingSystem.Controllers
                 return NotFound();
             }
 
+            _cache.Remove("AllCourses");
             // Redirect to index or success page
             return RedirectToAction("Index");
         }
@@ -359,6 +367,8 @@ namespace TrandingSystem.Controllers
             {
                 courseId = CourseId
             });
+
+            _cache.Remove("AllCourses");
 
             return Ok(result);
         }
