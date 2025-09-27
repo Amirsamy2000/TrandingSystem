@@ -374,8 +374,10 @@
         function createImageHtml(course) {
             if (course.imageCourseUrl) {
                 return `
-                <a href="/Course/CourseDashBoard?courseId=${course.courseId}">
-                <img src="${course.imageCourseUrl}" class="card-img-top course-image" alt="${course.titleEN}">
+                <a href="/Course/CourseDashBoard?courseId=${course.courseId}" alt="Course Details Dashboard">
+                    <div class="bg-image hover-zoom">
+                        <img src="${course.imageCourseUrl}" class="card-img-top course-image" alt="${course.titleEN}">
+                    </div>
                 </a>
                 `;
             } else {
