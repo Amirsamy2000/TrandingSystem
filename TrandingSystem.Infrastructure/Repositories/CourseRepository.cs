@@ -98,6 +98,16 @@ namespace TrandingSystem.Infrastructure.Repositories
                 .ToList();
         }
 
+        public List<User> GetEnrolledUsers(int courseId)
+        {
+            return _context.CourseEnrollments
+                .Include(ce => ce.User)
+                .Where(ce => ce.CourseId == courseId)
+                .Select(ce => ce.User)
+                .ToList();
+        }
+
+
         public List<User> GetLecturesByCourseId(int CourseId)
         {
             return _context.CourseLecturers
@@ -129,5 +139,7 @@ namespace TrandingSystem.Infrastructure.Repositories
             _context.SaveChanges();
             return true;
         }
+
+       
     }
 }

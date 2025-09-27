@@ -3,7 +3,9 @@ using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
+using System.Threading.Tasks;
 using TradingSystem.Application.Common.Response;
+using TrandingSystem.Application.Dtos;
 using TrandingSystem.Application.Features.Courses.Commands;
 using TrandingSystem.Application.Features.Courses.Queries;
 using TrandingSystem.Application.Features.Users.Queries;
@@ -300,7 +302,15 @@ namespace TrandingSystem.Controllers
             return RedirectToAction("Courses","Home");
         }
 
+        public async Task<IActionResult> CourseDashBoard(int courseId)
+        {
+            Response<CourseDto> courseDetails =  _mediator.Send(new GetCourseByIdQuery
+            {
+                CourseId = courseId
+            }).Result;
 
+            return View(courseDetails);
+        }
 
 
         [HttpGet]

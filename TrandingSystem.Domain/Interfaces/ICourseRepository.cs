@@ -13,6 +13,7 @@ namespace TrandingSystem.Domain.Interfaces
         bool IsCourseEnrolled(int courseId, int userId);
         bool EnrollCourse(int courseId, int userId, string RecieptUrl);
         List<int> CourseEnrolledUsers(int courseId);
+        List<User> GetEnrolledUsers(int courseId);
         List<User> GetLecturesByCourseId (int CourseId);
         List<User> AssignTeacherToCourse(int courseId, List<int> TeachersId);
         bool RemoveTeacherFromCourse(int courseId, int teacherId);

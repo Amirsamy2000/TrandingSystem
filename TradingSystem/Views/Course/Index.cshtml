@@ -373,7 +373,11 @@
 
         function createImageHtml(course) {
             if (course.imageCourseUrl) {
-                return `<img src="${course.imageCourseUrl}" class="card-img-top course-image" alt="${course.titleEN}">`;
+                return `
+                <a href="/Course/CourseDashBoard?courseId=${course.courseId}">
+                <img src="${course.imageCourseUrl}" class="card-img-top course-image" alt="${course.titleEN}">
+                </a>
+                `;
             } else {
                 return `<div class="placeholder-image rounded-top"><i class="bx bx-book-open"></i></div>`;
             }
