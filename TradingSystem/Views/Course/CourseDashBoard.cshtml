@@ -348,10 +348,7 @@
             </div>
         </div>
 
-        <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css" />
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-        <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+        
 
         <!-- Enrolled Users Table -->
         <div class="data-list-card mb-4">
@@ -401,7 +398,7 @@
         </div>
 
         <!-- Course Lectures Table -->
-        <div class="data-list-card">
+        <div class="data-list-card mb-4">
             <div class="data-list-header mb-2">
                 🎓 Course Lectures (@(course.Lectures?.Count ?? 0))
             </div>
@@ -447,6 +444,55 @@
             </div>
         </div>
 
+        <!-- Communities Lectures Table -->
+        <div class="data-list-card">
+            <div class="data-list-header mb-2">
+                💭 Course Communities (@(course.CourseCommunities?.Count ?? 0))
+            </div>
+            <div class="data-list-content">
+                @if (course.CourseCommunities != null && course.CourseCommunities.Any())
+                {
+                    <table id="CommunitiesTable" class="table table-striped table-hover align-middle">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Course Title</th>
+                                <th>Is Closed</th>
+                                <th>Is Admin Only</th>
+                                <th>Created At</th>
+                                <th>subscriber count</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var Community in course.CourseCommunities)
+                            {
+                                <tr>
+                                    <td>@Community.Title</td>
+                                    <td>
+                                        <span class="badge @(Community.IsClosed == true ? "bg-danger" : "bg-success")">
+                                            @(Community.IsClosed ==true ? "Closed" : "Active")
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <span class="badge @(Community.IsAdminOnly == true ? "bg-secondary" : "bg-success")">
+                                            @(Community.IsAdminOnly == true ? "Admin Only" : "For All")
+                                        </span>
+                                    </td>
+                                    <td>@Community.CreatedAt</td>
+                                    <td>@Community.CountSubucribtor</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    <div class="empty-state">No lectures assigned yet</div>
+                }
+            </div>
+        </div>
+
+
+
         
 
     }
@@ -480,6 +526,13 @@
         });
 
         $('#lecturesTable').DataTable({
+            searching: true,
+            paging: true,
+            info: true,
+            lengthChange: true
+        });
+
+        $('#CourseCommunities').DataTable({
             searching: true,
             paging: true,
             info: true,

@@ -43,8 +43,11 @@ namespace TrandingSystem.Application.Dtos
         
         public List<UserDto> EnrolledUsers{ get; set; }
 
+
         //public List<int> EnrolledUsers{ get; set; }
         public List<CourseEnrollmentDto> CourseEnrollments { get; set; }
+
+        public List<CommunitiesDto> CourseCommunities{ get; set; }
 
     }
 }
