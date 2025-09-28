@@ -18,6 +18,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TrandingSystem.Domain.Entities;
+using TrandingSystem.Domain.Helper;
 
 namespace TrandingSystem.Areas.Identity.Pages.Account
 {
@@ -121,17 +122,40 @@ namespace TrandingSystem.Areas.Identity.Pages.Account
 
             var user = await _userManager.FindByEmailAsync(Input.Email);
 
+            if (user == null)
+            {
+                ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                return Page();
+            }
+
+            // ✅ 1. Generate or read DeviceId from cookie
+            var deviceId = DeviceHelper.GetOrCreateDeviceId(HttpContext);
+
+            // ✅ 2. Compare DeviceId with what's stored in DB
+            if (string.IsNullOrEmpty(user.DeviceId))
+            {
+                // أول مرة → اربط الجهاز باليوزر
+                user.DeviceId = deviceId;
+                await _userManager.UpdateAsync(user);
+            }
+            else if (user.DeviceId != deviceId)
+            {
+                // جهاز مختلف → امنع الدخول
+                ModelState.AddModelError("", "You can only access your account from the first device you logged in on.");
+                return Page();
+
+            }
+
+            // ✅ 3. Continue normal login if device is correct
+
+
             if (user.IsBlocked)
             {
                 ModelState.AddModelError(string.Empty, "Your account has been blocked. Contact support for help.");
                 return Page();
             }
 
-            if (user == null)
-            {
-                ModelState.AddModelError(string.Empty, "Invalid login attempt.");
-                return Page();
-            }
+            
 
             // ✅ Check if email is confirmed
             if (!await _userManager.IsEmailConfirmedAsync(user))

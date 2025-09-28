@@ -18,6 +18,7 @@
                 <th>Email</th>
                 <th>Is Blocked</th>
                 <th>Email Confirmed</th>
+                <th>Rest Device</th>
                 <th>Role</th>
             </tr>
         </thead>
@@ -45,6 +46,15 @@
                             @(user.EmailConfirmed ? "Confirmed" : "Not Confirmed")
                         </button>
                     </td>
+                    <td>
+                        <button class="btn btn-sm toggle-DeviceId @(string.IsNullOrEmpty(user.DeviceId) ? "btn-secondary" : "btn-primary")"
+                                data-user-id="@user.Id"
+                                data-device-registered="@(string.IsNullOrEmpty(user.DeviceId) ? "false" : "true")"
+                                @(string.IsNullOrEmpty(user.DeviceId) ? "disabled" : "")>
+                            @(string.IsNullOrEmpty(user.DeviceId) ? "Not Registered" : "Registered")
+                        </button>
+                    </td>
+
                     <td>
                         <select class="form-select form-select-sm role-select"
                                 data-user-id="@user.Id"
@@ -263,6 +273,44 @@
             });
         });
 
+
+        // Handle reset device button click
+        $(document).on('click', '.toggle-DeviceId', function() {
+            const button = $(this);
+            const userId = button.data('user-id');
+
+            button.prop('disabled', true).text('Processing...');
+
+            $.ajax({
+                url: `/Users/ResetDevice?userId=${userId}`,
+                type: 'POST',
+                success: function(response) {
+                    if (response.success) {
+                        // بعد Reset المستخدم بقى Not Registered
+                        button
+                            .removeClass('btn-primary')
+                            .addClass('btn-secondary')
+                            .text('Not Registered')
+                            .prop('disabled', true)
+                            .data('device-registered', false);
+
+                        // Redraw DataTable row
+                        dataTable.row(button.closest('tr')).invalidate().draw(false);
+                    } else {
+                        alert("Error: " + (response.message || "Failed to reset device"));
+                        button.prop('disabled', false).text('Registered'); // رجعها زي ما كانت
+                    }
+                },
+                error: function() {
+                    alert("An error occurred while reseting the device.");
+                    button.prop('disabled', false).text('Registered'); // رجعها زي ما كانت
+                }
+            });
+        });
+
+
+
+
         // Handle role change
         $(document).on('change', '.role-select', function() {
             const select = $(this);
@@ -326,7 +374,7 @@
 
     <style>
         /* Custom styles for better appearance */
-        .toggle-blocked, .toggle-email {
+        .toggle-blocked, .toggle-email, .toggle-DeviceId {
             min-width: 100px;
         }
 
@@ -347,9 +395,7 @@
 
         /* Responsive table adjustments */
         @@media (max-width: 768px) {
-            .toggle-blocked, .toggle-email
-
-        {
+            .toggle-blocked, .toggle-email, .toggle-DeviceId {
             min-width: 80px;
             font-size: 0.8rem;
         }

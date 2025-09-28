@@ -337,6 +337,7 @@ namespace TrandingSystem.Controllers
             return RedirectToAction("Courses","Home");
         }
 
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> CourseDashBoard(int courseId)
         {
             Response<CourseDto> courseDetails =  _mediator.Send(new GetCourseByIdQuery

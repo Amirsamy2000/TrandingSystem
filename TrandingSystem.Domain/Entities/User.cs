@@ -21,6 +21,8 @@ public partial class User : IdentityUser<int>
 
     public string Address { get; set; }
 
+    public string? DeviceId { get; set; }
+
     public virtual ICollection<Category> Categories { get; set; } = new List<Category>();
 
     public virtual ICollection<CommunityMember> CommunityMembers { get; set; } = new List<CommunityMember>();

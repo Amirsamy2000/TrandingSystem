@@ -23,6 +23,8 @@ namespace TrandingSystem.Application.Dtos
         public string? Email { get; set; }
         public string? NationalId { get; set; }
 
+        public string? DeviceId { get; set; }
+
 
     }
 }
