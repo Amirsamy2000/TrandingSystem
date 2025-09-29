@@ -8,7 +8,5 @@ namespace TrandingSystem.Domain.Interfaces
     {
         Task<Message> AddAsync(Message message);
         Task<List<Message>> GetRecentAsync(int communityId, int count = 30);
-        Task<Message> GetByIdAsync(int id);
-        Task DeleteAsync(int id);
     }
 }

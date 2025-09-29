@@ -1,8 +1,6 @@
-﻿@inject IHttpContextAccessor HttpContextAccessor
 @{
     ViewData["Title"] = "Community Chat";
     var communityId = ViewBag.CommunityId;
-    var isAdmin = ViewBag.IsAdmin ?? false;
 }
 
 <style>
@@ -124,42 +122,41 @@
     <button class="btn btn-primary" onclick="sendMessage(document.getElementById('chat-input').value,@ViewBag.adminOnly)">Send</button>
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/7.0.5/signalr.min.js"></script>
-<script src="/js/chat.js"></script>
 <script>
     const communityId = @communityId;
     const currentUserId = @ViewBag.UserId;
-    const isAdmin = @((isAdmin ? "true" : "false"));
-
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/7.0.5/signalr.min.js"></script>
+<script src="/js/chat.js"></script>
+<script>
     function renderMessage(msg) {
         const container = document.getElementById('chat-messages');
-        const messageId = msg.MessageId ?? msg.id;
-        if (messageId && document.getElementById("msg-" + messageId)) return;
+
+        if (msg.id && document.getElementById("msg-" + msg.id)) {
+            return;
+        }
 
         const div = document.createElement('div');
-        div.id = "msg-" + messageId;
+        div.id = "msg-" + msg.id;
 
         let time = '[Invalid Date]';
-        if (msg.SentAt || msg.sentAt) {
-            const d = new Date(msg.SentAt || msg.sentAt);
+        if (msg.sentAt) {
+            const d = new Date(msg.sentAt);
             if (!isNaN(d)) time = d.toLocaleTimeString();
         }
 
-        const sender = msg.SenderName || msg.senderName || msg.UserId || msg.userId || 'Unknown';
-        const text = msg.MessageText || msg.text || '';
+        const sender = msg.senderName || msg.userId || 'Unknown';
+        const text = msg.text || '';
 
-        let deleteBtn = '';
-        if (isAdmin === "true") {
-            deleteBtn = `<button onclick=\"deleteMessage(${messageId})\" class=\"btn btn-danger btn-sm\" style=\"margin-left:8px;\">مسح</button>`;
-        }
+            div.innerHTML = `
+                <div class="message-sender">${sender}</div>
+                <div class="message-text">${text}</div>
+                <div class="message-time">${time}</div>
+            `;
 
-        div.innerHTML = `
-            <div class=\"message-sender\">${sender}</div>
-            <div class=\"message-text\">${text} ${deleteBtn}</div>
-            <div class=\"message-time\">${time}</div>
-        `;
 
-        if ((msg.UserId ?? msg.userId ?? msg.SenderId ?? msg.senderId) == currentUserId) {
+
+        if ((msg.userId ?? msg.senderId) == currentUserId) {
             div.classList.add("my-message");
         } else {
             div.classList.add("other-message");
@@ -167,17 +164,6 @@
 
         container.appendChild(div);
         container.scrollTop = container.scrollHeight;
-    }
-
-    function deleteMessage(messageId) {
-        fetch(`/Chat/DeleteMessage?id=${messageId}`, { method: 'POST' })
-            .then(res => {
-                if (res.ok) {
-                    document.getElementById("msg-" + messageId)?.remove();
-                } else {
-                    alert("Failed to delete message.");
-                }
-            });
     }
 
     document.addEventListener('DOMContentLoaded', async function() {

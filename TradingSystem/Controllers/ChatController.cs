@@ -27,6 +27,7 @@ namespace TradingSystem.Controllers
             if (!await _communityRepo.IsUserInCommunityAsync(id, userId) || _communityRepo.IsUserBlocked(id, userId))
                 throw new HubException("Not a member of this community || or is blocked.");
 
+            
             var community = await _communityRepo.GetByIdAsync(id);
             if (community == null)
                 return NotFound();
@@ -36,12 +37,11 @@ namespace TradingSystem.Controllers
             ViewBag.Name = community.Title;
 
             var roleClaim = User.FindAll(ClaimTypes.Role).ToList();
-            bool isAdmin = roleClaim.Any(r => r.Value.ToLower() == "admin");
-            ViewBag.IsAdmin = isAdmin;
 
             if (roleClaim != null)
             {
-                ViewBag.adminOnly = community.IsAdminOnly == true && !isAdmin;
+                ViewBag.adminOnly = community.IsAdminOnly == true && !roleClaim.Any(r => r.Value.ToLower() == "admin");
+                // e.g., "Admin", "User", etc.
             }
 
 
@@ -59,17 +59,6 @@ namespace TradingSystem.Controllers
                 Text = m.MessageText,
                 SentAt = m.SentAt?.ToString("o") // ISO 8601 for JS Date
             }));
-        }
-
-        [HttpPost]
-        [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> DeleteMessage(int id)
-        {
-            var message = await _messageRepo.GetByIdAsync(id);
-            if (message == null)
-                return NotFound();
-            await _messageRepo.DeleteAsync(id);
-            return Ok();
         }
     }
 }
