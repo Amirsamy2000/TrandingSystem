@@ -165,7 +165,7 @@
                 <ul>
                   @* Change Language *@
 
-                    @if (User.IsInRole("Admin"))
+                    @if (User.IsInRole("Admin") || User.IsInRole("Lecturer"))
                     {
                         <li><a asp-controller="Home" asp-action="Dashboard">@Localizer["dasbord"]<br></a></li>
                     }   

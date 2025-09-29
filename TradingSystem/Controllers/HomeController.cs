@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.SqlServer.Query.Internal;
 using Microsoft.Extensions.Localization;
+using System.Data;
 using TrandingSystem.Application.Features.analysis.Queriers;
 using TrandingSystem.Application.Features.Courses.Queries;
 using TrandingSystem.Controllers;
@@ -130,7 +131,7 @@ namespace WebApplication1.Controllers
             return LocalRedirect(returnUrl);
         }
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin,Lecturer")]
         public IActionResult Dashboard() { return View(); }
 
         public IActionResult Error(int? statusCode = null)

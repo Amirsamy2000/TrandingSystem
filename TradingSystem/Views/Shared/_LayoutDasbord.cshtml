@@ -276,11 +276,15 @@
                         </a>
 
                         <ul class="menu-sub">
-                            <li class="menu-item">
-                                <a asp-Action="AddNewVideo" asp-controller="Videos" class="menu-link">
-                                    <div data-i18n="Without menu">@Localizer["AddVideo"]</div>
-                                </a>
-                            </li>
+                            @if (User.IsInRole("Admin"))
+                            {
+                                <li class="menu-item">
+                                    <a asp-Action="AddNewVideo" asp-controller="Videos" class="menu-link">
+                                        <div data-i18n="Without menu">@Localizer["AddVideo"]</div>
+                                    </a>
+                                </li>
+                            }
+                            
                             <li class="menu-item" onclick="ChoiceCourse('@Localizer["btnShowAllVideo"]','@Localizer["ChoiceCourse"]',0)">
                                 <a class="menu-link" >
                                     <div data-i18n="Without navbar" >@Localizer["DisplatVideo"]</div>
@@ -303,12 +307,14 @@
                                     <div data-i18n="Without menu">@Localizer["Displasession"]</div>
                                 </a>
                             </li>
-
-                            <li class="menu-item" >
-                                <a class="menu-link" asp-action="AddNewLiveSession" asp-controller="LiveSession">
-                                    <div data-i18n="Without menu">@Localizer["AddNewasession"]</div>
-                                </a>
-                            </li>
+                            @if (User.IsInRole("Admin"))
+                            {
+                                <li class="menu-item" >
+                                    <a class="menu-link" asp-action="AddNewLiveSession" asp-controller="LiveSession">
+                                        <div data-i18n="Without menu">@Localizer["AddNewasession"]</div>
+                                    </a>
+                                </li>
+                            }
                         </ul>
                     </li>
 
