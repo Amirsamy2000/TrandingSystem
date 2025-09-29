@@ -23,17 +23,29 @@ namespace TrandingSystem.Infrastructure.Repositories
             return message;
         }
 
-        //TODO : remove count limit or make it configurable
         public async Task<List<Message>> GetRecentAsync(int communityId, int count = 30)
         {
-            // Eager load User for each message
             return await _context.Messages
                 .Include(m => m.User)
                 .Where(m => m.CommunityId == communityId)
                 .OrderByDescending(m => m.SentAt)
-                //.Take(count)
                 .OrderBy(m => m.SentAt)
                 .ToListAsync();
+        }
+
+        public async Task<Message> GetByIdAsync(int id)
+        {
+            return await _context.Messages.Include(m => m.User).FirstOrDefaultAsync(m => m.MessageId == id);
+        }
+
+        public async Task DeleteAsync(int id)
+        {
+            var message = await _context.Messages.FindAsync(id);
+            if (message != null)
+            {
+                _context.Messages.Remove(message);
+                await _context.SaveChangesAsync();
+            }
         }
     }
 }
