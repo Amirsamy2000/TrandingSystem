@@ -85,5 +85,18 @@ namespace TrandingSystem.Controllers
             return Ok(firstRole ?? "No Role Assigned");
         }
 
+
+        [HttpPost]
+        public async Task<IActionResult> ResetDevice(string userId)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user != null)
+            {
+                user.DeviceId = null; // هيتخزن تاني أول مرة يعمل login
+                await _userManager.UpdateAsync(user);
+            }
+            return Ok(Response<User>.SuccessResponse(user, "Device reset successfully."));
+        }
+
     }
 }

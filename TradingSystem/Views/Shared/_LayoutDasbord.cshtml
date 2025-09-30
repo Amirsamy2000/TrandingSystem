@@ -70,6 +70,12 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
+    @*for dataTable*@
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+
 
 </head>
 
@@ -285,11 +291,15 @@
                         </a>
 
                         <ul class="menu-sub">
-                            <li class="menu-item">
-                                <a asp-Action="AddNewVideo" asp-controller="Videos" class="menu-link">
-                                    <div data-i18n="Without menu">@Localizer["AddVideo"]</div>
-                                </a>
-                            </li>
+                            @if (User.IsInRole("Admin"))
+                            {
+                                <li class="menu-item">
+                                    <a asp-Action="AddNewVideo" asp-controller="Videos" class="menu-link">
+                                        <div data-i18n="Without menu">@Localizer["AddVideo"]</div>
+                                    </a>
+                                </li>
+                            }
+                            
                             <li class="menu-item" onclick="ChoiceCourse('@Localizer["btnShowAllVideo"]','@Localizer["ChoiceCourse"]',0)">
                                 <a class="menu-link" >
                                     <div data-i18n="Without navbar" >@Localizer["DisplatVideo"]</div>
@@ -312,12 +322,14 @@
                                     <div data-i18n="Without menu">@Localizer["Displasession"]</div>
                                 </a>
                             </li>
-
-                            <li class="menu-item" >
-                                <a class="menu-link" asp-action="AddNewLiveSession" asp-controller="LiveSession">
-                                    <div data-i18n="Without menu">@Localizer["AddNewasession"]</div>
-                                </a>
-                            </li>
+                            @if (User.IsInRole("Admin"))
+                            {
+                                <li class="menu-item" >
+                                    <a class="menu-link" asp-action="AddNewLiveSession" asp-controller="LiveSession">
+                                        <div data-i18n="Without menu">@Localizer["AddNewasession"]</div>
+                                    </a>
+                                </li>
+                            }
                         </ul>
                     </li>
 

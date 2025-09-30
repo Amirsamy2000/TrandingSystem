@@ -2,8 +2,11 @@
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
 using System.Security.Claims;
+using System.Threading.Tasks;
 using TradingSystem.Application.Common.Response;
+using TrandingSystem.Application.Dtos;
 using TrandingSystem.Application.Features.Courses.Commands;
 using TrandingSystem.Application.Features.Courses.Queries;
 using TrandingSystem.Application.Features.Users.Queries;
@@ -18,16 +21,40 @@ namespace TrandingSystem.Controllers
     {
         private readonly IMediator _mediator;
         private readonly IMapper _mapper;
+        private readonly IMemoryCache _cache;
 
-        public CourseController(IMediator mediator, IMapper mapper)
+        public CourseController(IMediator mediator, IMapper mapper,IMemoryCache memoryCache)
         {
             _mediator = mediator;
             _mapper = mapper;
+            _cache = memoryCache;
         }
 
         [HttpGet]
         public async Task<IActionResult> ReadAll()
         {
+            //// Get the current user ID from the claims
+            //var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
+
+            //if (userIdClaim == null)
+            //{
+            //    return Unauthorized("User ID not found in token.");
+            //}
+
+            //int userId = int.Parse(userIdClaim.Value);
+
+            //var result = await _mediator.Send(new GetAllCoursesQuery
+            //{
+            //    UserId = userId
+            //});
+
+            ////if (!result.Success)
+            ////    return StatusCode((int)(result.Status ?? System.Net.HttpStatusCode.BadRequest), result);
+
+            //return Ok(result);
+
+
+
             // Get the current user ID from the claims
             var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
 
@@ -38,30 +65,29 @@ namespace TrandingSystem.Controllers
 
             int userId = int.Parse(userIdClaim.Value);
 
-            var result = await _mediator.Send(new GetAllCoursesQuery
+            var ff = User.IsInRole("Admin");
+            var cacheKey = User.IsInRole("Admin") ? $"AllCourses":$"TeacherCourses_{userId}";
+
+            if (!_cache.TryGetValue(cacheKey, out object? cachedResult))
             {
-                UserId = userId
-            });
+                var result = await _mediator.Send(new GetAllCoursesQuery
+                {
+                    UserId = userId
+                });
 
-            //if (!result.Success)
-            //    return StatusCode((int)(result.Status ?? System.Net.HttpStatusCode.BadRequest), result);
+                // Cache options
+                var cacheOptions = new MemoryCacheEntryOptions()
+                    //.SetSlidingExpiration(TimeSpan.FromMinutes(5))   // يتم تجديد الوقت كل ما يتعمل access
+                    .SetAbsoluteExpiration(TimeSpan.FromHours(12)); // يمسح الكاش بعد نص ساعة مهما حصل
 
-            return Ok(result);
+                _cache.Set(cacheKey, result, cacheOptions);
 
-            //var Rescourses = await _mediator.Send(new GetAllCoursesQuery());
-            //// Check if the response is successful
-            ////if (!courses.Success)
-            ////{
-            ////    // Handle the error case, e.g., log the error or return an error view
-            ////    ModelState.AddModelError(string.Empty, courses.Message);
-            ////    return Json(new List<CourseVM>()); // Return an empty list or handle as needed
-            ////}
-            ////var courseViewModels = _mapper.Map<List<CourseVM>>(Rescourses);
-            //// Return the view with the list of courses
+                cachedResult = result;
+            }
 
-            ////// Map the course entities to view models if necessary
+            return Ok(cachedResult);
 
-            //return Ok(Rescourses);
+
         }
 
 
@@ -130,6 +156,8 @@ namespace TrandingSystem.Controllers
                     return PartialView("_ErrorPartial", "Failed to remove Teacher.");
                 }
 
+                //_cache.Remove($"TeacherCourses_{TeacherId}");
+
                 return Ok(result);
             }
             catch (Exception ex)
@@ -191,6 +219,10 @@ namespace TrandingSystem.Controllers
                 // Success response
                 if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
                 {
+
+                    //foreach(int userId in TeachersId)
+                    //    _cache.Remove($"TeacherCourses_{userId}");
+
                     return Json(new
                     {
                         success = true,
@@ -252,6 +284,10 @@ namespace TrandingSystem.Controllers
                 return View(model);
             }
 
+
+            _cache.Remove("AllCourses");
+
+
             // Redirect to index or success page
             return RedirectToAction("Create");
         }
@@ -276,6 +312,7 @@ namespace TrandingSystem.Controllers
                 return NotFound();
             }
 
+            _cache.Remove("AllCourses");
             // Redirect to index or success page
             return RedirectToAction("Index");
         }
@@ -300,7 +337,16 @@ namespace TrandingSystem.Controllers
             return RedirectToAction("Courses","Home");
         }
 
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> CourseDashBoard(int courseId)
+        {
+            Response<CourseDto> courseDetails =  _mediator.Send(new GetCourseByIdQuery
+            {
+                CourseId = courseId
+            }).Result;
 
+            return View(courseDetails);
+        }
 
 
         [HttpGet]
@@ -322,6 +368,8 @@ namespace TrandingSystem.Controllers
             {
                 courseId = CourseId
             });
+
+            _cache.Remove("AllCourses");
 
             return Ok(result);
         }

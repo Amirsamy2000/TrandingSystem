@@ -33,6 +33,8 @@ namespace TrandingSystem.Application.Features.Courses.Handlers
                 {
                     var dto = _mapper.Map<CourseDto>(course);
                     dto.Lectures = _mapper.Map<List<UserDto>>(_unitOfWork.Courses.GetLecturesByCourseId(dto.CourseId));
+                    dto.EnrolledUsers = _mapper.Map<List<UserDto>>(_unitOfWork.Courses.GetEnrolledUsers(dto.CourseId));
+                    dto.CourseCommunities = _mapper.Map<List<CommunitiesDto>>(_unitOfWork.Communities.GetAllCommunitiesByCourseId(dto.CourseId));
                     return Task.FromResult(Response<CourseDto>.SuccessResponse(dto));
                 }
                 return Task.FromResult(Response<CourseDto>.ErrorResponse("there is no course with this criteria",null,HttpStatusCode.NotFound));
