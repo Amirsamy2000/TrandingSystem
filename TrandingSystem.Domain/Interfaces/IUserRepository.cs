@@ -8,6 +8,7 @@ namespace TrandingSystem.Domain.Interfaces
     {
         List<User> GetActiveAndConfirmUser();
         List<User> GetUserEnrollInCourse(int CourseId);
+        public IQueryable<User> GetUser(int id,int status );
 
     }
 }

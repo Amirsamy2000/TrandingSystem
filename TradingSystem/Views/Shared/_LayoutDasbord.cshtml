@@ -255,7 +255,22 @@
                                 </li>
                             </ul>
                         </li>
+                        <!-- kyc -->
+                        <li class="menu-item">
+                            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                                <i class="menu-icon tf-icons bx bx-layout"></i>
+                                <div data-i18n="Layouts">@Localizer["Customers"]</div>
+                            </a>
 
+                            <ul class="menu-sub">
+                                <li class="menu-item">
+                                    <a asp-action="KYC" asp-controller="Dashboard" class="menu-link">
+                                        <div data-i18n="Without menu">@Localizer["Know Customer"]</div>
+                                    </a>
+                                </li>
+                               
+                            </ul>
+                        </li>
 
                     }
 
@@ -305,6 +320,8 @@
                             </li>
                         </ul>
                     </li>
+
+                    
 
                    @*  <!-- Test -->
                     <li class="menu-item">

@@ -201,4 +201,10 @@
   <data name="disCategories" xml:space="preserve">
     <value>عرض الفئات</value>
   </data>
+  <data name="Customers" xml:space="preserve">
+    <value>العملاء</value>
+  </data>
+  <data name="Know Customer" xml:space="preserve">
+    <value>اعرف العميل</value>
+  </data>
 </root>

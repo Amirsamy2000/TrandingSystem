@@ -1,0 +1,614 @@
+﻿@using Microsoft.Extensions.Localization
+@using TrandingSystem.Application.Dtos
+@using TrandingSystem.Controllers
+@model List<TrandingSystem.Application.Dtos.UserDto>
+@inject IStringLocalizer<LiveSessionController> Localizer
+
+@{
+    ViewData["Title"] = "KYC";
+    Layout = "~/Views/Shared/_LayoutDasbord.cshtml";
+}
+<style>
+    :root {
+        --primary-color: #6c5ce7;
+        --secondary-color: #a29bfe;
+        --success-color: #00b894;
+        --warning-color: #fdcb6e;
+        --danger-color: #e17055;
+        --info-color: #74b9ff;
+        --light-bg: #f8f9fa;
+        --card-shadow: 0 4px 20px rgba(108, 92, 231, 0.1);
+    }
+
+    body {
+        background-color: var(--light-bg);
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .sidebar {
+        background: linear-gradient(145deg, var(--primary-color), var(--secondary-color));
+        min-height: 100vh;
+        color: white;
+        padding: 0;
+    }
+
+        .sidebar .nav-link {
+            color: rgba(255, 255, 255, 0.8);
+            padding: 12px 20px;
+            border-radius: 8px;
+            margin: 5px 15px;
+            transition: all 0.3s ease;
+        }
+
+            .sidebar .nav-link:hover,
+            .sidebar .nav-link.active {
+                background: rgba(255, 255, 255, 0.2);
+                color: white;
+                transform: translateX(5px);
+            }
+
+    .main-content {
+        padding: 20px;
+    }
+
+    .kyc-header {
+        background: linear-gradient(135deg, var(--primary-color), var(--info-color));
+        color: white;
+        padding: 30px;
+        border-radius: 15px;
+        margin-bottom: 30px;
+        box-shadow: var(--card-shadow);
+    }
+
+    .customer-card {
+        background: white;
+        border-radius: 15px;
+        padding: 25px;
+        margin-bottom: 20px;
+        box-shadow: var(--card-shadow);
+        border: none;
+        transition: transform 0.3s ease;
+    }
+
+        .customer-card:hover {
+            transform: translateY(-5px);
+        }
+
+    .status-badge {
+        padding: 8px 15px;
+        border-radius: 25px;
+        font-weight: 600;
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .status-active {
+        background: var(--success-color);
+        color: white;
+    }
+
+    .status-inactive {
+        background: var(--danger-color);
+        color: white;
+    }
+
+    .status-pending {
+        background: var(--warning-color);
+        color: white;
+    }
+
+    .stats-card {
+        background: white;
+        border-radius: 12px;
+        padding: 20px;
+        text-align: center;
+        box-shadow: var(--card-shadow);
+        border: none;
+        height: 100%;
+    }
+
+    .stats-icon {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 15px auto;
+        font-size: 1.5rem;
+    }
+
+    .stats-number {
+        font-size: 2rem;
+        font-weight: 700;
+        margin: 10px 0 5px 0;
+    }
+
+    .btn-action {
+        border-radius: 8px;
+        padding: 8px 16px;
+        font-weight: 600;
+        text-transform: uppercase;
+        font-size: 0.8rem;
+        letter-spacing: 0.5px;
+        margin: 0 3px;
+    }
+
+    .customer-avatar {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1.5rem;
+        font-weight: 600;
+    }
+
+    .info-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 8px 0;
+        border-bottom: 1px solid #eee;
+    }
+
+        .info-row:last-child {
+            border-bottom: none;
+        }
+
+    .search-box {
+        background: white;
+        border-radius: 12px;
+        padding: 15px;
+        box-shadow: var(--card-shadow);
+        margin-bottom: 20px;
+    }
+
+    .filter-tabs {
+        background: white;
+        border-radius: 12px;
+        padding: 5px;
+        box-shadow: var(--card-shadow);
+        margin-bottom: 20px;
+    }
+
+        .filter-tabs .nav-link {
+            border: none;
+            color: #666;
+            font-weight: 600;
+            padding: 10px 20px;
+            border-radius: 8px;
+        }
+
+            .filter-tabs .nav-link.active {
+                background: var(--primary-color);
+                color: white;
+            }
+
+    /* Mobile-First Responsive Design */
+    @@media (max-width: 767px) {
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -250px;
+            width: 250px;
+            height: 100vh;
+            z-index: 1050;
+            transition: left 0.3s ease;
+        }
+
+            .sidebar.show {
+                left: 0;
+            }
+
+        .main-content {
+            margin-left: 0;
+            padding: 15px;
+        }
+
+        .mobile-header {
+            background: white;
+            padding: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            border-radius: 10px;
+        }
+
+        .kyc-header {
+            padding: 20px 15px;
+            text-align: center;
+        }
+
+            .kyc-header h2 {
+                font-size: 1.5rem;
+            }
+
+        .stats-card {
+            margin-bottom: 15px;
+        }
+
+        .customer-card {
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+
+        .customer-avatar {
+            width: 50px;
+            height: 50px;
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+        }
+
+        .btn-action {
+            padding: 6px 12px;
+            font-size: 0.75rem;
+            margin: 2px;
+            width: 100%;
+        }
+
+        .info-row {
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 5px 0;
+        }
+
+        .search-box .row {
+            gap: 10px;
+        }
+
+        .filter-tabs .nav-link {
+            padding: 8px 12px;
+            font-size: 0.85rem;
+        }
+
+        .status-badge {
+            font-size: 0.75rem;
+            padding: 6px 10px;
+        }
+
+        .order-status {
+            display: block;
+            margin: 2px 0;
+        }
+    }
+
+    @@media (min-width: 768px) and (max-width: 991px) {
+        .sidebar {
+            width: 200px;
+        }
+
+        .main-content {
+            padding: 20px 15px;
+        }
+
+        .customer-card {
+            padding: 20px;
+        }
+
+        .btn-action {
+            padding: 6px 12px;
+            font-size: 0.8rem;
+            margin: 2px 0;
+            width: 100%;
+        }
+
+        .kyc-header h2 {
+            font-size: 1.75rem;
+        }
+    }
+
+    @@media (min-width: 992px) {
+        .sidebar {
+            position: relative;
+        }
+
+        .main-content {
+            margin-left: 0;
+        }
+    }
+
+    /* Touch-friendly buttons */
+    @@media (max-width: 767px) {
+        .btn {
+            min-height: 44px;
+            touch-action: manipulation;
+        }
+
+        .form-control, .form-select {
+            min-height: 44px;
+        }
+    }
+
+    /* Sidebar overlay for mobile */
+    .sidebar-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 1040;
+    }
+
+        .sidebar-overlay.show {
+            display: block;
+        }
+
+    /* Mobile navigation */
+    .mobile-nav-toggle {
+        display: none;
+        background: none;
+        border: none;
+        font-size: 1.25rem;
+        color: var(--primary-color);
+    }
+
+    @@media (max-width: 767px) {
+        .mobile-nav-toggle {
+            display: block;
+        }
+    }
+
+    /* Responsive customer cards layout */
+    .customer-info-mobile {
+        display: none;
+    }
+
+    .customer-info-desktop {
+        display: block;
+    }
+
+    @@media (max-width: 767px) {
+        .customer-info-mobile {
+            display: block;
+        }
+
+        .customer-info-desktop {
+            display: none;
+        }
+    }
+
+    /* Responsive badges */
+    @@media (max-width: 576px) {
+        .badge {
+            font-size: 0.7rem;
+            margin: 1px;
+        }
+    }
+</style>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+<div class="container-fluid p-0">
+
+    <div class="row g-0">
+        <div class="col-lg-12 col-md-12 main-content">
+
+            <!-- KYC Header -->
+            <div class="kyc-header">
+                <div class="row align-items-center">
+                    <div class="col-md-8">
+                        <h2 class="mb-2 text-white">
+                            <i class="fas fa-user-shield me-3"></i>
+                            @Localizer["KYC"]
+                        </h2>
+                        <p class="mb-0 opacity-90">@Localizer["ManageCustomerVerification"]</p>
+                    </div>
+                    <div class="col-md-4 text-end">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stats Overview -->
+            <div class="row mb-4">
+                <div class="col-md-3 mb-3">
+                    <div class="stats-card">
+                        <div class="stats-icon" style="background: rgba(0, 184, 148, 0.1); color: var(--success-color);">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stats-number text-success">@Model.Count()</div>
+                        <div class="text-muted">@Localizer["TotalCustomers"]</div>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <div class="stats-card">
+                        <div class="stats-icon" style="background: rgba(116, 185, 255, 0.1); color: var(--info-color);">
+                            <i class="fas fa-user-check"></i>
+                        </div>
+                        <div class="stats-number text-info">@Model.Count(x => x.EmailConfirmed)</div>
+                        <div class="text-muted">@Localizer["Verified"]</div>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <div class="stats-card">
+                        <div class="stats-icon" style="background: rgba(253, 203, 110, 0.1); color: var(--warning-color);">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="stats-number text-warning">@Model.Count(x => !x.EmailConfirmed)</div>
+                        <div class="text-muted">@Localizer["NotVerified"]</div>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <div class="stats-card">
+                        <div class="stats-icon" style="background: rgba(225, 112, 85, 0.1); color: var(--danger-color);">
+                            <i class="fas fa-user-times"></i>
+                        </div>
+                        <div class="stats-number text-danger">@Model.Count(x => x.IsBlocked)</div>
+                        <div class="text-muted">@Localizer["Blocked"]</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Search and Filters -->
+            <div class="search-box">
+                <div class="row align-items-center">
+                    <div class="col-md-5">
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fas fa-search"></i></span>
+                            <input type="text" class="form-control" id="Userkyc" list="users" placeholder="Search customers..." >
+                            <datalist id="users">
+                                @if (Model is not null)
+                                {
+                                    <option value="0">All Users</option>
+                                    foreach (var user in Model)
+                                    {
+                                        <option value="@user.Id">@user.FullName - @user.Email</option>
+
+
+                                    }
+                                }
+                            </datalist>
+                        </div>
+                    </div>
+                    <div class="col-md-7 mt-3 mt-md-0">
+                        <div class="row g-2">
+                            @* <div class="col-sm-6"> *@
+                            @*     <select class="form-select"   id="courseUserId"> *@
+                            @*         @if (ViewBag.AllCourses is not null) *@
+                            @*         { *@
+                            @*             <option value="0">@Localizer["AllCourses"]</option> *@
+                            @*             foreach (var course in ViewBag.AllCourses as List<CourseDto>) *@
+                            @*             { *@
+                            @*                 <option value="@course.CourseId">@course.TitleEN</option> *@
+                            @*             } *@
+                            @*         } *@
+                            @*     </select> *@
+                            @* </div> *@
+                            <div class="col-sm-6">
+                                <select class="form-select"  id="Status">
+                                    <option value="0">@Localizer["TotalCustomers"]</option>
+                                    <option value="1">@Localizer["Verified"]</option>
+                                    <option value="2">@Localizer["NotVerified"]</option>
+                                    <option value="3">@Localizer["Blocked"]</option>
+                                </select>
+                            </div>
+
+                            <div class="col-sm-4">
+                                <button class="btn btn-outline-info btn-block" onclick="GetKycData()"> Filter</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <!-- Customer Cards -->
+            <div id="customersList">
+               
+
+            </div>
+
+
+        </div>
+    </div>
+</div>
+@section Scripts {
+
+    <script>
+        
+        function GetKycData(){
+                    let setting = {
+            title: "@Localizer["loading"]"
+        };
+        SweatAlterProcessing(setting);
+            let status=$("#Status").val();
+            let userid=$("#Userkyc").val();
+            let courseid=$("#courseUserId").val();
+            $.ajax({
+                url:"/Dashboard/FilterKycUser",
+                type:"Get",
+                data:{
+                    Status:status,
+                    CourseId:courseid,
+                    Userid:userid
+                },
+                success:function(response){
+                    Swal.close();
+                    $("#customersList").html(response);
+                },
+                Error:function(){
+                    Swal.close();
+                     SweatAlterDanger('@Localizer["FaildLoad"]')
+                    alert("Error");
+                }
+
+            })
+        }
+        // Filter functionality
+        document.querySelectorAll('[data-filter]').forEach(tab => {
+            tab.addEventListener('click', function(e) {
+                e.preventDefault();
+
+                // Update active tab
+                document.querySelectorAll('[data-filter]').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+
+                // Filter customers
+                const filter = this.getAttribute('data-filter');
+                const customers = document.querySelectorAll('.customer-card');
+
+                customers.forEach(card => {
+                    if (filter === 'all' || card.getAttribute('data-status') === filter) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Action button handlers
+        document.addEventListener('click', function(e) {
+            if (e.target.closest('.btn-action')) {
+                const button = e.target.closest('.btn-action');
+                const action = button.textContent.trim();
+
+                switch(true) {
+                    case action.includes('Block'):
+                        if (confirm('Are you sure you want to block this user?')) {
+                            alert('User blocked successfully!');
+                        }
+                        break;
+                    case action.includes('Unblock'):
+                        if (confirm('Are you sure you want to unblock this user?')) {
+                            alert('User unblocked successfully!');
+                        }
+                        break;
+                    case action.includes('Delete'):
+                        if (confirm('Are you sure you want to delete this account? This action cannot be undone!')) {
+                            alert('Account deleted successfully!');
+                        }
+                        break;
+                    case action.includes('Approve'):
+                        if (confirm('Approve this KYC verification?')) {
+                            alert('KYC approved successfully!');
+                        }
+                        break;
+                    case action.includes('Reject'):
+                        if (confirm('Reject this KYC verification?')) {
+                            alert('KYC rejected!');
+                        }
+                        break;
+                    default:
+                        alert(`${action} clicked!`);
+                }
+            }
+        });
+
+        // Search functionality
+        document.querySelector('input[placeholder*="Search"]').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const customers = document.querySelectorAll('.customer-card');
+
+            customers.forEach(card => {
+                const text = card.textContent.toLowerCase();
+                card.style.display = text.includes(searchTerm) ? 'block' : 'none';
+            });
+        });
+    </script>
+}
+

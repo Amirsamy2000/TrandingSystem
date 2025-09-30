@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Amazon.S3.Model;
+using MailKit.Search;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -37,6 +39,9 @@ namespace TrandingSystem.Application.Dtos
         public string LiveName { set; get; }
         public decimal VideoCost { set; get; } = 0;
         public decimal LiveCost { set; get; } = 0;
+
+        public int OrderByType {  get; set; } //0 = course ,1 = video ,2 = live
+
 
 
 
