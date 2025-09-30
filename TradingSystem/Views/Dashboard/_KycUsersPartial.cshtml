@@ -1,0 +1,433 @@
+﻿@using Microsoft.Extensions.Localization
+@using TrandingSystem.Application.Dtos
+@using TrandingSystem.Controllers
+@model List<KycUserDto>
+@inject IStringLocalizer<LiveSessionController> Localizer
+@if (Model.Any())
+{
+
+    <style>
+        th{
+        text-transform:capitalize
+        }
+
+        .dataTables_filter input {
+        padding: 6px 10px;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+        width: 250px;
+        font-size: 14px;
+        }
+
+        .dt-button, .custom-btn {
+        background-color: #007bff !important;
+        color: white !important;
+        padding: 6px 12px;
+        border-radius: 6px;
+        border: none;
+        font-size: 14px;
+        margin-left: 5px;
+        cursor: pointer;
+        }
+
+        .dt-button:hover, .custom-btn:hover {
+        background-color: #0056b3 !important;
+        }
+
+        .dataTables_filter input {
+        class: "form-control"
+        }
+
+        .dataTables_length select {
+        padding: 8px !important;
+        background-color: #007bff !important;
+        color: white !important;
+        }
+
+        #OrdersTable_filter label::before {
+        content: "" !important
+        }
+
+        #OrdersTable_filter label {
+        font-size: 0 !important; /* Hide text */
+        }
+
+        #OrdersTable_filter input {
+        font-size: 14px !important; /* Restore input font size */
+        }
+
+        .accordion-body p {
+        font-size:20px;
+        padding:10px;
+        margin:10px;
+        width:90%;
+        background-color:#eee
+        }
+        th{
+        text-transform:capitalize !important;
+        text-align: center !important
+        }
+    </style>
+
+    @foreach (var UserData in Model)
+    {
+
+        <!-- Customer 1 -->
+        <div class="customer-card " data-status="active">
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="customer-avatar">
+                        @UserData.FullName.Substring(0, 1)
+
+                    </div>
+                </div>
+                <div class="col-md-10">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h5 class="mb-2">
+                                @UserData.FullName
+                                @if (UserData.IsBlocketed)
+                                {
+                                    <span class="status-badge status-inactive">@Localizer["Blocked"]</span>
+                                }
+                                else if (!UserData.IsConfirmed)
+                                {
+                                    <span class="status-badge status-pending">@Localizer["NotVerified"]</span>
+                                }
+                                else
+                                {
+                                    <span class="status-badge status-active">@Localizer["Verified"]</span>
+                                }
+                            </h5>
+
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <div class="info-row">
+                                        <span><i class="fas fa-envelope text-muted me-2"></i>@Localizer["Email"]:</span>
+                                        <span>@UserData.Email</span>
+                                    </div>
+                                    <div class="info-row">
+                                        <span><i class="fas fa-phone text-muted me-2"></i>@Localizer["Phone"]:</span>
+                                        <span>@UserData.PhoneNumber</span>
+                                    </div>
+
+                                    <div class="info-row">
+                                        <span><i class="fas fa-book text-muted me-2"></i>@Localizer["Courses"]:</span>
+                                        <div class="d-flex flex-wrap gap-1">
+                                            @foreach(var UserCourses in UserData.Courses) {
+                                                <span class="badge bg-info">@UserCourses.CourseName</span>
+                                            }
+
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="info-row">
+                                        <span><i class="fas fa-phone text-muted me-2"></i>@Localizer["NationalId"]:</span>
+                                        <span>@UserData.NationalId</span>
+                                    </div>
+                                    <div class="info-row">
+                                        <span><i class="fas fa-users text-muted me-2"></i>@Localizer["Communities"]:</span>
+                                        <div class="d-flex flex-wrap gap-1">
+                                            @foreach (var comm in UserData.Communities)
+                                            {
+                                                <span class="badge bg-success">@comm.CommunityName</span>
+                                            }
+
+
+                                        </div>
+                                    </div>
+                                    <div class="info-row">
+                                        <span><i class="fas fa-dollar-sign text-muted me-2"></i>@Localizer["TotalPaid"]:</span>
+                                        <span class="text-success fw-bold">$ @UserData.TotalPaid</span>
+                                    </div>
+                                    <div class="info-row">
+                                        <span><i class="fas fa-calendar text-muted me-2"></i>@Localizer["JoinDate"]:</span>
+                                        <span>@UserData.JoinDate.ToString("F")</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <strong class="me-3">@Localizer["Orders"]: </strong>
+                                    <span class="order-status order-pending bg-warning text-white p-2 m-1">@UserData.CountPandingOrders @Localizer["Pending"]</span>
+                                    <span class="order-status order-accepted bg-success text-white p-2 m-1">@UserData.CountAcceptedOrders @Localizer["Accepted"]</span>
+                                    <span class="order-status order-rejected bg-danger text-white p-2 m-1 ">@UserData.CountRejectedOrders @Localizer["Rejected"]</span>
+                                </div>
+                            </div>
+                        </div>
+                        @* <div class="col-md-4 text-end"> *@
+                        @*     <div class="d-flex flex-column gap-2"> *@
+                        @*         <button class="btn btn-primary btn-action" data-bs-toggle="modal" data-bs-target="#customerModal"> *@
+                        @*             <i class="fas fa-eye me-1"></i>View Details *@
+                        @*         </button> *@
+
+                        @*     </div> *@
+                        @* </div> *@
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card accordion-item mb-4" id="accordion-@UserData.Id">
+            <h2 class="accordion-header" id="heading-@UserData.Id">
+                <button type="button" class="accordion-button collapsed"
+                data-bs-toggle="collapse"
+                data-bs-target="#collapse-@UserData.Id"
+                aria-expanded="false"
+                aria-controls="collapse-@UserData.Id">
+                    More Details (Kyc) @UserData.FullName
+                </button>
+            </h2>
+            <div id="collapse-@UserData.Id"
+            class="accordion-collapse collapse"
+            aria-labelledby="heading-@UserData.Id"
+            data-bs-parent="#accordionExample">
+                <div class="accordion-body table-responsive">
+
+                    <p> @Localizer["Orders"]</p>
+                    <table class="table table-hover table-bordered KycTable">
+
+                        <thead>
+                            <tr class=" table-info">
+
+                                <th>@Localizer["OrderDate"]</th>
+                                <th>@Localizer["OrderType"]</th>
+                                <th>@Localizer["Ordername"]</th>
+                                <th>@Localizer["OrderCost"] </th>
+                                <th>@Localizer["OrderStatus"] </th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (UserData.Courses.Any())
+                            {
+                                @foreach (var order in UserData.Orders)
+                                {
+                                    if (order != null)
+                                    {
+
+                                        <tr>
+                                            <td>
+                                                @(order?.CreatedAt ?? DateTime.Now)
+                                            </td>
+                                            
+                                            @if (order.OrderByType == 0)
+                                            {
+                                                <td>
+                                                    @Localizer["OrderTypeMessageCourse"]
+                                                </td>
+                                                <td>
+                                                    @(order?.CourseName ?? " ")
+                                                </td>
+
+                                                <td>
+                                                    @(order?.CostCourse ?? 0)
+                                                </td>
+
+                                            }
+                                            else if (order.OrderByType == 1)
+                                            {
+                                                <td>
+                                                    @Localizer["OrderTypeMessageVideo"]
+                                                </td>
+                                                <td>
+                                                    @(order?.VideoName ?? " ")
+                                                </td>
+
+                                                <td>
+                                                    @(order?.VideoCost ?? 0)
+                                                </td>
+                                            }
+                                            else
+                                            {
+                                                <td>
+                                                    @Localizer["OrderTypeMessageLive"]
+                                                </td>
+                                                <td>
+                                                    @(order?.LiveName ?? " ")
+                                                </td>
+                                                <td>
+                                                    @(order?.LiveCost ?? 0)
+                                                </td>
+                                            }
+
+                                            <td>
+                                                @if (order?.OrderStatus == 2)
+                                                {
+                                                    <span class="badge bg-warning text-dark">@Localizer["Pending"]</span>
+                                                }
+                                                else if (order?.OrderStatus == 1)
+                                                {
+                                                    <span class="badge bg-success">@Localizer["Accepted"]</span>
+                                                }
+                                                else if (order?.OrderStatus == 0)
+                                                {
+                                                    <span class="badge bg-danger">@Localizer["Rejected"]</span>
+                                                }
+                                            </td>
+                                        </tr>
+
+                                    }
+                                  
+                                }
+
+                            }
+
+
+                        </tbody>
+                    </table>
+
+
+                    <p>@Localizer["Courses"]</p>
+                    <table class="table table-hover table-bordered KycTable">
+
+                        <thead>
+                            <tr class=" table-info">
+
+                                <th>@Localizer["Course"]</th>
+                                <th>@Localizer["Cost"]</th>
+                                <th> @Localizer["Count Videos"]</th>
+                                <th>@Localizer["Count Lives"]</th>
+                                <th>@Localizer["Create At"]</th>
+                                <th>@Localizer["Status"]</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (UserData.Courses.Any())
+                            {
+                                @foreach (var order in UserData.Courses)
+                                {
+                                    if (order != null)
+                                    {
+
+                                        <tr>
+                                          
+                                            <td>
+                                                @(order?.CourseName?? " ")
+                                            </td>
+                                            <td>
+                                                @(order?.CourseCost ?? 0)
+                                            </td>
+                                            <td>
+                                                @(order?.CountVideos??0)
+                                            </td>
+                                            <td>
+                                                @(order?.CountLives??00)
+                                            </td>
+                                            <td>
+                                                @(order?.CreateAt ?? DateTime.Now)
+                                            </td>
+                                            <td>
+                                               
+                                                 @if (order?.CourseStatus == true)
+                                                {
+                                                    <span class="badge bg-success">@Localizer["Active"]</span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="badge bg-warning">@Localizer["Blocked"]</span>
+                                                }
+                                            </td>
+                                        </tr>
+
+                                    }
+
+                                }
+
+                            }
+
+
+                        </tbody>
+                    </table>
+
+                    <p> @Localizer["Communities"]</p>
+                    <table class="table table-hover table-bordered KycTable">
+
+                        <thead>
+                            <tr class=" table-info">
+
+                                <th>@Localizer["Community"]</th>
+                                <th>@Localizer["JoinDate"]</th>
+                                <th>@Localizer["Courseheader"]</th>
+                                <th>@Localizer["Status Community"]</th>
+                                 <th>@Localizer["Status User"]</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (UserData.Communities.Any())
+                            {
+                                @foreach (var order in UserData.Communities)
+                                {
+                                    if (order != null)
+                                    {
+
+                                        <tr>
+                                            <td>
+                                                @(order?.CommunityName??"")
+                                            </td>
+                                            <td>
+                                                @(order?.JoinDate??DateTime.Now)
+                                            </td>
+                                            <td>
+                                                @(order?.CourseName??Localizer["PublicCommunity"])
+                                            </td>
+                                           
+                                            <td>
+
+                                                @if (order?.CommunityStatus == false)
+                                                {
+                                                    <span class="badge bg-success">@Localizer["Active"]</span>
+                                                }
+                                                else 
+                                                {
+                                                    <span class="badge bg-warning">@Localizer["Closed"]</span>
+                                                }
+                                            </td>
+
+                                            <td>
+
+                                                @if (order?.UserStatus == false)
+                                                {
+                                                    <span class="badge bg-success">@Localizer["Active"]</span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="badge bg-danger">@Localizer["Blocked"]</span>
+                                                }
+                                            </td>
+
+
+                                        </tr>
+
+                                    }
+
+                                }
+
+                            }
+
+
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+
+    }
+}
+
+  <script>
+    $('.KycTable').DataTable({
+        pageLength: 10,
+        ordering: true,
+        order: [[0, 'asc']],
+        responsive: true,
+        dom: 'Bfrtip',
+        buttons: ['copy', 'excel', 'pdf']
+    });
+  </script>                                                 

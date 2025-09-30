@@ -300,4 +300,112 @@
   <data name="UpdatenewCte" xml:space="preserve">
     <value>Update Data Of Category</value>
   </data>
+  <data name="KYC" xml:space="preserve">
+    <value>Know Your Customer (KYC)</value>
+  </data>
+  <data name="ManageCustomerVerification" xml:space="preserve">
+    <value>Manage customer verification and account status</value>
+  </data>
+  <data name="TotalCustomers" xml:space="preserve">
+    <value>Total Customers</value>
+  </data>
+  <data name="Verified" xml:space="preserve">
+    <value>Verified</value>
+  </data>
+  <data name="NotVerified" xml:space="preserve">
+    <value>Not Verified</value>
+  </data>
+  <data name="Blocked" xml:space="preserve">
+    <value>Blocked</value>
+  </data>
+  <data name="Active" xml:space="preserve">
+    <value>Active</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="Phone" xml:space="preserve">
+    <value>Phone</value>
+  </data>
+  <data name="Courses" xml:space="preserve">
+    <value>Courses</value>
+  </data>
+  <data name="NationalId" xml:space="preserve">
+    <value>National Id</value>
+  </data>
+  <data name="Communities" xml:space="preserve">
+    <value>Communities</value>
+  </data>
+  <data name="TotalPaid" xml:space="preserve">
+    <value>Total Paid</value>
+  </data>
+  <data name="JoinDate" xml:space="preserve">
+    <value>Join Date</value>
+  </data>
+  <data name="Orders" xml:space="preserve">
+    <value>Orders</value>
+  </data>
+  <data name="OrderDate" xml:space="preserve">
+    <value>Order Date</value>
+  </data>
+  <data name="OrderType" xml:space="preserve">
+    <value>Order Type</value>
+  </data>
+  <data name="Ordername" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="OrderCost" xml:space="preserve">
+    <value>Cost</value>
+  </data>
+  <data name="OrderStatus" xml:space="preserve">
+    <value>Order Status</value>
+  </data>
+  <data name="Rejected" xml:space="preserve">
+    <value>Rejected</value>
+  </data>
+  <data name="Accepted" xml:space="preserve">
+    <value>Accepted</value>
+  </data>
+  <data name="Pending" xml:space="preserve">
+    <value>Pending</value>
+  </data>
+  <data name="OrderTypeMessageCourse" xml:space="preserve">
+    <value>Order a Course</value>
+  </data>
+  <data name="OrderTypeMessageVideo" xml:space="preserve">
+    <value>Order a Video</value>
+  </data>
+  <data name="OrderTypeMessageLive" xml:space="preserve">
+    <value>Order a Live</value>
+  </data>
+  <data name="Courseheader" xml:space="preserve">
+    <value>Course</value>
+  </data>
+  <data name="Count Videos" xml:space="preserve">
+    <value>Count Videos</value>
+  </data>
+  <data name="Count Lives" xml:space="preserve">
+    <value>Count Lives</value>
+  </data>
+  <data name="Create At" xml:space="preserve">
+    <value>Creation Date</value>
+  </data>
+  <data name="Community" xml:space="preserve">
+    <value>Community Name</value>
+  </data>
+  <data name="Status Community" xml:space="preserve">
+    <value>Community Status</value>
+  </data>
+  <data name="Status User" xml:space="preserve">
+    <value>Member Status</value>
+  </data>
+  <data name="PublicCommunity" xml:space="preserve">
+    <value>Public Community</value>
+  </data>
+  <data name="Closed" xml:space="preserve">
+    <value>Closed</value>
+  </data>
+  <data name="Know Customer" xml:space="preserve">
+    <value>Know Customer</value>
+  </data>
 </root>

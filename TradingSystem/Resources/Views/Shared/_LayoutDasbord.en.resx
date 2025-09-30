@@ -201,4 +201,10 @@
   <data name="disCategories" xml:space="preserve">
     <value>Show Categories</value>
   </data>
+  <data name="Customers" xml:space="preserve">
+    <value>Customers</value>
+  </data>
+  <data name="Know Customer" xml:space="preserve">
+    <value>Know Customer</value>
+  </data>
 </root>

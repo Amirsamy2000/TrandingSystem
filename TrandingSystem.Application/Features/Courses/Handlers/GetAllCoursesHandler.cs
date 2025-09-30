@@ -24,7 +24,7 @@ internal class GetAllCoursesHandler : IRequestHandler<GetAllCoursesQuery, Respon
     }
 
     public async Task<Response<List<CourseDto>>> Handle(GetAllCoursesQuery request, CancellationToken cancellationToken)
-    {
+   {
         try
         {
             var user = _unitOfWork.Users.ReadById(request.UserId);

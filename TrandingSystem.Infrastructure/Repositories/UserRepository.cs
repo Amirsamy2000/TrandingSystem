@@ -26,6 +26,40 @@ namespace TrandingSystem.Infrastructure.Repositories
             return Object;
         }
 
+        public IQueryable<User> GetUser(int id, int status)
+        {
+            var query = _context.Users.AsNoTracking().AsQueryable();
+
+            // filter by id if provided
+            if (id != 0)
+            {
+                query = query.Where(x => x.Id == id);
+            }
+
+            // filter by status
+            switch (status)
+            {
+                case 1: // confirmed
+                    query = query.Where(x => x.EmailConfirmed == true && x.IsBlocked == false);
+                    break;
+
+                case 2: // unconfirmed
+                    query = query.Where(x => x.EmailConfirmed == false );
+                    break;
+
+                case 3: // blocked
+                    query = query.Where(x => x.IsBlocked == true);
+                    break;
+
+                case 0: // all
+                default:
+                   
+                    break;
+            }
+
+            return query;
+        }
+
         public User Delete(int Id)
         {
             throw new NotImplementedException();
@@ -37,6 +71,10 @@ namespace TrandingSystem.Infrastructure.Repositories
             return _context.Users.ToList();
         }
 
+        public IQueryable<User> Query()
+        {
+            return _context.Users;
+        }
         public User ReadById(int Id)
         {
             return _context.Users
