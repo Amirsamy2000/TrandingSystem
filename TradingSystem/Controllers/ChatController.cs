@@ -53,6 +53,7 @@ namespace TradingSystem.Controllers
         {
             var messages = await _messageRepo.GetRecentAsync(communityId, count);
             return Json(messages.Select(m => new {
+                m.MessageId,
                 m.CommunityId,
                 m.UserId,
                 SenderName = m.User?.FullName ?? $"User {m.UserId}",
@@ -60,5 +61,25 @@ namespace TradingSystem.Controllers
                 SentAt = m.SentAt?.ToString("o") // ISO 8601 for JS Date
             }));
         }
+
+        [HttpDelete]
+        public async Task<IActionResult> DeleteMessage(int messageId, int communityId)
+        {
+            
+            var isAdmin = User.IsInRole("Admin");
+
+            var message = await _messageRepo.GetRecentAsync(communityId);
+            var targetMessage = message.FirstOrDefault(m => m.MessageId == messageId);
+            if (targetMessage == null)
+                return NotFound();
+            if (!isAdmin)
+                return Forbid();
+            var result = await _messageRepo.deleteMessage(messageId);
+            if (!result)
+                return StatusCode(500, "Failed to delete message.");
+            return Ok(new { success = true });
+        }
+
+
     }
 }
