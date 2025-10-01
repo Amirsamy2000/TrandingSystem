@@ -1,4 +1,4 @@
-@{
+﻿@{
     ViewData["Title"] = "Community Chat";
     var communityId = ViewBag.CommunityId;
 }
@@ -46,6 +46,7 @@
         word-wrap: break-word;
         display: flex;
         flex-direction: column;
+        position: relative;
     }
 
     .other-message {
@@ -60,6 +61,7 @@
         word-wrap: break-word;
         display: flex;
         flex-direction: column;
+        position: relative;
     }
 
     /* sender name (top) */
@@ -109,10 +111,49 @@
         .btn-primary:hover {
             background-color: #a17c24;
         }
+
+    /* Enhanced Delete Button Design */
+    .delete-btn {
+        position: absolute;
+        top: -8px;
+        right: -8px;
+        background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+        border: 2px solid #ffffff;
+        color: #ffffff;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        font-size: 0.7rem;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+        transition: all 0.2s ease;
+        opacity: 0;
+        transform: scale(0.8);
+    }
+
+    .my-message:hover .delete-btn,
+    .other-message:hover .delete-btn {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    .delete-btn:hover {
+        background: linear-gradient(135deg, #c0392b 0%, #a93226 100%);
+        transform: scale(1.1);
+        box-shadow: 0 3px 8px rgba(231, 76, 60, 0.4);
+    }
+
+    .delete-btn:active {
+        transform: scale(0.95);
+    }
+
 </style>
 
 <header>
-    @(ViewBag.Name) 
+    @(ViewBag.Name)
 </header>
 
 <div id="chat-messages"></div>
@@ -132,12 +173,12 @@
     function renderMessage(msg) {
         const container = document.getElementById('chat-messages');
 
-        if (msg.id && document.getElementById("msg-" + msg.id)) {
+        if (msg.messageId && document.getElementById("msg-" + msg.messageId)) {
             return;
         }
 
         const div = document.createElement('div');
-        div.id = "msg-" + msg.id;
+        div.id = "msg-" + msg.messageId;
 
         let time = '[Invalid Date]';
         if (msg.sentAt) {
@@ -148,11 +189,11 @@
         const sender = msg.senderName || msg.userId || 'Unknown';
         const text = msg.text || '';
 
-            div.innerHTML = `
-                <div class="message-sender">${sender}</div>
-                <div class="message-text">${text}</div>
-                <div class="message-time">${time}</div>
-            `;
+        div.innerHTML = `
+            <div class="message-sender">${sender}</div>
+            <div class="message-text">${text}</div>
+            <div class="message-time">${time}</div>
+        `;
 
 
 
@@ -161,6 +202,19 @@
         } else {
             div.classList.add("other-message");
         }
+
+        debugger
+        // ✅ Show delete button only if current user is Admin
+        if ("@(User.IsInRole("Admin"))" === "True") {
+            const deleteBtn = document.createElement("button");
+            deleteBtn.innerText = "🗑️";
+            deleteBtn.classList.add("delete-btn");
+            debugger
+            deleteBtn.onclick = () => deleteMessage(msg.messageId);
+
+            div.appendChild(deleteBtn);
+        }
+
 
         container.appendChild(div);
         container.scrollTop = container.scrollHeight;
@@ -174,4 +228,47 @@
                 messages.forEach(renderMessage);
             });
     });
+
+
+    function deleteMessage(messageId) {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "This message will be permanently deleted!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#c3972e',
+            cancelButtonColor: '#6c757d',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                fetch(`/Chat/DeleteMessage?messageId=${messageId}&communityId=${communityId}`, { method: "DELETE" })
+                    .then(res => {
+                        if (res.ok) {
+                            // remove from DOM
+                            document.getElementById("msg-" + messageId)?.remove();
+
+                            Swal.fire(
+                                'Deleted!',
+                                'The message has been deleted.',
+                                'success'
+                            );
+                        } else {
+                            Swal.fire(
+                                'Error!',
+                                'Failed to delete message.',
+                                'error'
+                            );
+                        }
+                    })
+                    .catch(err => {
+                        console.error("Error deleting message:", err);
+                        Swal.fire(
+                            'Error!',
+                            'Something went wrong.',
+                            'error'
+                        );
+                    });
+            }
+        });
+    }
 </script>

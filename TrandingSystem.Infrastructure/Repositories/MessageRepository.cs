@@ -23,6 +23,13 @@ namespace TrandingSystem.Infrastructure.Repositories
             return message;
         }
 
+        public async Task< bool > deleteMessage(int messageId)
+        {
+            _context.Messages.Remove(_context.Messages.Find(messageId));
+            await _context.SaveChangesAsync();
+            return true;
+        }
+
         //TODO : remove count limit or make it configurable
         public async Task<List<Message>> GetRecentAsync(int communityId, int count = 30)
         {
@@ -35,5 +42,10 @@ namespace TrandingSystem.Infrastructure.Repositories
                 .OrderBy(m => m.SentAt)
                 .ToListAsync();
         }
+
+
+
+
+
     }
 }
