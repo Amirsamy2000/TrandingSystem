@@ -128,23 +128,23 @@ namespace TrandingSystem.Areas.Identity.Pages.Account
                 return Page();
             }
 
-            // ✅ 1. Generate or read DeviceId from cookie
-            var deviceId = DeviceHelper.GetOrCreateDeviceId(HttpContext);
+            //// ✅ 1. Generate or read DeviceId from cookie
+            //var deviceId = DeviceHelper.GetOrCreateDeviceId(HttpContext);
 
-            // ✅ 2. Compare DeviceId with what's stored in DB
-            if (string.IsNullOrEmpty(user.DeviceId))
-            {
-                // أول مرة → اربط الجهاز باليوزر
-                user.DeviceId = deviceId;
-                await _userManager.UpdateAsync(user);
-            }
-            else if (!_userManager.IsInRoleAsync(user, "Admin").Result && user.DeviceId != deviceId)
-            {
-                // جهاز مختلف → امنع الدخول
-                ModelState.AddModelError("", "You can only access your account from the first device you logged in on.");
-                return Page();
+            //// ✅ 2. Compare DeviceId with what's stored in DB
+            //if (string.IsNullOrEmpty(user.DeviceId))
+            //{
+            //    // أول مرة → اربط الجهاز باليوزر
+            //    user.DeviceId = deviceId;
+            //    await _userManager.UpdateAsync(user);
+            //}
+            //else if (!_userManager.IsInRoleAsync(user, "Admin").Result && user.DeviceId != deviceId)
+            //{
+            //    // جهاز مختلف → امنع الدخول
+            //    ModelState.AddModelError("", "You can only access your account from the first device you logged in on.");
+            //    return Page();
 
-            }
+            //}
 
             // ✅ 3. Continue normal login if device is correct
 
