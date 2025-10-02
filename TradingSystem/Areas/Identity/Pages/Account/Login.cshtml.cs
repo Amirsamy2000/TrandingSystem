@@ -138,13 +138,13 @@ namespace TrandingSystem.Areas.Identity.Pages.Account
                 user.DeviceId = deviceId;
                 await _userManager.UpdateAsync(user);
             }
-            else if (!_userManager.IsInRoleAsync(user, "Admin").Result && user.DeviceId != deviceId)
-            {
-                // جهاز مختلف → امنع الدخول
-                ModelState.AddModelError("", "You can only access your account from the first device you logged in on.");
-                return Page();
+            //else if (!_userManager.IsInRoleAsync(user, "Admin").Result && user.DeviceId != deviceId)
+            //{
+            //    // جهاز مختلف → امنع الدخول
+            //    ModelState.AddModelError("", "You can only access your account from the first device you logged in on.");
+            //    return Page();
 
-            }
+            //}
 
             // ✅ 3. Continue normal login if device is correct
 
