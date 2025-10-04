@@ -1,0 +1,118 @@
+﻿@using TrandingSystem.Application.Dtos
+@model EditUserDto;
+
+<div class="row p-3">
+    <div class="col-12">
+        <form method="post" id="editUserForm">
+             
+
+            <input type="hidden" asp-for="Id" />
+
+            <div class="mb-3">
+                <label asp-for="FullName" class="form-label"></label>
+                <input asp-for="FullName" class="form-control" />
+                <span asp-validation-for="FullName" class="text-danger"></span>
+            </div>
+
+            @* <div class="mb-3"> *@
+            @*     <label asp-for="Email" class="form-label"></label> *@
+            @*     <input asp-for="Email" class="form-control" /> *@
+            @*     <span asp-validation-for="Email" class="text-danger"></span> *@
+            @* </div> *@
+
+            <div class="mb-3">
+                <label asp-for="PhoneNumber" class="form-label"></label>
+                <input asp-for="PhoneNumber" class="form-control" />
+                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="NationalId" class="form-label"></label>
+                <input asp-for="NationalId" class="form-control" />
+                <span asp-validation-for="NationalId" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <span id="GeneralErrors" class="text-danger"></span>
+            </div>
+
+            <button type="button" onclick="SubmitEditProfileUser()" class="btn btn-primary">Update Profile</button>
+        </form>
+    </div>
+</div>
+<script>
+            // ✅ دالة التحقق اليدوي
+    function Valid() {
+        let isValid = true;
+
+        // نفضي كل رسائل الأخطاء القديمة
+    $('.text-danger').text('');
+
+        // ناخد القيم
+        let fullName = $('[name="FullName"]').val().trim();
+         let phone = $('[name="PhoneNumber"]').val().trim();
+        let nationalId = $('[name="NationalId"]').val().trim();
+
+        // التحقق من الاسم
+        if (fullName === '') {
+            $('[data-valmsg-for="FullName"]').text('Full name is required.');
+            isValid = false;
+        }
+
+        // التحقق من الإيميل
+        // const emailPattern = /[^\s]+[^\s]+\.[^\s]+$/;
+        // if (email === '' || !emailPattern.test(email)) {
+        //     $('[data-valmsg-for="Email"]').text('Please enter a valid email.');
+        //     isValid = false;
+        // }
+
+        // التحقق من رقم الموبايل
+
+        if (phone === '' ) {
+            $('[data-valmsg-for="PhoneNumber"]').text('Phone number must be 11 digits.');
+            isValid = false;
+        }
+
+        // التحقق من الرقم القومي
+
+        if (nationalId === '' ) {
+            $('[data-valmsg-for="NationalId"]').text('Please enter National ID ');
+            isValid = false;
+        }
+
+        return isValid;
+    }
+
+    function SubmitEditProfileUser(){
+        //   if (!Valid()) {
+        //     return;  
+        // }
+
+        var form = $('#editUserForm');
+
+        $.ajax({
+            type: 'POST',
+            url: '@Url.Action("EditUser", "Home")',
+            data: form.serialize(),
+            success: function (response) {
+                if (response.success) {
+
+                    location.reload();
+                }
+
+                else{
+                  
+                    $("#GeneralErrors").text(response.message)
+                }
+            },
+            error: function () {
+                $("#GeneralErrors").text("An error occurred while updating the profile.")
+
+            }
+        });
+    }
+</script>
+ 
+ 
+ 
+

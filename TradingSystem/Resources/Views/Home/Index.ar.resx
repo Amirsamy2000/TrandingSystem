@@ -276,4 +276,121 @@
   <data name="Videos" xml:space="preserve">
     <value>فديوهات</value>
   </data>
+  <data name="Courses Enrolled" xml:space="preserve">
+    <value>الدورات المسجلة</value>
+  </data>
+  <data name="Communities" xml:space="preserve">
+    <value>المجتمعات</value>
+  </data>
+  <data name="Total order" xml:space="preserve">
+    <value>إجمالي الطلبات</value>
+  </data>
+  <data name="Total Invested" xml:space="preserve">
+    <value>إجمالي المدفوع</value>
+  </data>
+  <data name="Personal Information" xml:space="preserve">
+    <value>معلومات شخصية</value>
+  </data>
+  <data name="Full Name" xml:space="preserve">
+    <value>الاسم الكامل</value>
+  </data>
+  <data name="National ID" xml:space="preserve">
+    <value>الهوية الوطنية</value>
+  </data>
+  <data name="Join date" xml:space="preserve">
+    <value>تاريخ الانضمام</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>بريد إلكتروني</value>
+  </data>
+  <data name="mobile" xml:space="preserve">
+    <value>هاتف</value>
+  </data>
+  <data name="Active" xml:space="preserve">
+    <value>نشط</value>
+  </data>
+  <data name="NotActive" xml:space="preserve">
+    <value>غير نشط</value>
+  </data>
+  <data name="ViewVideos" xml:space="preserve">
+    <value>عرض الفديوهات</value>
+  </data>
+  <data name="Account Status" xml:space="preserve">
+    <value>حالة الحساب</value>
+  </data>
+  <data name="Phone Verified" xml:space="preserve">
+    <value>التحقق من الهاتف</value>
+  </data>
+  <data name="KYC Status" xml:space="preserve">
+    <value>حالة KYC</value>
+  </data>
+  <data name="Membership" xml:space="preserve">
+    <value>عضوية</value>
+  </data>
+  <data name="User" xml:space="preserve">
+    <value>متدرب</value>
+  </data>
+  <data name="My Communities" xml:space="preserve">
+    <value>مجتمعاتي</value>
+  </data>
+  <data name="CommClose" xml:space="preserve">
+    <value>غير متاح</value>
+  </data>
+  <data name="CommOpen" xml:space="preserve">
+    <value>متاح</value>
+  </data>
+  <data name="Go To Communities" xml:space="preserve">
+    <value>انتقل إلى المجتمعات</value>
+  </data>
+  <data name="Orders Summary" xml:space="preserve">
+    <value>ملخص الطلبات</value>
+  </data>
+  <data name="Rejected" xml:space="preserve">
+    <value>مرفوض</value>
+  </data>
+  <data name="Pending" xml:space="preserve">
+    <value>معلق</value>
+  </data>
+  <data name="Accepted" xml:space="preserve">
+    <value>مقبول</value>
+  </data>
+  <data name="View Details Orders" xml:space="preserve">
+    <value>عرض تفاصيل الطلبات</value>
+  </data>
+  <data name="Security" xml:space="preserve">
+    <value>حماية</value>
+  </data>
+  <data name="Change Password" xml:space="preserve">
+    <value>تغيير كلمة المرور</value>
+  </data>
+  <data name="Logout" xml:space="preserve">
+    <value>تسجيل الخروج</value>
+  </data>
+  <data name="Detilas of Orders" xml:space="preserve">
+    <value>تفاصيل الطلبات</value>
+  </data>
+  <data name="OrderDate" xml:space="preserve">
+    <value>تاريخ الطلب</value>
+  </data>
+  <data name="OrderType" xml:space="preserve">
+    <value>نوع الطلب</value>
+  </data>
+  <data name="Ordername" xml:space="preserve">
+    <value>الاسم</value>
+  </data>
+  <data name="OrderCost" xml:space="preserve">
+    <value>السعر</value>
+  </data>
+  <data name="OrderStatus" xml:space="preserve">
+    <value>حالة الطلب</value>
+  </data>
+  <data name="OrderTypeMessageCourse" xml:space="preserve">
+    <value>طلب التسجيل في الدورة</value>
+  </data>
+  <data name="OrderTypeMessageLive" xml:space="preserve">
+    <value>طلب التسجيل في البث</value>
+  </data>
+  <data name="OrderTypeMessageVideo" xml:space="preserve">
+    <value>طلب التسجيل في الفديو</value>
+  </data>
 </root>

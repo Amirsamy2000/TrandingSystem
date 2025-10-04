@@ -408,4 +408,19 @@
   <data name="Know Customer" xml:space="preserve">
     <value>اعرف العميل</value>
   </data>
+  <data name="messageChangepassword" xml:space="preserve">
+    <value>تغيير كلمة المرور</value>
+  </data>
+  <data name="messageChangepassword2" xml:space="preserve">
+    <value>قم بتحديث كلمة المرور الخاصة بك</value>
+  </data>
+  <data name="Current" xml:space="preserve">
+    <value>كلمة المرور الحالية</value>
+  </data>
+  <data name="newpass" xml:space="preserve">
+    <value>كلمة مرور جديدة</value>
+  </data>
+  <data name="confirmpass" xml:space="preserve">
+    <value>تأكيد كلمة المرور الجديدة</value>
+  </data>
 </root>

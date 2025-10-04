@@ -62,6 +62,7 @@ public class GetUserDataKycHandlers : IRequestHandler<GetUserDataKycQuery, List<
                 // Courses
                 Courses = x.CourseEnrollments.Where(x=>x.OrderStatus==1).Select(c => new CoursesUserKycDto
                 {
+                    CourseId=c.Course.CourseId,
                     CourseName = c.Course.TitleEN ?? "",
                     CountLives = c.Course.LiveSessions.Count(),
                     CountVideos = c.Course.Videos.Count(),

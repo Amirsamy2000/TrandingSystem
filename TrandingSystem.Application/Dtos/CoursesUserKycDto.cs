@@ -8,6 +8,7 @@ namespace TrandingSystem.Application.Dtos
 {
     public class CoursesUserKycDto
     {
+        public int CourseId { get; set; }
         public string? CourseName { get; set; }
         public decimal CourseCost { get; set; }
         public int CountVideos { get; set; }

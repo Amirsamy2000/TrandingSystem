@@ -165,6 +165,13 @@
                 <ul>
                   @* Change Language *@
 
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        
+
+                        <li><a asp-controller="Home" asp-action="Profile">@Localizer["Profile"]</a></li>
+
+                    }
                     @if (User.IsInRole("Admin") || User.IsInRole("Lecturer"))
                     {
                         <li><a asp-controller="Home" asp-action="Dashboard">@Localizer["dasbord"]<br></a></li>
@@ -345,6 +352,7 @@
     <script src="~/assets/js/main.js"></script>
     <script src="~/assets/js/custom.js"></script>
     <script src="~/assets/js/video.js"></script>
+
     @await RenderSectionAsync("Scripts", required: false)
 
 </body>

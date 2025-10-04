@@ -195,4 +195,7 @@
   <data name="MetaSocialDesc" xml:space="preserve">
     <value>نحن نجمع بين التعليم والتكنولوجيا وخبرة السوق في الوقت الفعلي لتقديم نظام بيئي تداول كامل مصمم لنجاحك</value>
   </data>
+  <data name="Profile" xml:space="preserve">
+    <value>الحساب</value>
+  </data>
 </root>

@@ -408,4 +408,19 @@
   <data name="Know Customer" xml:space="preserve">
     <value>Know Customer</value>
   </data>
+  <data name="messageChangepassword" xml:space="preserve">
+    <value>change password</value>
+  </data>
+  <data name="messageChangepassword2" xml:space="preserve">
+    <value>Update your password</value>
+  </data>
+  <data name="Current" xml:space="preserve">
+    <value>Current password</value>
+  </data>
+  <data name="newpass" xml:space="preserve">
+    <value>New password</value>
+  </data>
+  <data name="confirmpass" xml:space="preserve">
+    <value>Confirm new password</value>
+  </data>
 </root>

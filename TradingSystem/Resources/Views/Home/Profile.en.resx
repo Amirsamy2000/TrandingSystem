@@ -394,4 +394,16 @@ Alternatively, feel free to email us directly or contact us instantly through th
   <data name="OrderTypeMessageVideo" xml:space="preserve">
     <value>Video registration request</value>
   </data>
+  <data name="Blocked" xml:space="preserve">
+    <value>Blocked</value>
+  </data>
+  <data name="Confirmed" xml:space="preserve">
+    <value>Verified</value>
+  </data>
+  <data name="NotConfirm" xml:space="preserve">
+    <value>Not Verified</value>
+  </data>
+  <data name="Edit Profile" xml:space="preserve">
+    <value>Edit Profile</value>
+  </data>
 </root>

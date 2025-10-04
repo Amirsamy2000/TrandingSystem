@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Humanizer;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -7,8 +8,14 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.SqlServer.Query.Internal;
 using Microsoft.Extensions.Localization;
 using System.Data;
+using System.Security.Claims;
+using System.Threading.Tasks;
+using TradingSystem.Application.Common.Response;
+using TrandingSystem.Application.Dtos;
 using TrandingSystem.Application.Features.analysis.Queriers;
 using TrandingSystem.Application.Features.Courses.Queries;
+using TrandingSystem.Application.Features.Dashboard.Queries;
+using TrandingSystem.Application.Features.Users.Commands;
 using TrandingSystem.Controllers;
 using TrandingSystem.Domain.Entities;
 using TrandingSystem.Infrastructure.Data;
@@ -172,6 +179,55 @@ namespace WebApplication1.Controllers
         public IActionResult PartialUploadReceiptSession(int id)
         {
             return PartialView("_PartialUploadReceiptSession", id);
+        }
+
+        public IActionResult Profile()
+        {
+
+            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
+
+            if (userIdClaim == null)
+            {
+                return Unauthorized("User ID not found in token.");
+            }
+            var Res = _mediator.Send(new GetUserDataKycQuery(int.Parse(userIdClaim.Value),0,0)).Result;
+            return View(Res);
+        }
+
+
+        [HttpGet]
+        public async Task<IActionResult> EditUser()
+        {
+            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
+            
+
+            if (userIdClaim == null)
+            {
+                return Unauthorized("User ID not found in token.");
+            }
+            var user =  _userManager.FindByIdAsync(userIdClaim.Value).Result;
+            EditUserDto model = new EditUserDto();
+            model.Id = user.Id;
+            model.PhoneNumber = user.Mobile;
+             
+            model.FullName = user.FullName;
+            model.NationalId = user.NationalId;
+            return PartialView("_EditUserPartial", model);
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> EditUser(EditUserDto model)
+        {
+            if (!ModelState.IsValid)
+            {
+
+                return Json(Response<EditUserDto>.ErrorResponse("Invalid Data Please Enter Valid Data"));
+            }
+            var res=await _mediator.Send(new EditUserCommand(model));
+
+
+            return Json(res);
         }
     }
 }

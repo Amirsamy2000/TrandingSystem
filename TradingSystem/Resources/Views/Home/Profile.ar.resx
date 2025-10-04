@@ -118,280 +118,291 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Students" xml:space="preserve">
-    <value>Students</value>
+    <value>طلاب</value>
   </data>
   <data name="Courses" xml:space="preserve">
-    <value>Courses</value>
+    <value>دورات</value>
   </data>
   <data name="Events" xml:space="preserve">
-    <value>EventsVideos</value>
+    <value>فعاليات</value>
   </data>
   <data name="Trainers" xml:space="preserve">
-    <value>Trainers</value>
+    <value>محاضرين</value>
   </data>
   <data name="SecAbout1" xml:space="preserve">
-    <value>A Professional Platform to Learn Trading from Scratch</value>
+    <value>منصة احترافية لتعلّم التداول من الصفر حتى الاحتراف</value>
   </data>
   <data name="Why Choose Our Platform?" xml:space="preserve">
-    <value>Why Choose Saif El Qadi?</value>
+    <value>لماذا تختار سيف القاضي؟</value>
   </data>
   <data name="Learings3" xml:space="preserve">
-    <value>we combine education, technology, and real-time market expertise to deliver a complete trading ecosystem designed for your success</value>
+    <value>نجمع بين التعليم والتكنولوجيا وخبرة السوق في الوقت الفعلي لتقديم نظام بيئي تجاري كامل مصمم لنجاحك</value>
   </data>
   <data name="Learings2" xml:space="preserve">
-    <value>Leading Tomorrow</value>
+    <value>قيادة الغد</value>
   </data>
   <data name="Learings1" xml:space="preserve">
-    <value>Saif El Qadi Trading Hub,</value>
+    <value>مركز سيف القاضي التجاري</value>
   </data>
   <data name="SecAbout2" xml:space="preserve">
-    <value>Trading with Saif El Qadi is different.
-We don’t just teach you how to trade – we give you every tool, signal, and insight you need to become a confident and successful trader</value>
+    <value>التداول مع سيف القاضي مختلف. لا نكتفي بتعليمك كيفية التداول، بل نوفر لك كل الأدوات والإشارات والرؤى التي تحتاجها لتصبح متداولًا واثقًا وناجحًا.</value>
   </data>
   <data name="SecAbout3" xml:space="preserve">
-    <value>Comprehensive Trading Courses – beginner to advanced</value>
+    <value> دورات تداول شاملة – من المبتدئ حتى المتقدم.</value>
   </data>
   <data name="SecAbout4" xml:space="preserve">
-    <value>Daily &amp; Precise Market Analysis – Forex, Gold, Indices, Crypto</value>
+    <value>تحليلات يومية دقيقة – للفوركس، الذهب، المؤشرات، والعملات الرقمية</value>
   </data>
   <data name="SecAbout5" xml:space="preserve">
-    <value>Exclusive Indicators &amp; Tools – confident, profitable decisions.</value>
+    <value>مؤشرات وأدوات حصرية – قرارات واثقة ومربحة</value>
   </data>
   <data name="SecAbout6" xml:space="preserve">
-    <value>Read More</value>
+    <value>اعرف المزيد</value>
   </data>
   <data name="Our trading education" xml:space="preserve">
-    <value>Trading is not just numbers and charts – it’s knowledge, tools, and smart decisions. That’s why Saif El Qadi Trading Hub gives you everything you need to trade smarter, safer, and more profitably</value>
+    <value>التداول ليس مجرد أرقام ورسوم بيانية – بل معرفة وأدوات وقرارات ذكية. لذلك نوفر لك في منصة سيف القاضي كل ما تحتاجه لتداول أكثر أمانًا وربحية</value>
   </data>
   <data name="Real Market Strategies" xml:space="preserve">
-    <value>Real Market Strategies
+    <value>استراتيجيات حقيقية من السوق
 </value>
   </data>
   <data name="Learn proven strategies" xml:space="preserve">
-    <value>Step-by-step trading courses and daily market insights – Forex, Gold, Indices, and Cryptocurrencies.</value>
+    <value>دورات تدريبية خطوة بخطوة وتحليلات يومية للفوركس، الذهب، المؤشرات، والعملات الرقمية.</value>
   </data>
   <data name="Expert Mentors" xml:space="preserve">
-    <value>Expert Mentors
+    <value>مدربون محترفون
 </value>
   </data>
   <data name="Our instructors" xml:space="preserve">
-    <value>Guidance from professional traders with years of experience, plus personal mentorship and support.</value>
+    <value>إرشاد من متداولين محترفين بخبرة سنوات، مع دعم مباشر وتوجيه شخصي.</value>
   </data>
   <data name="Community &amp; Suppor" xml:space="preserve">
-    <value>Community &amp; Support
+    <value>مجتمع ودعم متكامل
 </value>
   </data>
   <data name="Join a growing community of traders" xml:space="preserve">
-    <value>A global trading community, trusted brokers, and exclusive rewards – so you’ll never trade alone.</value>
+    <value>مجتمع تداول عالمي، وسطاء موثوقون، ومكافآت حصرية – لتتداول بثقة ودون أن تكون وحدك.</value>
   </data>
   <data name="Feature1" xml:space="preserve">
-    <value>Global Community</value>
+    <value>مجتمع عالمي</value>
   </data>
   <data name="Feature2" xml:space="preserve">
-    <value>Professional Journey</value>
+    <value>رحلة احتراف</value>
   </data>
   <data name="Feature3" xml:space="preserve">
-    <value>Comprehensive Courses</value>
+    <value>كورسات شاملة</value>
   </data>
   <data name="Feature4" xml:space="preserve">
-    <value>Smart Tools</value>
+    <value>أدوات ذكية</value>
   </data>
   <data name="Feature5" xml:space="preserve">
-    <value>Exclusive Rewards</value>
+    <value>مكافآت حصرية</value>
   </data>
   <data name="Feature6" xml:space="preserve">
-    <value>Real Opportunities</value>
+    <value>فرص حقيقية</value>
   </data>
   <data name="Feature7" xml:space="preserve">
-    <value>Daily Analytics</value>
+    <value>تحليلات يومية</value>
   </data>
   <data name="Feature8" xml:space="preserve">
-    <value>Live Streaming Sessions</value>
+    <value>جلسات بث مباشر</value>
   </data>
   <data name="Feature9" xml:space="preserve">
-    <value>Advanced Technologies</value>
+    <value>تقنيات متقدمة</value>
   </data>
   <data name="Feature10" xml:space="preserve">
-    <value>Trusted Brokers</value>
+    <value>وسطاء موثوقون</value>
   </data>
   <data name="Feature11" xml:space="preserve">
-    <value>Secure Trading</value>
+    <value>تداول آمن</value>
   </data>
   <data name="Feature12" xml:space="preserve">
-    <value>Live Support</value>
+    <value>دعم مباشر</value>
   </data>
   <data name="SecAbout7" xml:space="preserve">
-    <value>AI-Powered Solutions – fast &amp; accurate market analysis</value>
+    <value>حلول مدعومة بالذكاء الاصطناعي – تحليل أسرع وأكثر دقة</value>
   </data>
   <data name="SecAbout8" xml:space="preserve">
-    <value>Direct Mentorship &amp; Support – you’ll never trade alone.</value>
+    <value>توجيه ودعم مباشر – لن تكون وحدك في رحلتك</value>
   </data>
   <data name="SecAbout9" xml:space="preserve">
-    <value>Special Bonuses &amp; Rewards – for our trading community</value>
+    <value>توجيه ودعم مباشر – لن تكون وحدك في رحلتك</value>
   </data>
   <data name="SecAbout10" xml:space="preserve">
-    <value>Direct Mentorship &amp; Support – you’ll never trade alone.</value>
+    <value>توجيه ودعم مباشر – لن تكون وحدك في رحلتك</value>
   </data>
   <data name="OurServer" xml:space="preserve">
-    <value>Our service</value>
+    <value>خدمتنا</value>
   </data>
   <data name="OurServerSubject" xml:space="preserve">
-    <value>What will you get with us?</value>
+    <value>ماذا ستحصل معنا؟</value>
   </data>
   <data name="Education" xml:space="preserve">
-    <value>Education</value>
+    <value>تعليم</value>
   </data>
   <data name="EducationSubject" xml:space="preserve">
-    <value>Comprehensive Trading Courses</value>
+    <value>دورات التداول الشاملة</value>
   </data>
   <data name="EducationBody" xml:space="preserve">
-    <value>From beginners to professional, clear practical strategies that will make you trade with confidence</value>
+    <value>من البداية للاحتراف، استراتيجيات عملية واضحة تخليك تداول بثقة</value>
   </data>
   <data name="Marketing" xml:space="preserve">
-    <value>Market Analysis</value>
+    <value>تحليل السوق</value>
   </data>
   <data name="Marketingtitle" xml:space="preserve">
-    <value>Daily &amp; Accurate Market Insights</value>
+    <value>رؤى السوق اليومية والدقيقة</value>
   </data>
   <data name="MarketingSubject" xml:space="preserve">
-    <value>Accurate daily reports on Forex, Gold, Indices and Cryptocurrencies.</value>
+    <value>تقارير يومية دقيقة على الفوركس، الذهب، المؤشرات والعملات الرقمية.</value>
   </data>
   <data name="Content" xml:space="preserve">
-    <value>AI Tools</value>
+    <value>أدوات الذكاء الاصطناعي</value>
   </data>
   <data name="ContentTitle" xml:space="preserve">
-    <value>Smart AI-Powered Indicators</value>
+    <value>مؤشرات ذكية مدعومة بالذكاء الاصطناعي</value>
   </data>
   <data name="Contentbody" xml:space="preserve">
-    <value>Smart tools that read the market accurately and quickly to give you a competitive advantage.</value>
+    <value>أدوات ذكية تقرأ السوق بدقة وسرعة عشان تديك ميزة تنافسية</value>
   </data>
   <data name="contactbody" xml:space="preserve">
-    <value>We are always happy to hear from you!  
-Whether you have questions about our courses, want to join one of our communities, or need assistance with your learning journey, our team is ready to help.  
-You can reach out to us through the form below, and we will get back to you as soon as possible.  
-Alternatively, feel free to email us directly or contact us instantly through the WhatsApp icon at the bottom of the page.  </value>
+    <value>يسعدنا دائمًا التواصل معكم!
+سواءً كانت لديكم أسئلة حول دوراتنا، أو ترغبون بالانضمام إلى إحدى مجتمعاتنا، أو تحتاجون إلى مساعدة في رحلة التعلم، فإن فريقنا جاهز لمساعدتكم.
+يمكنكم التواصل معنا عبر النموذج أدناه، وسنتواصل معكم في أقرب وقت ممكن.
+أو يمكنكم مراسلتنا مباشرةً عبر البريد الإلكتروني أو التواصل معنا مباشرةً عبر أيقونة واتساب أسفل الصفحة.</value>
   </data>
   <data name="Contact" xml:space="preserve">
-    <value>Contact Us</value>
+    <value>تواصل معنا</value>
   </data>
   <data name="Videos" xml:space="preserve">
-    <value>Videos</value>
+    <value>فديوهات</value>
   </data>
   <data name="Courses Enrolled" xml:space="preserve">
-    <value>Courses Enrolled</value>
+    <value>الدورات المسجلة</value>
   </data>
   <data name="Communities" xml:space="preserve">
-    <value>Communities</value>
+    <value>المجتمعات</value>
   </data>
   <data name="Total order" xml:space="preserve">
-    <value>Total orders</value>
+    <value>إجمالي الطلبات</value>
   </data>
   <data name="Total Invested" xml:space="preserve">
-    <value>Total Paid</value>
+    <value>إجمالي المدفوع</value>
   </data>
   <data name="Personal Information" xml:space="preserve">
-    <value>Personal Information</value>
+    <value>معلومات شخصية</value>
   </data>
   <data name="Full Name" xml:space="preserve">
-    <value>Full Name</value>
+    <value>الاسم الكامل</value>
   </data>
   <data name="National ID" xml:space="preserve">
-    <value>National ID</value>
+    <value>الهوية الوطنية</value>
   </data>
   <data name="Join date" xml:space="preserve">
-    <value>Join date</value>
+    <value>تاريخ الانضمام</value>
   </data>
   <data name="Email" xml:space="preserve">
-    <value>Email</value>
+    <value>بريد إلكتروني</value>
   </data>
   <data name="mobile" xml:space="preserve">
-    <value>phone</value>
+    <value>هاتف</value>
   </data>
   <data name="Active" xml:space="preserve">
-    <value>Active</value>
+    <value>نشط</value>
   </data>
   <data name="NotActive" xml:space="preserve">
-    <value>Not Active</value>
+    <value>غير نشط</value>
   </data>
   <data name="ViewVideos" xml:space="preserve">
-    <value>View Videos</value>
+    <value>عرض الفديوهات</value>
   </data>
   <data name="Account Status" xml:space="preserve">
-    <value>Account Status</value>
+    <value>حالة الحساب</value>
   </data>
   <data name="Phone Verified" xml:space="preserve">
-    <value>Phone Verified</value>
+    <value>التحقق من الهاتف</value>
   </data>
   <data name="KYC Status" xml:space="preserve">
-    <value>KYC Status</value>
+    <value>حالة KYC</value>
   </data>
   <data name="Membership" xml:space="preserve">
-    <value>Membership</value>
+    <value>عضوية</value>
   </data>
   <data name="User" xml:space="preserve">
-    <value>Trainee</value>
+    <value>متدرب</value>
   </data>
   <data name="My Communities" xml:space="preserve">
-    <value>My Communities</value>
+    <value>مجتمعاتي</value>
   </data>
   <data name="CommClose" xml:space="preserve">
-    <value>Unavailable</value>
+    <value>غير متاح</value>
   </data>
   <data name="CommOpen" xml:space="preserve">
-    <value>Available</value>
+    <value>متاح</value>
   </data>
   <data name="Go To Communities" xml:space="preserve">
-    <value>Go To Communities</value>
+    <value>انتقل إلى المجتمعات</value>
   </data>
   <data name="Orders Summary" xml:space="preserve">
-    <value>Orders Summary</value>
+    <value>ملخص الطلبات</value>
   </data>
   <data name="Rejected" xml:space="preserve">
-    <value>Rejected</value>
+    <value>مرفوض</value>
   </data>
   <data name="Pending" xml:space="preserve">
-    <value>Pending</value>
+    <value>معلق</value>
   </data>
   <data name="Accepted" xml:space="preserve">
-    <value>Accepted</value>
+    <value>مقبول</value>
   </data>
   <data name="View Details Orders" xml:space="preserve">
-    <value>View Details Orders</value>
+    <value>عرض تفاصيل الطلبات</value>
   </data>
   <data name="Security" xml:space="preserve">
-    <value>Security</value>
+    <value>حماية</value>
   </data>
   <data name="Change Password" xml:space="preserve">
-    <value>Change Password</value>
+    <value>تغيير كلمة المرور</value>
   </data>
   <data name="Logout" xml:space="preserve">
-    <value>Logout</value>
+    <value>تسجيل الخروج</value>
   </data>
   <data name="Detilas of Orders" xml:space="preserve">
-    <value>Details of Orders</value>
+    <value>تفاصيل الطلبات</value>
   </data>
   <data name="OrderDate" xml:space="preserve">
-    <value>Order Date</value>
+    <value>تاريخ الطلب</value>
   </data>
   <data name="OrderType" xml:space="preserve">
-    <value>Order Type</value>
+    <value>نوع الطلب</value>
   </data>
   <data name="Ordername" xml:space="preserve">
-    <value>Name</value>
+    <value>الاسم</value>
   </data>
   <data name="OrderCost" xml:space="preserve">
-    <value>Cost</value>
+    <value>السعر</value>
   </data>
   <data name="OrderStatus" xml:space="preserve">
-    <value>Order Status</value>
+    <value>حالة الطلب</value>
   </data>
   <data name="OrderTypeMessageCourse" xml:space="preserve">
-    <value>Course registration request</value>
+    <value>طلب التسجيل في الدورة</value>
   </data>
   <data name="OrderTypeMessageLive" xml:space="preserve">
-    <value>Live registration request</value>
+    <value>طلب التسجيل في البث</value>
   </data>
   <data name="OrderTypeMessageVideo" xml:space="preserve">
-    <value>Video registration request</value>
+    <value>طلب التسجيل في الفديو</value>
+  </data>
+  <data name="Blocked" xml:space="preserve">
+    <value>محظور</value>
+  </data>
+  <data name="Confirmed" xml:space="preserve">
+    <value>موثق</value>
+  </data>
+  <data name="NotConfirm" xml:space="preserve">
+    <value>غير موثق</value>
+  </data>
+  <data name="Edit Profile" xml:space="preserve">
+    <value>تعديل الملف الشخصي</value>
   </data>
 </root>

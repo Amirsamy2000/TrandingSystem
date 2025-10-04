@@ -195,4 +195,7 @@
   <data name="MetaSocialDesc" xml:space="preserve">
     <value>we combine education, technology, and real-time market expertise to deliver a complete trading ecosystem designed for your success</value>
   </data>
+  <data name="Profile" xml:space="preserve">
+    <value>Account</value>
+  </data>
 </root>

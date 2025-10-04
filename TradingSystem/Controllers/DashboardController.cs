@@ -24,7 +24,7 @@ namespace TrandingSystem.Controllers
         
         
         
-        {
+     {
             var usersResponse = await _mediator.Send(new GetAllUsersQuery());
 
             var AllCourses = await _mediator.Send(new GetAllCoursesQuery
