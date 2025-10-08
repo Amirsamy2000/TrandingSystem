@@ -47,7 +47,7 @@ namespace TrandingSystem.Application.Features.OrdersEnorllment.Handlers
                     Subject = _localizer["stieName"],
                     StieName = _localizer["stieName"],
                     Hi = _localizer["hi"],
-                    info1 = _localizer["infoorder1"],
+                    info1 = _localizer["infoorder2"],
                     info2 = _localizer["infoVido3"] + " " + order.Course.TitleEN,
                     info3 = "",
                     contact = _localizer["contact"],
@@ -58,7 +58,7 @@ namespace TrandingSystem.Application.Features.OrdersEnorllment.Handlers
                 };
                 if (request.Status==1)
                 {
-                    EmailTemp.info1 = _localizer["infoorder2"];
+                    EmailTemp.info1 = _localizer["infoorder1"];
                     order.EnrollmentDate = request.CreatedAt;
                    // var communities = _unitOfWork.Courses.ReadById((int)order.OrderStatus).Communities;
                     var communities = _unitOfWork.Courses.ReadById(order.CourseId??0 ).Communities;
