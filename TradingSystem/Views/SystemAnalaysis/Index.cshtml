@@ -1,0 +1,668 @@
+﻿@model TrandingSystem.Application.Dtos.SystemAnalysisDashboardDto
+@{
+    ViewData["Title"] = "System Analysis Dashboard";
+    // Layout = "~/Views/Shared/_LayoutDasbord.cshtml";
+}
+
+@section Styles {
+    <style>
+        :root {
+            --primary-color: #74b9ff;
+            --secondary-color: rgba(67, 89, 113, 0.1);
+            --text-dark: rgba(67, 89, 113, 1);
+        }
+
+        body {
+            background: linear-gradient(135deg, #74b9ff 0%, rgba(67, 89, 113, 0.05) 100%);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .metric-card {
+            border: none;
+            border-radius: 15px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background: white;
+            overflow: hidden;
+        }
+
+        .metric-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(116, 185, 255, 0.2) !important;
+        }
+
+        .metric-card .card-body {
+            padding: 25px;
+        }
+
+        .metric-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            margin-bottom: 15px;
+        }
+
+        .icon-blue {
+            background: linear-gradient(135deg, #74b9ff 0%, #5fa3e8 100%);
+            color: white;
+        }
+
+        .icon-green {
+            background: linear-gradient(135deg, #55efc4 0%, #00b894 100%);
+            color: white;
+        }
+
+        .icon-purple {
+            background: linear-gradient(135deg, #a29bfe 0%, #6c5ce7 100%);
+            color: white;
+        }
+
+        .icon-orange {
+            background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
+            color: white;
+        }
+
+        .metric-value {
+            font-size: 32px;
+            font-weight: bold;
+            color: var(--text-dark);
+            margin: 10px 0;
+        }
+
+        .metric-label {
+            color: #999;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .metric-change {
+            font-size: 13px;
+            margin-top: 8px;
+        }
+
+        .metric-change.positive {
+            color: #00b894;
+        }
+
+        .metric-change.negative {
+            color: #d63031;
+        }
+
+        .section-card {
+            background: white;
+            border-radius: 15px;
+            border: none;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            color: var(--text-dark);
+            font-weight: 600;
+            font-size: 18px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .section-title i {
+            margin-right: 10px;
+            color: var(--primary-color);
+        }
+
+        .table thead th {
+            background: var(--secondary-color);
+            color: var(--text-dark);
+            border: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 12px;
+            letter-spacing: 0.5px;
+        }
+
+        .table tbody tr {
+            transition: background 0.2s ease;
+        }
+
+        .table tbody tr:hover {
+            background: var(--secondary-color);
+        }
+
+        .user-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #74b9ff 0%, #5fa3e8 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 40px;
+            margin: 0 auto 15px;
+        }
+
+        .stat-badge {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            background: var(--secondary-color);
+            color: var(--primary-color);
+            font-size: 13px;
+            font-weight: 600;
+            margin: 5px;
+        }
+
+        .filter-dropdown {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 8px 15px;
+            color: var(--text-dark);
+            transition: all 0.3s ease;
+        }
+
+        .notification-item {
+            padding: 12px;
+            border-bottom: 1px solid #f0f0f0;
+            transition: background 0.2s ease;
+        }
+
+        .notification-item:hover {
+            background: var(--secondary-color);
+        }
+
+        .notification-item:last-child {
+            border-bottom: none;
+        }
+
+        .health-indicator {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            padding: 10px;
+            background: var(--secondary-color);
+            border-radius: 8px;
+        }
+
+        .health-indicator i {
+            font-size: 24px;
+            margin-right: 15px;
+            color: var(--primary-color);
+        }
+    </style>
+}
+
+<div class="container-fluid mt-4">
+    <!-- Filter Section -->
+    <div class="row mb-4">
+        <div class="col-12 d-flex justify-content-between align-items-center">
+            <h2 class="text-dark fw-bold">Dashboard Overview</h2>
+            <select class="filter-dropdown" id="dateFilter">
+                <option value="current">This Month</option>
+                <option value="3months">Last 3 Months</option>
+                <option value="6months">Last 6 Months</option>
+                <option value="year">This Year</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- System Overview Cards -->
+    <div class="row g-4 mb-4">
+        <div class="col-12 col-sm-6 col-xl-3">
+            <div class="card metric-card shadow-sm">
+                <div class="card-body">
+                    <div class="metric-icon icon-blue">
+                        <i class="bi bi-cart-check"></i>
+                    </div>
+                    <div class="metric-label">Total Orders</div>
+                    <div class="metric-value">@Model.Overview.TotalOrders.ToString("N0")</div>
+                    <div class="metric-change @(Model.Overview.OrdersChangePercent >= 0 ? "positive" : "negative")">
+                        <i class="bi bi-arrow-@(Model.Overview.OrdersChangePercent >= 0 ? "up" : "down")"></i>
+                        @(Model.Overview.OrdersChangePercent > 0 ? "+" : "")@Model.Overview.OrdersChangePercent.ToString("F1")% since last month
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-xl-3">
+            <div class="card metric-card shadow-sm">
+                <div class="card-body">
+                    <div class="metric-icon icon-green">
+                        <i class="bi bi-currency-dollar"></i>
+                    </div>
+                    <div class="metric-label">Total Profit</div>
+                    <div class="metric-value">$@Model.Overview.TotalProfit.ToString("N0")</div>
+                    <div class="metric-change @(Model.Overview.ProfitChangePercent >= 0 ? "positive" : "negative")">
+                        <i class="bi bi-arrow-@(Model.Overview.ProfitChangePercent >= 0 ? "up" : "down")"></i>
+                        @(Model.Overview.ProfitChangePercent > 0 ? "+" : "")@Model.Overview.ProfitChangePercent.ToString("F1")% since last month
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-xl-3">
+            <div class="card metric-card shadow-sm">
+                <div class="card-body">
+                    <div class="metric-icon icon-purple">
+                        <i class="bi bi-people"></i>
+                    </div>
+                    <div class="metric-label">Total Users</div>
+                    <div class="metric-value">@Model.Overview.TotalUsers.ToString("N0")</div>
+                    <div class="metric-change @(Model.Overview.UsersChangePercent >= 0 ? "positive" : "negative")">
+                        <i class="bi bi-arrow-@(Model.Overview.UsersChangePercent >= 0 ? "up" : "down")"></i>
+                        @(Model.Overview.UsersChangePercent > 0 ? "+" : "")@Model.Overview.UsersChangePercent.ToString("F1")% since last month
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-xl-3">
+            <div class="card metric-card shadow-sm">
+                <div class="card-body">
+                    <div class="metric-icon icon-orange">
+                        <i class="bi bi-chat-left-text"></i>
+                    </div>
+                    <div class="metric-label">Total Messages</div>
+                    <div class="metric-value">@Model.Overview.TotalMessages.ToString("N0")</div>
+                    <div class="metric-change @(Model.Overview.MessagesChangePercent >= 0 ? "positive" : "negative")">
+                        <i class="bi bi-arrow-@(Model.Overview.MessagesChangePercent >= 0 ? "up" : "down")"></i>
+                        @(Model.Overview.MessagesChangePercent > 0 ? "+" : "")@Model.Overview.MessagesChangePercent.ToString("F1")% since last month
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Financial Analysis Chart -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card section-card">
+                <div class="card-body p-4">
+                    <h5 class="section-title">
+                        <i class="bi bi-graph-up"></i>
+                        Monthly Profit Trend
+                    </h5>
+                    <canvas id="profitChart" height="80"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- User Analytics -->
+    <div class="row mb-4">
+        <div class="col-12 col-lg-8">
+            <div class="card section-card">
+                <div class="card-body p-4">
+                    <h5 class="section-title">
+                        <i class="bi bi-trophy"></i>
+                        Top 5 Active Users
+                    </h5>
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Rank</th>
+                                    <th>Name</th>
+                                    <th>Activities Count</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model.TopActiveUsers != null && Model.TopActiveUsers.Any())
+                                {
+                                    @for (int i = 0; i < Model.TopActiveUsers.Count; i++)
+                                    {
+                                        var user = Model.TopActiveUsers[i];
+                                        <tr>
+                                            <td>
+                                                <span class="badge bg-@(i == 0 ? "warning" : "secondary")">@(i + 1)</span>
+                                            </td>
+                                            <td>@user.FullName</td>
+                                            <td><strong>@user.ActivitiesCount.ToString("N0")</strong></td>
+                                            <td>
+                                                <span class="badge bg-@(user.Status == "Active" ? "success" : "warning")">
+                                                    @user.Status
+                                                </span>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                                else
+                                {
+                                    <tr>
+                                        <td colspan="4" class="text-center text-muted">No active users found</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-lg-4">
+            <div class="card section-card">
+                <div class="card-body p-4 text-center">
+                    <h5 class="section-title justify-content-center">
+                        <i class="bi bi-star"></i>
+                        Best User of the Month
+                    </h5>
+                    @if (Model.BestUser != null)
+                    {
+                        <div class="user-avatar">
+                            <i class="bi bi-person"></i>
+                        </div>
+                        <h4 class="fw-bold text-dark">@Model.BestUser.FullName</h4>
+                        <p class="text-muted">Most Active Member</p>
+                        <div class="mt-3">
+                            <span class="stat-badge">
+                                <i class="bi bi-chat"></i> @Model.BestUser.TotalMessages Messages
+                            </span>
+                            <span class="stat-badge">
+                                <i class="bi bi-activity"></i> @Model.BestUser.ActivityScore Score
+                            </span>
+                        </div>
+                    }
+                    else
+                    {
+                        <p class="text-muted">No user data available</p>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Community Statistics -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card section-card">
+                <div class="card-body p-4">
+                    <h5 class="section-title">
+                        <i class="bi bi-people-fill"></i>
+                        Community Statistics
+                    </h5>
+                    @if (Model.CommunityStats != null)
+                    {
+                        <div class="row">
+                            <div class="col-md-4 mb-3 mb-md-0">
+                                <div class="text-center p-3">
+                                    <h3 class="text-primary fw-bold">@Model.CommunityStats.TotalCommunities</h3>
+                                    <p class="text-muted mb-0">Total Communities</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3 mb-md-0">
+                                <div class="text-center p-3">
+                                    <h3 class="text-success fw-bold">@(Model.CommunityStats.MostActiveCommunity ?? "N/A")</h3>
+                                    <p class="text-muted mb-0">Most Active Community</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="text-center p-3">
+                                    <h3 class="text-info fw-bold">@(Model.CommunityStats.AvgMessagesPerCommunity?.ToString("N0") ?? "0")</h3>
+                                    <p class="text-muted mb-0">Avg. Messages/Community</p>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    <div class="mt-4">
+                        <canvas id="communityChart" height="60"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notifications and System Health -->
+    <div class="row mb-4">
+        <div class="col-12 col-lg-6">
+            <div class="card section-card">
+                <div class="card-body p-4">
+                    <h5 class="section-title">
+                        <i class="bi bi-bell"></i>
+                        Recent Notifications
+                    </h5>
+                    @if (Model.RecentNotifications != null && Model.RecentNotifications.Any())
+                    {
+                        @foreach (var notification in Model.RecentNotifications)
+                        {
+                            <div class="notification-item">
+                                <div class="d-flex justify-content-between">
+                                    <div>
+                                        <strong>@notification.Subject</strong>
+                                        <p class="text-muted mb-0 small">@notification.Message</p>
+                                    </div>
+                                    <span class="text-muted small">@notification.TimeAgo</span>
+                                </div>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <p class="text-muted text-center">No recent notifications</p>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-lg-6">
+            <div class="card section-card">
+                <div class="card-body p-4">
+                    <h5 class="section-title">
+                        <i class="bi bi-heart-pulse"></i>
+                        System Health
+                    </h5>
+                    @if (Model.SystemHealth != null)
+                    {
+                        <div class="health-indicator">
+                            <i class="bi bi-check-circle-fill text-success"></i>
+                            <div class="flex-grow-1">
+                                <strong>System Uptime</strong>
+                                <div class="text-muted small">@Model.SystemHealth.SystemUptimePercent.ToString("F1")%</div>
+                            </div>
+                            <span class="badge bg-success">Excellent</span>
+                        </div>
+                        <div class="health-indicator">
+                            <i class="bi bi-speedometer2"></i>
+                            <div class="flex-grow-1">
+                                <strong>Active Sessions</strong>
+                                <div class="text-muted small">@Model.SystemHealth.ActiveSessions sessions</div>
+                            </div>
+                            <span class="badge bg-success">Good</span>
+                        </div>
+                        <div class="health-indicator">
+                            <i class="bi bi-people"></i>
+                            <div class="flex-grow-1">
+                                <strong>Users Online</strong>
+                                <div class="text-muted small">@Model.SystemHealth.UsersOnline users</div>
+                            </div>
+                            <span class="badge bg-success">Active</span>
+                        </div>
+                        <div class="health-indicator">
+                            <i class="bi bi-clock"></i>
+                            <div class="flex-grow-1">
+                                <strong>Last System Update</strong>
+                                <div class="text-muted small">
+                                    @(Model.SystemHealth.LastSystemUpdate?.ToString("MMMM dd, yyyy - HH:mm") ?? "N/A")
+                                </div>
+                            </div>
+                            <span class="badge bg-info">Recent</span>
+                        </div>
+                        @if (Model.SystemHealth.PendingOrders > 0)
+                        {
+                            <div class="health-indicator">
+                                <i class="bi bi-hourglass-split"></i>
+                                <div class="flex-grow-1">
+                                    <strong>Pending Orders</strong>
+                                    <div class="text-muted small">@Model.SystemHealth.PendingOrders orders awaiting approval</div>
+                                </div>
+                                <span class="badge bg-warning">@Model.SystemHealth.PendingOrders</span>
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+    <script>
+        // Monthly Profit Data from Model
+        var monthlyProfitData = @Html.Raw(Json.Serialize(Model.MonthlyProfits));
+        var communityMessagesData = @Html.Raw(Json.Serialize(Model.CommunityMessages));
+
+        // Profit Chart
+        const profitCtx = document.getElementById('profitChart').getContext('2d');
+        const profitGradient = profitCtx.createLinearGradient(0, 0, 0, 400);
+        profitGradient.addColorStop(0, 'rgba(116, 185, 255, 0.3)');
+        profitGradient.addColorStop(1, 'rgba(116, 185, 255, 0.0)');
+
+        new Chart(profitCtx, {
+            type: 'line',
+            data: {
+                labels: monthlyProfitData.map(m => m.monthName),
+                datasets: [{
+                    label: 'Profit ($)',
+                    data: monthlyProfitData.map(m => m.monthlyProfit),
+                    borderColor: '#74b9ff',
+                    backgroundColor: profitGradient,
+                    borderWidth: 3,
+                    fill: true,
+                    tension: 0.4,
+                    pointBackgroundColor: '#74b9ff',
+                    pointBorderColor: '#fff',
+                    pointBorderWidth: 2,
+                    pointRadius: 5,
+                    pointHoverRadius: 7
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        backgroundColor: 'rgba(67, 89, 113, 0.9)',
+                        padding: 12,
+                        titleColor: '#fff',
+                        bodyColor: '#fff',
+                        borderColor: '#74b9ff',
+                        borderWidth: 1,
+                        callbacks: {
+                            label: function(context) {
+                                return 'Profit: $' + context.parsed.y.toLocaleString();
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: {
+                            color: 'rgba(0, 0, 0, 0.05)'
+                        },
+                        ticks: {
+                            callback: function(value) {
+                                return '$' + value.toLocaleString();
+                            }
+                        }
+                    },
+                    x: {
+                        grid: {
+                            display: false
+                        }
+                    }
+                }
+            }
+        });
+
+        // Community Chart
+        const communityCtx = document.getElementById('communityChart').getContext('2d');
+        const colors = [
+            'rgba(116, 185, 255, 0.8)',
+            'rgba(85, 239, 196, 0.8)',
+            'rgba(162, 155, 254, 0.8)',
+            'rgba(255, 234, 167, 0.8)',
+            'rgba(253, 121, 168, 0.8)',
+            'rgba(129, 236, 236, 0.8)'
+        ];
+
+        new Chart(communityCtx, {
+            type: 'bar',
+            data: {
+                labels: communityMessagesData.map(c => c.communityName),
+                datasets: [{
+                    label: 'Messages',
+                    data: communityMessagesData.map(c => c.messageCount),
+                    backgroundColor: colors.slice(0, communityMessagesData.length),
+                    borderRadius: 8,
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        backgroundColor: 'rgba(67, 89, 113, 0.9)',
+                        padding: 12
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: {
+                            color: 'rgba(0, 0, 0, 0.05)'
+                        }
+                    },
+                    x: {
+                        grid: {
+                            display: false
+                        }
+                    }
+                }
+            }
+        });
+
+        // Date Filter Change Handler
+        document.getElementById('dateFilter').addEventListener('change', function() {
+            const value = this.value;
+            let startDate, endDate = new Date();
+            
+            switch(value) {
+                case '3months':
+                    startDate = new Date();
+                    startDate.setMonth(startDate.getMonth() - 3);
+                    break;
+                case '6months':
+                    startDate = new Date();
+                    startDate.setMonth(startDate.getMonth() - 6);
+                    break;
+                case 'year':
+                    startDate = new Date();
+                    startDate.setFullYear(startDate.getFullYear() - 1);
+                    break;
+                default:
+                    startDate = new Date();
+                    startDate.setDate(1);
+            }
+            
+            // Reload page with new date parameters
+            const url = new URL(window.location);
+            url.searchParams.set('startDate', startDate.toISOString().split('T')[0]);
+            url.searchParams.set('endDate', endDate.toISOString().split('T')[0]);
+            window.location.href = url.toString();
+        });
+    </script>
+}

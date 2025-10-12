@@ -1,20 +1,21 @@
 using FluentValidation;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using System.Globalization;
+using TradingSystem.Hubs;
 using TrandingSystem.Application.Dtos;
+using TrandingSystem.Application.Features.analysis.ProcedureExe;
+using TrandingSystem.Areas.Identity.Email;
 using TrandingSystem.Domain.Entities;
 using TrandingSystem.Domain.Interfaces;
 using TrandingSystem.Infrastructure.Data;
 using TrandingSystem.Infrastructure.Repositories;
 using TrandingSystem.Infrastructure.Services;
-using Microsoft.AspNetCore.Identity.UI.Services;
-using TrandingSystem.Areas.Identity.Email;
-using TradingSystem.Hubs;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -37,6 +38,7 @@ builder.Services.AddTransient<IEmailSender, SmtpEmailSender>();
 builder.Services.AddScoped<ICommunityRepository, CommunityRepository>();
 builder.Services.AddScoped<IMessageRepository, MessageRepository>();
 builder.Services.AddScoped<INotificationService, NotificationService>();
+builder.Services.AddScoped<ISystemAnalysisService, SystemAnalysisService>();
 builder.Services.AddSignalR();
 
 
