@@ -265,7 +265,7 @@
                         <li class="menu-item">
                             <a href="javascript:void(0);" class="menu-link menu-toggle">
                                 <i class="menu-icon tf-icons bx bx-layout"></i>
-                                <div data-i18n="Layouts">@Localizer["Customers"]</div>
+                                <div data-i18n="Layouts">@Localizer["DataAnalysis"]</div>
                             </a>
 
                             <ul class="menu-sub">
@@ -275,6 +275,15 @@
                                     </a>
                                 </li>
                                
+                            </ul>
+
+                            <ul class="menu-sub">
+                                <li class="menu-item">
+                                    <a asp-action="Index" asp-controller="SystemAnalaysis" class="menu-link">
+                                        <div data-i18n="Without menu">@Localizer["SystemAnalysis"]</div>
+                                    </a>
+                                </li>
+
                             </ul>
                         </li>
 

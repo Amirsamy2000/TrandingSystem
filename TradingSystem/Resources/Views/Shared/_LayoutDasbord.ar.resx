@@ -207,4 +207,10 @@
   <data name="Know Customer" xml:space="preserve">
     <value>اعرف العميل</value>
   </data>
+  <data name="DataAnalysis" xml:space="preserve">
+    <value>تحليل البيانات</value>
+  </data>
+  <data name="SystemAnalysis" xml:space="preserve">
+    <value>تحليل النظام</value>
+  </data>
 </root>

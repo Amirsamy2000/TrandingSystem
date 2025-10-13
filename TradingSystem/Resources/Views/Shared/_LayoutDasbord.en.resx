@@ -207,4 +207,10 @@
   <data name="Know Customer" xml:space="preserve">
     <value>Know Customer</value>
   </data>
+  <data name="DataAnalysis" xml:space="preserve">
+    <value>Data Analysis</value>
+  </data>
+  <data name="SystemAnalysis" xml:space="preserve">
+    <value>System Analysis</value>
+  </data>
 </root>
