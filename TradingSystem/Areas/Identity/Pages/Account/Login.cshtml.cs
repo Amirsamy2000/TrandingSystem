@@ -19,6 +19,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TrandingSystem.Domain.Entities;
 using TrandingSystem.Domain.Helper;
+using TrandingSystem.Infrastructure.Data;
 
 namespace TrandingSystem.Areas.Identity.Pages.Account
 {
@@ -28,15 +29,17 @@ namespace TrandingSystem.Areas.Identity.Pages.Account
         private readonly UserManager<User> _userManager;
         private readonly ILogger<LoginModel> _logger;
         private readonly Microsoft.AspNetCore.Identity.UI.Services.IEmailSender _emailSender;
+        private readonly db23617Context _dbContext;
 
 
 
-        public LoginModel(SignInManager<User> signInManager, UserManager<User> userManager, ILogger<LoginModel> logger, Microsoft.AspNetCore.Identity.UI.Services.IEmailSender emailSender)
+        public LoginModel(SignInManager<User> signInManager, UserManager<User> userManager, ILogger<LoginModel> logger, Microsoft.AspNetCore.Identity.UI.Services.IEmailSender emailSender, db23617Context dbContext)
         {
             _signInManager = signInManager;
             _userManager = userManager;
             _logger = logger;
             _emailSender = emailSender;
+            _dbContext = dbContext;
         }
 
         /// <summary>
@@ -438,6 +441,20 @@ namespace TrandingSystem.Areas.Identity.Pages.Account
                 await _signInManager.SignInAsync(user, Input.RememberMe);
 
                 _logger.LogInformation("User logged in with single session.");
+
+                // --- UsersConnections logic ---
+                var connId = Guid.NewGuid().ToString();
+                var userConn = new UsersConnection
+                {
+                    UserId = user.Id,
+                    ConnId = connId,
+                    ConnecdAt = DateTime.UtcNow,
+                    IsOnline = true
+                };
+                _dbContext.UsersConnections.Add(userConn);
+                await _dbContext.SaveChangesAsync();
+                // --- End UsersConnections logic ---
+
                 return LocalRedirect(returnUrl);
             }
 
