@@ -269,9 +269,10 @@
                     <div class="metric-icon icon-orange">
                         <i class="bi bi-chat-left-text"></i>
                     </div>
-                    <div class="metric-label">Total Messages</div>
-                    <div class="metric-value">@Model.Overview.TotalMessages.ToString("N0")</div>
+                    <div class="metric-label">Total Communities</div>
+                    <div class="metric-value">@(Model.CommunityStats.TotalCommunities)</div>
                     <div class="metric-change @(Model.Overview.MessagesChangePercent >= 0 ? "positive" : "negative")">
+                        messages
                         <i class="bi bi-arrow-@(Model.Overview.MessagesChangePercent >= 0 ? "up" : "down")"></i>
                         @(Model.Overview.MessagesChangePercent > 0 ? "+" : "")@Model.Overview.MessagesChangePercent.ToString("F1")% since last month
                     </div>
@@ -476,7 +477,7 @@
                             </div>
                             <span class="badge bg-success">Good</span>
                         </div>
-                        <div class="health-indicator">
+                        <div class="health-indicator" hidden>
                             <i class="bi bi-people"></i>
                             <div class="flex-grow-1">
                                 <strong>Users Online</strong>
