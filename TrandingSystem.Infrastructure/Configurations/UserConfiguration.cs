@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
 using System.Collections.Generic;
+using System.Reflection.Emit;
 using TrandingSystem.Domain.Entities;
 using TrandingSystem.Infrastructure.Data;
 
@@ -24,8 +25,9 @@ namespace TrandingSystem.Infrastructure.Data.Configurations
             entity.Property(e => e.RegisteredAt).HasColumnType("datetime");
             entity.Property(e => e.Address).HasMaxLength(250);
 
-            
 
+            entity.Property(u => u.RegisteredAt)
+        .HasDefaultValueSql("GETDATE()");
             //entity.HasOne(d => d.Role).WithMany(p => p.Users)
             //    .HasForeignKey(d => d.RoleId)
             //    .OnDelete(DeleteBehavior.ClientSetNull)
